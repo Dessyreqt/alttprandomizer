@@ -14,7 +14,7 @@ namespace AlttpRandomizer.Rom
         public string SeedFileString { get { return "C{0:0000000}"; } }
         public string SeedRomString { get { return "Z3Rv{0} C{1}"; } }
 
-        public void ResetPlms()
+        public void ResetLocations()
         {
             Locations = new List<Location>();
         }

@@ -1,0 +1,260 @@
+﻿(-2 to all chest addresses for JP version)
+
+0xe96e to 0xeb65 - chest data
+
+0xe970 = Escape - first B2 room [50] (key)
+0xe973 = Hyrule Castle Secret Entrance [85] (lamp / 5 rupees)
+0xe976 = Hyrule Castle Boomerang room [113] (boomerang / 10 arrows)
+0xe979 = Eastern Palace - compass room [168] (compass)
+0xe97c = Graveyard Cave [275] (Magic cape)
+0xe97f = Eastern Palace - bow [169] (bow)
+0xe982 = 
+0xe985 = 
+0xe988 = Swamp Palace - map room [55] (map)
+0xe98b = Swamp Palace - hookshot room [54] (hookshot)
+0xe98e = Dam [267] (3 bombs)
+0xe991 = Desert Palace - Power Glove [115] (power glove)
+0xe994 = Skull Woods -  Compass room [103] (compass)
+0xe997 = Ice Palace - above Blue Mail room [126] (3 bombs)
+0xe99a = Skull Woods - Fire Rod room [88] (fire rod)
+0xe99d = Skull Woods - east of Fire Rod room [88] (map)
+0xe9a0 = Skull Woods - Big Key room [87] (big key)
+0xe9a3 = Skull Woods - Gibdo/Stalfos room [87] (key)
+0xe9a6 = Ice Palace - Big Key room [31] (big key)
+0xe9a9 = 
+0xe9ac = Ice Palace - Blue Mail [158] (blue mail)
+0xe9af = Tower of Hera - Entrance [119] (map)
+0xe9b2 = 
+0xe9b5 = Eastern Palace - big ball room [185] (100 rupees)
+0xe9b8 = Desert Palace - Map room [116] (map)
+0xe9bb = Eastern Palace - Big key [184] (big key)
+0xe9be = Link's House [260] (Lamp / 5 Rupees)
+0xe9c1 = cave??? [254] (50 rupees)
+0xe9c4 = Desert Palace - Big key room [117] (big key)
+0xe9c7 = Light World Mimic Cave [268] (Piece of Heart)
+0xe9ca = Skull Woods - south of Fire Rod room [104] (key)
+0xe9cd = Desert Palace - compass room [133] (compass)
+0xe9d0 = Tavern [259] (Bottle)
+0xe9d3 = 
+0xe9d6 = Ice Palace - compass room [46] (compass)
+0xe9d9 = 
+0xe9dc = Misery Mire - spike room [179] (key)
+0xe9df = Ice Palace - map room [63] (map)
+0xe9e2 = Ice Palace - spike room [95] (key)
+0xe9e5 = Ice Palace - b5 up staircase [174] (key)
+0xe9e8 = Tower of Hera - first floor [135] (big key)
+0xe9eb = chicken house [264] (Boomerang / 10 arrows)
+0xe9ee = doorless hut [262] (Red Boomerang / 300 Rupees)
+0xe9f1 = C-shaped house [284] (300 rupees)
+0xe9f4 = Aginah's cave [266] (Piece of Heart)
+0xe9f7 = 
+0xe9fa = Tower of Hera - Moon pearl room [big chest] [39] (moon pearl)
+0xe9fd = Tower of Hera - Moon pearl room [small chest] [39] (compass)
+0xea00 = Skull Woods - Entrance to part 2 [89] (key)
+0xea03 = Thieves' Town - Bottom left of huge room [top left chest] [219] (map)
+0xea06 = Thieves' Town - Bottom left of huge room [bottom right chest] [219] (big key)
+0xea09 = Thieves' Town - Bottom right of huge room [220] (compass)
+0xea0c = Thieves' Town - Top left of huge room [203] (20 rupees)
+0xea0f = Thieves' Town - Room above boss [101] (3 bombs) 
+0xea12 = Thieves' Town - Titan's Mitt [68] (Titan's Mitt)
+0xea15 = Thieves' Town - next to Blind [69] (key)
+0xea18 = Turtle Rock - Chain chomp room [182] (key)
+0xea1b = Turtle Rock - Mirror shield room [36] (mirror shield)
+0xea1e = Turtle Rock - Map room [left chest] [183] (map)
+0xea21 = Turtle Rock - Map room [right chest] [183] (key)
+0xea24 = Turtle Rock - compass room [214] (compass)
+0xea27 = Turtle Rock - big key room [20] (big key)
+0xea2a = Turtle Rock - Eye bridge room [top right chest] [213] (1 rupee)
+0xea2d = Turtle Rock - Eye bridge room [top left chest] [213] (5 rupees)
+0xea30 = Turtle Rock - Eye bridge room [bottom rigth chest] [213] (20 rupees)
+0xea33 = Turtle Rock - Eye bridge room [bottom left chest] [213] (key)
+0xea36 = Turtle Rock - Roller switch room [4] (key)
+0xea39 = Dark Palace - big key room [58] (big key)
+0xea3c = Dark Palace - jump room [right chest] [42] (key)
+0xea3f = Dark Palace - jump room [left chest] [42] (key)
+0xea42 = Dark Palace - hammer room [26] (hammer)
+0xea45 = Dark Palace - compass room [26] (compass)
+0xea48 = Dark Palace - spike statue room [26] (5 rupees)
+0xea4b = Dark Palace - turtle stalfos room [10] (key)
+0xea4e = Dark Palace - room leading to Helmasaur [left chest] [106] (arrow)
+0xea51 = Dark Palace - room leading to Helmasaur [right chest] [106] (key)
+0xea54 = Dark Palace - statue push room [43] (map)
+0xea57 = Dark Palace - maze room [top chest] [25] (3 bombs)
+0xea5a = Dark Palace - maze room [bottom chest] [25] (key)
+0xea5d = Dark Palace - shooter room [9] (key)
+0xea60 = Misery Mire - big hub room [194] (key)
+0xea63 = Misery Mire - end of bridge [162] (key)
+0xea66 = Misery Mire - compass [193] (compass)
+0xea69 = Misery Mire - Cane of Somaria [195] (cane of somaria)
+0xea6c = Misery Mire - map room [195] (map)
+0xea6f = Misery Mire - big key [209] (big key)
+0xea72 = 
+0xea75 = Misery Mire west area [left chest] [269] (Piece of Heart)
+0xea78 = Misery Mire west area [right chest] [269] (20 rupees)
+0xea7b = Sanctuary [18] (Heart Container)
+0xea7e = cave??? [top chest] [248] (3 bombs)
+0xea81 = cave??? [bottom chest] [248] (20 rupees)
+0xea84 = Sahasrahla's Hut [left chest] [261] (50 rupees)
+0xea87 = Sahasrahla's Hut [center chest] [261] (3 bombs)
+0xea8a = Sahasrahla's Hut [right chest] [261] (50 rupees)
+0xea8d = Spike cave [279] (Staff of Byrna)
+0xea90 = Kakariko well [top chest] [47] (Piece of Heart)
+0xea93 = Kakariko well [left chest row of 3] [47] (20 rupees)
+0xea96 = Kakariko well [center chest row of 3] [47] (20 rupees)
+0xea99 = Kakariko well [right chest row of 3] [47] (20 rupees)
+0xea9c = Kakariko well [bottom chest] [47] (3 bombs)
+0xea9f = Swamp Palace - First room [40] (key)
+0xeaa2 = Swamp Palace - south of hookshot room [70] (compass)
+0xeaa5 = Swamp Palace - push 4 blocks room [52] (20 rupees)
+0xeaa8 = Swamp Palace - big key room [53] (big key)
+0xeaab = Swamp Palace - flooded room [left chest] [118] (20 rupees)
+0xeaae = Swamp Palace - flooded room [right chest] [118] (20 rupees)
+0xeab1 = Swamp Palace - hidden waterfall door room [102] (20 rupees)
+0xeab4 = Hyrule Castle Tower - maze room [208] (key)
+0xeab7 = Hyrule Castle Tower - 2 knife guys room [224] (key)
+0xeaba = Ganon's Tower - north of gap room [top left chest] [123] (3 bombs)
+0xeabd = Ganon's Tower - north of gap room [top right chest] [123] (10 arrows)
+0xeac0 = Ganon's Tower - north of gap room [bottom left chest] [123] (20 rupees)
+0xeac3 = Ganon's Tower - north of gap room [bottom right chest] [123] (20 rupees)
+0xeac6 = Ganon's Tower - west of teleport room [top left chest] [124] (10 arrows)
+0xeac9 = Ganon's Tower - west of teleport room [top right chest] [124] (10 arrows)
+0xeacc = Ganon's Tower - west of teleport room [bottom left chest] [124] (3 bombs)
+0xeacf = Ganon's Tower - west of teleport room [bottom right chest] [124] (3 bombs)
+0xead2 = Ganon's Tower - north of teleport room [125] (key)
+0xead5 = 
+0xead8 = Ganon's Tower - Red Mail [140] (red mail)
+0xeadb = Ganon's Tower - down right staircase from entrance [left chest] [140] (10 arrows)
+0xeade = Ganon's Tower - down right staircase from entrance [right chest] [140] (3 bombs)
+0xeae1 = Ganon's Tower - above Armos [140] (10 arrows)
+0xeae4 = Ganon's Tower - east of down right staircase from entrace [141] (key)
+0xeae7 = Ganon's Tower - compass room [top left chest] [157] (compass)
+0xeaea = Ganon's Tower - compass room [top right chest] [157] (1 rupee)
+0xeaed = Ganon's Tower - compass room [bottom left chest] [157] (20 rupees)
+0xeaf0 = Ganon's Tower - compass room [bottom right chest] [157] (10 arrows)
+0xeaf3 = Ganon's Tower - north of Armos room [bottom chest] [28] (big key)
+0xeaf6 = Ganon's Tower - north of Armos room [left chest] [28] (10 arrows)
+0xeaf9 = Ganon's Tower - north of Armos room [right chest] [28] (3 bombs)
+0xeafc = 
+0xeaff = Ganon's Tower - north of falling floor four torches [top left chest] [61] (3 bombs)
+0xeb02 = Ganon's Tower - north of falling floor four torches [top right chest] [61] (3 bombs)
+0xeb05 = Ganon's Tower - before Moldorm [61] (key)
+0xeb08 = Ganon's Tower - Moldorm room [77] (20 rupees)
+0xeb0b = Hyrule Castle - next to Zelda [128] (lamp / 5 rupees)
+0xeb0e = Hyrule Castle - map room [114] (map) 
+0xeb11 = Thief's hut [top chest] [285] (Piece of Heart)
+0xeb14 = Thief's hut [top left chest] [285] (20 rupees)
+0xeb17 = Thief's hut [top right chest] [285] (20 rupees)
+0xeb1a = Thief's hut [bottom left chest] [285] (20 rupees)
+0xeb1d = Thief's hut [bottom right chest] [285] (20 rupees)
+0xeb20 = cave??? [top chest] [286] (20 rupees)
+0xeb23 = cave??? [top middle chest] [286] (20 rupees)
+0xeb26 = cave??? [bottom middle chest] [286] (20 rupees)
+0xeb29 = cave??? [bottom chest] [286] (20 rupees)
+0xeb2c = cave??? five chests [top left chest] [239] (20 rupees)
+0xeb2f = cave??? five chests [top left middle chest] [239] (20 rupees)
+0xeb32 = cave??? five chests [top right middle chest] [239] (20 rupees)
+0xeb35 = cave??? five chests [top right chest] [239] (20 rupees)
+0xeb38 = cave??? five chests [bottom chest] [239] (20 rupees)
+0xeb3b = cave with shop??? [left chest] [255] (3 bombs)
+0xeb3e = cave with shop??? [right chest] [255] (10 arrows)
+0xeb41 = cave near sanctuary??? [292] (Piece of Heart)
+0xeb44 = Moldorm Cave [bottom left chest] [291] (3 bombs)
+0xeb47 = Moldorm Cave [top left chest] [291] (20 rupees)
+0xeb4a = Moldorm Cave [top right chest] [291] (20 rupees)
+0xeb4d = Moldorm Cave [bottom right chest] [291] (10 arrows)
+0xeb50 = Ice Cave [288] (Ice Rod)
+0xeb53 = Hidden floor cave [top right chest] [60] (50 rupees)
+0xeb56 = Hidden floor cave [top left chest] [60] (50 rupees)
+0xeb59 = Hidden floor cave [bottom left chest] [60] (50 rupees)
+0xeb5c = Hidden floor cave [bottom right chest] [60] (50 rupees)
+0xeb5f = Escape - final basement room [left chest] [17] (3 Bombs)
+0xeb62 = Escape - final basement room [middle chest] [17] (300 rupees)
+0xeb65 = Escape - final basement room [right chest] [17] (10 arrows)
+
+0x2df45 = Uncle (L.1 Sword & Shield)
+0x2f1fc = Sahasrahla (Pegasus Boots)
+0x330bf = Flute Boy (Shovel)
+0x339c7 = Sick Kid (Bug-Catching Net)
+0x33d60 = Purple Chest (Bottle)
+0x33e75 = Hobo (Bottle)
+0xee185 ?= Catfish (Quake)
+0xee1c3 ?= King Zora (Flippers)
+0xf6a00 = Old mountain man (Magic Mirror)
+
+Item list
+00 - L.1 Sword (can't be used until after uncle dies)
+01 - L.2 Sword (crash)
+02 - L.3 Sword (can't be used until after uncle dies)
+03 - L.4 Sword (can't be used until after uncle dies)
+04 - Blue Shield (can't be used until after uncle dies)
+05 - Red Shield (can't be used until after uncle dies)
+06 - Mirror Shield (can't be used until after uncle dies)
+07 - Fire Rod
+08 - Ice Rod
+09 - Hammer
+0A - Hookshot
+0B - Bow
+0C - Boomerang / 10 Arrows
+0D - Powder
+0E - Bee (does nothing if no bottle)
+0F - Bombos
+10 - Ether
+11 - Quake
+12 - Lamp / 5 Rupees
+13 - Shovel
+14 - Ocarina (inactive)
+15 - Cane of Somaria
+16 - Bottle
+17 - Piece of Heart
+18 - Staff of Byrna
+19 - Cape
+1A - Magic Mirror
+1B - Power Glove
+1C - Titan's Mitt
+1D - Book of Mudora
+1E - Flippers
+1F - Moon Pearl
+20 - Crystal (crash)
+21 - Net
+22 - Blue Mail
+23 - Red Mail
+24 - Key
+25 - Compass
+26 - Heart Container (no animation)
+27 - Bomb
+28 - 3 Bombs
+29 - Mushroom
+2A - Red boomerang / 300 rupees
+2B - Red potion (does nothing if no bottle)
+2C - Green potion (does nothing if no bottle)
+2D - Blue potion (does nothing if no bottle)
+2E - Red potion (does nothing if no bottle)
+2F - Green potion (does nothing if no bottle)
+30 - Blue potion (does nothing if no bottle)
+31 - 10 bombs
+32 - Big Key
+33 - Map
+34 - 1 rupee
+35 - 5 rupees
+36 - 20 rupees
+37 - Pendant of Courage (green)
+38 - Pendant of Wisdom (red)
+39 - Pendant of Power (blue)
+3A - Bow & Arrows
+3B - Bow & Silver Arrows
+3C - Bee (does nothing if no bottle)
+3D - Fairy (does nothing if no bottle)
+3E - Heart Container (no dialog)
+3F - Heart Container
+40 - 100 rupees
+41 - 50 rupees
+42 - Heart
+43 - Arrow
+44 - 10 arrows
+45 - Small Magic
+46 - 300 rupees
+47 - 20 rupees
+48 - Good Bee (?) (does nothing if no bottle)
+49 - L.1 Sword (can't be used until after uncle dies)
+4A - Ocarina (active)
+4B - Pegasus Boots
