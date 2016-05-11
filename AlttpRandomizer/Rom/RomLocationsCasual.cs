@@ -141,9 +141,10 @@ namespace AlttpRandomizer.Rom
 					Region = Region.IcePalace,
 					Name = "[dungeon-D5-B4] Ice Palace - above Blue Mail room",
 					Address = 0xE995,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterIcePalace(have),
 				},
 				new Location
 				{
@@ -192,9 +193,11 @@ namespace AlttpRandomizer.Rom
 					Region = Region.IcePalace,
 					Name = "[dungeon-D5-B1] Ice Palace - Big Key room",
 					Address = 0xE9A4,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterIcePalace(have)
+						&& have.Contains(ItemType.Hookshot),
 				},
 
 				new Location
@@ -203,9 +206,11 @@ namespace AlttpRandomizer.Rom
 					Region = Region.IcePalace,
 					Name = "[dungeon-D5-B5] Ice Palace - big chest",
 					Address = 0xE9AA,
+					KeysNeeded = 2,
+					BigKeyNeeded = true,
 					CanAccess =
 						have =>
-						true,
+						CanEnterIcePalace(have),
 				},
 				new Location
 				{
@@ -328,9 +333,10 @@ namespace AlttpRandomizer.Rom
 					Region = Region.IcePalace,
 					Name = "[dungeon-D5-B1] Ice Palace - compass room",
 					Address = 0xE9D4,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
-						true,
+						CanEnterIcePalace(have),
 				},
 
 				new Location
@@ -341,7 +347,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xE9DA,
 					CanAccess =
 						have =>
-						true,
+						CanEnterMiseryMire(have),
 				},
 				new Location
 				{
@@ -349,9 +355,11 @@ namespace AlttpRandomizer.Rom
 					Region = Region.IcePalace,
 					Name = "[dungeon-D5-B2] Ice Palace - map room",
 					Address = 0xE9DD,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterIcePalace(have)
+						&& have.Contains(ItemType.Hookshot),
 				},
 				new Location
 				{
@@ -359,9 +367,11 @@ namespace AlttpRandomizer.Rom
 					Region = Region.IcePalace,
 					Name = "[dungeon-D5-B3] Ice Palace - spike room",
 					Address = 0xE9E0,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterIcePalace(have)
+						&& have.Contains(ItemType.Hookshot),
 				},
 				new Location
 				{
@@ -369,9 +379,10 @@ namespace AlttpRandomizer.Rom
 					Region = Region.IcePalace,
 					Name = "[dungeon-D5-B5] Ice Palace - b5 up staircase",
 					Address = 0xE9E3,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterIcePalace(have),
 				},
 				new Location
 				{
@@ -533,7 +544,7 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanEnterThievesTown(have),
-`				},
+				},
 				new Location
 				{
 					TitansMittOkay = false,
@@ -1738,6 +1749,22 @@ namespace AlttpRandomizer.Rom
 				},
 			};
         }
+
+		private bool CanEnterMiseryMire(List<ItemType> have)
+		{
+			return have.Contains(ItemType.OcarinaInactive)
+				&& have.Contains(ItemType.TitansMitt)
+				&& have.Contains(ItemType.Ether)
+				&& (have.Contains(ItemType.PegasusBoots)
+					|| have.Contains(ItemType.Hookshot));
+		}
+
+		private bool CanEnterIcePalace(List<ItemType> have)
+		{
+			return have.Contains(ItemType.Flippers)
+				&& have.Contains(ItemType.TitansMitt)
+				&& have.Contains(ItemType.FireRod);
+		}
 
 		private bool CanEnterThievesTown(List<ItemType> have)
 		{
