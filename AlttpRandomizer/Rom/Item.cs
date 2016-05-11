@@ -35,7 +35,7 @@
         Flippers = 0x1e,
         MoonPearl = 0x1f,
         Crystal = 0x20, // crashes game
-        Net = 0x21,
+        BugCatchingNet = 0x21,
         BlueMail = 0x22,
         RedMail = 0x23,
         Key = 0x24,
@@ -78,8 +78,34 @@
         L1Sword = 0x49, // can't be used until after uncle dies
         OcarinaActive = 0x4a,
         PegasusBoots = 0x4b,
-    }
-    public class Item
+		HyruleCastleEscapeKey = 0x80,
+		EasternPalaceKey = 0x81,
+		DesertPalaceKey = 0x82,
+		TowerOfHeraKey = 0x83,
+		HyruleCastleTowerKey = 0x84,
+		DarkPalaceKey = 0x85,
+		SwampPalaceKey = 0x86,
+		SkullWoodsKey = 0x87,
+		ThievesTownKey = 0x88,
+		IcePalaceKey = 0x89,
+		MiseryMireKey = 0x8A,
+		TurtleRockKey = 0x8B,
+		GanonsTowerKey = 0x8C,
+		EasternPalaceBigKey = 0x91,
+		DesertPalaceBigKey = 0x92,
+		TowerOfHeraBigKey = 0x93,
+		DarkPalaceBigKey = 0x85,
+		SwampPalaceBigKey = 0x86,
+		SkullWoodsBigKey = 0x87,
+		ThievesTownBigKey = 0x88,
+		IcePalaceBigKey = 0x89,
+		MiseryMireBigKey = 0x8A,
+		TurtleRockBigKey = 0x8B,
+		GanonsTowerBigKey = 0x8C,
+
+	}
+
+	public class Item
     {
         private ItemType type;
         public string HexValue { get; set; }

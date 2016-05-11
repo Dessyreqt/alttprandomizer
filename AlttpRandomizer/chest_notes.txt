@@ -11,7 +11,7 @@
 0xe982 = 
 0xe985 = 
 0xe988 = [dungeon-D2-B1] Swamp Palace - map room [55] (map)
-0xe98b = [dungeon-D2-B1] Swamp Palace - hookshot room [54] (hookshot)
+0xe98b = [dungeon-D2-B1] Swamp Palace - big chest [54] (hookshot)
 0xe98e = [cave-047] Dam [267] (3 bombs)
 0xe991 = [dungeon-L2-B1] Desert Palace - big chest [115] (power glove)
 0xe994 = [dungeon-D3-B1] Skull Woods -  Compass room [103] (compass)
@@ -185,12 +185,19 @@ Missing chests:
 [dungeon-L1-1F] Eastern Palace - map room
 
 items to add:
-Magic Powder
+Mushroom
 Bottle (bought)
 Book of Mudora
 [cave-050] Guy who gives 300 rupees
 [cave-073] Guy who gives 300 rupees
+Ether
+Bombos
 
+Items to never add:
+Magic Powder
+Master Sword
+L3 Sword
+L4 Sword
 
 Item list
 00 - L.1 Sword (can't be used until after uncle dies)
