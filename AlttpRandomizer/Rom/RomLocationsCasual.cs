@@ -22,7 +22,7 @@ namespace AlttpRandomizer.Rom
 	            new Location
 	            {
 		            Region = Region.HyruleCastleEscape,
-					Name = "Escape - first B2 room [50] (key)",
+					Name = "[dungeon-C-B1] Escape - first B1 room",
 					Address = 0xE96E,
 					CanAccess =
 						have =>
@@ -30,17 +30,8 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					Region = Region.HyruleCastleEscape,
-					Name = "Escape - first B2 room [50] (key)",
-					Address = 0xE96E,
-					CanAccess =
-						have
-						=> true,
-				},
-				new Location
-				{
 					Region = Region.LightWorld,
-					Name = "Hyrule Castle Secret Entrance [85] (lamp / 5 rupees)",
+					Name = "[cave-034] Hyrule Castle secret entrance",
 					Address = 0xE971,
 					CanAccess =
 						have
@@ -49,7 +40,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.HyruleCastleEscape,
-					Name = "Hyrule Castle Boomerang room [113] (boomerang / 10 arrows)",
+					Name = "[dungeon-C-B1] Hyrule Castle - boomerang room",
 					Address = 0xE974,
 					CanAccess =
 						have
@@ -58,7 +49,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.EasternPalace,
-					Name = "Eastern Palace - compass room [168] (compass)",
+					Name = "[dungeon-L1-1F] Eastern Palace - compass room",
 					Address = 0xE977,
 					CanAccess =
 						have
@@ -67,7 +58,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkWorld,
-					Name = "Graveyard Cave [275] (Magic cape)",
+					Name = "[cave-018] Graveyard - top right grave",
 					Address = 0xE97A,
 					CanAccess =
 						have
@@ -76,7 +67,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.EasternPalace,
-					Name = "Eastern Palace - bow [169] (bow)",
+					Name = "[dungeon-L1-1F] Eastern Palace - big chest",
 					Address = 0xE97D,
 					CanAccess =
 						have
@@ -87,7 +78,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - map room [55] (map)",
+					Name = "[dungeon-D2-B1] Swamp Palace - map room",
 					Address = 0xE986,
 					CanAccess =
 						have
@@ -96,7 +87,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - hookshot room [54] (hookshot)",
+					Name = "[dungeon-D2-B1] Swamp Palace - hookshot room",
 					Address = 0xE989,
 					CanAccess =
 						have
@@ -105,7 +96,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Dam [267] (3 bombs)",
+					Name = "[cave-047] Dam",
 					Address = 0xE98C,
 					CanAccess =
 						have
@@ -114,7 +105,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DesertPalace,
-					Name = "Desert Palace - Power Glove [115] (power glove)",
+					Name = "[dungeon-L2-B1] Desert Palace - big chest",
 					Address = 0xE98F,
 					CanAccess =
 						have
@@ -123,7 +114,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SkullWoods,
-					Name = "Skull Woods -  Compass room [103] (compass)",
+					Name = "[dungeon-D3-B1] Skull Woods -  Compass room",
 					Address = 0xE992,
 					CanAccess =
 						have
@@ -132,7 +123,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.IcePalace,
-					Name = "Ice Palace - above Blue Mail room [126] (3 bombs)",
+					Name = "[dungeon-D5-B4] Ice Palace - above Blue Mail room",
 					Address = 0xE995,
 					CanAccess =
 						have
@@ -141,7 +132,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SkullWoods,
-					Name = "Skull Woods - Fire Rod room [88] (fire rod)",
+					Name = "[dungeon-D3-B1] Skull Woods - big chest",
 					Address = 0xE998,
 					CanAccess =
 						have
@@ -150,7 +141,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SkullWoods,
-					Name = "Skull Woods - east of Fire Rod room [88] (map)",
+					Name = "[dungeon-D3-B1] Skull Woods - east of Fire Rod room",
 					Address = 0xE99B,
 					CanAccess =
 						have
@@ -159,7 +150,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SkullWoods,
-					Name = "Skull Woods - Big Key room [87] (big key)",
+					Name = "[dungeon-D3-B1] Skull Woods - Big Key room",
 					Address = 0xE99E,
 					CanAccess =
 						have
@@ -168,7 +159,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SkullWoods,
-					Name = "Skull Woods - Gibdo/Stalfos room [87] (key)",
+					Name = "[dungeon-D3-B1] Skull Woods - Gibdo/Stalfos room",
 					Address = 0xE9A1,
 					CanAccess =
 						have
@@ -177,7 +168,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.IcePalace,
-					Name = "Ice Palace - Big Key room [31] (big key)",
+					Name = "[dungeon-D5-B1] Ice Palace - Big Key room",
 					Address = 0xE9A4,
 					CanAccess =
 						have
@@ -187,7 +178,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.IcePalace,
-					Name = "Ice Palace - Blue Mail [158] (blue mail)",
+					Name = "[dungeon-D5-B5] Ice Palace - big chest",
 					Address = 0xE9AA,
 					CanAccess =
 						have
@@ -196,7 +187,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TowerOfHera,
-					Name = "Tower of Hera - Entrance [119] (map)",
+					Name = "[dungeon-L3-2F] Tower of Hera - Entrance",
 					Address = 0xE9AD,
 					CanAccess =
 						have
@@ -206,7 +197,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.EasternPalace,
-					Name = "Eastern Palace - big ball room [185] (100 rupees)",
+					Name = "[dungeon-L1-1F] Eastern Palace - big ball room",
 					Address = 0xE9B3,
 					CanAccess =
 						have
@@ -215,7 +206,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DesertPalace,
-					Name = "Desert Palace - Map room [116] (map)",
+					Name = "[dungeon-L2-B1] Desert Palace - Map room",
 					Address = 0xE9B6,
 					CanAccess =
 						have
@@ -224,7 +215,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.EasternPalace,
-					Name = "Eastern Palace - Big key [184] (big key)",
+					Name = "[dungeon-L1-1F] Eastern Palace - Big key",
 					Address = 0xE9B9,
 					CanAccess =
 						have
@@ -233,7 +224,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Link's House [260] (Lamp / 5 Rupees)",
+					Name = "[cave-040] Link's House",
 					Address = 0xE9BC,
 					CanAccess =
 						have
@@ -242,7 +233,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? [254] (50 rupees)",
+					Name = "[cave-012-1F] Death Mountain - wall of caves - left cave",
 					Address = 0xE9BF,
 					CanAccess =
 						have
@@ -251,7 +242,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DesertPalace,
-					Name = "Desert Palace - Big key room [117] (big key)",
+					Name = "[dungeon-L2-B1] Desert Palace - Big key room",
 					Address = 0xE9C2,
 					CanAccess =
 						have
@@ -260,7 +251,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Light World Mimic Cave [268] (Piece of Heart)",
+					Name = "[cave-013] Mimic cave (from Turtle Rock)",
 					Address = 0xE9C5,
 					CanAccess =
 						have
@@ -269,7 +260,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SkullWoods,
-					Name = "Skull Woods - south of Fire Rod room [104] (key)",
+					Name = "[dungeon-D3-B1] Skull Woods - south of Fire Rod room",
 					Address = 0xE9C8,
 					CanAccess =
 						have
@@ -278,7 +269,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DesertPalace,
-					Name = "Desert Palace - compass room [133] (compass)",
+					Name = "[dungeon-L2-B1] Desert Palace - compass room",
 					Address = 0xE9CB,
 					CanAccess =
 						have
@@ -287,7 +278,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Tavern [259] (Bottle)",
+					Name = "[cave-031] Tavern",
 					Address = 0xE9CE,
 					CanAccess =
 						have
@@ -297,7 +288,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.IcePalace,
-					Name = "Ice Palace - compass room [46] (compass)",
+					Name = "[dungeon-D5-B1] Ice Palace - compass room",
 					Address = 0xE9D4,
 					CanAccess =
 						have
@@ -307,7 +298,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire - spike room [179] (key)",
+					Name = "[dungeon-D6-B1] Misery Mire - spike room",
 					Address = 0xE9DA,
 					CanAccess =
 						have
@@ -316,7 +307,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.IcePalace,
-					Name = "Ice Palace - map room [63] (map)",
+					Name = "[dungeon-D5-B2] Ice Palace - map room",
 					Address = 0xE9DD,
 					CanAccess =
 						have
@@ -325,7 +316,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.IcePalace,
-					Name = "Ice Palace - spike room [95] (key)",
+					Name = "[dungeon-D5-B3] Ice Palace - spike room",
 					Address = 0xE9E0,
 					CanAccess =
 						have
@@ -334,7 +325,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.IcePalace,
-					Name = "Ice Palace - b5 up staircase [174] (key)",
+					Name = "[dungeon-D5-B5] Ice Palace - b5 up staircase",
 					Address = 0xE9E3,
 					CanAccess =
 						have
@@ -343,7 +334,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TowerOfHera,
-					Name = "Tower of Hera - first floor [135] (big key)",
+					Name = "[dungeon-L3-1F] Tower of Hera - first floor",
 					Address = 0xE9E6,
 					CanAccess =
 						have
@@ -352,7 +343,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "chicken house [264] (Boomerang / 10 arrows)",
+					Name = "[cave-026] chicken house",
 					Address = 0xE9E9,
 					CanAccess =
 						have
@@ -361,7 +352,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkWorld,
-					Name = "doorless hut [262] (Red Boomerang / 300 Rupees)",
+					Name = "[cave-063] doorless hut",
 					Address = 0xE9EC,
 					CanAccess =
 						have
@@ -369,8 +360,8 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					Region = Region.LightWorld,
-					Name = "C-shaped house [284] (300 rupees)",
+					Region = Region.DarkWorld,
+					Name = "[cave-062] C-shaped house",
 					Address = 0xE9EF,
 					CanAccess =
 						have
@@ -379,7 +370,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Aginah's cave [266] (Piece of Heart)",
+					Name = "[cave-044] Aginah's cave",
 					Address = 0xE9F2,
 					CanAccess =
 						have
@@ -389,7 +380,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TowerOfHera,
-					Name = "Tower of Hera - Moon pearl room [big chest] [39] (moon pearl)",
+					Name = "[dungeon-L3-4F] Tower of Hera - big chest",
 					Address = 0xE9F8,
 					CanAccess =
 						have
@@ -398,7 +389,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TowerOfHera,
-					Name = "Tower of Hera - Moon pearl room [small chest] [39] (compass)",
+					Name = "[dungeon-L3-4F] Tower of Hera - 4F [small chest]",
 					Address = 0xE9FB,
 					CanAccess =
 						have
@@ -407,7 +398,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SkullWoods,
-					Name = "Skull Woods - Entrance to part 2 [89] (key)",
+					Name = "[dungeon-D3-B1] Skull Woods - Entrance to part 2",
 					Address = 0xE9FE,
 					CanAccess =
 						have
@@ -416,7 +407,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.ThievesTown,
-					Name = "Thieves' Town - Bottom left of huge room [top left chest] [219] (map)",
+					Name = "[dungeon-D4-B1] Thieves' Town - Bottom left of huge room [top left chest]",
 					Address = 0xEA01,
 					CanAccess =
 						have
@@ -425,7 +416,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.ThievesTown,
-					Name = "Thieves' Town - Bottom left of huge room [bottom right chest] [219] (big key)",
+					Name = "[dungeon-D4-B1] Thieves' Town - Bottom left of huge room [bottom right chest]",
 					Address = 0xEA04,
 					CanAccess =
 						have
@@ -434,7 +425,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.ThievesTown,
-					Name = "Thieves' Town - Bottom right of huge room [220] (compass)",
+					Name = "[dungeon-D4-B1] Thieves' Town - Bottom right of huge room",
 					Address = 0xEA07,
 					CanAccess =
 						have
@@ -443,7 +434,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.ThievesTown,
-					Name = "Thieves' Town - Top left of huge room [203] (20 rupees)",
+					Name = "[dungeon-D4-B1] Thieves' Town - Top left of huge room",
 					Address = 0xEA0A,
 					CanAccess =
 						have
@@ -452,7 +443,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.ThievesTown,
-					Name = "Thieves' Town - Room above boss [101] (3 bombs) ",
+					Name = "[dungeon-D4-1F] Thieves' Town - Room above boss",
 					Address = 0xEA0D,
 					CanAccess =
 						have
@@ -461,7 +452,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.ThievesTown,
-					Name = "Thieves' Town - Titan's Mitt [68] (Titan's Mitt)",
+					Name = "[dungeon-D4-B2] Thieves' Town - big chest",
 					Address = 0xEA10,
 					CanAccess =
 						have
@@ -470,7 +461,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.ThievesTown,
-					Name = "Thieves' Town - next to Blind [69] (key)",
+					Name = "[dungeon-D4-B2] Thieves' Town - next to Blind",
 					Address = 0xEA13,
 					CanAccess =
 						have
@@ -479,7 +470,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Chain chomp room [182] (key)",
+					Name = "[dungeon-D7-1F] Turtle Rock - Chain chomp room",
 					Address = 0xEA16,
 					CanAccess =
 						have
@@ -488,7 +479,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Mirror shield room [36] (mirror shield)",
+					Name = "[dungeon-D7-B1] Turtle Rock - big chest",
 					Address = 0xEA19,
 					CanAccess =
 						have
@@ -497,7 +488,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Map room [left chest] [183] (map)",
+					Name = "[dungeon-D7-1F] Turtle Rock - Map room [left chest]",
 					Address = 0xEA1C,
 					CanAccess =
 						have
@@ -506,7 +497,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Map room [right chest] [183] (key)",
+					Name = "[dungeon-D7-1F] Turtle Rock - Map room [right chest]",
 					Address = 0xEA1F,
 					CanAccess =
 						have
@@ -515,7 +506,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - compass room [214] (compass)",
+					Name = "[dungeon-D7-1F] Turtle Rock - compass room",
 					Address = 0xEA22,
 					CanAccess =
 						have
@@ -524,7 +515,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - big key room [20] (big key)",
+					Name = "[dungeon-D7-B1] Turtle Rock - big key room",
 					Address = 0xEA25,
 					CanAccess =
 						have
@@ -533,7 +524,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Eye bridge room [top right chest] [213] (1 rupee)",
+					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top right chest]",
 					Address = 0xEA28,
 					CanAccess =
 						have
@@ -542,7 +533,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Eye bridge room [top left chest] [213] (5 rupees)",
+					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top left chest]",
 					Address = 0xEA2B,
 					CanAccess =
 						have
@@ -551,7 +542,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Eye bridge room [bottom rigth chest] [213] (20 rupees)",
+					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom right chest]",
 					Address = 0xEA2E,
 					CanAccess =
 						have
@@ -560,7 +551,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Eye bridge room [bottom left chest] [213] (key)",
+					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom left chest]",
 					Address = 0xEA31,
 					CanAccess =
 						have
@@ -569,7 +560,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.TurtleRock,
-					Name = "Turtle Rock - Roller switch room [4] (key)",
+					Name = "[dungeon-D7-B1] Turtle Rock - Roller switch room",
 					Address = 0xEA34,
 					CanAccess =
 						have
@@ -578,7 +569,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - big key room [58] (big key)",
+					Name = "[dungeon-D1-1F] Dark Palace - big key room",
 					Address = 0xEA37,
 					CanAccess =
 						have
@@ -587,7 +578,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - jump room [right chest] [42] (key)",
+					Name = "[dungeon-D1-1F] Dark Palace - jump room [right chest]",
 					Address = 0xEA3A,
 					CanAccess =
 						have
@@ -596,7 +587,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - jump room [left chest] [42] (key)",
+					Name = "[dungeon-D1-1F] Dark Palace - jump room [left chest]",
 					Address = 0xEA3D,
 					CanAccess =
 						have
@@ -605,7 +596,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - hammer room [26] (hammer)",
+					Name = "[dungeon-D1-1F] Dark Palace - big chest",
 					Address = 0xEA40,
 					CanAccess =
 						have
@@ -614,7 +605,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - compass room [26] (compass)",
+					Name = "[dungeon-D1-1F] Dark Palace - compass room",
 					Address = 0xEA43,
 					CanAccess =
 						have
@@ -623,7 +614,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - spike statue room [26] (5 rupees)",
+					Name = "[dungeon-D1-1F] Dark Palace - spike statue room",
 					Address = 0xEA46,
 					CanAccess =
 						have
@@ -632,7 +623,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - turtle stalfos room [10] (key)",
+					Name = "[dungeon-D1-B1] Dark Palace - turtle stalfos room",
 					Address = 0xEA49,
 					CanAccess =
 						have
@@ -641,7 +632,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - room leading to Helmasaur [left chest] [106] (arrow)",
+					Name = "[dungeon-D1-B1] Dark Palace - room leading to Helmasaur [left chest]",
 					Address = 0xEA4C,
 					CanAccess =
 						have
@@ -650,7 +641,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - room leading to Helmasaur [right chest] [106] (key)",
+					Name = "[dungeon-D1-B1] Dark Palace - room leading to Helmasaur [right chest]",
 					Address = 0xEA4F,
 					CanAccess =
 						have
@@ -659,7 +650,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - statue push room [43] (map)",
+					Name = "[dungeon-D1-1F] Dark Palace - statue push room",
 					Address = 0xEA52,
 					CanAccess =
 						have
@@ -668,7 +659,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - maze room [top chest] [25] (3 bombs)",
+					Name = "[dungeon-D1-1F] Dark Palace - maze room [top chest]",
 					Address = 0xEA55,
 					CanAccess =
 						have
@@ -677,7 +668,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - maze room [bottom chest] [25] (key)",
+					Name = "[dungeon-D1-1F] Dark Palace - maze room [bottom chest]",
 					Address = 0xEA58,
 					CanAccess =
 						have
@@ -686,7 +677,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkPalace,
-					Name = "Dark Palace - shooter room [9] (key)",
+					Name = "[dungeon-D1-B1] Dark Palace - shooter room",
 					Address = 0xEA5B,
 					CanAccess =
 						have
@@ -695,7 +686,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire - big hub room [194] (key)",
+					Name = "[dungeon-D6-B1] Misery Mire - big hub room",
 					Address = 0xEA5E,
 					CanAccess =
 						have
@@ -704,7 +695,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire - end of bridge [162] (key)",
+					Name = "[dungeon-D6-B1] Misery Mire - end of bridge",
 					Address = 0xEA61,
 					CanAccess =
 						have
@@ -713,7 +704,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire - compass [193] (compass)",
+					Name = "[dungeon-D6-B1] Misery Mire - compass",
 					Address = 0xEA64,
 					CanAccess =
 						have
@@ -722,7 +713,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire - Cane of Somaria [195] (cane of somaria)",
+					Name = "[dungeon-D6-B1] Misery Mire - big chest",
 					Address = 0xEA67,
 					CanAccess =
 						have
@@ -731,7 +722,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire - map room [195] (map)",
+					Name = "[dungeon-D6-B1] Misery Mire - map room",
 					Address = 0xEA6A,
 					CanAccess =
 						have
@@ -740,7 +731,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire - big key [209] (big key)",
+					Name = "[dungeon-D6-B1] Misery Mire - big key",
 					Address = 0xEA6D,
 					CanAccess =
 						have
@@ -750,7 +741,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire west area [left chest] [269] (Piece of Heart)",
+					Name = "[cave-071] Misery Mire west area [left chest]",
 					Address = 0xEA73,
 					CanAccess =
 						have
@@ -759,7 +750,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.MiseryMire,
-					Name = "Misery Mire west area [right chest] [269] (20 rupees)",
+					Name = "[cave-071] Misery Mire west area [right chest]",
 					Address = 0xEA76,
 					CanAccess =
 						have
@@ -768,7 +759,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Sanctuary [18] (Heart Container)",
+					Name = "[dungeon-C-1F] Sanctuary",
 					Address = 0xEA79,
 					CanAccess =
 						have
@@ -777,7 +768,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? [top chest] [248] (3 bombs)",
+					Name = "[cave-057-1F] Dark World Death Mountain - cave from top to bottom [top chest]",
 					Address = 0xEA7C,
 					CanAccess =
 						have
@@ -786,7 +777,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? [bottom chest] [248] (20 rupees)",
+					Name = "[cave-057-1F] Dark World Death Mountain - cave from top to bottom [bottom chest]",
 					Address = 0xEA7F,
 					CanAccess =
 						have
@@ -795,7 +786,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Sahasrahla's Hut [left chest] [261] (50 rupees)",
+					Name = "[cave-035] Sahasrahla's Hut [left chest]",
 					Address = 0xEA82,
 					CanAccess =
 						have
@@ -804,7 +795,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Sahasrahla's Hut [center chest] [261] (3 bombs)",
+					Name = "[cave-035] Sahasrahla's Hut [center chest]",
 					Address = 0xEA85,
 					CanAccess =
 						have
@@ -813,7 +804,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Sahasrahla's Hut [right chest] [261] (50 rupees)",
+					Name = "[cave-035] Sahasrahla's Hut [right chest]",
 					Address = 0xEA88,
 					CanAccess =
 						have
@@ -822,7 +813,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkWorld,
-					Name = "Spike cave [279] (Staff of Byrna)",
+					Name = "[cave-055] Spike cave",
 					Address = 0xEA8B,
 					CanAccess =
 						have
@@ -831,7 +822,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Kakariko well [top chest] [47] (Piece of Heart)",
+					Name = "[cave-021] Kakariko well [top chest]",
 					Address = 0xEA8E,
 					CanAccess =
 						have
@@ -840,7 +831,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Kakariko well [left chest row of 3] [47] (20 rupees)",
+					Name = "[cave-021] Kakariko well [left chest row of 3]",
 					Address = 0xEA91,
 					CanAccess =
 						have
@@ -849,7 +840,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Kakariko well [center chest row of 3] [47] (20 rupees)",
+					Name = "[cave-021] Kakariko well [center chest row of 3]",
 					Address = 0xEA94,
 					CanAccess =
 						have
@@ -858,7 +849,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Kakariko well [right chest row of 3] [47] (20 rupees)",
+					Name = "[cave-021] Kakariko well [right chest row of 3]",
 					Address = 0xEA97,
 					CanAccess =
 						have
@@ -867,7 +858,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Kakariko well [bottom chest] [47] (3 bombs)",
+					Name = "[cave-021] Kakariko well [bottom chest]",
 					Address = 0xEA9A,
 					CanAccess =
 						have
@@ -876,7 +867,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - First room [40] (key)",
+					Name = "[dungeon-D2-1F] Swamp Palace - first room",
 					Address = 0xEA9D,
 					CanAccess =
 						have
@@ -885,7 +876,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - south of hookshot room [70] (compass)",
+					Name = "[dungeon-D2-B1] Swamp Palace - south of hookshot room",
 					Address = 0xEAA0,
 					CanAccess =
 						have
@@ -894,7 +885,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - push 4 blocks room [52] (20 rupees)",
+					Name = "[dungeon-D2-B1] Swamp Palace - push 4 blocks room",
 					Address = 0xEAA3,
 					CanAccess =
 						have
@@ -903,7 +894,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - big key room [53] (big key)",
+					Name = "[dungeon-D2-B1] Swamp Palace - big key room",
 					Address = 0xEAA6,
 					CanAccess =
 						have
@@ -912,7 +903,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - flooded room [left chest] [118] (20 rupees)",
+					Name = "[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",
 					Address = 0xEAA9,
 					CanAccess =
 						have
@@ -921,7 +912,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - flooded room [right chest] [118] (20 rupees)",
+					Name = "[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",
 					Address = 0xEAAC,
 					CanAccess =
 						have
@@ -930,7 +921,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.SwampPalace,
-					Name = "Swamp Palace - hidden waterfall door room [102] (20 rupees)",
+					Name = "[dungeon-D2-B2] Swamp Palace - hidden waterfall door room",
 					Address = 0xEAAF,
 					CanAccess =
 						have
@@ -939,7 +930,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.HyruleCastleTower,
-					Name = "Hyrule Castle Tower - maze room [208] (key)",
+					Name = "[dungeon-A1-3F] Hyrule Castle Tower - maze room",
 					Address = 0xEAB2,
 					CanAccess =
 						have
@@ -948,7 +939,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.HyruleCastleTower,
-					Name = "Hyrule Castle Tower - 2 knife guys room [224] (key)",
+					Name = "[dungeon-A1-2F] Hyrule Castle Tower - 2 knife guys room",
 					Address = 0xEAB5,
 					CanAccess =
 						have
@@ -957,7 +948,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of gap room [top left chest] [123] (3 bombs)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [top left chest]",
 					Address = 0xEAB8,
 					CanAccess =
 						have
@@ -966,7 +957,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of gap room [top right chest] [123] (10 arrows)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [top right chest]",
 					Address = 0xEABB,
 					CanAccess =
 						have
@@ -975,7 +966,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of gap room [bottom left chest] [123] (20 rupees)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom left chest]",
 					Address = 0xEABE,
 					CanAccess =
 						have
@@ -984,7 +975,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of gap room [bottom right chest] [123] (20 rupees)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom right chest])",
 					Address = 0xEAC1,
 					CanAccess =
 						have
@@ -993,7 +984,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - west of teleport room [top left chest] [124] (10 arrows)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [top left chest]",
 					Address = 0xEAC4,
 					CanAccess =
 						have
@@ -1002,7 +993,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - west of teleport room [top right chest] [124] (10 arrows)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [top right chest]",
 					Address = 0xEAC7,
 					CanAccess =
 						have
@@ -1011,7 +1002,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - west of teleport room [bottom left chest] [124] (3 bombs)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom left chest]",
 					Address = 0xEACA,
 					CanAccess =
 						have
@@ -1020,7 +1011,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - west of teleport room [bottom right chest] [124] (3 bombs)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom right chest]",
 					Address = 0xEACD,
 					CanAccess =
 						have
@@ -1029,7 +1020,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of teleport room [125] (key)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - north of teleport room",
 					Address = 0xEAD0,
 					CanAccess =
 						have
@@ -1039,7 +1030,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - Red Mail [140] (red mail)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - big chest",
 					Address = 0xEAD6,
 					CanAccess =
 						have
@@ -1048,7 +1039,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - down right staircase from entrance [left chest] [140] (10 arrows)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [left chest]",
 					Address = 0xEAD9,
 					CanAccess =
 						have
@@ -1057,7 +1048,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - down right staircase from entrance [right chest] [140] (3 bombs)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [right chest]",
 					Address = 0xEADC,
 					CanAccess =
 						have
@@ -1066,7 +1057,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - above Armos [140] (10 arrows)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - above Armos",
 					Address = 0xEADF,
 					CanAccess =
 						have
@@ -1075,7 +1066,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - east of down right staircase from entrace [141] (key)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - east of down right staircase from entrace",
 					Address = 0xEAE2,
 					CanAccess =
 						have
@@ -1084,7 +1075,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - compass room [top left chest] [157] (compass)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - compass room [top left chest]",
 					Address = 0xEAE5,
 					CanAccess =
 						have
@@ -1093,7 +1084,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - compass room [top right chest] [157] (1 rupee)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - compass room [top right chest]",
 					Address = 0xEAE8,
 					CanAccess =
 						have
@@ -1102,7 +1093,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - compass room [bottom left chest] [157] (20 rupees)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - compass room [bottom left chest]",
 					Address = 0xEAEB,
 					CanAccess =
 						have
@@ -1111,7 +1102,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - compass room [bottom right chest] [157] (10 arrows)",
+					Name = "[dungeon-A2-1F] Ganon's Tower - compass room [bottom right chest]",
 					Address = 0xEAEE,
 					CanAccess =
 						have
@@ -1120,7 +1111,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of Armos room [bottom chest] [28] (big key)",
+					Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [bottom chest]",
 					Address = 0xEAF1,
 					CanAccess =
 						have
@@ -1129,7 +1120,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of Armos room [left chest] [28] (10 arrows)",
+					Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [left chest]",
 					Address = 0xEAF4,
 					CanAccess =
 						have
@@ -1138,7 +1129,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of Armos room [right chest] [28] (3 bombs)",
+					Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [right chest]",
 					Address = 0xEAF7,
 					CanAccess =
 						have
@@ -1148,7 +1139,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of falling floor four torches [top left chest] [61] (3 bombs)",
+					Name = "[dungeon-A2-6F] Ganon's Tower - north of falling floor four torches [top left chest]",
 					Address = 0xEAFD,
 					CanAccess =
 						have
@@ -1157,7 +1148,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - north of falling floor four torches [top right chest] [61] (3 bombs)",
+					Name = "[dungeon-A2-6F] Ganon's Tower - north of falling floor four torches [top right chest]",
 					Address = 0xEB00,
 					CanAccess =
 						have
@@ -1166,7 +1157,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - before Moldorm [61] (key)",
+					Name = "[dungeon-A2-6F] Ganon's Tower - before Moldorm",
 					Address = 0xEB03,
 					CanAccess =
 						have
@@ -1175,7 +1166,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.GanonsTower,
-					Name = "Ganon's Tower - Moldorm room [77] (20 rupees)",
+					Name = "[dungeon-A2-6F] Ganon's Tower - Moldorm room",
 					Address = 0xEB06,
 					CanAccess =
 						have
@@ -1184,7 +1175,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.HyruleCastleEscape,
-					Name = "Hyrule Castle - next to Zelda [128] (lamp / 5 rupees)",
+					Name = "[dungeon-C-B3] Hyrule Castle - next to Zelda",
 					Address = 0xEB09,
 					CanAccess =
 						have
@@ -1193,7 +1184,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.HyruleCastleEscape,
-					Name = "Hyrule Castle - map room [114] (map) ",
+					Name = "[dungeon-C-B1] Hyrule Castle - map room",
 					Address = 0xEB0C,
 					CanAccess =
 						have
@@ -1202,7 +1193,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Thief's hut [top chest] [285] (Piece of Heart)",
+					Name = "[cave-022-B1] Thief's hut [top chest]",
 					Address = 0xEB0F,
 					CanAccess =
 						have
@@ -1211,7 +1202,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Thief's hut [top left chest] [285] (20 rupees)",
+					Name = "[cave-022-B1] Thief's hut [top left chest]",
 					Address = 0xEB12,
 					CanAccess =
 						have
@@ -1220,7 +1211,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Thief's hut [top right chest] [285] (20 rupees)",
+					Name = "[cave-022-B1] Thief's hut [top right chest]",
 					Address = 0xEB15,
 					CanAccess =
 						have
@@ -1229,7 +1220,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Thief's hut [bottom left chest] [285] (20 rupees)",
+					Name = "[cave-022-B1] Thief's hut [bottom left chest]",
 					Address = 0xEB18,
 					CanAccess =
 						have
@@ -1238,7 +1229,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Thief's hut [bottom right chest] [285] (20 rupees)",
+					Name = "[cave-022-B1] Thief's hut [bottom right chest]",
 					Address = 0xEB1B,
 					CanAccess =
 						have
@@ -1247,7 +1238,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? [top chest] [286] (20 rupees)",
+					Name = "[cave-073] cave northeast of swamp palace [top chest]",
 					Address = 0xEB1E,
 					CanAccess =
 						have
@@ -1256,7 +1247,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? [top middle chest] [286] (20 rupees)",
+					Name = "[cave-073] cave northeast of swamp palace [top middle chest]",
 					Address = 0xEB21,
 					CanAccess =
 						have
@@ -1265,7 +1256,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? [bottom middle chest] [286] (20 rupees)",
+					Name = "[cave-073] cave northeast of swamp palace [bottom middle chest]",
 					Address = 0xEB24,
 					CanAccess =
 						have
@@ -1274,7 +1265,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? [bottom chest] [286] (20 rupees)",
+					Name = "[cave-073] cave northeast of swamp palace [bottom chest]",
 					Address = 0xEB27,
 					CanAccess =
 						have
@@ -1283,7 +1274,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? five chests [top left chest] [239] (20 rupees)",
+					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top left chest]",
 					Address = 0xEB2A,
 					CanAccess =
 						have
@@ -1292,7 +1283,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? five chests [top left middle chest] [239] (20 rupees)",
+					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top left middle chest]",
 					Address = 0xEB2D,
 					CanAccess =
 						have
@@ -1301,7 +1292,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? five chests [top right middle chest] [239] (20 rupees)",
+					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top right middle chest]",
 					Address = 0xEB30,
 					CanAccess =
 						have
@@ -1310,7 +1301,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? five chests [top right chest] [239] (20 rupees)",
+					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top right chest]",
 					Address = 0xEB33,
 					CanAccess =
 						have
@@ -1319,7 +1310,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave??? five chests [bottom chest] [239] (20 rupees)",
+					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [bottom chest]",
 					Address = 0xEB36,
 					CanAccess =
 						have
@@ -1328,7 +1319,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave with shop??? [left chest] [255] (3 bombs)",
+					Name = "[cave-009-B1] Death Mountain - wall of caves - right cave [left chest]",
 					Address = 0xEB39,
 					CanAccess =
 						have
@@ -1337,7 +1328,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave with shop??? [right chest] [255] (10 arrows)",
+					Name = "[cave-009-B1] Death Mountain - wall of caves - right cave [right chest]",
 					Address = 0xEB3C,
 					CanAccess =
 						have
@@ -1346,7 +1337,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "cave near sanctuary??? [292] (Piece of Heart)",
+					Name = "[cave-016] cave under rocks west of Santuary",
 					Address = 0xEB3F,
 					CanAccess =
 						have
@@ -1355,7 +1346,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "Moldorm Cave [bottom left chest] [291] (3 bombs)",
+					Name = "[cave-050] cave southwest of Lake Hylia [bottom left chest]",
 					Address = 0xEB42,
 					CanAccess =
 						have
@@ -1364,7 +1355,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "Moldorm Cave [top left chest] [291] (20 rupees)",
+					Name = "[cave-050] cave southwest of Lake Hylia [top left chest]",
 					Address = 0xEB45,
 					CanAccess =
 						have
@@ -1373,7 +1364,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "Moldorm Cave [top right chest] [291] (20 rupees)",
+					Name = "[cave-050] cave southwest of Lake Hylia [top right chest]",
 					Address = 0xEB48,
 					CanAccess =
 						have
@@ -1382,7 +1373,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "Moldorm Cave [bottom right chest] [291] (10 arrows)",
+					Name = "[cave-050] cave southwest of Lake Hylia [bottom right chest]",
 					Address = 0xEB4B,
 					CanAccess =
 						have
@@ -1391,7 +1382,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Ice Cave [288] (Ice Rod)",
+					Name = "[cave-051] Ice Cave",
 					Address = 0xEB4E,
 					CanAccess =
 						have
@@ -1400,7 +1391,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "Hidden floor cave [top right chest] [60] (50 rupees)",
+					Name = "[cave-056] Dark World Death Mountain - cave under boulder [top right chest]",
 					Address = 0xEB51,
 					CanAccess =
 						have
@@ -1409,7 +1400,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "Hidden floor cave [top left chest] [60] (50 rupees)",
+					Name = "[cave-056] Dark World Death Mountain - cave under boulder [top left chest]",
 					Address = 0xEB54,
 					CanAccess =
 						have
@@ -1418,7 +1409,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "Hidden floor cave [bottom left chest] [60] (50 rupees)",
+					Name = "[cave-056] Dark World Death Mountain - cave under boulder [bottom left chest]",
 					Address = 0xEB57,
 					CanAccess =
 						have
@@ -1427,7 +1418,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.Unknown,
-					Name = "Hidden floor cave [bottom right chest] [60] (50 rupees)",
+					Name = "[cave-056] Dark World Death Mountain - cave under boulder [bottom right chest]",
 					Address = 0xEB5A,
 					CanAccess =
 						have
@@ -1436,7 +1427,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.HyruleCastleEscape,
-					Name = "Escape - final basement room [left chest] [17] (3 Bombs)",
+					Name = "[dungeon-C-B1] Escape - final basement room [left chest]",
 					Address = 0xEB5D,
 					CanAccess =
 						have
@@ -1444,8 +1435,26 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
+					Region = Region.HyruleCastleEscape,
+					Name = "[dungeon-C-B1] Escape - final basement room [middle chest]",
+					Address = 0xEB60,
+					CanAccess =
+						have
+						=> true,
+				},
+				new Location
+				{
+					Region = Region.HyruleCastleEscape,
+					Name = "[dungeon-C-B1] Escape - final basement room [right chest]",
+					Address = 0xEB63,
+					CanAccess =
+						have
+						=> true,
+				},
+				new Location
+				{
 					Region = Region.LightWorld,
-					Name = "Uncle (L.1 Sword & Shield)",
+					Name = "Uncle",
 					Address = 0x2DF45,
 					CanAccess =
 						have
@@ -1454,7 +1463,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Sahasrahla (Pegasus Boots)",
+					Name = "Sahasrahla",
 					Address = 0x2F1FC,
 					CanAccess =
 						have
@@ -1463,7 +1472,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkWorld,
-					Name = "Flute Boy (Shovel)",
+					Name = "Flute Boy",
 					Address = 0x330BF,
 					CanAccess =
 						have
@@ -1472,7 +1481,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Sick Kid (Bug-Catching Net)",
+					Name = "Sick Kid",
 					Address = 0x339C7,
 					CanAccess =
 						have
@@ -1481,7 +1490,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Purple Chest (Bottle)",
+					Name = "Purple Chest",
 					Address = 0x33D60,
 					CanAccess =
 						have
@@ -1490,7 +1499,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Hobo (Bottle)",
+					Name = "Hobo",
 					Address = 0x33E75,
 					CanAccess =
 						have
@@ -1499,7 +1508,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.DarkWorld,
-					Name = "Catfish (Quake)",
+					Name = "Catfish",
 					Address = 0xEE185,
 					CanAccess =
 						have
@@ -1508,7 +1517,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "King Zora (Flippers)",
+					Name = "King Zora",
 					Address = 0xEE1C3,
 					CanAccess =
 						have
@@ -1517,7 +1526,7 @@ namespace AlttpRandomizer.Rom
 				new Location
 				{
 					Region = Region.LightWorld,
-					Name = "Old mountain man (Magic Mirror)",
+					Name = "Old mountain man",
 					Address = 0xF6A00,
 					CanAccess =
 						have
