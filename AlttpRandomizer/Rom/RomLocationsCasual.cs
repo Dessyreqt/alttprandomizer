@@ -551,20 +551,23 @@ namespace AlttpRandomizer.Rom
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-1F] Turtle Rock - Chain chomp room",
 					Address = 0xEA16,
+                    KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B1] Turtle Rock - big chest",
 					Address = 0xEA19,
-					CanAccess =
+                    KeysNeeded = 2,
+                    BigKeyNeeded = true,
+                    CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
@@ -573,7 +576,8 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA1C,
 					CanAccess =
 						have =>
-						true,
+						CanEnterTurtleRock(have)
+                        && have.Contains(ItemType.FireRod),
 				},
 				new Location
 				{
@@ -583,8 +587,9 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA1F,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have)
+                        && have.Contains(ItemType.FireRod),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
@@ -593,68 +598,79 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA22,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B1] Turtle Rock - big key room",
 					Address = 0xEA25,
+                    KeysNeeded = 3,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top right chest]",
 					Address = 0xEA28,
-					CanAccess =
+                    KeysNeeded = 3,
+                    BigKeyNeeded = true,
+                    CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top left chest]",
 					Address = 0xEA2B,
-					CanAccess =
+                    KeysNeeded = 3,
+                    BigKeyNeeded = true,
+                    CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom right chest]",
 					Address = 0xEA2E,
-					CanAccess =
+                    KeysNeeded = 3,
+                    BigKeyNeeded = true,
+                    CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom left chest]",
 					Address = 0xEA31,
-					CanAccess =
+                    KeysNeeded = 3,
+                    BigKeyNeeded = true,
+                    CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B1] Turtle Rock - Roller switch room",
 					Address = 0xEA34,
+                    KeysNeeded = 2,
+                    BigKeyNeeded = true,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterTurtleRock(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
@@ -801,10 +817,11 @@ namespace AlttpRandomizer.Rom
 					Region = Region.MiseryMire,
 					Name = "[dungeon-D6-B1] Misery Mire - big hub room",
 					Address = 0xEA5E,
+                    KeysNeeded = 1,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterMiseryMire(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
@@ -813,69 +830,80 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA61,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterMiseryMire(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.MiseryMire,
 					Name = "[dungeon-D6-B1] Misery Mire - compass",
 					Address = 0xEA64,
+                    KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterMiseryMire(have)
+                        && (have.Contains(ItemType.Lamp)
+                            || have.Contains(ItemType.FireRod)),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.MiseryMire,
 					Name = "[dungeon-D6-B1] Misery Mire - big chest",
 					Address = 0xEA67,
+                    KeysNeeded = 2,
+                    BigKeyNeeded = true,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterMiseryMire(have)
+                        && (have.Contains(ItemType.Lamp)
+                            || have.Contains(ItemType.FireRod)),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.MiseryMire,
 					Name = "[dungeon-D6-B1] Misery Mire - map room",
 					Address = 0xEA6A,
+                    KeysNeeded = 1,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterMiseryMire(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.MiseryMire,
 					Name = "[dungeon-D6-B1] Misery Mire - big key",
 					Address = 0xEA6D,
+                    KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterMiseryMire(have)
+                        && (have.Contains(ItemType.Lamp)
+                            || have.Contains(ItemType.FireRod)),
+                },
 
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.MiseryMire,
+					Region = Region.DarkWorld,
 					Name = "[cave-071] Misery Mire west area [left chest]",
 					Address = 0xEA73,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterMiseryMire(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.MiseryMire,
+					Region = Region.DarkWorld,
 					Name = "[cave-071] Misery Mire west area [right chest]",
 					Address = 0xEA76,
 					CanAccess =
 						have =>
-						true,
-				},
+                        CanEnterMiseryMire(have),
+                },
 				new Location
 				{
 					TitansMittOkay = false,
@@ -1204,7 +1232,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEAD9,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
@@ -1750,9 +1778,66 @@ namespace AlttpRandomizer.Rom
 			};
         }
 
-		private bool CanEnterMiseryMire(List<ItemType> have)
+        private bool CanEnterGanonsTower(List<ItemType> have)
+        {
+            return CanDefeatDarkPalace(have)
+                && CanDefeatSwampPalace(have)
+                && CanDefeatSkullWoods(have)
+                && CanDefeatThievesTown(have)
+                && CanDefeatIcePalace(have)
+                && CanDefeatMiseryMire(have)
+                && CanDefeatTurtleRock(have);
+        }
+
+        private bool CanDefeatDarkPalace(List<ItemType> have)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanDefeatSwampPalace(List<ItemType> have)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanDefeatSkullWoods(List<ItemType> have)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanDefeatThievesTown(List<ItemType> have)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanDefeatIcePalace(List<ItemType> have)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanDefeatMiseryMire(List<ItemType> have)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanDefeatTurtleRock(List<ItemType> have)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanEnterTurtleRock(List<ItemType> have)
+        {
+            return have.Contains(ItemType.Hookshot)
+                && have.Contains(ItemType.MagicMirror)
+                && have.Contains(ItemType.TitansMitt)
+                && have.Contains(ItemType.Hammer)
+                && have.Contains(ItemType.Quake)
+                && have.Contains(ItemType.CaneOfSomaria);
+        }
+
+        private bool CanEnterMiseryMire(List<ItemType> have)
 		{
 			return have.Contains(ItemType.OcarinaInactive)
+                && have.Contains(ItemType.MagicMirror)
 				&& have.Contains(ItemType.TitansMitt)
 				&& have.Contains(ItemType.Ether)
 				&& (have.Contains(ItemType.PegasusBoots)
@@ -1762,7 +1847,8 @@ namespace AlttpRandomizer.Rom
 		private bool CanEnterIcePalace(List<ItemType> have)
 		{
 			return have.Contains(ItemType.Flippers)
-				&& have.Contains(ItemType.TitansMitt)
+                && have.Contains(ItemType.MagicMirror)
+                && have.Contains(ItemType.TitansMitt)
 				&& have.Contains(ItemType.FireRod);
 		}
 
