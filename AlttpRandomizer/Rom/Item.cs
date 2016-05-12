@@ -2,7 +2,8 @@
 {
     public enum ItemType
     {
-        L1SwordAndShield = 0x00, // can't be used until after uncle dies
+		Nothing = 0xFF,
+		L1SwordAndShield = 0x00, // can't be used until after uncle dies
         L2Sword = 0x01, // crashes game
         L3Sword = 0x02, // can't be used until after uncle dies
         L4Sword = 0x03, // can't be used until after uncle dies

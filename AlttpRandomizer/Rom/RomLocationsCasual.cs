@@ -25,6 +25,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B1] Escape - first B1 room",
 					Address = 0xE96E,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
 						CanEscapeCastle(have),
@@ -45,6 +46,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B1] Hyrule Castle - boomerang room",
 					Address = 0xE974,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
 						true,
@@ -680,7 +682,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-1F] Dark Palace - big key room",
 					Address = 0xEA37,
-					KeysNeeded = 1,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -702,6 +704,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-1F] Dark Palace - jump room [left chest]",
 					Address = 0xEA3D,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -712,7 +715,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-1F] Dark Palace - big chest",
 					Address = 0xEA40,
-					KeysNeeded = 2,
+					KeysNeeded = 3,
 					BigKeyNeeded = true,
 					CanAccess =
 						have =>
@@ -724,7 +727,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-1F] Dark Palace - compass room",
 					Address = 0xEA43,
-					KeysNeeded = 1,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -735,7 +738,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-1F] Dark Palace - spike statue room",
 					Address = 0xEA46,
-					KeysNeeded = 2,
+					KeysNeeded = 3,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -746,6 +749,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-B1] Dark Palace - turtle stalfos room",
 					Address = 0xEA49,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -756,6 +760,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-B1] Dark Palace - room leading to Helmasaur [left chest]",
 					Address = 0xEA4C,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -766,7 +771,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-B1] Dark Palace - room leading to Helmasaur [right chest]",
 					Address = 0xEA4F,
-					KeysNeeded = 1,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -788,7 +793,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-1F] Dark Palace - maze room [top chest]",
 					Address = 0xEA55,
-					KeysNeeded = 2,
+					KeysNeeded = 3,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -799,7 +804,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.DarkPalace,
 					Name = "[dungeon-D1-1F] Dark Palace - maze room [bottom chest]",
 					Address = 0xEA58,
-					KeysNeeded = 2,
+					KeysNeeded = 3,
 					CanAccess =
 						have =>
 						CanEnterDarkPalace(have),
@@ -1412,6 +1417,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B3] Hyrule Castle - next to Zelda",
 					Address = 0xEB09,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
 						true,
@@ -1717,6 +1723,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B1] Escape - final basement room [left chest]",
 					Address = 0xEB5D,
+					KeysNeeded = 4,
 					CanAccess =
 						have =>
 						CanEscapeCastle(have)
@@ -1729,6 +1736,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B1] Escape - final basement room [middle chest]",
 					Address = 0xEB60,
+					KeysNeeded = 4,
 					CanAccess =
 						have =>
 						CanEscapeCastle(have)
@@ -1741,6 +1749,7 @@ namespace AlttpRandomizer.Rom
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B1] Escape - final basement room [right chest]",
 					Address = 0xEB63,
+					KeysNeeded = 4,
 					CanAccess =
 						have =>
 						CanEscapeCastle(have)
@@ -1850,13 +1859,18 @@ namespace AlttpRandomizer.Rom
 
 		private bool CanEnterHyruleCastleTower(List<ItemType> have)
 		{
-			return (CanDefeatEasternPalace(have)
-					&& CanDefeatDesertPalace(have)
-					&& CanDefeatTowerOfHera(have))
+			return (CanGetMasterSword(have))
 				|| (have.Contains(ItemType.Cape));
 		}
 
-		private bool CanAccessEastDarkWorldDeathMountain(List<ItemType> have)
+	    public bool CanGetMasterSword(List<ItemType> have)
+	    {
+		    return CanDefeatEasternPalace(have)
+					&& CanDefeatDesertPalace(have)
+					&& CanDefeatTowerOfHera(have);
+	    }
+
+	    private bool CanAccessEastDarkWorldDeathMountain(List<ItemType> have)
 		{
 			return CanClimbDeathMountain(have) 
 				&& have.Contains(ItemType.Hammer)

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\FileName.cs" />
+    <Compile Include="IO\RandomizerLog.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,11 +57,13 @@
     <Compile Include="Net\RandomizerVersion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Random\Randomizer.cs" />
     <Compile Include="Random\SeedRandom.cs" />
     <Compile Include="Rom\IRomLocations.cs" />
     <Compile Include="Rom\Item.cs" />
     <Compile Include="Rom\Location.cs" />
     <Compile Include="Rom\RomLocationsCasual.cs" />
+    <Compile Include="Rom\RomLocationsFactory.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -72,6 +75,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -88,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chest_notes.txt" />
+    <None Include="Resources\MenuFileSaveIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

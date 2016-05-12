@@ -1,7 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AlttpRandomizer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="OutputFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ALttP Random - &lt;seed&gt;.sfc</Value>
+    </Setting>
+    <Setting Name="RandomizerDifficulty" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Casual</Value>
+    </Setting>
+    <Setting Name="CreateSpoilerLog" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
