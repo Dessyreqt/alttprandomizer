@@ -112,7 +112,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xE98C,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -214,7 +214,7 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TowerOfHera,
 					Name = "[dungeon-L3-2F] Tower of Hera - Entrance",
 					Address = 0xE9AD,
@@ -266,13 +266,16 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.LightWorld,
 					Name = "[cave-012-1F] Death Mountain - wall of caves - left cave",
 					Address = 0xE9BF,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& ((have.Contains(ItemType.MagicMirror)
+								&& have.Contains(ItemType.Hammer))
+							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
 				{
@@ -287,13 +290,13 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.LightWorld,
 					Name = "[cave-013] Mimic cave (from Turtle Rock)",
 					Address = 0xE9C5,
 					CanAccess =
 						have =>
-						true,
+						CanEnterTurtleRock(have),
 				},
 				new Location
 				{
@@ -324,7 +327,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xE9CE,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 
 				new Location
@@ -386,7 +389,7 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TowerOfHera,
 					Name = "[dungeon-L3-1F] Tower of Hera - first floor",
 					Address = 0xE9E6,
@@ -403,7 +406,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xE9E9,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -413,7 +416,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xE9EC,
 					CanAccess =
 						have =>
-						true,
+						CanAccessLowerDarkWorld(have),
 				},
 				new Location
 				{
@@ -423,7 +426,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xE9EF,
 					CanAccess =
 						have =>
-						true,
+						CanAccessLowerDarkWorld(have),
 				},
 				new Location
 				{
@@ -433,12 +436,12 @@ namespace AlttpRandomizer.Rom
 					Address = 0xE9F2,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TowerOfHera,
 					Name = "[dungeon-L3-4F] Tower of Hera - big chest",
 					Address = 0xE9F8,
@@ -449,7 +452,7 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TowerOfHera,
 					Name = "[dungeon-L3-4F] Tower of Hera - 4F [small chest]",
 					Address = 0xE9FB,
@@ -558,7 +561,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B1] Turtle Rock - big chest",
 					Address = 0xEA19,
@@ -570,7 +573,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-1F] Turtle Rock - Map room [left chest]",
 					Address = 0xEA1C,
@@ -581,7 +584,7 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-1F] Turtle Rock - Map room [right chest]",
 					Address = 0xEA1F,
@@ -592,7 +595,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-1F] Turtle Rock - compass room",
 					Address = 0xEA22,
@@ -602,7 +605,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B1] Turtle Rock - big key room",
 					Address = 0xEA25,
@@ -613,7 +616,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top right chest]",
 					Address = 0xEA28,
@@ -625,7 +628,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top left chest]",
 					Address = 0xEA2B,
@@ -637,7 +640,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom right chest]",
 					Address = 0xEA2E,
@@ -649,7 +652,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom left chest]",
 					Address = 0xEA31,
@@ -661,7 +664,7 @@ namespace AlttpRandomizer.Rom
                 },
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.TurtleRock,
 					Name = "[dungeon-D7-B1] Turtle Rock - Roller switch room",
 					Address = 0xEA34,
@@ -892,7 +895,9 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA73,
 					CanAccess =
 						have =>
-                        CanEnterMiseryMire(have),
+						have.Contains(ItemType.OcarinaInactive)
+						&& have.Contains(ItemType.MagicMirror)
+						&& have.Contains(ItemType.TitansMitt),
                 },
 				new Location
 				{
@@ -902,8 +907,10 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA76,
 					CanAccess =
 						have =>
-                        CanEnterMiseryMire(have),
-                },
+						have.Contains(ItemType.OcarinaInactive)
+						&& have.Contains(ItemType.MagicMirror)
+						&& have.Contains(ItemType.TitansMitt),
+				},
 				new Location
 				{
 					TitansMittOkay = false,
@@ -912,27 +919,27 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA79,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.DarkWorld,
 					Name = "[cave-057-1F] Dark World Death Mountain - cave from top to bottom [top chest]",
 					Address = 0xEA7C,
 					CanAccess =
 						have =>
-						true,
+						CanAccessEastDarkWorldDeathMountain(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.DarkWorld,
 					Name = "[cave-057-1F] Dark World Death Mountain - cave from top to bottom [bottom chest]",
 					Address = 0xEA7F,
 					CanAccess =
 						have =>
-						true,
+						CanAccessEastDarkWorldDeathMountain(have),
 				},
 				new Location
 				{
@@ -942,7 +949,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA82,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -952,7 +959,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA85,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -962,17 +969,19 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA88,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.DarkWorld,
 					Name = "[cave-055] Spike cave",
 					Address = 0xEA8B,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& have.Contains(ItemType.MagicMirror)
+						&& have.Contains(ItemType.Hammer),
 				},
 				new Location
 				{
@@ -982,7 +991,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA8E,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -992,7 +1001,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA91,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1002,7 +1011,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA94,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1012,7 +1021,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA97,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1022,7 +1031,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEA9A,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1111,7 +1120,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEAB2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterHyruleCastleTower(have),
 				},
 				new Location
 				{
@@ -1121,112 +1130,119 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEAB5,
 					CanAccess =
 						have =>
-						true,
+						CanEnterHyruleCastleTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [top left chest]",
 					Address = 0xEAB8,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [top right chest]",
 					Address = 0xEABB,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom left chest]",
 					Address = 0xEABE,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom right chest])",
 					Address = 0xEAC1,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [top left chest]",
 					Address = 0xEAC4,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [top right chest]",
 					Address = 0xEAC7,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom left chest]",
 					Address = 0xEACA,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom right chest]",
 					Address = 0xEACD,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - north of teleport room",
 					Address = 0xEAD0,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - big chest",
 					Address = 0xEAD6,
+					BigKeyNeeded = true,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [left chest]",
 					Address = 0xEAD9,
@@ -1236,144 +1252,159 @@ namespace AlttpRandomizer.Rom
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [right chest]",
 					Address = 0xEADC,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - above Armos",
 					Address = 0xEADF,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - east of down right staircase from entrace",
 					Address = 0xEAE2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - compass room [top left chest]",
 					Address = 0xEAE5,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - compass room [top right chest]",
 					Address = 0xEAE8,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - compass room [bottom left chest]",
 					Address = 0xEAEB,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-1F] Ganon's Tower - compass room [bottom right chest]",
 					Address = 0xEAEE,
+					KeysNeeded = 1,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [bottom chest]",
 					Address = 0xEAF1,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [left chest]",
 					Address = 0xEAF4,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [right chest]",
 					Address = 0xEAF7,
+					KeysNeeded = 2,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-6F] Ganon's Tower - north of falling floor four torches [top left chest]",
 					Address = 0xEAFD,
+					BigKeyNeeded = true,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-6F] Ganon's Tower - north of falling floor four torches [top right chest]",
 					Address = 0xEB00,
+					BigKeyNeeded = true,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-6F] Ganon's Tower - before Moldorm",
 					Address = 0xEB03,
+					KeysNeeded = 1,
+					BigKeyNeeded = true,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.GanonsTower,
 					Name = "[dungeon-A2-6F] Ganon's Tower - Moldorm room",
 					Address = 0xEB06,
+					KeysNeeded = 2,
+					BigKeyNeeded = true,
 					CanAccess =
 						have =>
-						true,
+						CanEnterGanonsTower(have)
+						&& have.Contains(ItemType.L1SwordAndShield),
 				},
 				new Location
 				{
@@ -1403,7 +1434,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEB0F,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1413,7 +1444,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEB12,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1423,7 +1454,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEB15,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1433,7 +1464,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEB18,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1443,167 +1474,188 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEB1B,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.DarkWorld,
 					Name = "[cave-073] cave northeast of swamp palace [top chest]",
 					Address = 0xEB1E,
 					CanAccess =
 						have =>
-						true,
+						CanAccessLowerDarkWorld(have),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.DarkWorld,
 					Name = "[cave-073] cave northeast of swamp palace [top middle chest]",
 					Address = 0xEB21,
 					CanAccess =
 						have =>
-						true,
+						CanAccessLowerDarkWorld(have),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.DarkWorld,
 					Name = "[cave-073] cave northeast of swamp palace [bottom middle chest]",
 					Address = 0xEB24,
 					CanAccess =
 						have =>
-						true,
+						CanAccessLowerDarkWorld(have),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.DarkWorld,
 					Name = "[cave-073] cave northeast of swamp palace [bottom chest]",
 					Address = 0xEB27,
 					CanAccess =
 						have =>
-						true,
+						CanAccessLowerDarkWorld(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.LightWorld,
 					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top left chest]",
 					Address = 0xEB2A,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& ((have.Contains(ItemType.MagicMirror)
+								&& have.Contains(ItemType.Hammer))
+							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.LightWorld,
 					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top left middle chest]",
 					Address = 0xEB2D,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& ((have.Contains(ItemType.MagicMirror)
+								&& have.Contains(ItemType.Hammer))
+							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.LightWorld,
 					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top right middle chest]",
 					Address = 0xEB30,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& ((have.Contains(ItemType.MagicMirror)
+								&& have.Contains(ItemType.Hammer))
+							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.LightWorld,
 					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top right chest]",
 					Address = 0xEB33,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& ((have.Contains(ItemType.MagicMirror)
+								&& have.Contains(ItemType.Hammer))
+							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.LightWorld,
 					Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [bottom chest]",
 					Address = 0xEB36,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& ((have.Contains(ItemType.MagicMirror)
+								&& have.Contains(ItemType.Hammer))
+							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.LightWorld,
 					Name = "[cave-009-B1] Death Mountain - wall of caves - right cave [left chest]",
 					Address = 0xEB39,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& ((have.Contains(ItemType.MagicMirror)
+								&& have.Contains(ItemType.Hammer))
+							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.LightWorld,
 					Name = "[cave-009-B1] Death Mountain - wall of caves - right cave [right chest]",
 					Address = 0xEB3C,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have)
+						&& ((have.Contains(ItemType.MagicMirror)
+								&& have.Contains(ItemType.Hammer))
+							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.LightWorld,
 					Name = "[cave-016] cave under rocks west of Santuary",
 					Address = 0xEB3F,
 					CanAccess =
 						have =>
-						true,
+						have.Contains(ItemType.PegasusBoots),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.LightWorld,
 					Name = "[cave-050] cave southwest of Lake Hylia [bottom left chest]",
 					Address = 0xEB42,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.LightWorld,
 					Name = "[cave-050] cave southwest of Lake Hylia [top left chest]",
 					Address = 0xEB45,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.LightWorld,
 					Name = "[cave-050] cave southwest of Lake Hylia [top right chest]",
 					Address = 0xEB48,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
 					TitansMittOkay = false,
-					Region = Region.Unknown,
+					Region = Region.LightWorld,
 					Name = "[cave-050] cave southwest of Lake Hylia [bottom right chest]",
 					Address = 0xEB4B,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1613,77 +1665,87 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEB4E,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.DarkWorld,
 					Name = "[cave-056] Dark World Death Mountain - cave under boulder [top right chest]",
 					Address = 0xEB51,
 					CanAccess =
 						have =>
-						true,
+						CanAccessEastDarkWorldDeathMountain(have)
+						&& have.Contains(ItemType.Hookshot),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.DarkWorld,
 					Name = "[cave-056] Dark World Death Mountain - cave under boulder [top left chest]",
 					Address = 0xEB54,
 					CanAccess =
 						have =>
-						true,
+						CanAccessEastDarkWorldDeathMountain(have)
+						&& have.Contains(ItemType.Hookshot),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.DarkWorld,
 					Name = "[cave-056] Dark World Death Mountain - cave under boulder [bottom left chest]",
 					Address = 0xEB57,
 					CanAccess =
 						have =>
-						true,
+						CanAccessEastDarkWorldDeathMountain(have)
+						&& have.Contains(ItemType.Hookshot),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
-					Region = Region.Unknown,
+					TitansMittOkay = true,
+					Region = Region.DarkWorld,
 					Name = "[cave-056] Dark World Death Mountain - cave under boulder [bottom right chest]",
 					Address = 0xEB5A,
 					CanAccess =
 						have =>
-						true,
+						CanAccessEastDarkWorldDeathMountain(have)
+						&& have.Contains(ItemType.Hookshot),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B1] Escape - final basement room [left chest]",
 					Address = 0xEB5D,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have)
+						&& have.Contains(ItemType.PegasusBoots)
+						&& have.Contains(ItemType.PowerGlove),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B1] Escape - final basement room [middle chest]",
 					Address = 0xEB60,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have)
+						&& have.Contains(ItemType.PegasusBoots)
+						&& have.Contains(ItemType.PowerGlove),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.HyruleCastleEscape,
 					Name = "[dungeon-C-B1] Escape - final basement room [right chest]",
 					Address = 0xEB63,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have)
+						&& have.Contains(ItemType.PegasusBoots)
+						&& have.Contains(ItemType.PowerGlove),
 				},
 				new Location
 				{
@@ -1703,7 +1765,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0x2F1FC,
 					CanAccess =
 						have =>
-						true,
+						CanDefeatEasternPalace(have),
 				},
 				new Location
 				{
@@ -1713,7 +1775,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0x330BF,
 					CanAccess =
 						have =>
-						true,
+						CanAccessLowerDarkWorld(have),
 				},
 				new Location
 				{
@@ -1723,7 +1785,7 @@ namespace AlttpRandomizer.Rom
 					Address = 0x339C7,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have),
 				},
 				new Location
 				{
@@ -1733,7 +1795,8 @@ namespace AlttpRandomizer.Rom
 					Address = 0x33D60,
 					CanAccess =
 						have =>
-						true,
+						CanAccessLowerDarkWorld(have)
+						&& have.Contains(ItemType.TitansMitt),
 				},
 				new Location
 				{
@@ -1743,43 +1806,71 @@ namespace AlttpRandomizer.Rom
 					Address = 0x33E75,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have)
+						&& have.Contains(ItemType.Flippers),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.DarkWorld,
 					Name = "Catfish",
 					Address = 0xEE185,
 					CanAccess =
 						have =>
-						true,
+						CanAccessPyramid(have)
+						&& have.Contains(ItemType.PowerGlove)
+						&& (have.Contains(ItemType.PegasusBoots)
+							|| have.Contains(ItemType.TitansMitt)),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.LightWorld,
 					Name = "King Zora",
 					Address = 0xEE1C3,
 					CanAccess =
 						have =>
-						true,
+						CanEscapeCastle(have)
+						&& have.Contains(ItemType.PowerGlove)
+						&& (have.Contains(ItemType.PegasusBoots)
+							|| have.Contains(ItemType.TitansMitt)),
 				},
 				new Location
 				{
-					TitansMittOkay = false,
+					TitansMittOkay = true,
 					Region = Region.LightWorld,
 					Name = "Old mountain man",
 					Address = 0xF6A00,
 					CanAccess =
 						have =>
-						true,
+						CanClimbDeathMountain(have),
 				},
 			};
         }
 
-        private bool CanEnterGanonsTower(List<ItemType> have)
+		private bool CanEnterHyruleCastleTower(List<ItemType> have)
+		{
+			return (CanDefeatEasternPalace(have)
+					&& CanDefeatDesertPalace(have)
+					&& CanDefeatTowerOfHera(have))
+				|| (have.Contains(ItemType.Cape));
+		}
+
+		private bool CanAccessEastDarkWorldDeathMountain(List<ItemType> have)
+		{
+			return CanClimbDeathMountain(have) 
+				&& have.Contains(ItemType.Hammer)
+				&& have.Contains(ItemType.MagicMirror);
+		}
+
+		private bool CanClimbDeathMountain(List<ItemType> have)
+		{
+			return have.Contains(ItemType.PowerGlove);
+		}
+
+		private bool CanEnterGanonsTower(List<ItemType> have)
         {
+			// items guaranteed here: Cane of Somaria, Ether, Fire Rod, Flippers, Hammer, Hookshot, Magic Mirror, Ocarina, Quake, Titan's Mitt
             return CanDefeatDarkPalace(have)
                 && CanDefeatSwampPalace(have)
                 && CanDefeatSkullWoods(have)
@@ -1791,44 +1882,48 @@ namespace AlttpRandomizer.Rom
 
         private bool CanDefeatDarkPalace(List<ItemType> have)
         {
-            throw new NotImplementedException();
+            return CanEnterDarkPalace(have)
+				&& have.Contains(ItemType.Bow)
+				&& have.Contains(ItemType.Hammer);
         }
 
         private bool CanDefeatSwampPalace(List<ItemType> have)
         {
-            throw new NotImplementedException();
+            return CanEnterSwampPalace(have)
+				&& have.Contains(ItemType.Hookshot);
         }
 
         private bool CanDefeatSkullWoods(List<ItemType> have)
         {
-            throw new NotImplementedException();
+            return CanEnterSkullWoods2(have);
         }
 
         private bool CanDefeatThievesTown(List<ItemType> have)
         {
-            throw new NotImplementedException();
+            return CanEnterThievesTown(have);
         }
 
         private bool CanDefeatIcePalace(List<ItemType> have)
         {
-            throw new NotImplementedException();
+            return CanEnterIcePalace(have);
         }
 
         private bool CanDefeatMiseryMire(List<ItemType> have)
         {
-            throw new NotImplementedException();
+            return CanEnterMiseryMire(have)
+				&& have.Contains(ItemType.CaneOfSomaria);
         }
 
         private bool CanDefeatTurtleRock(List<ItemType> have)
         {
-            throw new NotImplementedException();
+            return CanEnterTurtleRock(have)
+				&& have.Contains(ItemType.FireRod)
+				&& have.Contains(ItemType.IceRod);
         }
 
         private bool CanEnterTurtleRock(List<ItemType> have)
         {
-            return have.Contains(ItemType.Hookshot)
-                && have.Contains(ItemType.MagicMirror)
-                && have.Contains(ItemType.TitansMitt)
+            return CanAccessEastDarkWorldDeathMountain(have)
                 && have.Contains(ItemType.Hammer)
                 && have.Contains(ItemType.Quake)
                 && have.Contains(ItemType.CaneOfSomaria);
@@ -1877,7 +1972,8 @@ namespace AlttpRandomizer.Rom
 		private bool CanAccessLowerDarkWorld(List<ItemType> have)
 		{
 			return CanAccessPyramid(have)
-				&& have.Contains(ItemType.Hammer);
+				&& have.Contains(ItemType.Hammer)
+				&& have.Contains(ItemType.MagicMirror);
 		}
 
 		private bool CanEnterDarkPalace(List<ItemType> have)
@@ -1887,18 +1983,17 @@ namespace AlttpRandomizer.Rom
 
 		private bool CanAccessPyramid(List<ItemType> have)
 		{
-			return CanDefeatAgahnim1(have)
-				|| (have.Contains(ItemType.Hammer)
-					&& have.Contains(ItemType.TitansMitt));
+			return (CanDefeatAgahnim1(have)
+					|| (have.Contains(ItemType.Hammer)
+						&& have.Contains(ItemType.TitansMitt)))
+				&& have.Contains(ItemType.MagicMirror);
 		}
 
 		private bool CanDefeatAgahnim1(List<ItemType> have)
 		{
-			return (CanDefeatEasternPalace(have)
-					&& CanDefeatDesertPalace(have)
-					&& CanDefeatTowerOfHera(have))
-				|| (have.Contains(ItemType.Cape)
-					&& have.Contains(ItemType.BugCatchingNet));
+			return CanEnterHyruleCastleTower(have)
+				&& (have.Contains(ItemType.BugCatchingNet)
+					|| have.Contains(ItemType.L1SwordAndShield));
 		}
 
 		private bool CanDefeatTowerOfHera(List<ItemType> have)
@@ -1923,7 +2018,7 @@ namespace AlttpRandomizer.Rom
 		private bool CanEnterTowerOfHera(List<ItemType> have)
 		{
 			return CanEscapeCastle(have)
-				&& have.Contains(ItemType.PowerGlove)
+				&& CanClimbDeathMountain(have)
 				&& have.Contains(ItemType.MagicMirror);
 		}
 

@@ -8,7 +8,6 @@ namespace AlttpRandomizer.Rom
 {
     public enum Region
     {
-        Unknown,
         LightWorld,
         DarkWorld,
         HyruleCastleEscape,
