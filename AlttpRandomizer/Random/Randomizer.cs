@@ -84,9 +84,8 @@ namespace AlttpRandomizer.Random
 			var currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
-			// TODO: uncomment when the map chest is added to locations
-			//currentLocations = locations.Where(x => x.Item == null).ToList();
-			//currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Map);
+			currentLocations = locations.Where(x => x.Item == null).ToList();
+			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Map);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Compass);
@@ -312,9 +311,8 @@ namespace AlttpRandomizer.Random
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 			keys++;
 
-			// TODO: uncomment when the map chest is added to locations
-			//currentLocations = locations.Where(x => x.Item == null).ToList();
-			//currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Map);
+			currentLocations = locations.Where(x => x.Item == null).ToList();
+			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Map);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Compass);
@@ -323,84 +321,47 @@ namespace AlttpRandomizer.Random
 		private void WriteRom(string filename)
 		{
 			string usedFilename = FileName.Fix(filename, string.Format(romLocations.SeedFileString, seed));
-		//	var hideLocations = !(romLocations is RomLocationsCasual);
 
-		//	using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
-		//	{
-		//		rom.Write(Resources.RomImage, 0, 3145728);
+			using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
+			{
+				rom.Write(Resources.RomImage, 0, 1048576);
 
-		//		foreach (var location in romLocations.Locations)
-		//		{
-		//			rom.Seek(location.Address, SeekOrigin.Begin);
-		//			var newItem = new byte[2];
+				foreach (var location in romLocations.Locations)
+				{
+					rom.Seek(location.Address, SeekOrigin.Begin);
+				    var newItem = (byte)location.Item.HexValue;
 
-		//			if (!location.NoHidden && location.Item.Type != ItemType.Nothing && location.Item.Type != ItemType.ChargeBeam && location.ItemStorageType == ItemStorageType.Normal)
-		//			{
-		//				// hide the item half of the time (to be a jerk)
-		//				if (hideLocations && random.Next(2) == 0)
-		//				{
-		//					location.ItemStorageType = ItemStorageType.Hidden;
-		//				}
-		//			}
+                    rom.Write(new [] { newItem }, 0, 1);
+				}
 
-		//			switch (location.ItemStorageType)
-		//			{
-		//				case ItemStorageType.Normal:
-		//					newItem = StringToByteArray(location.Item.Normal);
-		//					break;
-		//				case ItemStorageType.Hidden:
-		//					newItem = StringToByteArray(location.Item.Hidden);
-		//					break;
-		//				case ItemStorageType.Chozo:
-		//					newItem = StringToByteArray(location.Item.Chozo);
-		//					break;
-		//			}
+				WriteSeedInRom(rom);
 
-		//			rom.Write(newItem, 0, 2);
-
-		//			if (location.Item.Type == ItemType.Nothing)
-		//			{
-		//				// give same index as morph ball
-		//				rom.Seek(location.Address + 4, SeekOrigin.Begin);
-		//				rom.Write(StringToByteArray("\x1a"), 0, 1);
-		//			}
-
-		//			if (location.Item.Type == ItemType.ChargeBeam)
-		//			{
-		//				// we have 4 copies of charge to reduce tedium, give them all the same index
-		//				rom.Seek(location.Address + 4, SeekOrigin.Begin);
-		//				rom.Write(StringToByteArray("\xff"), 0, 1);
-		//			}
-		//		}
-
-		//		WriteSeedInRom(rom);
-
-		//		rom.Close();
-		//	}
+				rom.Close();
+			}
 
 			log?.WriteLog(usedFilename);
 		}
 
-		//private void WriteSeedInRom(FileStream rom)
-		//{
-		//	string seedStr = string.Format(romLocations.SeedRomString, RandomizerVersion.Current, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
-		//	rom.Seek(0x7fc0, SeekOrigin.Begin);
-		//	rom.Write(StringToByteArray(seedStr), 0, 21);
-		//}
+		private void WriteSeedInRom(FileStream rom)
+		{
+			string seedStr = string.Format(romLocations.SeedRomString, RandomizerVersion.Current, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+			rom.Seek(0x7fc0, SeekOrigin.Begin);
+			rom.Write(StringToByteArray(seedStr), 0, 21);
+		}
 
-		//private static byte[] StringToByteArray(string input)
-		//{
-		//	var retVal = new byte[input.Length];
-		//	var i = 0;
+		private static byte[] StringToByteArray(string input)
+		{
+			var retVal = new byte[input.Length];
+			var i = 0;
 
-		//	foreach (var ch in input)
-		//	{
-		//		retVal[i] = (byte)ch;
-		//		i++;
-		//	}
+			foreach (var ch in input)
+			{
+				retVal[i] = (byte)ch;
+				i++;
+			}
 
-		//	return retVal;
-		//}
+			return retVal;
+		}
 
 		private void GenerateItemPositions()
 		{
@@ -464,23 +425,36 @@ namespace AlttpRandomizer.Random
 				unavailableLocation.Item = new Item(ItemType.Nothing);
 			}
 
-			foreach (var location in romLocations.Locations.Where(x => x.Item == null))
-			{
-				location.Item = new Item(ItemType.Nothing);
-			}
-
 			log?.AddGeneratedItems(romLocations.Locations);
 		}
 
-		private void RemoveCollateralItems(List<ItemType> itemList, ItemType insertedItem)
+        private void AddMasterSwordItems(List<ItemType> haveItems)
+        {
+            if (romLocations.CanGetMasterSword(haveItems))
+            {
+                if (!haveItems.Contains(ItemType.Ether))
+                {
+                    haveItems.Add(ItemType.Ether);
+                }
+                if (!haveItems.Contains(ItemType.Bombos))
+                {
+                    haveItems.Add(ItemType.Bombos);
+                }
+            }
+        }
+
+        private void RemoveCollateralItems(List<ItemType> itemList, ItemType insertedItem)
 		{
 			switch (insertedItem)
 			{
 				case ItemType.PegasusBoots:
 					itemList.Remove(ItemType.BookOfMudora);
 					break;
-			}
-		}
+                case ItemType.Shovel:
+                    itemList.Remove(ItemType.OcarinaInactive);
+                    break;
+            }
+        }
 
 		private void AddCollateralItems(List<ItemType> itemList, ItemType insertedItem)
 		{
@@ -489,6 +463,9 @@ namespace AlttpRandomizer.Random
 				case ItemType.PegasusBoots:
 					itemList.Add(ItemType.BookOfMudora);
 					break;
+                case ItemType.Shovel:
+                    itemList.Add(ItemType.OcarinaInactive);
+			        break;
 			}
 		}
 

@@ -47,7 +47,7 @@
 0xe9ee = [cave-063] doorless hut [262] (Red Boomerang / 300 Rupees)
 0xe9f1 = [cave-062] C-shaped house [284] (300 rupees)
 0xe9f4 = [cave-044] Aginah's cave [266] (Piece of Heart)
-0xe9f7 = 
+0xe9f7 = [dungeon-L1-1F] Eastern Palace - map room [170] (map)
 0xe9fa = [dungeon-L3-4F] Tower of Hera - big chest [39] (moon pearl)
 0xe9fd = [dungeon-L3-4F] Tower of Hera - 4F [small chest] [39] (compass)
 0xea00 = [dungeon-D3-B1] Skull Woods - Entrance to part 2 [89] (key)
@@ -121,7 +121,7 @@
 0xeacc = [dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom left chest] [124] (3 bombs)
 0xeacf = [dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom right chest] [124] (3 bombs)
 0xead2 = [dungeon-A2-1F] Ganon's Tower - north of teleport room [125] (key)
-0xead5 = 
+0xead5 = [dungeon-A2-1F] Ganon's Tower - map room [139] (map)
 0xead8 = [dungeon-A2-1F] Ganon's Tower - big chest [140] (red mail)
 0xeadb = [dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [left chest] [140] (10 arrows)
 0xeade = [dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [right chest] [140] (3 bombs)
@@ -180,10 +180,6 @@
 0xee185 ?= Catfish (Quake)
 0xee1c3 ?= King Zora (Flippers)
 0xf6a00 = Old mountain man (Magic Mirror)
-
-Missing chests:
-[dungeon-L1-1F] Eastern Palace - map room
-[dungeon-A2-1F] Ganon's Tower - map room
 
 items to add:
 Mushroom
@@ -281,8 +277,8 @@ Item list
 
 Sorted by dungeon:
 0xea72 = 
-0xead5 = 
-0xe9f7 = 
+0xead5 = [dungeon-A2-1F] Ganon's Tower - map room [139] (map)
+0xe9f7 = [dungeon-L1-1F] Eastern Palace - map room [170] (map)
 0xe9d9 = 
 0xe9d3 = 
 0xeafc = 

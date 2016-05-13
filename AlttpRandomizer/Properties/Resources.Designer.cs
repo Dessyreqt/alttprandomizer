@@ -69,5 +69,15 @@ namespace AlttpRandomizer.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] RomImage {
+            get {
+                object obj = ResourceManager.GetObject("RomImage", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

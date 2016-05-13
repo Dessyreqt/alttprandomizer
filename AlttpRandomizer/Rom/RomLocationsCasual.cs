@@ -275,8 +275,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& ((have.Contains(ItemType.MagicMirror)
-								&& have.Contains(ItemType.Hammer))
+						&& ((CanBeInDarkWorld(have)
+                                && have.Contains(ItemType.Hammer))
 							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
@@ -440,8 +440,17 @@ namespace AlttpRandomizer.Rom
 						have =>
 						CanEscapeCastle(have),
 				},
-
-				new Location
+                new Location
+                {
+                    TitansMittOkay = false,
+                    Region = Region.EasternPalace,
+                    Name = "[dungeon-L1-1F] Eastern Palace - map room",
+                    Address = 0xE9F5,
+                    CanAccess =
+                        have =>
+                        CanEnterEasternPalace(have),
+                },
+                new Location
 				{
 					TitansMittOkay = true,
 					Region = Region.TowerOfHera,
@@ -901,8 +910,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						have.Contains(ItemType.OcarinaInactive)
-						&& have.Contains(ItemType.MagicMirror)
-						&& have.Contains(ItemType.TitansMitt),
+						&& CanBeInDarkWorld(have)
+                        && have.Contains(ItemType.TitansMitt),
                 },
 				new Location
 				{
@@ -913,8 +922,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						have.Contains(ItemType.OcarinaInactive)
-						&& have.Contains(ItemType.MagicMirror)
-						&& have.Contains(ItemType.TitansMitt),
+						&& CanBeInDarkWorld(have)
+                        && have.Contains(ItemType.TitansMitt),
 				},
 				new Location
 				{
@@ -985,8 +994,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& have.Contains(ItemType.MagicMirror)
-						&& have.Contains(ItemType.Hammer),
+						&& CanBeInDarkWorld(have)
+                        && have.Contains(ItemType.Hammer),
 				},
 				new Location
 				{
@@ -1171,7 +1180,7 @@ namespace AlttpRandomizer.Rom
 				{
 					TitansMittOkay = true,
 					Region = Region.GanonsTower,
-					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom right chest])",
+					Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom right chest]",
 					Address = 0xEAC1,
 					CanAccess =
 						have =>
@@ -1232,8 +1241,18 @@ namespace AlttpRandomizer.Rom
 						have =>
 						CanEnterGanonsTower(have),
 				},
-
-				new Location
+                new Location
+                {
+                    TitansMittOkay = true,
+                    Region = Region.GanonsTower,
+                    Name = "[dungeon-A2-1F] Ganon's Tower - map room",
+                    Address = 0xEAD3,
+                    KeysNeeded = 1,
+                    CanAccess =
+                        have =>
+                        CanEnterGanonsTower(have),
+                },
+                new Location
 				{
 					TitansMittOkay = true,
 					Region = Region.GanonsTower,
@@ -1408,8 +1427,7 @@ namespace AlttpRandomizer.Rom
 					BigKeyNeeded = true,
 					CanAccess =
 						have =>
-						CanEnterGanonsTower(have)
-						&& have.Contains(ItemType.L1SwordAndShield),
+						CanEnterGanonsTower(have),
 				},
 				new Location
 				{
@@ -1531,8 +1549,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& ((have.Contains(ItemType.MagicMirror)
-								&& have.Contains(ItemType.Hammer))
+						&& ((CanBeInDarkWorld(have)
+                                && have.Contains(ItemType.Hammer))
 							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
@@ -1544,8 +1562,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& ((have.Contains(ItemType.MagicMirror)
-								&& have.Contains(ItemType.Hammer))
+						&& ((CanBeInDarkWorld(have)
+                                && have.Contains(ItemType.Hammer))
 							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
@@ -1557,8 +1575,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& ((have.Contains(ItemType.MagicMirror)
-								&& have.Contains(ItemType.Hammer))
+						&& ((CanBeInDarkWorld(have)
+                                && have.Contains(ItemType.Hammer))
 							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
@@ -1570,8 +1588,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& ((have.Contains(ItemType.MagicMirror)
-								&& have.Contains(ItemType.Hammer))
+						&& ((CanBeInDarkWorld(have)
+                                && have.Contains(ItemType.Hammer))
 							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
@@ -1583,8 +1601,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& ((have.Contains(ItemType.MagicMirror)
-								&& have.Contains(ItemType.Hammer))
+						&& ((CanBeInDarkWorld(have)
+                                && have.Contains(ItemType.Hammer))
 							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
@@ -1596,8 +1614,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& ((have.Contains(ItemType.MagicMirror)
-								&& have.Contains(ItemType.Hammer))
+						&& ((CanBeInDarkWorld(have)
+                                && have.Contains(ItemType.Hammer))
 							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
@@ -1609,8 +1627,8 @@ namespace AlttpRandomizer.Rom
 					CanAccess =
 						have =>
 						CanClimbDeathMountain(have)
-						&& ((have.Contains(ItemType.MagicMirror)
-								&& have.Contains(ItemType.Hammer))
+						&& ((CanBeInDarkWorld(have)
+                                && have.Contains(ItemType.Hammer))
 							|| have.Contains(ItemType.Hookshot)),
 				},
 				new Location
@@ -1621,7 +1639,8 @@ namespace AlttpRandomizer.Rom
 					Address = 0xEB3F,
 					CanAccess =
 						have =>
-						have.Contains(ItemType.PegasusBoots),
+                        CanEscapeCastle(have)
+						&& have.Contains(ItemType.PegasusBoots),
 				},
 				new Location
 				{
@@ -1756,52 +1775,57 @@ namespace AlttpRandomizer.Rom
 						&& have.Contains(ItemType.PegasusBoots)
 						&& have.Contains(ItemType.PowerGlove),
 				},
-				new Location
-				{
-					TitansMittOkay = false,
-					Region = Region.LightWorld,
-					Name = "Uncle",
-					Address = 0x2DF45,
-					CanAccess =
-						have =>
-						true,
-				},
-				new Location
-				{
-					TitansMittOkay = false,
-					Region = Region.LightWorld,
-					Name = "Sahasrahla",
-					Address = 0x2F1FC,
-					CanAccess =
-						have =>
-						CanDefeatEasternPalace(have),
-				},
-				new Location
-				{
-					TitansMittOkay = false,
-					Region = Region.DarkWorld,
-					Name = "Flute Boy",
-					Address = 0x330BF,
-					CanAccess =
-						have =>
-						CanAccessLowerDarkWorld(have),
-				},
-				new Location
-				{
-					TitansMittOkay = false,
-					Region = Region.LightWorld,
-					Name = "Sick Kid",
-					Address = 0x339C7,
-					CanAccess =
-						have =>
-						CanEscapeCastle(have),
-				},
+                // Getting anything other than the sword here can be bad for progress... may as well keep the sword here since you can't use it if you get it before the uncle.
+                //new Location
+                //{
+                //    TitansMittOkay = false,
+                //    Region = Region.LightWorld,
+                //    Name = "Uncle",
+                //    Address = 0x2DF45,
+                //    CanAccess =
+                //        have =>
+                //        true,
+                //},
+                // Controlled by whether or not you have Pegasus Boots
+                //new Location
+				//{
+				//	TitansMittOkay = false,
+				//	Region = Region.LightWorld,
+				//	Name = "Sahasrahla",
+				//	Address = 0x2F1FC,
+				//	CanAccess =
+				//		have =>
+				//		CanDefeatEasternPalace(have),
+				//},
+                // Controlled by whether you have Ocarina or not
+				//new Location
+				//{
+				//	TitansMittOkay = false,
+				//	Region = Region.DarkWorld,
+				//	Name = "Flute Boy",
+				//	Address = 0x330C7,
+				//	CanAccess =
+				//		have =>
+				//		CanAccessLowerDarkWorld(have),
+				//},
+                // He'll keep giving you the item if you don't have bug-catching net (and probably not give you anything if you do)
+				//new Location
+				//{
+				//	TitansMittOkay = false,
+				//	Region = Region.LightWorld,
+				//	Name = "Sick Kid",
+				//	Address = 0x339CF,
+				//	CanAccess =
+				//		have =>
+				//		CanEscapeCastle(have)
+    //                    && have.Contains(ItemType.Bottle),
+				//},
 				new Location
 				{
 					TitansMittOkay = false,
 					Region = Region.LightWorld,
 					Name = "Purple Chest",
-					Address = 0x33D60,
+					Address = 0x33D68,
 					CanAccess =
 						have =>
 						CanAccessLowerDarkWorld(have)
@@ -1812,48 +1836,51 @@ namespace AlttpRandomizer.Rom
 					TitansMittOkay = false,
 					Region = Region.LightWorld,
 					Name = "Hobo",
-					Address = 0x33E75,
+					Address = 0x33E7D,
 					CanAccess =
 						have =>
 						CanEscapeCastle(have)
 						&& have.Contains(ItemType.Flippers),
 				},
-				new Location
-				{
-					TitansMittOkay = true,
-					Region = Region.DarkWorld,
-					Name = "Catfish",
-					Address = 0xEE185,
-					CanAccess =
-						have =>
-						CanAccessPyramid(have)
-						&& have.Contains(ItemType.PowerGlove)
-						&& (have.Contains(ItemType.PegasusBoots)
-							|| have.Contains(ItemType.TitansMitt)),
-				},
-				new Location
-				{
-					TitansMittOkay = true,
-					Region = Region.LightWorld,
-					Name = "King Zora",
-					Address = 0xEE1C3,
-					CanAccess =
-						have =>
-						CanEscapeCastle(have)
-						&& have.Contains(ItemType.PowerGlove)
-						&& (have.Contains(ItemType.PegasusBoots)
-							|| have.Contains(ItemType.TitansMitt)),
-				},
-				new Location
-				{
-					TitansMittOkay = true,
-					Region = Region.LightWorld,
-					Name = "Old mountain man",
-					Address = 0xF6A00,
-					CanAccess =
-						have =>
-						CanClimbDeathMountain(have),
-				},
+                // Catfish only gives you item if you don't have Quake
+				//new Location
+				//{
+				//	TitansMittOkay = true,
+				//	Region = Region.DarkWorld,
+				//	Name = "Catfish",
+				//	Address = 0xEE185,
+				//	CanAccess =
+				//		have =>
+				//		CanAccessPyramid(have)
+				//		&& have.Contains(ItemType.PowerGlove)
+				//		&& (have.Contains(ItemType.PegasusBoots)
+				//			|| have.Contains(ItemType.TitansMitt)),
+				//},
+                // Zora's appearance is based on if you have flippers or not
+				//new Location
+				//{
+				//	TitansMittOkay = true,
+				//	Region = Region.LightWorld,
+				//	Name = "King Zora",
+				//	Address = 0xEE1C3,
+				//	CanAccess =
+				//		have =>
+				//		CanEscapeCastle(have)
+				//		&& have.Contains(ItemType.PowerGlove)
+				//		&& (have.Contains(ItemType.PegasusBoots)
+				//			|| have.Contains(ItemType.TitansMitt)),
+				//},
+                // Old man's item is missable if you get the Mirror elsewhere
+				//new Location
+				//{
+				//	TitansMittOkay = true,
+				//	Region = Region.LightWorld,
+				//	Name = "Old mountain man",
+				//	Address = 0xF69FA,
+				//	CanAccess =
+				//		have =>
+				//		CanClimbDeathMountain(have),
+				//},
 			};
         }
 
@@ -1874,12 +1901,13 @@ namespace AlttpRandomizer.Rom
 		{
 			return CanClimbDeathMountain(have) 
 				&& have.Contains(ItemType.Hammer)
-				&& have.Contains(ItemType.MagicMirror);
+				&& CanBeInDarkWorld(have);
 		}
 
 		private bool CanClimbDeathMountain(List<ItemType> have)
 		{
-			return have.Contains(ItemType.PowerGlove);
+			return CanEscapeCastle(have)
+                && have.Contains(ItemType.PowerGlove);
 		}
 
 		private bool CanEnterGanonsTower(List<ItemType> have)
@@ -1946,17 +1974,23 @@ namespace AlttpRandomizer.Rom
         private bool CanEnterMiseryMire(List<ItemType> have)
 		{
 			return have.Contains(ItemType.OcarinaInactive)
-                && have.Contains(ItemType.MagicMirror)
+                && CanBeInDarkWorld(have)
 				&& have.Contains(ItemType.TitansMitt)
 				&& have.Contains(ItemType.Ether)
 				&& (have.Contains(ItemType.PegasusBoots)
 					|| have.Contains(ItemType.Hookshot));
 		}
 
-		private bool CanEnterIcePalace(List<ItemType> have)
+        private static bool CanBeInDarkWorld(List<ItemType> have)
+        {
+            return have.Contains(ItemType.MagicMirror)
+                && have.Contains(ItemType.MoonPearl);
+        }
+
+        private bool CanEnterIcePalace(List<ItemType> have)
 		{
 			return have.Contains(ItemType.Flippers)
-                && have.Contains(ItemType.MagicMirror)
+                && CanBeInDarkWorld(have)
                 && have.Contains(ItemType.TitansMitt)
 				&& have.Contains(ItemType.FireRod);
 		}
@@ -1987,7 +2021,7 @@ namespace AlttpRandomizer.Rom
 		{
 			return CanAccessPyramid(have)
 				&& have.Contains(ItemType.Hammer)
-				&& have.Contains(ItemType.MagicMirror);
+				&& CanBeInDarkWorld(have);
 		}
 
 		private bool CanEnterDarkPalace(List<ItemType> have)
@@ -2000,20 +2034,17 @@ namespace AlttpRandomizer.Rom
 			return (CanDefeatAgahnim1(have)
 					|| (have.Contains(ItemType.Hammer)
 						&& have.Contains(ItemType.TitansMitt)))
-				&& have.Contains(ItemType.MagicMirror);
+				&& CanBeInDarkWorld(have);
 		}
 
 		private bool CanDefeatAgahnim1(List<ItemType> have)
 		{
-			return CanEnterHyruleCastleTower(have)
-				&& (have.Contains(ItemType.BugCatchingNet)
-					|| have.Contains(ItemType.L1SwordAndShield));
+			return CanEnterHyruleCastleTower(have);
 		}
 
 		private bool CanDefeatTowerOfHera(List<ItemType> have)
 		{
-			return CanEnterTowerOfHera(have)
-				&& have.Contains(ItemType.L1SwordAndShield);
+			return CanEnterTowerOfHera(have);
 		}
 
 		private bool CanDefeatDesertPalace(List<ItemType> have)
@@ -2065,24 +2096,62 @@ namespace AlttpRandomizer.Rom
 
 		public void TryInsertCandidateItem(List<Location> currentLocations, List<ItemType> candidateItemList, ItemType candidateItem)
         {
-			candidateItemList.Add(candidateItem);
+            if (!(candidateItem == ItemType.TitansMitt && !currentLocations.Any(x => x.TitansMittOkay)) && (currentLocations.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem)))
+            {
+                candidateItemList.Add(candidateItem);
+            }
 		}
 
 		public int GetInsertedLocation(List<Location> currentLocations, ItemType insertedItem, SeedRandom random)
 		{
-			int retVal = random.Next(currentLocations.Count);
+		    int retVal;
+
+            do
+            {
+                retVal = random.Next(currentLocations.Count);
+            } while (insertedItem == ItemType.TitansMitt && !currentLocations[retVal].TitansMittOkay);
+
 
 			return retVal;
 		}
 
 	    public ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random)
 	    {
-		    ItemType retVal = itemPool[random.Next(itemPool.Count)];
+		    ItemType retVal;
 
-		    return retVal;
+            do
+            {
+                retVal = itemPool[random.Next(itemPool.Count)];
+            } while ((retVal == ItemType.TitansMitt && !currentLocations.Any(x => x.TitansMittOkay)) || NeedToGrabProgressionItem(itemPool, retVal));
+
+            return retVal;
 	    }
 
-	    public List<ItemType> GetItemPool(SeedRandom random)
+        private bool NeedToGrabProgressionItem(List<ItemType> itemPool, ItemType item)
+        {
+            var checkList = new List<ItemType>
+            {
+                ItemType.CaneOfSomaria,
+                ItemType.Bow,
+                ItemType.FireRod,
+                ItemType.Flippers,
+                ItemType.Hammer,
+                ItemType.Hookshot,
+                ItemType.IceRod,
+                ItemType.Lamp,
+                ItemType.MagicMirror,
+                ItemType.MoonPearl,
+                ItemType.PegasusBoots,
+                ItemType.PowerGlove,
+                ItemType.Quake,
+                ItemType.Shovel,
+                ItemType.TitansMitt,
+            };
+
+            return itemPool.Any(x => checkList.Contains(x)) && !checkList.Contains(item);
+        }
+
+        public List<ItemType> GetItemPool(SeedRandom random)
         {
 			return new List<ItemType>
 			{
@@ -2090,15 +2159,15 @@ namespace AlttpRandomizer.Rom
 				ItemType.CaneOfSomaria,
 				ItemType.Bow,
 				ItemType.FireRod,
-				ItemType.Flippers,
+				//ItemType.Flippers,
 				ItemType.Hammer,
 				ItemType.Hookshot,
 				ItemType.IceRod,
-				ItemType.L1SwordAndShield,
 				ItemType.Lamp,
 				ItemType.Lamp,
 				ItemType.Lamp,
-				ItemType.MagicMirror,
+                //ItemType.L1SwordAndShield,
+                ItemType.MagicMirror,
 				ItemType.MoonPearl,
 				ItemType.PegasusBoots,
 				ItemType.PowerGlove,

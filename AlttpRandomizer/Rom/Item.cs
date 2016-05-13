@@ -84,7 +84,7 @@
 	public class Item
     {
         private ItemType type;
-        public string HexValue { get; set; }
+        public char HexValue { get; set; }
 
         public Item(ItemType insertedItem)
         {
@@ -98,7 +98,7 @@
             set
             {
                 type = value;
-                HexValue = ((char)type).ToString();
+                HexValue = (char)type;
             }
         }
     }

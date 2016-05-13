@@ -46,7 +46,7 @@ namespace AlttpRandomizer.IO
 				writer.WriteLine("--------------------");
 				foreach (var Location in orderedItems)
 				{
-					writer.WriteLine("{0}{1}", Location.Name.PadRight(47, '.'), GetItemName(Location.Item));
+					writer.WriteLine("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item));
 				}
 				writer.WriteLine();
 				writer.WriteLine();
