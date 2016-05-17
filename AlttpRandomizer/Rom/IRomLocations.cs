@@ -21,6 +21,6 @@ namespace AlttpRandomizer.Rom
         int GetInsertedLocation(List<Location> currentLocations, ItemType insertedItem, SeedRandom random);
         ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random);
         List<ItemType> GetItemPool(SeedRandom random);
-	    bool CanGetMasterSword(List<ItemType> haveItems);
+	    List<ItemType> GetImplicitProgressionItems(List<ItemType> haveItems);
     }
 }

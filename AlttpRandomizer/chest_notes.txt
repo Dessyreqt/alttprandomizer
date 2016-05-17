@@ -196,6 +196,10 @@ Master Sword
 L3 Sword
 L4 Sword
 
+debug mode:
+0x65b88 to \xea\xea
+0x65b91 to \xea\xea
+
 Item list
 00 - L.1 Sword (can't be used until after uncle dies)
 01 - L.2 Sword (crash)
@@ -274,6 +278,37 @@ Item list
 4A - Ocarina (active)
 4B - Pegasus Boots
 
+Inventory RAM:
+
+0x7ef340 = Bow & Arrows (02 = Bow & Arrows, 03 = Bow & Silver Arrows?, 04 Bow & Silver Arrows?)
+0x7ef341 = Boomerang/Red Boomerang (01 = Boomerang, 02 = Red Boomerang)
+0x7ef342 = Hookshot
+0x7ef343 = Bombs (count shown)
+0x7ef344 = Mushroom/Powder (01 = Mushroom, 02 = Powder)
+0x7ef345 = Fire Rod
+0x7ef346 = Ice Rod
+0x7ef347 = Bombos
+0x7ef348 = Ether
+0x7ef349 = Quake
+0x7ef34a = Lamp
+0x7ef34b = Hammer
+0x7ef34c = Shovel/Ocarina (01 = Shovel, 02 = Ocarina, 03 = Active Ocarina)
+0x7ef34d = Bug-Catching Net
+0x7ef34e = Book of Mudora
+0x7ef350 = Cane of Somaria
+0x7ef351 = Staff of Bryna
+0x7ef352 = Cape
+0x7ef353 = Magic Mirror (02 = Mirror)
+0x7ef354 = Power Glove/Titan's Mitt (01 = Power Glove, 02 = Titan's Mitt)
+0x7ef355 = Pegasus Boots
+0x7ef356 = Flippers
+0x7ef357 = Moon Pearl
+0x7ef359 = Sword (level)
+0x7ef35a = Shield (level)
+0x7ef35c = Bottle 1
+0x7ef35d = Bottle 2
+0x7ef35e = Bottle 3
+0x7ef35f = Bottle 4
 
 Sorted by dungeon:
 0xea72 = 

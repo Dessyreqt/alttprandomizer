@@ -26,7 +26,7 @@ namespace AlttpRandomizer.Random
 		private List<ItemType> itemPool;
 		private readonly int seed;
 		private readonly IRomLocations romLocations;
-		private RandomizerLog log;
+		private readonly RandomizerLog log;
 
 		public Randomizer(int seed, IRomLocations romLocations, RandomizerLog log)
 		{
@@ -156,7 +156,7 @@ namespace AlttpRandomizer.Random
 		private void GenerateSwampPalaceItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.SwampPalace).ToList();
-			var keys = 0;
+			const int keys = 0;
 
 			var currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
@@ -197,12 +197,11 @@ namespace AlttpRandomizer.Random
 		private void GenerateThievesTownItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.ThievesTown).ToList();
-			List<Location> currentLocations;
 
-			currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
+		    var currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
-			var keys = 2;
+			const int keys = 2;
 
 			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
@@ -264,9 +263,8 @@ namespace AlttpRandomizer.Random
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.TurtleRock).ToList();
 			var keys = 0;
-			List<Location> currentLocations;
 
-			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+		    var currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 			keys += 2;
 
@@ -309,7 +307,6 @@ namespace AlttpRandomizer.Random
 
 			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-			keys++;
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Map);
@@ -373,20 +370,20 @@ namespace AlttpRandomizer.Random
 				// Generate candidate item list
 				foreach (var candidateItem in itemPool)
 				{
-					var oldMasterSwordEligible = romLocations.CanGetMasterSword(haveItems);
 					haveItems.Add(candidateItem);
-					AddCollateralItems(haveItems, candidateItem);
-					var newMasterSwordEligible = romLocations.CanGetMasterSword(haveItems);
-
+                    var addedItems = AddProgressionItems(haveItems);
 					var newLocations = romLocations.GetAvailableLocations(haveItems);
 
-					if (newLocations.Count > currentLocations.Count || oldMasterSwordEligible != newMasterSwordEligible)
+					if (newLocations.Count > currentLocations.Count)
 					{
 						romLocations.TryInsertCandidateItem(currentLocations, candidateItemList, candidateItem);
 					}
 
 					haveItems.Remove(candidateItem);
-					RemoveCollateralItems(haveItems, candidateItem);
+				    foreach (var item in addedItems)
+				    {
+				        haveItems.Remove(item);
+				    }
 				}
 
 				// Grab an item from the candidate list if there are any, otherwise, grab a random item
@@ -396,10 +393,9 @@ namespace AlttpRandomizer.Random
 
 					itemPool.Remove(insertedItem);
 					haveItems.Add(insertedItem);
-					AddCollateralItems(haveItems, insertedItem);
-					AddMasterSwordItems(haveItems);
+                    AddProgressionItems(haveItems);
 
-					int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
+                    int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
 					currentLocations[insertedLocation].Item = new Item(insertedItem);
 
 					log?.AddOrderedItem(currentLocations[insertedLocation]);
@@ -410,8 +406,7 @@ namespace AlttpRandomizer.Random
 
 					itemPool.Remove(insertedItem);
 					haveItems.Add(insertedItem);
-					AddCollateralItems(haveItems, insertedItem);
-					AddMasterSwordItems(haveItems);
+					AddProgressionItems(haveItems);
 
 					int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
 					currentLocations[insertedLocation].Item = new Item(insertedItem);
@@ -428,46 +423,22 @@ namespace AlttpRandomizer.Random
 			log?.AddGeneratedItems(romLocations.Locations);
 		}
 
-        private void AddMasterSwordItems(List<ItemType> haveItems)
+        private List<ItemType> AddProgressionItems(List<ItemType> have)
         {
-            if (romLocations.CanGetMasterSword(haveItems))
+            var implicitProgressionItems = romLocations.GetImplicitProgressionItems(have);
+            var retVal = new List<ItemType>();
+
+            foreach (var item in implicitProgressionItems)
             {
-                if (!haveItems.Contains(ItemType.Ether))
+                if (!have.Contains(item))
                 {
-                    haveItems.Add(ItemType.Ether);
-                }
-                if (!haveItems.Contains(ItemType.Bombos))
-                {
-                    haveItems.Add(ItemType.Bombos);
+                    have.Add(item);
+                    retVal.Add(item);
                 }
             }
-        }
 
-        private void RemoveCollateralItems(List<ItemType> itemList, ItemType insertedItem)
-		{
-			switch (insertedItem)
-			{
-				case ItemType.PegasusBoots:
-					itemList.Remove(ItemType.BookOfMudora);
-					break;
-                case ItemType.Shovel:
-                    itemList.Remove(ItemType.OcarinaInactive);
-                    break;
-            }
+            return retVal;
         }
-
-		private void AddCollateralItems(List<ItemType> itemList, ItemType insertedItem)
-		{
-			switch (insertedItem)
-			{
-				case ItemType.PegasusBoots:
-					itemList.Add(ItemType.BookOfMudora);
-					break;
-                case ItemType.Shovel:
-                    itemList.Add(ItemType.OcarinaInactive);
-			        break;
-			}
-		}
 
 		private void GenerateItemList()
 		{
