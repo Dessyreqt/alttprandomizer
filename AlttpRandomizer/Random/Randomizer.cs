@@ -386,8 +386,8 @@ namespace AlttpRandomizer.Random
 				    }
 				}
 
-				// Grab an item from the candidate list if there are any, otherwise, grab a random item
-				if (candidateItemList.Count > 0)
+                // Grab an item from the candidate list if there are any, otherwise, grab a random item
+                if (candidateItemList.Count > 0)
 				{
 					var insertedItem = candidateItemList[random.Next(candidateItemList.Count)];
 

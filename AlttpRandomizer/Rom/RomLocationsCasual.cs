@@ -1773,10 +1773,11 @@ namespace AlttpRandomizer.Rom
 						CanEscapeCastle(have)
 						&& have.Contains(ItemType.PowerGlove),
 				},
-                // Getting anything other than the sword here can be bad for progress... may as well keep the sword here since you can't use it if you get it before the uncle.
+                //// Getting anything other than the sword here can be bad for progress... may as well keep the sword here since you can't use it if you get it before the uncle.
                 //new Location
                 //{
                 //    TitansMittOkay = false,
+                //    UniqueItemOnly = true,
                 //    Region = Region.LightWorld,
                 //    Name = "Uncle",
                 //    Address = 0x2DF45,
@@ -1785,39 +1786,42 @@ namespace AlttpRandomizer.Rom
                 //        true,
                 //},
                 // Controlled by whether or not you have Pegasus Boots
-                //new Location
-				//{
-				//	TitansMittOkay = false,
-				//	Region = Region.LightWorld,
-				//	Name = "Sahasrahla",
-				//	Address = 0x2F1FC,
-				//	CanAccess =
-				//		have =>
-				//		CanDefeatEasternPalace(have),
-				//},
+                new Location
+				{
+					TitansMittOkay = false,
+                    UniqueItemOnly = true,
+                    Region = Region.LightWorld,
+					Name = "Sahasrahla",
+					Address = 0x2F1FC,
+					CanAccess =
+						have =>
+						CanDefeatEasternPalace(have),
+				},
                 // Controlled by whether you have Ocarina or not
-				//new Location
-				//{
-				//	TitansMittOkay = false,
-				//	Region = Region.DarkWorld,
-				//	Name = "Flute Boy",
-				//	Address = 0x330C7,
-				//	CanAccess =
-				//		have =>
-				//		CanAccessLowerDarkWorld(have),
-				//},
+				new Location
+				{
+					TitansMittOkay = false,
+                    UniqueItemOnly = true,
+                    Region = Region.DarkWorld,
+					Name = "Flute Boy",
+					Address = 0x330C7,
+					CanAccess =
+						have =>
+						CanAccessLowerDarkWorld(have),
+				},
                 // He'll keep giving you the item if you don't have bugcatching net (and probably not give you anything if you do)
-				//new Location
-				//{
-				//	TitansMittOkay = false,
-				//	Region = Region.LightWorld,
-				//	Name = "Sick Kid",
-				//	Address = 0x339CF,
-				//	CanAccess =
-				//		have =>
-				//		CanEscapeCastle(have)
-                //      && have.Contains(ItemType.Bottle),
-				//},
+				new Location
+				{
+					TitansMittOkay = false,
+                    UniqueItemOnly = true,
+                    Region = Region.LightWorld,
+					Name = "Sick Kid",
+					Address = 0x339CF,
+					CanAccess =
+						have =>
+						CanEscapeCastle(have)
+                      && have.Contains(ItemType.Bottle),
+				},
 				new Location
 				{
 					TitansMittOkay = false,
@@ -1841,44 +1845,47 @@ namespace AlttpRandomizer.Rom
 						&& have.Contains(ItemType.Flippers),
 				},
                 // Catfish only gives you item if you don't have Quake
-				//new Location
-				//{
-				//	TitansMittOkay = true,
-				//	Region = Region.DarkWorld,
-				//	Name = "Catfish",
-				//	Address = 0xEE185,
-				//	CanAccess =
-				//		have =>
-				//		CanAccessPyramid(have)
-				//		&& have.Contains(ItemType.PowerGlove)
-				//		&& (have.Contains(ItemType.PegasusBoots)
-				//			|| have.Contains(ItemType.TitansMitt)),
-				//},
+				new Location
+				{
+					TitansMittOkay = true,
+                    UniqueItemOnly = true,
+                    Region = Region.DarkWorld,
+					Name = "Catfish",
+					Address = 0xEE185,
+					CanAccess =
+						have =>
+						CanAccessPyramid(have)
+						&& have.Contains(ItemType.PowerGlove)
+						&& (have.Contains(ItemType.PegasusBoots)
+							|| have.Contains(ItemType.TitansMitt)),
+				},
                 // Zora's appearance is based on if you have flippers or not
-				//new Location
-				//{
-				//	TitansMittOkay = true,
-				//	Region = Region.LightWorld,
-				//	Name = "King Zora",
-				//	Address = 0xEE1C3,
-				//	CanAccess =
-				//		have =>
-				//		CanEscapeCastle(have)
-				//		&& have.Contains(ItemType.PowerGlove)
-				//		&& (have.Contains(ItemType.PegasusBoots)
-				//			|| have.Contains(ItemType.TitansMitt)),
-				//},
+				new Location
+				{
+					TitansMittOkay = true,
+                    UniqueItemOnly = true,
+                    Region = Region.LightWorld,
+					Name = "King Zora",
+					Address = 0xEE1C3,
+					CanAccess =
+						have =>
+						CanEscapeCastle(have)
+						&& have.Contains(ItemType.PowerGlove)
+						&& (have.Contains(ItemType.PegasusBoots)
+							|| have.Contains(ItemType.TitansMitt)),
+				},
                 // Old man's item is missable if you get the Mirror elsewhere
-				//new Location
-				//{
-				//	TitansMittOkay = true,
-				//	Region = Region.LightWorld,
-				//	Name = "Old mountain man",
-				//	Address = 0xF69FA,
-				//	CanAccess =
-				//		have =>
-				//		CanClimbDeathMountain(have),
-				//},
+				new Location
+				{
+					TitansMittOkay = true,
+                    UniqueItemOnly = true,
+                    Region = Region.LightWorld,
+					Name = "Old mountain man",
+					Address = 0xF69FA,
+					CanAccess =
+						have =>
+						CanClimbDeathMountain(have),
+				},
 			};
         }
 
@@ -2093,8 +2100,10 @@ namespace AlttpRandomizer.Rom
 		}
 
 		public void TryInsertCandidateItem(List<Location> currentLocations, List<ItemType> candidateItemList, ItemType candidateItem)
-        {
-            if (!(candidateItem == ItemType.TitansMitt && !currentLocations.Any(x => x.TitansMittOkay)) && (currentLocations.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem)))
+		{
+		    var uniqueItems = GetUniqueItems();
+
+            if (!(candidateItem == ItemType.TitansMitt && !currentLocations.Any(x => x.TitansMittOkay)) && !(!uniqueItems.Contains(candidateItem) && currentLocations.All(x => x.UniqueItemOnly)) && (currentLocations.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem)))
             {
                 candidateItemList.Add(candidateItem);
             }
@@ -2103,11 +2112,12 @@ namespace AlttpRandomizer.Rom
 		public int GetInsertedLocation(List<Location> currentLocations, ItemType insertedItem, SeedRandom random)
 		{
 		    int retVal;
+            var uniqueItems = GetUniqueItems();
 
             do
             {
                 retVal = random.Next(currentLocations.Count);
-            } while (insertedItem == ItemType.TitansMitt && !currentLocations[retVal].TitansMittOkay);
+            } while ((insertedItem == ItemType.TitansMitt && !currentLocations[retVal].TitansMittOkay) || (insertedItem != ItemType.TitansMitt && uniqueItems.Contains(insertedItem) && !currentLocations[retVal].UniqueItemOnly && currentLocations.Any(x => x.UniqueItemOnly)));
 
 
 			return retVal;
@@ -2116,11 +2126,12 @@ namespace AlttpRandomizer.Rom
 	    public ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random)
 	    {
 		    ItemType retVal;
+            var uniqueItems = GetUniqueItems();
 
             do
             {
                 retVal = itemPool[random.Next(itemPool.Count)];
-            } while ((retVal == ItemType.TitansMitt && !currentLocations.Any(x => x.TitansMittOkay)) || NeedToGrabProgressionItem(itemPool, retVal));
+            } while ((retVal == ItemType.TitansMitt && !currentLocations.Any(x => x.TitansMittOkay)) || NeedToGrabProgressionItem(itemPool, retVal) || (!uniqueItems.Contains(retVal) && currentLocations.All(x => x.UniqueItemOnly)));
 
             return retVal;
 	    }
@@ -2175,10 +2186,37 @@ namespace AlttpRandomizer.Rom
 
         private bool NeedToGrabProgressionItem(List<ItemType> itemPool, ItemType item)
         {
-            var checkList = new List<ItemType>
+            //var checkList = new List<ItemType>
+            //{
+            //    ItemType.CaneOfSomaria,
+            //    ItemType.Bow,
+            //    ItemType.FireRod,
+            //    ItemType.Flippers,
+            //    ItemType.Hammer,
+            //    ItemType.Hookshot,
+            //    ItemType.IceRod,
+            //    ItemType.Lamp,
+            //    ItemType.MagicMirror,
+            //    ItemType.MoonPearl,
+            //    ItemType.PegasusBoots,
+            //    ItemType.PowerGlove,
+            //    ItemType.Quake,
+            //    ItemType.Shovel,
+            //    ItemType.TitansMitt,
+            //};
+
+            var checkList = GetUniqueItems();
+
+            return itemPool.Any(x => checkList.Contains(x)) && !checkList.Contains(item);
+        }
+
+        public List<ItemType> GetUniqueItems()
+        {
+            return new List<ItemType>
             {
+				// advancement items
+				ItemType.Bow,
                 ItemType.CaneOfSomaria,
-                ItemType.Bow,
                 ItemType.FireRod,
                 ItemType.Flippers,
                 ItemType.Hammer,
@@ -2192,9 +2230,15 @@ namespace AlttpRandomizer.Rom
                 ItemType.Quake,
                 ItemType.Shovel,
                 ItemType.TitansMitt,
+				ItemType.BlueMail,
+                ItemType.Boomerang,
+                ItemType.BugCatchingNet,
+                ItemType.Cape,
+                ItemType.MirrorShield,
+                ItemType.RedBoomerang,
+                ItemType.RedMail,
+                ItemType.StaffOfByrna,
             };
-
-            return itemPool.Any(x => checkList.Contains(x)) && !checkList.Contains(item);
         }
 
         public List<ItemType> GetItemPool(SeedRandom random)
@@ -2205,7 +2249,7 @@ namespace AlttpRandomizer.Rom
 				ItemType.Bow,
                 ItemType.CaneOfSomaria,
                 ItemType.FireRod,
-				//ItemType.Flippers,
+				ItemType.Flippers,
 				ItemType.Hammer,
 				ItemType.Hookshot,
 				ItemType.IceRod,
@@ -2213,12 +2257,12 @@ namespace AlttpRandomizer.Rom
 				ItemType.Lamp,
 				ItemType.Lamp,
                 //ItemType.L1SwordAndShield,
-                //ItemType.MagicMirror,
+                ItemType.MagicMirror,
 				ItemType.MoonPearl,
-				//ItemType.PegasusBoots,
+				ItemType.PegasusBoots,
 				ItemType.PowerGlove,
-				//ItemType.Quake,
-				//ItemType.Shovel,
+				ItemType.Quake,
+				ItemType.Shovel,
 				ItemType.TitansMitt,
 				
 				// nice-to-have items
@@ -2228,7 +2272,7 @@ namespace AlttpRandomizer.Rom
 				ItemType.Bottle,
 				ItemType.Bottle,
 				ItemType.Bottle,
-				//ItemType.BugCatchingNet,
+				ItemType.BugCatchingNet,
 				ItemType.Cape,
 				ItemType.HeartContainer,
 				ItemType.MirrorShield,

@@ -154,16 +154,16 @@ namespace AlttpRandomizer
 		{
 			filename.Text = Settings.Default.OutputFile;
 			createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
-			Text = string.Format("Super Metroid Randomizer v{0}", RandomizerVersion.Current);
+			Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.Current);
 			randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
 			RunCheckUpdate();
 		}
 
 		private void RunCheckUpdate()
 		{
-			//checkUpdateThread = new Thread(RandomizerVersion.CheckUpdate);
-			//checkUpdateThread.SetApartmentState(ApartmentState.STA);
-			//checkUpdateThread.Start();
+			checkUpdateThread = new Thread(RandomizerVersion.CheckUpdate);
+			checkUpdateThread.SetApartmentState(ApartmentState.STA);
+			checkUpdateThread.Start();
 		}
 	}
 }
