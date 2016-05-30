@@ -2348,7 +2348,7 @@ namespace AlttpRandomizer.Rom
                 ItemType.Hammer,
                 ItemType.Hookshot,
                 ItemType.IceRod,
-                ItemType.Lamp,
+                //ItemType.Lamp,
                 ItemType.MagicMirror,
                 ItemType.MoonPearl,
                 ItemType.PegasusBoots,
