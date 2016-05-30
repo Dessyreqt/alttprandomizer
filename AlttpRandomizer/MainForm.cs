@@ -157,9 +157,15 @@ namespace AlttpRandomizer
 			Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.Current);
 			randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
 			RunCheckUpdate();
-		}
 
-		private void RunCheckUpdate()
+            if (RandomizerVersion.Debug)
+            {
+                create.BackColor = Color.DarkRed;
+                Text += " *** DEBUG ***";
+            }
+        }
+
+        private void RunCheckUpdate()
 		{
 			checkUpdateThread = new Thread(RandomizerVersion.CheckUpdate);
 			checkUpdateThread.SetApartmentState(ApartmentState.STA);

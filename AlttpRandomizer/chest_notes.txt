@@ -183,7 +183,6 @@
 
 items to add:
 Mushroom
-Bottle (bought)
 Book of Mudora
 [cave-050] Guy who gives 300 rupees
 [cave-073] Guy who gives 300 rupees
@@ -303,8 +302,9 @@ Inventory RAM:
 0x7ef355 = Pegasus Boots
 0x7ef356 = Flippers
 0x7ef357 = Moon Pearl
-0x7ef359 = Sword (level)
-0x7ef35a = Shield (level)
+0x7ef359 = Sword (level) (01 = Uncle's, 02 = Master, 03 = Red, 04 = Golden)
+0x7ef35a = Shield (level) (01 = Blue, 02 = Red, 03 = Mirror)
+0x7ef35b = Armor (level) (01 = Blue, 02 = Red)
 0x7ef35c = Bottle 1
 0x7ef35d = Bottle 2
 0x7ef35e = Bottle 3

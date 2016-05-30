@@ -72,8 +72,8 @@ namespace AlttpRandomizer.IO
 					writer.WriteLine("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item));
 				}
 				writer.WriteLine();
-				writer.WriteLine("EasternPalace");
-				writer.WriteLine("-------------");
+				writer.WriteLine("Eastern Palace");
+				writer.WriteLine("--------------");
 				foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.EasternPalace).OrderBy(x => x.Name))
 				{
 					writer.WriteLine("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item));
@@ -224,7 +224,7 @@ namespace AlttpRandomizer.IO
 				case ItemType.ThreeBombs:
 					return "3 Bombs";
 				case ItemType.RedBoomerang:
-					return "Red Boomerang";
+					return "Red Boomerang / 300 Rupees";
 				case ItemType.BigKey:
 					return "Big Key";
 				case ItemType.Map:

@@ -1,4 +1,6 @@
-﻿namespace AlttpRandomizer.Rom
+﻿using System;
+
+namespace AlttpRandomizer.Rom
 {
     public enum ItemType
     {
@@ -91,7 +93,6 @@
             Type = insertedItem;
         }
 
-
         public ItemType Type
         {
             get { return type; }
@@ -100,6 +101,108 @@
                 type = value;
                 HexValue = (char)type;
             }
+        }
+
+        public static byte[] GetCheckLocation(ItemType item)
+        {
+            byte retVal;
+
+            switch (item)
+            {
+                case ItemType.Bow:
+                case ItemType.BowAndArrows:
+                case ItemType.BowAndSilverArrows:
+                    retVal = 0x40;
+                    break;
+                case ItemType.Boomerang:
+                case ItemType.RedBoomerang:
+                    retVal = 0x41;
+                    break;
+                case ItemType.Hookshot:
+                    retVal = 0x42;
+                    break;
+                case ItemType.Mushroom:
+                case ItemType.Powder:
+                    retVal = 0x44;
+                    break;
+                case ItemType.FireRod:
+                    retVal = 0x45;
+                    break;
+                case ItemType.IceRod:
+                    retVal = 0x46;
+                    break;
+                case ItemType.Bombos:
+                    retVal = 0x47;
+                    break;
+                case ItemType.Ether:
+                    retVal = 0x48;
+                    break;
+                case ItemType.Quake:
+                    retVal = 0x49;
+                    break;
+                case ItemType.Lamp:
+                    retVal = 0x4a;
+                    break;
+                case ItemType.Hammer:
+                    retVal = 0x4b;
+                    break;
+                case ItemType.Shovel:
+                case ItemType.OcarinaActive:
+                case ItemType.OcarinaInactive:
+                    retVal = 0x4c;
+                    break;
+                case ItemType.BugCatchingNet:
+                    retVal = 0x4d;
+                    break;
+                case ItemType.BookOfMudora:
+                    retVal = 0x4e;
+                    break;
+                case ItemType.CaneOfSomaria:
+                    retVal = 0x50;
+                    break;
+                case ItemType.StaffOfByrna:
+                    retVal = 0x51;
+                    break;
+                case ItemType.Cape:
+                    retVal = 0x52;
+                    break;
+                case ItemType.MagicMirror:
+                    retVal = 0x53;
+                    break;
+                case ItemType.PowerGlove:
+                case ItemType.TitansMitt:
+                    retVal = 0x54;
+                    break;
+                case ItemType.PegasusBoots:
+                    retVal = 0x55;
+                    break;
+                case ItemType.Flippers:
+                    retVal = 0x56;
+                    break;
+                case ItemType.MoonPearl:
+                    retVal = 0x57;
+                    break;
+                case ItemType.L1Sword:
+                case ItemType.L1SwordAndShield:
+                case ItemType.L2Sword:
+                case ItemType.L3Sword:
+                case ItemType.L4Sword:
+                    retVal = 0x59;
+                    break;
+                case ItemType.BlueShield:
+                case ItemType.RedShield:
+                case ItemType.MirrorShield:
+                    retVal = 0x5a;
+                    break;
+                case ItemType.BlueMail:
+                case ItemType.RedMail:
+                    retVal = 0x5b;
+                    break;
+                default:
+                    throw new ArgumentException("Item must be a unique item.", "item");
+            }
+
+            return new[] { retVal };
         }
     }
 }

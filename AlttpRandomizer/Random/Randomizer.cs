@@ -136,14 +136,14 @@ namespace AlttpRandomizer.Random
 			var keys = 0;
 			List<Location> currentLocations;
 
-			for (int addKeys = 6; addKeys > 0; addKeys--)
-			{
-				currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
-				currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-				keys++;
-			}
+            for (int addKeys = 6; addKeys > 0; addKeys--)
+            {
+                currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
+                currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+                keys++;
+            }
 
-			currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
+            currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -329,9 +329,16 @@ namespace AlttpRandomizer.Random
 				    var newItem = (byte)location.Item.HexValue;
 
                     rom.Write(new [] { newItem }, 0, 1);
-				}
+
+                    location.WriteItemCheck?.Invoke(rom, location.Item.Type);
+                }
 
 				WriteSeedInRom(rom);
+
+			    if (RandomizerVersion.Debug)
+			    {
+			        WriteDebugModeToRom(rom);
+			    }
 
 				rom.Close();
 			}
@@ -339,7 +346,15 @@ namespace AlttpRandomizer.Random
 			log?.WriteLog(usedFilename);
 		}
 
-		private void WriteSeedInRom(FileStream rom)
+        private void WriteDebugModeToRom(FileStream rom)
+        {
+            rom.Seek(0x65b88, SeekOrigin.Begin);
+            rom.Write(StringToByteArray("\xea\xea"), 0, 2);
+            rom.Seek(0x65b91, SeekOrigin.Begin);
+            rom.Write(StringToByteArray("\xea\xea"), 0, 2);
+        }
+
+        private void WriteSeedInRom(FileStream rom)
 		{
 			string seedStr = string.Format(romLocations.SeedRomString, RandomizerVersion.Current, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
 			rom.Seek(0x7fc0, SeekOrigin.Begin);
