@@ -10,8 +10,24 @@ namespace AlttpRandomizer.Net
 {
     public class RandomizerVersion
     {
-        public static string Current = "P3";
+        public static string Current = "1P4";
         public static bool Debug = false;
+
+        public static string CurrentDisplay
+        {
+            get
+            {
+                var retVal = Current;
+
+                if (retVal.Contains("P"))
+                {
+                    retVal = string.Format("{0})", retVal.Replace("P", " (preview "));
+                }
+
+                return retVal;
+            }
+        }
+
         private const int checkVersion = 0;
         private static readonly string updateAddress = "http://dessyreqt.github.io/alttprandomizer/?" + DateTime.Now.Ticks;
 

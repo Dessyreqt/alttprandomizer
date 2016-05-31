@@ -147,14 +147,14 @@ namespace AlttpRandomizer
 
 		private void btnReport_Click(object sender, EventArgs e)
 		{
-			Help.ShowHelp(null, "https://github.com/Dessyreqt/alttprandomizer/issues/new");
+			Help.ShowHelp(null, string.Format("https://gitreports.com/issue/Dessyreqt/alttprandomizer?issue_title=[v{0}]%20Anonymous%20Issue&details=[v{0}]%0A%0A", RandomizerVersion.CurrentDisplay));
 		}
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			filename.Text = Settings.Default.OutputFile;
 			createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
-			Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.Current);
+			Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.CurrentDisplay);
 			randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
 			RunCheckUpdate();
 

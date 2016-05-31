@@ -9,6 +9,7 @@ namespace AlttpRandomizer.Rom
 {
     public enum Region
     {
+        Progression,
         LightWorld,
         DarkWorld,
         HyruleCastleEscape,
@@ -32,7 +33,7 @@ namespace AlttpRandomizer.Rom
     {
         public string Name { get; set; }
         public long Address { get; set; }
-        public bool TitansMittOkay { get; set; }
+        public bool LateGameItem { get; set; }
         public bool UniqueItemOnly { get; set; }
         public int KeysNeeded { get; set; }
         public bool BigKeyNeeded { get; set; }

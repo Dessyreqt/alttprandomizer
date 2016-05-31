@@ -5,6 +5,7 @@ namespace AlttpRandomizer.Rom
     public enum ItemType
     {
 		Nothing = 0xFF,
+        Progression = 0xFF,
 		L1SwordAndShield = 0x00, // can't be used until after uncle dies
         L2Sword = 0x01, // crashes game
         L3Sword = 0x02, // can't be used until after uncle dies

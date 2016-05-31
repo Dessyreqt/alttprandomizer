@@ -401,6 +401,8 @@ namespace AlttpRandomizer.Random
 				    }
 				}
 
+			    currentLocations.RemoveAll(x => x.Item?.Type == ItemType.Progression);
+
                 // Grab an item from the candidate list if there are any, otherwise, grab a random item
                 if (candidateItemList.Count > 0)
 				{

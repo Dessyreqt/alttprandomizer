@@ -22,7 +22,7 @@ namespace AlttpRandomizer.Rom
             {
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Escape - first B1 room",
                     Address = 0xE96E,
@@ -33,7 +33,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-034] Hyrule Castle secret entrance",
                     Address = 0xE971,
@@ -43,7 +43,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Hyrule Castle - boomerang room",
                     Address = 0xE974,
@@ -54,7 +54,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - compass room",
                     Address = 0xE977,
@@ -64,7 +64,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-018] Graveyard - top right grave",
                     Address = 0xE97A,
@@ -76,7 +76,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - big chest",
                     Address = 0xE97D,
@@ -87,7 +87,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - map room",
                     Address = 0xE986,
@@ -98,7 +98,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - big chest",
                     Address = 0xE989,
@@ -110,7 +110,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-047] Dam",
                     Address = 0xE98C,
@@ -120,7 +120,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.DesertPalace,
                     Name = "[dungeon-L2-B1] Desert Palace - big chest",
                     Address = 0xE98F,
@@ -131,7 +131,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - Compass room",
                     Address = 0xE992,
@@ -141,7 +141,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B4] Ice Palace - above Blue Mail room",
                     Address = 0xE995,
@@ -152,7 +152,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - big chest",
                     Address = 0xE998,
@@ -163,7 +163,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - east of Fire Rod room",
                     Address = 0xE99B,
@@ -173,7 +173,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - Big Key room",
                     Address = 0xE99E,
@@ -183,7 +183,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - Gibdo/Stalfos room",
                     Address = 0xE9A1,
@@ -193,7 +193,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B1] Ice Palace - Big Key room",
                     Address = 0xE9A4,
@@ -206,7 +206,7 @@ namespace AlttpRandomizer.Rom
 
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B5] Ice Palace - big chest",
                     Address = 0xE9AA,
@@ -218,7 +218,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.TowerOfHera,
                     Name = "[dungeon-L3-2F] Tower of Hera - Entrance",
                     Address = 0xE9AD,
@@ -229,7 +229,7 @@ namespace AlttpRandomizer.Rom
 
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - big ball room",
                     Address = 0xE9B3,
@@ -239,7 +239,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.DesertPalace,
                     Name = "[dungeon-L2-B1] Desert Palace - Map room",
                     Address = 0xE9B6,
@@ -249,7 +249,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - Big key",
                     Address = 0xE9B9,
@@ -260,7 +260,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-040] Link's House",
                     Address = 0xE9BC,
@@ -270,7 +270,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-012-1F] Death Mountain - wall of caves - left cave",
                     Address = 0xE9BF,
@@ -283,7 +283,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.DesertPalace,
                     Name = "[dungeon-L2-B1] Desert Palace - Big key room",
                     Address = 0xE9C2,
@@ -294,7 +294,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.LightWorld,
                     Name = "[cave-013] Mimic cave (from Turtle Rock)",
                     Address = 0xE9C5,
@@ -304,7 +304,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - south of Fire Rod room",
                     Address = 0xE9C8,
@@ -314,7 +314,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.DesertPalace,
                     Name = "[dungeon-L2-B1] Desert Palace - compass room",
                     Address = 0xE9CB,
@@ -325,7 +325,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-031] Tavern",
                     Address = 0xE9CE,
@@ -336,7 +336,7 @@ namespace AlttpRandomizer.Rom
 
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B1] Ice Palace - compass room",
                     Address = 0xE9D4,
@@ -348,7 +348,7 @@ namespace AlttpRandomizer.Rom
 
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - spike room",
                     Address = 0xE9DA,
@@ -358,7 +358,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B2] Ice Palace - map room",
                     Address = 0xE9DD,
@@ -370,7 +370,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B3] Ice Palace - spike room",
                     Address = 0xE9E0,
@@ -382,7 +382,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B5] Ice Palace - b5 up staircase",
                     Address = 0xE9E3,
@@ -393,7 +393,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.TowerOfHera,
                     Name = "[dungeon-L3-1F] Tower of Hera - first floor",
                     Address = 0xE9E6,
@@ -404,7 +404,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-026] chicken house",
                     Address = 0xE9E9,
@@ -414,7 +414,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-063] doorless hut",
                     Address = 0xE9EC,
@@ -424,7 +424,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-062] C-shaped house",
                     Address = 0xE9EF,
@@ -434,7 +434,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-044] Aginah's cave",
                     Address = 0xE9F2,
@@ -444,7 +444,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - map room",
                     Address = 0xE9F5,
@@ -454,7 +454,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.TowerOfHera,
                     Name = "[dungeon-L3-4F] Tower of Hera - big chest",
                     Address = 0xE9F8,
@@ -465,7 +465,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.TowerOfHera,
                     Name = "[dungeon-L3-4F] Tower of Hera - 4F [small chest]",
                     Address = 0xE9FB,
@@ -476,7 +476,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - Entrance to part 2",
                     Address = 0xE9FE,
@@ -486,7 +486,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B1] Thieves' Town - Bottom left of huge room [top left chest]",
                     Address = 0xEA01,
@@ -496,7 +496,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B1] Thieves' Town - Bottom left of huge room [bottom right chest]",
                     Address = 0xEA04,
@@ -506,7 +506,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B1] Thieves' Town - Bottom right of huge room",
                     Address = 0xEA07,
@@ -516,7 +516,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B1] Thieves' Town - Top left of huge room",
                     Address = 0xEA0A,
@@ -526,7 +526,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-1F] Thieves' Town - Room above boss",
                     Address = 0xEA0D,
@@ -538,7 +538,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B2] Thieves' Town - big chest",
                     Address = 0xEA10,
@@ -551,7 +551,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B2] Thieves' Town - next to Blind",
                     Address = 0xEA13,
@@ -563,7 +563,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-1F] Turtle Rock - Chain chomp room",
                     Address = 0xEA16,
@@ -574,7 +574,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B1] Turtle Rock - big chest",
                     Address = 0xEA19,
@@ -586,7 +586,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-1F] Turtle Rock - Map room [left chest]",
                     Address = 0xEA1C,
@@ -597,7 +597,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-1F] Turtle Rock - Map room [right chest]",
                     Address = 0xEA1F,
@@ -608,7 +608,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-1F] Turtle Rock - compass room",
                     Address = 0xEA22,
@@ -618,7 +618,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B1] Turtle Rock - big key room",
                     Address = 0xEA25,
@@ -630,7 +630,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top right chest]",
                     Address = 0xEA28,
@@ -644,7 +644,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top left chest]",
                     Address = 0xEA2B,
@@ -658,7 +658,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom right chest]",
                     Address = 0xEA2E,
@@ -672,7 +672,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom left chest]",
                     Address = 0xEA31,
@@ -686,7 +686,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B1] Turtle Rock - Roller switch room",
                     Address = 0xEA34,
@@ -699,7 +699,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - big key room",
                     Address = 0xEA37,
@@ -710,7 +710,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - jump room [right chest]",
                     Address = 0xEA3A,
@@ -721,7 +721,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - jump room [left chest]",
                     Address = 0xEA3D,
@@ -732,7 +732,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - big chest",
                     Address = 0xEA40,
@@ -744,7 +744,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - compass room",
                     Address = 0xEA43,
@@ -755,7 +755,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - spike statue room",
                     Address = 0xEA46,
@@ -766,7 +766,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-B1] Dark Palace - turtle stalfos room",
                     Address = 0xEA49,
@@ -777,7 +777,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-B1] Dark Palace - room leading to Helmasaur [left chest]",
                     Address = 0xEA4C,
@@ -788,7 +788,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-B1] Dark Palace - room leading to Helmasaur [right chest]",
                     Address = 0xEA4F,
@@ -799,7 +799,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - statue push room",
                     Address = 0xEA52,
@@ -810,7 +810,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - maze room [top chest]",
                     Address = 0xEA55,
@@ -821,7 +821,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - maze room [bottom chest]",
                     Address = 0xEA58,
@@ -832,7 +832,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-B1] Dark Palace - shooter room",
                     Address = 0xEA5B,
@@ -842,7 +842,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - big hub room",
                     Address = 0xEA5E,
@@ -853,7 +853,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - end of bridge",
                     Address = 0xEA61,
@@ -863,7 +863,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - compass",
                     Address = 0xEA64,
@@ -876,7 +876,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - big chest",
                     Address = 0xEA67,
@@ -890,7 +890,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - map room",
                     Address = 0xEA6A,
@@ -901,7 +901,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - big key",
                     Address = 0xEA6D,
@@ -915,31 +915,31 @@ namespace AlttpRandomizer.Rom
 
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-071] Misery Mire west area [left chest]",
                     Address = 0xEA73,
                     CanAccess =
                         have =>
-                        have.Contains(ItemType.OcarinaInactive)
+                        have.Contains(ItemType.OcarinaActive)
                         && CanBeInDarkWorld(have)
                         && have.Contains(ItemType.TitansMitt),
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-071] Misery Mire west area [right chest]",
                     Address = 0xEA76,
                     CanAccess =
                         have =>
-                        have.Contains(ItemType.OcarinaInactive)
+                        have.Contains(ItemType.OcarinaActive)
                         && CanBeInDarkWorld(have)
                         && have.Contains(ItemType.TitansMitt),
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[dungeon-C-1F] Sanctuary",
                     Address = 0xEA79,
@@ -949,7 +949,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-057-1F] Dark World Death Mountain - cave from top to bottom [top chest]",
                     Address = 0xEA7C,
@@ -959,7 +959,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-057-1F] Dark World Death Mountain - cave from top to bottom [bottom chest]",
                     Address = 0xEA7F,
@@ -969,7 +969,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-035] Sahasrahla's Hut [left chest]",
                     Address = 0xEA82,
@@ -979,7 +979,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-035] Sahasrahla's Hut [center chest]",
                     Address = 0xEA85,
@@ -989,7 +989,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-035] Sahasrahla's Hut [right chest]",
                     Address = 0xEA88,
@@ -999,7 +999,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-055] Spike cave",
                     Address = 0xEA8B,
@@ -1011,7 +1011,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-021] Kakariko well [top chest]",
                     Address = 0xEA8E,
@@ -1021,7 +1021,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-021] Kakariko well [left chest row of 3]",
                     Address = 0xEA91,
@@ -1031,7 +1031,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-021] Kakariko well [center chest row of 3]",
                     Address = 0xEA94,
@@ -1041,7 +1041,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-021] Kakariko well [right chest row of 3]",
                     Address = 0xEA97,
@@ -1051,7 +1051,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-021] Kakariko well [bottom chest]",
                     Address = 0xEA9A,
@@ -1061,7 +1061,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-1F] Swamp Palace - first room",
                     Address = 0xEA9D,
@@ -1071,7 +1071,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - south of hookshot room",
                     Address = 0xEAA0,
@@ -1082,7 +1082,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - push 4 blocks room",
                     Address = 0xEAA3,
@@ -1093,7 +1093,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - big key room",
                     Address = 0xEAA6,
@@ -1104,7 +1104,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",
                     Address = 0xEAA9,
@@ -1116,7 +1116,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",
                     Address = 0xEAAC,
@@ -1128,7 +1128,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B2] Swamp Palace - hidden waterfall door room",
                     Address = 0xEAAF,
@@ -1140,7 +1140,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleTower,
                     Name = "[dungeon-A1-3F] Hyrule Castle Tower - maze room",
                     Address = 0xEAB2,
@@ -1150,7 +1150,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleTower,
                     Name = "[dungeon-A1-2F] Hyrule Castle Tower - 2 knife guys room",
                     Address = 0xEAB5,
@@ -1160,7 +1160,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [top left chest]",
                     Address = 0xEAB8,
@@ -1170,7 +1170,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [top right chest]",
                     Address = 0xEABB,
@@ -1180,7 +1180,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom left chest]",
                     Address = 0xEABE,
@@ -1190,7 +1190,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom right chest]",
                     Address = 0xEAC1,
@@ -1200,7 +1200,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [top left chest]",
                     Address = 0xEAC4,
@@ -1211,7 +1211,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [top right chest]",
                     Address = 0xEAC7,
@@ -1222,7 +1222,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom left chest]",
                     Address = 0xEACA,
@@ -1233,7 +1233,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom right chest]",
                     Address = 0xEACD,
@@ -1244,7 +1244,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - north of teleport room",
                     Address = 0xEAD0,
@@ -1255,7 +1255,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - map room",
                     Address = 0xEAD3,
@@ -1266,7 +1266,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - big chest",
                     Address = 0xEAD6,
@@ -1278,7 +1278,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [left chest]",
                     Address = 0xEAD9,
@@ -1288,7 +1288,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [right chest]",
                     Address = 0xEADC,
@@ -1298,7 +1298,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - above Armos",
                     Address = 0xEADF,
@@ -1309,7 +1309,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - east of down right staircase from entrace",
                     Address = 0xEAE2,
@@ -1319,7 +1319,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - compass room [top left chest]",
                     Address = 0xEAE5,
@@ -1330,7 +1330,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - compass room [top right chest]",
                     Address = 0xEAE8,
@@ -1341,7 +1341,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - compass room [bottom left chest]",
                     Address = 0xEAEB,
@@ -1352,7 +1352,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - compass room [bottom right chest]",
                     Address = 0xEAEE,
@@ -1363,7 +1363,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [bottom chest]",
                     Address = 0xEAF1,
@@ -1374,7 +1374,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [left chest]",
                     Address = 0xEAF4,
@@ -1385,7 +1385,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [right chest]",
                     Address = 0xEAF7,
@@ -1397,7 +1397,7 @@ namespace AlttpRandomizer.Rom
 
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-6F] Ganon's Tower - north of falling floor four torches [top left chest]",
                     Address = 0xEAFD,
@@ -1408,7 +1408,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-6F] Ganon's Tower - north of falling floor four torches [top right chest]",
                     Address = 0xEB00,
@@ -1419,7 +1419,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-6F] Ganon's Tower - before Moldorm",
                     Address = 0xEB03,
@@ -1431,7 +1431,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-6F] Ganon's Tower - Moldorm room",
                     Address = 0xEB06,
@@ -1443,7 +1443,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B3] Hyrule Castle - next to Zelda",
                     Address = 0xEB09,
@@ -1454,7 +1454,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Hyrule Castle - map room",
                     Address = 0xEB0C,
@@ -1464,7 +1464,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-022-B1] Thief's hut [top chest]",
                     Address = 0xEB0F,
@@ -1474,7 +1474,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-022-B1] Thief's hut [top left chest]",
                     Address = 0xEB12,
@@ -1484,7 +1484,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-022-B1] Thief's hut [top right chest]",
                     Address = 0xEB15,
@@ -1494,7 +1494,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-022-B1] Thief's hut [bottom left chest]",
                     Address = 0xEB18,
@@ -1504,7 +1504,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-022-B1] Thief's hut [bottom right chest]",
                     Address = 0xEB1B,
@@ -1514,7 +1514,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-073] cave northeast of swamp palace [top chest]",
                     Address = 0xEB1E,
@@ -1524,7 +1524,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-073] cave northeast of swamp palace [top middle chest]",
                     Address = 0xEB21,
@@ -1534,7 +1534,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-073] cave northeast of swamp palace [bottom middle chest]",
                     Address = 0xEB24,
@@ -1544,7 +1544,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-073] cave northeast of swamp palace [bottom chest]",
                     Address = 0xEB27,
@@ -1554,7 +1554,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top left chest]",
                     Address = 0xEB2A,
@@ -1567,7 +1567,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top left middle chest]",
                     Address = 0xEB2D,
@@ -1580,7 +1580,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top right middle chest]",
                     Address = 0xEB30,
@@ -1593,7 +1593,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [top right chest]",
                     Address = 0xEB33,
@@ -1606,7 +1606,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-009-1F] Death Mountain - wall of caves - right cave [bottom chest]",
                     Address = 0xEB36,
@@ -1619,7 +1619,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-009-B1] Death Mountain - wall of caves - right cave [left chest]",
                     Address = 0xEB39,
@@ -1632,7 +1632,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-009-B1] Death Mountain - wall of caves - right cave [right chest]",
                     Address = 0xEB3C,
@@ -1645,7 +1645,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-016] cave under rocks west of Santuary",
                     Address = 0xEB3F,
@@ -1656,7 +1656,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-050] cave southwest of Lake Hylia [bottom left chest]",
                     Address = 0xEB42,
@@ -1666,7 +1666,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-050] cave southwest of Lake Hylia [top left chest]",
                     Address = 0xEB45,
@@ -1676,7 +1676,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-050] cave southwest of Lake Hylia [top right chest]",
                     Address = 0xEB48,
@@ -1686,7 +1686,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-050] cave southwest of Lake Hylia [bottom right chest]",
                     Address = 0xEB4B,
@@ -1696,7 +1696,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "[cave-051] Ice Cave",
                     Address = 0xEB4E,
@@ -1706,7 +1706,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-056] Dark World Death Mountain - cave under boulder [top right chest]",
                     Address = 0xEB51,
@@ -1717,7 +1717,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-056] Dark World Death Mountain - cave under boulder [top left chest]",
                     Address = 0xEB54,
@@ -1728,7 +1728,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-056] Dark World Death Mountain - cave under boulder [bottom left chest]",
                     Address = 0xEB57,
@@ -1739,7 +1739,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = true,
                     Region = Region.DarkWorld,
                     Name = "[cave-056] Dark World Death Mountain - cave under boulder [bottom right chest]",
                     Address = 0xEB5A,
@@ -1750,7 +1750,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Escape - final basement room [left chest]",
                     Address = 0xEB5D,
@@ -1763,7 +1763,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Escape - final basement room [middle chest]",
                     Address = 0xEB60,
@@ -1776,7 +1776,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Escape - final basement room [right chest]",
                     Address = 0xEB63,
@@ -1790,7 +1790,7 @@ namespace AlttpRandomizer.Rom
                 //// Getting anything other than the sword here can be bad for progress... may as well keep the sword here since you can't use it if you get it before the uncle.
                 //new Location
                 //{
-                //    TitansMittOkay = false,
+                //    LateGameItem = false,
                 //    UniqueItemOnly = true,
                 //    Region = Region.LightWorld,
                 //    Name = "Uncle",
@@ -1801,7 +1801,7 @@ namespace AlttpRandomizer.Rom
                 //},
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "Bottle Vendor",
                     Address = 0x2EB18,
@@ -1811,7 +1811,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     UniqueItemOnly = true,
                     Region = Region.LightWorld,
                     Name = "Sahasrahla",
@@ -1828,7 +1828,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     UniqueItemOnly = true,
                     Region = Region.DarkWorld,
                     Name = "Flute Boy",
@@ -1874,7 +1874,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     UniqueItemOnly = true,
                     Region = Region.LightWorld,
                     Name = "Sick Kid",
@@ -1892,7 +1892,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "Purple Chest",
                     Address = 0x33D68,
@@ -1903,7 +1903,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     Region = Region.LightWorld,
                     Name = "Hobo",
                     Address = 0x33E7D,
@@ -1914,7 +1914,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     UniqueItemOnly = true,
                     Region = Region.DarkWorld,
                     Name = "Catfish",
@@ -1937,7 +1937,7 @@ namespace AlttpRandomizer.Rom
                 //// Zora's appearance is based on if you have flippers or not
                 new Location
                 {
-                    TitansMittOkay = false,
+                    LateGameItem = false,
                     UniqueItemOnly = true,
                     Region = Region.LightWorld,
                     Name = "King Zora",
@@ -1958,7 +1958,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    TitansMittOkay = true,
+                    LateGameItem = false,
                     UniqueItemOnly = true,
                     Region = Region.LightWorld,
                     Name = "Old mountain man",
@@ -2010,6 +2010,20 @@ namespace AlttpRandomizer.Rom
                             }
                         }
                 },
+                // To prevent double-item deadlocks
+                new Location
+                {
+                    LateGameItem = true,
+                    Region = Region.Progression,
+                    Name = "Turtle Rock",
+                    Item = new Item(ItemType.Progression),
+                    CanAccess =
+                        have =>
+                        CanAccessEastDarkWorldDeathMountain(have)
+                        && have.Contains(ItemType.Hammer)
+                        && have.Contains(ItemType.Quake),
+                },
+
             };
         }
 
@@ -2103,7 +2117,7 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEnterMiseryMire(List<ItemType> have)
         {
-            return have.Contains(ItemType.OcarinaInactive)
+            return have.Contains(ItemType.OcarinaActive)
                 && CanBeInDarkWorld(have)
                 && have.Contains(ItemType.TitansMitt)
                 && have.Contains(ItemType.Ether)
@@ -2111,10 +2125,11 @@ namespace AlttpRandomizer.Rom
                     || have.Contains(ItemType.Hookshot));
         }
 
-        private static bool CanBeInDarkWorld(List<ItemType> have)
+        private bool CanBeInDarkWorld(List<ItemType> have)
         {
             return have.Contains(ItemType.MagicMirror)
-                && have.Contains(ItemType.MoonPearl);
+                && have.Contains(ItemType.MoonPearl)
+                && CanDefeatAgahnim1(have);
         }
 
         private bool CanEnterIcePalace(List<ItemType> have)
@@ -2217,19 +2232,22 @@ namespace AlttpRandomizer.Rom
 
         public List<Location> GetAvailableLocations(List<ItemType> haveItems)
         {
-            return (from Location location in Locations where location.Item == null && location.CanAccess(haveItems) select location).ToList();
+            return (from Location location in Locations where (location.Item == null || location.Item.Type == ItemType.Progression) && location.CanAccess(haveItems) select location).ToList();
         }
 
         public List<Location> GetUnavailableLocations(List<ItemType> haveItems)
         {
-            return (from Location location in Locations where location.Item == null && !location.CanAccess(haveItems) select location).ToList();
+            return (from Location location in Locations where (location.Item == null || location.Item.Type == ItemType.Progression) && !location.CanAccess(haveItems) select location).ToList();
         }
 
         public void TryInsertCandidateItem(List<Location> currentLocations, List<ItemType> candidateItemList, ItemType candidateItem)
         {
             var uniqueItems = GetUniqueItems();
+            var badLateGameItem = (candidateItem == ItemType.TitansMitt || candidateItem == ItemType.Hammer) && !currentLocations.Any(x => x.LateGameItem);
+            var needUniqueItem = !uniqueItems.Contains(candidateItem) && currentLocations.All(x => x.UniqueItemOnly);
+            var badFirstItem = (candidateItem == ItemType.PowerGlove || candidateItem == ItemType.MirrorShield) && currentLocations.All(x => x.Name != "[cave-040] Link's House");
 
-            if (!(candidateItem == ItemType.TitansMitt && !currentLocations.Any(x => x.TitansMittOkay)) && !(!uniqueItems.Contains(candidateItem) && currentLocations.All(x => x.UniqueItemOnly)) && (currentLocations.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem)))
+            if (!badLateGameItem && !needUniqueItem && !badFirstItem)
             {
                 candidateItemList.Add(candidateItem);
             }
@@ -2239,11 +2257,16 @@ namespace AlttpRandomizer.Rom
         {
             int retVal;
             var uniqueItems = GetUniqueItems();
+            bool badLateGameItemSpot;
+            bool badUniqueItemSpot;
 
             do
             {
                 retVal = random.Next(currentLocations.Count);
-            } while ((insertedItem == ItemType.TitansMitt && !currentLocations[retVal].TitansMittOkay) || (insertedItem != ItemType.TitansMitt && uniqueItems.Contains(insertedItem) && !currentLocations[retVal].UniqueItemOnly && currentLocations.Any(x => x.UniqueItemOnly)));
+
+                badLateGameItemSpot = (insertedItem == ItemType.TitansMitt || insertedItem == ItemType.Hammer) && !currentLocations[retVal].LateGameItem;
+                badUniqueItemSpot = uniqueItems.Contains(insertedItem) && !currentLocations[retVal].UniqueItemOnly && currentLocations.Any(x => x.UniqueItemOnly);
+            } while (badLateGameItemSpot || badUniqueItemSpot);
 
 
             return retVal;
@@ -2253,11 +2276,16 @@ namespace AlttpRandomizer.Rom
         {
             ItemType retVal;
             var uniqueItems = GetUniqueItems();
+            bool badLateGameItem;
+            bool needUniqueItem;
 
             do
             {
                 retVal = itemPool[random.Next(itemPool.Count)];
-            } while ((retVal == ItemType.TitansMitt && !currentLocations.Any(x => x.TitansMittOkay)) || NeedToGrabProgressionItem(itemPool, retVal) || (!uniqueItems.Contains(retVal) && currentLocations.All(x => x.UniqueItemOnly)));
+
+                badLateGameItem = (retVal == ItemType.TitansMitt || retVal == ItemType.Hammer) && !currentLocations.Any(x => x.LateGameItem);
+                needUniqueItem = !uniqueItems.Contains(retVal) && currentLocations.All(x => x.UniqueItemOnly);
+            } while (badLateGameItem || needUniqueItem);
 
             return retVal;
         }
@@ -2302,42 +2330,18 @@ namespace AlttpRandomizer.Rom
             //{
             //    retVal.Add(ItemType.Shovel);
             //}
-            if (CanAccessLowerDarkWorld(have) && have.Contains(ItemType.Shovel))
+            if (CanEscapeCastle(have) && have.Contains(ItemType.Shovel))
             {
                 retVal.Add(ItemType.OcarinaInactive);
+                retVal.Add(ItemType.OcarinaActive);
             }
 
             return retVal;
         }
 
-        private bool NeedToGrabProgressionItem(List<ItemType> itemPool, ItemType item)
-        {
-            //var checkList = new List<ItemType>
-            //{
-            //    ItemType.CaneOfSomaria,
-            //    ItemType.Bow,
-            //    ItemType.FireRod,
-            //    ItemType.Flippers,
-            //    ItemType.Hammer,
-            //    ItemType.Hookshot,
-            //    ItemType.IceRod,
-            //    ItemType.Lamp,
-            //    ItemType.MagicMirror,
-            //    ItemType.MoonPearl,
-            //    ItemType.PegasusBoots,
-            //    ItemType.PowerGlove,
-            //    ItemType.Quake,
-            //    ItemType.Shovel,
-            //    ItemType.TitansMitt,
-            //};
-
-            var checkList = GetUniqueItems();
-
-            return itemPool.Any(x => checkList.Contains(x)) && !checkList.Contains(item);
-        }
-
         public List<ItemType> GetUniqueItems()
         {
+            // Please exclude late game items from this list
             return new List<ItemType>
             {
                 // advancement items
@@ -2345,7 +2349,7 @@ namespace AlttpRandomizer.Rom
                 ItemType.CaneOfSomaria,
                 ItemType.FireRod,
                 ItemType.Flippers,
-                ItemType.Hammer,
+                //ItemType.Hammer,
                 ItemType.Hookshot,
                 ItemType.IceRod,
                 //ItemType.Lamp,
