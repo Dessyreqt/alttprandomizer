@@ -57,6 +57,7 @@
     <Compile Include="Net\RandomizerVersion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Random\RandomizationException.cs" />
     <Compile Include="Random\Randomizer.cs" />
     <Compile Include="Random\SeedRandom.cs" />
     <Compile Include="Rom\IRomLocations.cs" />

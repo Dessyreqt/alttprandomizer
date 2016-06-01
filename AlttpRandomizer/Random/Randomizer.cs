@@ -38,13 +38,22 @@ namespace AlttpRandomizer.Random
 
 		public void CreateRom(string filename)
 		{
-			if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
-				Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
+		    try
+		    {
+                if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
+                    Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
 
-			GenerateItemList();
-			GenerateDungeonItems();
-			GenerateItemPositions();
-			WriteRom(filename);
+                GenerateItemList();
+                GenerateDungeonItems();
+                GenerateItemPositions();
+                WriteRom(filename);
+            }
+            catch (Exception ex)
+		    {
+                var newEx = new RandomizationException(string.Format("Error creating seed: {0}.", string.Format(romLocations.SeedFileString, seed)), ex);
+
+		        throw newEx;
+		    }
 		}
 
 		private void GenerateDungeonItems()
@@ -419,14 +428,54 @@ namespace AlttpRandomizer.Random
 				}
 				else
 				{
-					ItemType insertedItem = romLocations.GetInsertedItem(currentLocations, itemPool, random);
+				    try
+				    {
+                        ItemType insertedItem = romLocations.GetInsertedItem(currentLocations, itemPool, random);
 
-					itemPool.Remove(insertedItem);
-					haveItems.Add(insertedItem);
-					AddProgressionItems(haveItems);
+                        itemPool.Remove(insertedItem);
+                        haveItems.Add(insertedItem);
+                        AddProgressionItems(haveItems);
 
-					int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
-					currentLocations[insertedLocation].Item = new Item(insertedItem);
+                        int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
+                        currentLocations[insertedLocation].Item = new Item(insertedItem);
+                    }
+                    catch (ArgumentOutOfRangeException)
+				    {
+				        if (RandomizerVersion.Debug)
+				        {
+                            using (var writer = new StreamWriter(string.Format("unavailableLocations - {0}.txt", string.Format(romLocations.SeedFileString, seed))))
+                            {
+                                var unavailable = romLocations.GetUnavailableLocations(haveItems);
+
+                                writer.WriteLine("Unavailable Locations");
+                                writer.WriteLine("---------------------");
+
+                                foreach (var location in unavailable.OrderBy(x => x.Name))
+                                {
+                                    writer.WriteLine(location.Name);
+                                }
+
+                                writer.WriteLine();
+                                writer.WriteLine("Have Items");
+                                writer.WriteLine("----------");
+
+                                foreach (var item in haveItems)
+                                {
+                                    writer.WriteLine(item);
+                                }
+
+                                writer.WriteLine();
+                                writer.WriteLine("Item Pool");
+                                writer.WriteLine("---------");
+
+                                foreach (var item in itemPool)
+                                {
+                                    writer.WriteLine(item);
+                                }
+                            }
+                        }
+				        throw;
+				    }
 				}
 			} while (itemPool.Count > 0);
 

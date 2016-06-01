@@ -2245,7 +2245,7 @@ namespace AlttpRandomizer.Rom
             var uniqueItems = GetUniqueItems();
             var badLateGameItem = (candidateItem == ItemType.TitansMitt || candidateItem == ItemType.Hammer) && !currentLocations.Any(x => x.LateGameItem);
             var needUniqueItem = !uniqueItems.Contains(candidateItem) && currentLocations.All(x => x.UniqueItemOnly);
-            var badFirstItem = (candidateItem == ItemType.PowerGlove || candidateItem == ItemType.MirrorShield) && currentLocations.All(x => x.Name != "[cave-040] Link's House");
+            var badFirstItem = (candidateItem == ItemType.PowerGlove || candidateItem == ItemType.MirrorShield) && currentLocations.Any(x => x.Name == "[cave-040] Link's House");
 
             if (!badLateGameItem && !needUniqueItem && !badFirstItem)
             {
@@ -2294,22 +2294,6 @@ namespace AlttpRandomizer.Rom
         {
             var retVal = new List<ItemType>();
 
-            //if (CanEscapeCastle(have) && !have.Contains(ItemType.BugCatchingNet))
-            //{
-            //    retVal.Add(ItemType.BugCatchingNet);
-            //}
-            //if (CanDefeatEasternPalace(have) && !have.Contains(ItemType.PegasusBoots))
-            //{
-            //    retVal.Add(ItemType.PegasusBoots);
-            //}
-            //if (CanEscapeCastle(have) && have.Contains(ItemType.PowerGlove) && (have.Contains(ItemType.PegasusBoots) || have.Contains(ItemType.TitansMitt)) && !have.Contains(ItemType.Flippers))
-            //{
-            //    retVal.Add(ItemType.Flippers);
-            //}
-            //if (CanClimbDeathMountain(have) && !have.Contains(ItemType.MagicMirror))
-            //{
-            //    retVal.Add(ItemType.MagicMirror);
-            //}
             if (CanDefeatEasternPalace(have) && !have.Contains(ItemType.BookOfMudora))
             {
                 retVal.Add(ItemType.BookOfMudora);
@@ -2322,14 +2306,6 @@ namespace AlttpRandomizer.Rom
             {
                 retVal.Add(ItemType.Ether);
             }
-            //if (CanAccessPyramid(have) && have.Contains(ItemType.PowerGlove) && (have.Contains(ItemType.PegasusBoots) || have.Contains(ItemType.TitansMitt)) && !have.Contains(ItemType.Quake))
-            //{
-            //    retVal.Add(ItemType.Quake);
-            //}
-            //if (CanAccessLowerDarkWorld(have) && !have.Contains(ItemType.Shovel))
-            //{
-            //    retVal.Add(ItemType.Shovel);
-            //}
             if (CanEscapeCastle(have) && have.Contains(ItemType.Shovel))
             {
                 retVal.Add(ItemType.OcarinaInactive);
