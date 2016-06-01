@@ -321,7 +321,7 @@ namespace AlttpRandomizer.Random
 
 			using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
 			{
-				rom.Write(Resources.RomImage, 0, 1048576);
+				rom.Write(Resources.RomImage, 0, 2097152);
 
 				foreach (var location in romLocations.Locations)
 				{
