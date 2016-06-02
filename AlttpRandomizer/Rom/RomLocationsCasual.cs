@@ -924,7 +924,7 @@ namespace AlttpRandomizer.Rom
                         have.Contains(ItemType.OcarinaActive)
                         && CanBeInDarkWorld(have)
                         && have.Contains(ItemType.TitansMitt),
-                },
+               },
                 new Location
                 {
                     LateGameItem = true,
@@ -1007,7 +1007,9 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanClimbDeathMountain(have)
                         && CanBeInDarkWorld(have)
-                        && have.Contains(ItemType.Hammer),
+                        && have.Contains(ItemType.Hammer)
+                        // not actually required here, but stops some deadlocks
+                        && have.Contains(ItemType.Quake),
                 },
                 new Location
                 {
@@ -2010,20 +2012,6 @@ namespace AlttpRandomizer.Rom
                             }
                         }
                 },
-                // To prevent double-item deadlocks
-                new Location
-                {
-                    LateGameItem = true,
-                    Region = Region.Progression,
-                    Name = "Turtle Rock",
-                    Item = new Item(ItemType.Progression),
-                    CanAccess =
-                        have =>
-                        CanAccessEastDarkWorldDeathMountain(have)
-                        && have.Contains(ItemType.Hammer)
-                        && have.Contains(ItemType.Quake),
-                },
-
             };
         }
 
@@ -2243,14 +2231,19 @@ namespace AlttpRandomizer.Rom
         public void TryInsertCandidateItem(List<Location> currentLocations, List<ItemType> candidateItemList, ItemType candidateItem)
         {
             var uniqueItems = GetUniqueItems();
-            var badLateGameItem = (candidateItem == ItemType.TitansMitt || candidateItem == ItemType.Hammer) && !currentLocations.Any(x => x.LateGameItem);
+            var badLateGameItem = IsLateGameItem(candidateItem) && !currentLocations.Any(x => x.LateGameItem);
             var needUniqueItem = !uniqueItems.Contains(candidateItem) && currentLocations.All(x => x.UniqueItemOnly);
-            var badFirstItem = (candidateItem == ItemType.PowerGlove || candidateItem == ItemType.MirrorShield) && currentLocations.Any(x => x.Name == "[cave-040] Link's House");
+            var badFirstItem = IsBadFirstItem(candidateItem) && currentLocations.Any(x => x.Name == "[cave-040] Link's House");
 
             if (!badLateGameItem && !needUniqueItem && !badFirstItem)
             {
                 candidateItemList.Add(candidateItem);
             }
+        }
+
+        private static bool IsBadFirstItem(ItemType item)
+        {
+            return (item == ItemType.PowerGlove || item == ItemType.TitansMitt || item == ItemType.RedShield || item == ItemType.MirrorShield);
         }
 
         public int GetInsertedLocation(List<Location> currentLocations, ItemType insertedItem, SeedRandom random)
@@ -2259,17 +2252,23 @@ namespace AlttpRandomizer.Rom
             var uniqueItems = GetUniqueItems();
             bool badLateGameItemSpot;
             bool badUniqueItemSpot;
+            bool unusedUniqueItemSpot;
 
             do
             {
                 retVal = random.Next(currentLocations.Count);
 
-                badLateGameItemSpot = (insertedItem == ItemType.TitansMitt || insertedItem == ItemType.Hammer) && !currentLocations[retVal].LateGameItem;
-                badUniqueItemSpot = uniqueItems.Contains(insertedItem) && !currentLocations[retVal].UniqueItemOnly && currentLocations.Any(x => x.UniqueItemOnly);
-            } while (badLateGameItemSpot || badUniqueItemSpot);
-
+                badLateGameItemSpot = IsLateGameItem(insertedItem) && !currentLocations[retVal].LateGameItem;
+                badUniqueItemSpot = !uniqueItems.Contains(insertedItem) && currentLocations[retVal].UniqueItemOnly;
+                unusedUniqueItemSpot = uniqueItems.Contains(insertedItem) && !currentLocations[retVal].UniqueItemOnly && currentLocations.Any(x => x.UniqueItemOnly);
+            } while (badLateGameItemSpot || badUniqueItemSpot || unusedUniqueItemSpot);
 
             return retVal;
+        }
+
+        private static bool IsLateGameItem(ItemType item)
+        {
+            return item == ItemType.TitansMitt || item == ItemType.RedMail || item == ItemType.MirrorShield;
         }
 
         public ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random)
@@ -2283,7 +2282,7 @@ namespace AlttpRandomizer.Rom
             {
                 retVal = itemPool[random.Next(itemPool.Count)];
 
-                badLateGameItem = (retVal == ItemType.TitansMitt || retVal == ItemType.Hammer) && !currentLocations.Any(x => x.LateGameItem);
+                badLateGameItem = IsLateGameItem(retVal) && !currentLocations.Any(x => x.LateGameItem);
                 needUniqueItem = !uniqueItems.Contains(retVal) && currentLocations.All(x => x.UniqueItemOnly);
             } while (badLateGameItem || needUniqueItem);
 

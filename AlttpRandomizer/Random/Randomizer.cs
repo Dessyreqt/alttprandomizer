@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using AlttpRandomizer.IO;
 using AlttpRandomizer.Net;
 using AlttpRandomizer.Properties;
@@ -14,7 +9,7 @@ using AlttpRandomizer.Rom;
 
 namespace AlttpRandomizer.Random
 {
-	public enum RandomizerDifficulty
+    public enum RandomizerDifficulty
 	{
 		Casual = 0,
 	}
