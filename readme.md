@@ -1,4 +1,4 @@
-# Current Version: 1
+# Current Version: 2
 
 # About the Legend of Zelda: A Link to the Past Randomizer (or ALttPRandomizer)
 This is a simple program that moves around items in the Legend of Zelda: A Link to the Past (ALttP). It is used for racing the game.
@@ -29,3 +29,16 @@ This randomizer uses the 1.0 JP version of the base rom because it is what is pr
 - You can jump down from a wall of which you are partially inside. This is most useful above the section of Turtle Rock that leads to the Mirror Shield.
 - In an area where you can't use the Magic Mirror, you can make pushed blocks disappear by trying to use it while pushing the blocks.
 - You can enter the Exploration Glitch in Tower of Hera by falling down the rightmost hole on the 3F, then jumping right from the wall.
+
+# What's new in Randomizer?
+v2
+- Fixed a bug didn't allow you to create the seed entered
+- Accounted for the fact that hookshot can be used to access lower Dark World.
+
+v1
+- Chest items and items given to you by the bottle vendor, Sahasrahla, the flute boy, the sick kid, the purple chest, the hobo under the bridge, the catfish, King Zora, and the old mountain man are randomized. Note that this doesn't include chests in the various chest games throughout Hyrule.
+- Fake Dark World is fixed.
+- Titan's Mitt won't downgrade to Power Gloves.
+- Swamp Palace softlock is fixed.
+- "No mirror" softlock is fixed.
+- 0bb patch for Agahnim applied.
