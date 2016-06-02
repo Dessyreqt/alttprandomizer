@@ -172,13 +172,14 @@
 0xeb65 = [dungeon-C-B1] Escape - final basement room [right chest] [17] (10 arrows)
 
 0x2df45 = Uncle (L.1 Sword & Shield)
+0x2eb18 = Bottle Vendor	(Bottle)
 0x2f1fc = Sahasrahla (Pegasus Boots)
 0x330bf = Flute Boy (Shovel)
 0x339c7 = Sick Kid (Bug-Catching Net)
 0x33d60 = Purple Chest (Bottle)
 0x33e75 = Hobo (Bottle)
-0xee185 ?= Catfish (Quake)
-0xee1c3 ?= King Zora (Flippers)
+0xee185 = Catfish (Quake)
+0xee1c3 = King Zora (Flippers)
 0xf6a00 = Old mountain man (Magic Mirror)
 
 items to add:

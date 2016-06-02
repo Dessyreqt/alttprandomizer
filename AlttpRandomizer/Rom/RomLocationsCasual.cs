@@ -2154,7 +2154,8 @@ namespace AlttpRandomizer.Rom
         private bool CanAccessLowerDarkWorld(List<ItemType> have)
         {
             return CanAccessPyramid(have)
-                && have.Contains(ItemType.Hammer)
+                && (have.Contains(ItemType.Hammer)
+					|| have.Contains(ItemType.Hookshot))
                 && CanBeInDarkWorld(have);
         }
 
