@@ -72,7 +72,8 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEscapeCastle(have)
                         && have.Contains(ItemType.PegasusBoots)
-                        && have.Contains(ItemType.TitansMitt),
+                        && (have.Contains(ItemType.TitansMitt)
+                            || CanAccessLowerDarkWorld(have)),
                 },
                 new Location
                 {
@@ -1760,8 +1761,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
-                        && have.Contains(ItemType.PowerGlove)
-                        && have.Contains(ItemType.PegasusBoots),
+                        && have.Contains(ItemType.PowerGlove),
                 },
                 new Location
                 {
@@ -1773,8 +1773,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
-                        && have.Contains(ItemType.PowerGlove)
-                        && have.Contains(ItemType.PegasusBoots),
+                        && have.Contains(ItemType.PowerGlove),
                 },
                 new Location
                 {
@@ -1786,8 +1785,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
-                        && have.Contains(ItemType.PowerGlove)
-                        && have.Contains(ItemType.PegasusBoots),
+                        && have.Contains(ItemType.PowerGlove),
                 },
                 //// Getting anything other than the sword here can be bad for progress... may as well keep the sword here since you can't use it if you get it before the uncle.
                 //new Location
