@@ -107,7 +107,8 @@ namespace AlttpRandomizer.Rom
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have),
+                        CanEnterSwampPalace(have)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
@@ -1081,7 +1082,8 @@ namespace AlttpRandomizer.Rom
                     KeysNeeded = 3,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have),
+                        CanEnterSwampPalace(have)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
@@ -1092,7 +1094,8 @@ namespace AlttpRandomizer.Rom
                     KeysNeeded = 4,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have),
+                        CanEnterSwampPalace(have)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
@@ -1103,7 +1106,8 @@ namespace AlttpRandomizer.Rom
                     KeysNeeded = 4,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have),
+                        CanEnterSwampPalace(have)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
@@ -1127,7 +1131,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(ItemType.Hookshot),
+                        && have.Contains(ItemType.Hookshot)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
@@ -1139,7 +1144,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(ItemType.Hookshot),
+                        && have.Contains(ItemType.Hookshot)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
