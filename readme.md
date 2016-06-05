@@ -31,6 +31,21 @@ This randomizer uses the 1.0 JP version of the base rom because it is what is pr
 - You can enter the Exploration Glitch in Tower of Hera by falling down the rightmost hole on the 3F, then jumping right from the wall.
 
 # What's new in Randomizer?
+
+v3
+- Added "Random Spoiler" button. This allows you to see a random seed's spoiler without creating the rom.
+- Added Red Shield to the list of available items, replacing an instance of 20 rupees.
+- Fixed the requirements to enter the graves near the Sanctuary.
+- Fixed Swamp Palace locations that require the Hammer.
+- Fixed where saving and quitting will take you in the Dark World if you haven't defeated Agahnim 1 yet.
+- Fixed the "fake Light World" condition if you save and quit in a Dark World dungeon.
+- Fixed boomerang and shield downgrades.
+- Fixed Fire Rod requirement for certain Turtle Rock chests.
+- Fixed some rare crashes in rom generation.
+- Fixed item generation involving Book of Mudora.
+- Made keys in Thieves' Town and Turtle Rock more lenient in where they spawn.
+- Changed output font to a fixed-width font.
+
 v2
 - Fixed a bug didn't allow you to create the seed entered
 - Accounted for the fact that hookshot can be used to access lower Dark World.
