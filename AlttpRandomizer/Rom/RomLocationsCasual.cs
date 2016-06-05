@@ -572,7 +572,8 @@ namespace AlttpRandomizer.Rom
                     KeysNeeded = 2,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have),
+                        CanEnterTurtleRock(have)
+                        && have.Contains(ItemType.FireRod),
                 },
                 new Location
                 {
@@ -584,7 +585,8 @@ namespace AlttpRandomizer.Rom
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have),
+                        CanEnterTurtleRock(have)
+                        && have.Contains(ItemType.FireRod),
                 },
                 new Location
                 {
@@ -2395,6 +2397,7 @@ namespace AlttpRandomizer.Rom
                 ItemType.PieceOfHeart,
                 ItemType.RedBoomerang,
                 ItemType.RedMail,
+                ItemType.RedShield,
                 ItemType.StaffOfByrna,
                 
                 // other treasure box contents
@@ -2432,7 +2435,6 @@ namespace AlttpRandomizer.Rom
                 ItemType.OneRupee,
                 ItemType.FiveRupees,
                 ItemType.FiveRupees,
-                ItemType.TwentyRupees,
                 ItemType.TwentyRupees,
                 ItemType.TwentyRupees,
                 ItemType.TwentyRupees,

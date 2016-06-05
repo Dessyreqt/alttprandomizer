@@ -207,7 +207,7 @@ namespace AlttpRandomizer.Random
 
 			const int keys = 2;
 
-			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -268,11 +268,11 @@ namespace AlttpRandomizer.Random
 			var locations = romLocations.Locations.Where(x => x.Region == Region.TurtleRock).ToList();
 			var keys = 0;
 
-		    var currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+		    var currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 			keys += 2;
 
-			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 			keys += 2;
 
@@ -281,7 +281,7 @@ namespace AlttpRandomizer.Random
 
 			for (int addKeys = 2; addKeys > 0; addKeys--)
 			{
-				currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+				currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
 				currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 				keys++;
 			}

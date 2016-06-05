@@ -249,6 +249,8 @@ namespace AlttpRandomizer.IO
 					return "300 Rupees";
 				case ItemType.PegasusBoots:
 					return "Pegasus Boots";
+                case ItemType.RedShield:
+			        return "Red Shield";
 				default:
 					throw new ArgumentException("Couldn't get item type!", "item");
 			}
