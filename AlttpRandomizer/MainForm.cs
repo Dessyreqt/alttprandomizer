@@ -40,59 +40,48 @@ namespace AlttpRandomizer
 		{
 			if (string.IsNullOrWhiteSpace(seed.Text))
 			{
-				switch (randomizerDifficulty.SelectedItem.ToString())
-				{
-					default:
-						seed.Text = string.Format("C{0:0000000}", (new SeedRandom()).Next(10000000));
-						break;
-				}
+				SetSeedBasedOnDifficulty();
 			}
 
 			ClearOutput();
 
-			int parsedSeed;
-			RandomizerDifficulty difficulty;
-			var seedText = seed.Text;
+		    var difficulty = GetRandomizerDifficulty();
 
-			if (seedText.ToUpper().Contains("C"))
-			{
-				randomizerDifficulty.SelectedItem = "Casual";
-				seedText = seedText.ToUpper().Replace("C", "");
-				difficulty = RandomizerDifficulty.Casual;
-			}
-			else
-			{
-				switch (randomizerDifficulty.SelectedItem.ToString())
-				{
-					case "Casual":
-						difficulty = RandomizerDifficulty.Casual;
-						break;
-					default:
-						MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						WriteOutput("Please select a difficulty.");
-						return;
-				}
-			}
+		    if (difficulty == RandomizerDifficulty.None)
+		    {
+		        return;
+		    }
 
-			if (!int.TryParse(seedText, out parsedSeed))
-			{
-				MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				WriteOutput("Seed must be numeric or blank.");
-			}
-			else
-			{
-				var romPlms = RomLocationsFactory.GetRomPlms(difficulty);
-				RandomizerLog log = null;
+            CreateRom(difficulty);
 
-				if (createSpoilerLog.Checked)
-				{
-					log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
-				}
+		    Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
+			Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
+			Settings.Default.Save();
+		}
 
-				seed.Text = string.Format(romPlms.SeedFileString, parsedSeed);
+        private void CreateRom(RandomizerDifficulty difficulty)
+        {
+            int parsedSeed;
 
-			    try
-			    {
+            if (!int.TryParse(seed.Text, out parsedSeed))
+            {
+                MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WriteOutput("Seed must be numeric or blank.");
+            }
+            else
+            {
+                var romPlms = RomLocationsFactory.GetRomPlms(difficulty);
+                RandomizerLog log = null;
+
+                if (createSpoilerLog.Checked)
+                {
+                    log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
+                }
+
+                seed.Text = string.Format(romPlms.SeedFileString, parsedSeed);
+
+                try
+                {
                     var randomizer = new Randomizer(parsedSeed, romPlms, log);
                     randomizer.CreateRom(filename.Text);
 
@@ -105,17 +94,78 @@ namespace AlttpRandomizer
                     WriteOutput(outputString.ToString());
                 }
                 catch (RandomizationException ex)
-			    {
+                {
                     WriteOutput(ex.ToString());
-			    }
-			}
+                }
+            }
+        }
 
-			Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
-			Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
-			Settings.Default.Save();
-		}
+        private void CreateSpoilerLog(RandomizerDifficulty difficulty)
+        {
+            int parsedSeed;
 
-		private void ClearOutput()
+            if (!int.TryParse(seed.Text, out parsedSeed))
+            {
+                MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WriteOutput("Seed must be numeric or blank.");
+            }
+            else
+            {
+                var romPlms = RomLocationsFactory.GetRomPlms(difficulty);
+                RandomizerLog log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
+
+                seed.Text = string.Format(romPlms.SeedFileString, parsedSeed);
+
+                try
+                {
+                    var randomizer = new Randomizer(parsedSeed, romPlms, log);
+                    WriteOutput(randomizer.CreateRom(filename.Text, true));
+                }
+                catch (RandomizationException ex)
+                {
+                    WriteOutput(ex.ToString());
+                }
+            }
+        }
+
+
+        private RandomizerDifficulty GetRandomizerDifficulty()
+        {
+            RandomizerDifficulty difficulty;
+
+            if (seed.Text.ToUpper().Contains("C"))
+            {
+                randomizerDifficulty.SelectedItem = "Casual";
+                seed.Text = seed.Text.ToUpper().Replace("C", "");
+                difficulty = RandomizerDifficulty.Casual;
+            }
+            else
+            {
+                switch (randomizerDifficulty.SelectedItem.ToString())
+                {
+                    case "Casual":
+                        difficulty = RandomizerDifficulty.Casual;
+                        break;
+                    default:
+                        MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        WriteOutput("Please select a difficulty.");
+                        return RandomizerDifficulty.None;
+                }
+            }
+            return difficulty;
+        }
+
+        private void SetSeedBasedOnDifficulty()
+        {
+            switch (randomizerDifficulty.SelectedItem.ToString())
+            {
+                default:
+                    seed.Text = string.Format("C{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
+            }
+        }
+
+        private void ClearOutput()
 		{
 			output.Text = "";
 		}
@@ -188,5 +238,15 @@ namespace AlttpRandomizer
 			checkUpdateThread.SetApartmentState(ApartmentState.STA);
 			checkUpdateThread.Start();
 		}
-	}
+
+        private void randomSpoiler_Click(object sender, EventArgs e)
+        {
+            SetSeedBasedOnDifficulty();
+
+            ClearOutput();
+
+            var difficulty = GetRandomizerDifficulty();
+            CreateSpoilerLog(difficulty);
+        }
+    }
 }

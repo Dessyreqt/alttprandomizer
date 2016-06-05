@@ -11,7 +11,8 @@ namespace AlttpRandomizer.Random
 {
     public enum RandomizerDifficulty
 	{
-		Casual = 0,
+        None,
+		Casual,
 	}
 
 	public class Randomizer
@@ -31,7 +32,7 @@ namespace AlttpRandomizer.Random
 			this.log = log;
 		}
 
-		public void CreateRom(string filename)
+		public string CreateRom(string filename, bool spoilerOnly = false)
 		{
 		    try
 		    {
@@ -41,8 +42,16 @@ namespace AlttpRandomizer.Random
                 GenerateItemList();
                 GenerateDungeonItems();
                 GenerateItemPositions();
+
+		        if (spoilerOnly)
+		        {
+		            return log?.GetLogOutput();
+		        }
+
                 WriteRom(filename);
-            }
+
+		        return "";
+		    }
             catch (Exception ex)
 		    {
                 var newEx = new RandomizationException(string.Format("Error creating seed: {0}.", string.Format(romLocations.SeedFileString, seed)), ex);
@@ -404,8 +413,6 @@ namespace AlttpRandomizer.Random
 				        haveItems.Remove(item);
 				    }
 				}
-
-			    currentLocations.RemoveAll(x => x.Item?.Type == ItemType.Progression);
 
                 // Grab an item from the candidate list if there are any, otherwise, grab a random item
                 if (candidateItemList.Count > 0)

@@ -2227,12 +2227,12 @@ namespace AlttpRandomizer.Rom
 
         public List<Location> GetAvailableLocations(List<ItemType> haveItems)
         {
-            return (from Location location in Locations where (location.Item == null || location.Item.Type == ItemType.Progression) && location.CanAccess(haveItems) select location).ToList();
+            return (from Location location in Locations where (location.Item == null) && location.CanAccess(haveItems) select location).ToList();
         }
 
         public List<Location> GetUnavailableLocations(List<ItemType> haveItems)
         {
-            return (from Location location in Locations where (location.Item == null || location.Item.Type == ItemType.Progression) && !location.CanAccess(haveItems) select location).ToList();
+            return (from Location location in Locations where (location.Item == null) && !location.CanAccess(haveItems) select location).ToList();
         }
 
         public void TryInsertCandidateItem(List<Location> currentLocations, List<ItemType> candidateItemList, ItemType candidateItem)

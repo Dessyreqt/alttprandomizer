@@ -39,6 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.filename = new System.Windows.Forms.TextBox();
             this.btnReport = new System.Windows.Forms.Button();
+            this.randomSpoiler = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // createSpoilerLog
@@ -97,12 +98,15 @@
             this.output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.output.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.output.Location = new System.Drawing.Point(10, 111);
             this.output.Multiline = true;
             this.output.Name = "output";
             this.output.ReadOnly = true;
+            this.output.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.output.Size = new System.Drawing.Size(469, 184);
             this.output.TabIndex = 22;
+            this.output.WordWrap = false;
             // 
             // seed
             // 
@@ -157,11 +161,23 @@
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
+            // randomSpoiler
+            // 
+            this.randomSpoiler.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.randomSpoiler.Location = new System.Drawing.Point(10, 301);
+            this.randomSpoiler.Name = "randomSpoiler";
+            this.randomSpoiler.Size = new System.Drawing.Size(100, 23);
+            this.randomSpoiler.TabIndex = 34;
+            this.randomSpoiler.Text = "Random Spoiler";
+            this.randomSpoiler.UseVisualStyleBackColor = true;
+            this.randomSpoiler.Click += new System.EventHandler(this.randomSpoiler_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(491, 336);
+            this.Controls.Add(this.randomSpoiler);
             this.Controls.Add(this.btnReport);
             this.Controls.Add(this.createSpoilerLog);
             this.Controls.Add(this.label5);
@@ -194,6 +210,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox filename;
 		private System.Windows.Forms.Button btnReport;
-	}
+        private System.Windows.Forms.Button randomSpoiler;
+    }
 }
 
