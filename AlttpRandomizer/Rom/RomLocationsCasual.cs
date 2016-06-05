@@ -1757,7 +1757,9 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessEastDarkWorldDeathMountain(have)
-                        && have.Contains(ItemType.Hookshot),
+                        && have.Contains(ItemType.Hookshot)
+                        // not actually required here, but stops some deadlocks
+                        && have.Contains(ItemType.FireRod),
                 },
                 new Location
                 {
@@ -2240,7 +2242,7 @@ namespace AlttpRandomizer.Rom
             var uniqueItems = GetUniqueItems();
             var badLateGameItem = IsLateGameItem(candidateItem) && !currentLocations.Any(x => x.LateGameItem);
             var needUniqueItem = !uniqueItems.Contains(candidateItem) && currentLocations.All(x => x.UniqueItemOnly);
-            var badFirstItem = IsBadFirstItem(candidateItem) && currentLocations.Any(x => x.Name == "[cave-040] Link's House");
+            var badFirstItem = IsBadFirstItem(candidateItem) && currentLocations.All(x => x.Name == "[cave-040] Link's House");
 
             if (!badLateGameItem && !needUniqueItem && !badFirstItem)
             {
@@ -2259,6 +2261,7 @@ namespace AlttpRandomizer.Rom
             var uniqueItems = GetUniqueItems();
             bool badLateGameItemSpot;
             bool badUniqueItemSpot;
+            bool badFirstItemSpot;
             bool unusedUniqueItemSpot;
 
             do
@@ -2267,8 +2270,9 @@ namespace AlttpRandomizer.Rom
 
                 badLateGameItemSpot = IsLateGameItem(insertedItem) && !currentLocations[retVal].LateGameItem;
                 badUniqueItemSpot = !uniqueItems.Contains(insertedItem) && currentLocations[retVal].UniqueItemOnly;
+                badFirstItemSpot = IsBadFirstItem(insertedItem) && currentLocations[retVal].Name == "[cave-040] Link's House";
                 unusedUniqueItemSpot = uniqueItems.Contains(insertedItem) && !currentLocations[retVal].UniqueItemOnly && currentLocations.Any(x => x.UniqueItemOnly);
-            } while (badLateGameItemSpot || badUniqueItemSpot || unusedUniqueItemSpot);
+            } while (badLateGameItemSpot || badUniqueItemSpot || badFirstItemSpot || unusedUniqueItemSpot);
 
             return retVal;
         }
@@ -2284,6 +2288,7 @@ namespace AlttpRandomizer.Rom
             var uniqueItems = GetUniqueItems();
             bool badLateGameItem;
             bool needUniqueItem;
+            bool preferLateGameItem;
 
             do
             {
@@ -2291,7 +2296,8 @@ namespace AlttpRandomizer.Rom
 
                 badLateGameItem = IsLateGameItem(retVal) && !currentLocations.Any(x => x.LateGameItem);
                 needUniqueItem = !uniqueItems.Contains(retVal) && currentLocations.All(x => x.UniqueItemOnly);
-            } while (badLateGameItem || needUniqueItem);
+                preferLateGameItem = !IsLateGameItem(retVal) && currentLocations.Any(x => x.LateGameItem) && itemPool.Any(IsLateGameItem);
+            } while (badLateGameItem || needUniqueItem || preferLateGameItem);
 
             return retVal;
         }
@@ -2300,7 +2306,7 @@ namespace AlttpRandomizer.Rom
         {
             var retVal = new List<ItemType>();
 
-            if (CanDefeatEasternPalace(have) && !have.Contains(ItemType.BookOfMudora))
+            if (CanEscapeCastle(have) && have.Contains(ItemType.PegasusBoots) && !have.Contains(ItemType.BookOfMudora))
             {
                 retVal.Add(ItemType.BookOfMudora);
             }
