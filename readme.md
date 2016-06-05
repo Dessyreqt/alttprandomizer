@@ -1,4 +1,4 @@
-# Current Version: 2
+# Current Version: 3
 
 # About the Legend of Zelda: A Link to the Past Randomizer (or ALttPRandomizer)
 This is a simple program that moves around items in the Legend of Zelda: A Link to the Past (ALttP). It is used for racing the game.
@@ -47,7 +47,7 @@ v3
 - Changed output font to a fixed-width font.
 
 v2
-- Fixed a bug didn't allow you to create the seed entered
+- Fixed a bug that didn't allow you to create the seed entered.
 - Accounted for the fact that hookshot can be used to access lower Dark World.
 
 v1
