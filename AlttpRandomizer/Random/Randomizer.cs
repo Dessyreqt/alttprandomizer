@@ -36,8 +36,10 @@ namespace AlttpRandomizer.Random
 		{
 		    try
 		    {
-                if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
-                    Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
+		        if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
+		        {
+		            Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
+		        }
 
                 GenerateItemList();
                 GenerateDungeonItems();

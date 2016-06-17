@@ -302,7 +302,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9C5,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have),
+                        CanEnterTurtleRock(have)
+                        && have.Contains(ItemType.FireRod),
                 },
                 new Location
                 {
@@ -2229,7 +2230,26 @@ namespace AlttpRandomizer.Rom
 
         public List<Location> GetAvailableLocations(List<ItemType> haveItems)
         {
-            return (from Location location in Locations where (location.Item == null) && location.CanAccess(haveItems) select location).ToList();
+            var retVal = (from Location location in Locations where (location.Item == null) && location.CanAccess(haveItems) select location).ToList();
+            var currentWeight = (from item in retVal orderby item.Weight descending select item.Weight).First() + 1;
+
+            foreach (var item in retVal.Where(item => item.Weight == 0))
+            {
+                item.Weight = currentWeight;
+            }
+
+            var addedItems = new List<List<Location>>();
+            for (int i = 1; i < currentWeight; i++)
+            {
+                addedItems.Add(retVal.Where(x => x.Weight > i).ToList());
+            }
+
+            foreach (var list in addedItems)
+            {
+                retVal.AddRange(list);
+            }
+
+            return retVal;
         }
 
         public List<Location> GetUnavailableLocations(List<ItemType> haveItems)

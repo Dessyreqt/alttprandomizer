@@ -41,5 +41,6 @@ namespace AlttpRandomizer.Rom
         public Action<FileStream, ItemType> WriteItemCheck { get; set; }
         public Item Item { get; set; }
         public Region Region { get; set; }
+        public int Weight { get; set; }
     }
 }

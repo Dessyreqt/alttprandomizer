@@ -70,7 +70,7 @@ namespace AlttpRandomizer
             }
             else
             {
-                var romPlms = RomLocationsFactory.GetRomPlms(difficulty);
+                var romPlms = RomLocationsFactory.GetRomLocations(difficulty);
                 RandomizerLog log = null;
 
                 if (createSpoilerLog.Checked)
@@ -111,7 +111,7 @@ namespace AlttpRandomizer
             }
             else
             {
-                var romPlms = RomLocationsFactory.GetRomPlms(difficulty);
+                var romPlms = RomLocationsFactory.GetRomLocations(difficulty);
                 RandomizerLog log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
 
                 seed.Text = string.Format(romPlms.SeedFileString, parsedSeed);
@@ -127,7 +127,6 @@ namespace AlttpRandomizer
                 }
             }
         }
-
 
         private RandomizerDifficulty GetRandomizerDifficulty()
         {
@@ -152,6 +151,7 @@ namespace AlttpRandomizer
                         return RandomizerDifficulty.None;
                 }
             }
+
             return difficulty;
         }
 

@@ -9,7 +9,7 @@ namespace AlttpRandomizer.Rom
 {
 	public class RomLocationsFactory
 	{
-		public static IRomLocations GetRomPlms(RandomizerDifficulty difficulty)
+		public static IRomLocations GetRomLocations(RandomizerDifficulty difficulty)
 		{
 			switch (difficulty)
 			{
