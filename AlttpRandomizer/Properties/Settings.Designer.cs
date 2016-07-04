@@ -58,5 +58,17 @@ namespace AlttpRandomizer.Properties {
                 this["CreateSpoilerLog"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SramTrace {
+            get {
+                return ((bool)(this["SramTrace"]));
+            }
+            set {
+                this["SramTrace"] = value;
+            }
+        }
     }
 }

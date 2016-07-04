@@ -11,6 +11,8 @@ namespace AlttpRandomizer.Rom
 {
     public class RomLocationsCasual : IRomLocations
     {
+        private List<ItemType> lateGameItems;
+
         public List<Location> Locations { get; set; }
         public string DifficultyName => "Casual";
         public string SeedFileString => "C{0:0000000}";
@@ -26,7 +28,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Escape - first B1 room",
                     Address = 0xE96E,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEscapeCastle(have),
@@ -47,7 +49,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Hyrule Castle - boomerang room",
                     Address = 0xE974,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         true,
@@ -76,12 +78,13 @@ namespace AlttpRandomizer.Rom
                             || CanAccessLowerDarkWorld(have)),
                 },
                 new Location
-                {
+                {             
                     LateGameItem = false,
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - big chest",
                     Address = 0xE97D,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterEasternPalace(have),
@@ -92,7 +95,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - map room",
                     Address = 0xE986,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have),
@@ -103,12 +106,14 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - big chest",
                     Address = 0xE989,
-                    KeysNeeded = 3,
+                    KeyZone = 3,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(ItemType.Hammer),
+                        && have.Contains(ItemType.Hammer)
+                        && have.Contains(ItemType.Hookshot),
                 },
                 new Location
                 {
@@ -127,6 +132,7 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-L2-B1] Desert Palace - big chest",
                     Address = 0xE98F,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterDesertPalace(have),
@@ -137,6 +143,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - Compass room",
                     Address = 0xE992,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterSkullWoods(have),
@@ -147,7 +154,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B4] Ice Palace - above Blue Mail room",
                     Address = 0xE995,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have),
@@ -159,9 +166,11 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D3-B1] Skull Woods - big chest",
                     Address = 0xE998,
                     BigKeyNeeded = true,
+                    KeyZone = 2,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods(have),
+                        CanEnterSkullWoods2(have),
                 },
                 new Location
                 {
@@ -169,6 +178,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - east of Fire Rod room",
                     Address = 0xE99B,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterSkullWoods(have),
@@ -179,6 +189,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - Big Key room",
                     Address = 0xE99E,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterSkullWoods(have),
@@ -189,6 +200,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - Gibdo/Stalfos room",
                     Address = 0xE9A1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterSkullWoods(have),
@@ -199,7 +211,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B1] Ice Palace - Big Key room",
                     Address = 0xE9A4,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
@@ -212,11 +224,13 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B5] Ice Palace - big chest",
                     Address = 0xE9AA,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterIcePalace(have),
+                        CanEnterIcePalace(have)
+                        && have.Contains(ItemType.Hookshot),
                 },
                 new Location
                 {
@@ -255,7 +269,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - Big key",
                     Address = 0xE9B9,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterEasternPalace(have),
@@ -289,7 +303,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DesertPalace,
                     Name = "[dungeon-L2-B1] Desert Palace - Big key room",
                     Address = 0xE9C2,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterDesertPalace(have),
@@ -321,7 +335,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DesertPalace,
                     Name = "[dungeon-L2-B1] Desert Palace - compass room",
                     Address = 0xE9CB,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterDesertPalace(have),
@@ -343,7 +357,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B1] Ice Palace - compass room",
                     Address = 0xE9D4,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have),
@@ -365,7 +379,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B2] Ice Palace - map room",
                     Address = 0xE9DD,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
@@ -377,7 +391,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B3] Ice Palace - spike room",
                     Address = 0xE9E0,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
@@ -389,7 +403,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B5] Ice Palace - b5 up staircase",
                     Address = 0xE9E3,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have),
@@ -400,10 +414,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TowerOfHera,
                     Name = "[dungeon-L3-1F] Tower of Hera - first floor",
                     Address = 0xE9E6,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
-                        CanEnterTowerOfHera(have),
+                        CanEnterTowerOfHera(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -462,9 +477,11 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-L3-4F] Tower of Hera - big chest",
                     Address = 0xE9F8,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterTowerOfHera(have),
+                        CanEnterTowerOfHera(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -483,6 +500,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - Entrance to part 2",
                     Address = 0xE9FE,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterSkullWoods2(have),
@@ -504,7 +522,7 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D4-B1] Thieves' Town - Bottom left of huge room [bottom right chest]",
                     Address = 0xEA04,
                     CanAccess =
-                        have =>
+                        have =>                                                                                                                                                                    
                         CanEnterThievesTown(have),
                 },
                 new Location
@@ -533,7 +551,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-1F] Thieves' Town - Room above boss",
                     Address = 0xEA0D,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
@@ -545,8 +563,9 @@ namespace AlttpRandomizer.Rom
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B2] Thieves' Town - big chest",
                     Address = 0xEA10,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterThievesTown(have)
@@ -558,7 +577,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B2] Thieves' Town - next to Blind",
                     Address = 0xEA13,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
@@ -570,7 +589,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-1F] Turtle Rock - Chain chomp room",
                     Address = 0xEA16,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
@@ -582,8 +601,9 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B1] Turtle Rock - big chest",
                     Address = 0xEA19,
-                    KeysNeeded = 3,
+                    KeyZone = 3,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
@@ -627,7 +647,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B1] Turtle Rock - big key room",
                     Address = 0xEA25,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
@@ -639,13 +659,14 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top right chest]",
                     Address = 0xEA28,
-                    KeysNeeded = 5,
+                    KeyZone = 6,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
                         && have.Contains(ItemType.MirrorShield)
-                        && have.Contains(ItemType.FireRod),
+                        && have.Contains(ItemType.FireRod)
+                        && have.Contains(ItemType.Lamp),
                 },
                 new Location
                 {
@@ -653,13 +674,14 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [top left chest]",
                     Address = 0xEA2B,
-                    KeysNeeded = 5,
+                    KeyZone = 6,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
                         && have.Contains(ItemType.MirrorShield)
-                        && have.Contains(ItemType.FireRod),
+                        && have.Contains(ItemType.FireRod)
+                        && have.Contains(ItemType.Lamp),
                 },
                 new Location
                 {
@@ -667,13 +689,14 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom right chest]",
                     Address = 0xEA2E,
-                    KeysNeeded = 5,
+                    KeyZone = 6,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
                         && have.Contains(ItemType.MirrorShield)
-                        && have.Contains(ItemType.FireRod),
+                        && have.Contains(ItemType.FireRod)
+                        && have.Contains(ItemType.Lamp),
                 },
                 new Location
                 {
@@ -681,7 +704,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom left chest]",
                     Address = 0xEA31,
-                    KeysNeeded = 5,
+                    KeyZone = 6,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
@@ -695,7 +718,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "[dungeon-D7-B1] Turtle Rock - Roller switch room",
                     Address = 0xEA34,
-                    KeysNeeded = 4,
+                    KeyZone = 5,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
@@ -708,7 +731,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - big key room",
                     Address = 0xEA37,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterDarkPalace(have),
@@ -730,7 +753,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - jump room [left chest]",
                     Address = 0xEA3D,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterDarkPalace(have),
@@ -741,11 +764,14 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - big chest",
                     Address = 0xEA40,
-                    KeysNeeded = 3,
+                    KeyZone = 3,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have),
+                        CanEnterDarkPalace(have)
+                        && have.Contains(ItemType.Lamp)
+                        && have.Contains(ItemType.Bow),
                 },
                 new Location
                 {
@@ -753,7 +779,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - compass room",
                     Address = 0xEA43,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterDarkPalace(have),
@@ -764,7 +790,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - spike statue room",
                     Address = 0xEA46,
-                    KeysNeeded = 3,
+                    KeyZone = 3,
                     CanAccess =
                         have =>
                         CanEnterDarkPalace(have),
@@ -775,7 +801,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-B1] Dark Palace - turtle stalfos room",
                     Address = 0xEA49,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterDarkPalace(have),
@@ -786,10 +812,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-B1] Dark Palace - room leading to Helmasaur [left chest]",
                     Address = 0xEA4C,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have),
+                        CanEnterDarkPalace(have)
+                        && have.Contains(ItemType.Lamp),
                 },
                 new Location
                 {
@@ -797,10 +824,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-B1] Dark Palace - room leading to Helmasaur [right chest]",
                     Address = 0xEA4F,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have),
+                        CanEnterDarkPalace(have)
+                        && have.Contains(ItemType.Lamp),
                 },
                 new Location
                 {
@@ -819,10 +847,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - maze room [top chest]",
                     Address = 0xEA55,
-                    KeysNeeded = 3,
+                    KeyZone = 3,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have),
+                        CanEnterDarkPalace(have)
+                        && have.Contains(ItemType.Lamp),
                 },
                 new Location
                 {
@@ -830,10 +859,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "[dungeon-D1-1F] Dark Palace - maze room [bottom chest]",
                     Address = 0xEA58,
-                    KeysNeeded = 3,
+                    KeyZone = 3,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have),
+                        CanEnterDarkPalace(have)
+                        && have.Contains(ItemType.Lamp),
                 },
                 new Location
                 {
@@ -851,7 +881,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - big hub room",
                     Address = 0xEA5E,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have),
@@ -872,12 +902,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - compass",
                     Address = 0xEA64,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
-                        && (have.Contains(ItemType.Lamp)
-                            || have.Contains(ItemType.FireRod)),
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -885,13 +914,14 @@ namespace AlttpRandomizer.Rom
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - big chest",
                     Address = 0xEA67,
-                    KeysNeeded = 2,
                     BigKeyNeeded = true,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
-                        && (have.Contains(ItemType.Lamp)
-                            || have.Contains(ItemType.FireRod)),
+                        && (have.Contains(ItemType.Hookshot)
+                            || have.Contains(ItemType.PegasusBoots))
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -899,7 +929,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - map room",
                     Address = 0xEA6A,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have),
@@ -910,12 +940,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.MiseryMire,
                     Name = "[dungeon-D6-B1] Misery Mire - big key",
                     Address = 0xEA6D,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
-                        && (have.Contains(ItemType.Lamp)
-                            || have.Contains(ItemType.FireRod)),
+                        && CanLightTorches(have),
                 },
 
                 new Location
@@ -945,9 +974,10 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    Region = Region.LightWorld,
+                    Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-1F] Sanctuary",
                     Address = 0xEA79,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEscapeCastle(have),
@@ -1082,7 +1112,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - south of hookshot room",
                     Address = 0xEAA0,
-                    KeysNeeded = 3,
+                    KeyZone = 3,
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
@@ -1094,7 +1124,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - push 4 blocks room",
                     Address = 0xEAA3,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
@@ -1106,7 +1136,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - big key room",
                     Address = 0xEAA6,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
@@ -1118,7 +1148,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",
                     Address = 0xEAA9,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
@@ -1130,7 +1160,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",
                     Address = 0xEAAC,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
@@ -1143,7 +1173,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B2] Swamp Palace - hidden waterfall door room",
                     Address = 0xEAAF,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
@@ -1216,7 +1246,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [top left chest]",
                     Address = 0xEAC4,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1227,7 +1257,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [top right chest]",
                     Address = 0xEAC7,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1238,7 +1268,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom left chest]",
                     Address = 0xEACA,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1249,7 +1279,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom right chest]",
                     Address = 0xEACD,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1260,7 +1290,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - north of teleport room",
                     Address = 0xEAD0,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1271,7 +1301,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - map room",
                     Address = 0xEAD3,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1283,7 +1313,8 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-A2-1F] Ganon's Tower - big chest",
                     Address = 0xEAD6,
                     BigKeyNeeded = true,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
+                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1314,7 +1345,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - above Armos",
                     Address = 0xEADF,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1335,10 +1366,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - compass room [top left chest]",
                     Address = 0xEAE5,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        CanEnterGanonsTower(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1346,10 +1378,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - compass room [top right chest]",
                     Address = 0xEAE8,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        CanEnterGanonsTower(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1357,10 +1390,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - compass room [bottom left chest]",
                     Address = 0xEAEB,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        CanEnterGanonsTower(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1368,10 +1402,11 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - compass room [bottom right chest]",
                     Address = 0xEAEE,
-                    KeysNeeded = 1,
+                    KeyZone = 1,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        CanEnterGanonsTower(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1379,7 +1414,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [bottom chest]",
                     Address = 0xEAF1,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1390,7 +1425,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [left chest]",
                     Address = 0xEAF4,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1401,7 +1436,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-B1] Ganon's Tower - north of Armos room [right chest]",
                     Address = 0xEAF7,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -1413,10 +1448,12 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-6F] Ganon's Tower - north of falling floor four torches [top left chest]",
                     Address = 0xEAFD,
+                    KeyZone = 3,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        CanEnterGanonsTower(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1424,10 +1461,12 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-6F] Ganon's Tower - north of falling floor four torches [top right chest]",
                     Address = 0xEB00,
+                    KeyZone = 3,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        CanEnterGanonsTower(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1435,11 +1474,12 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-6F] Ganon's Tower - before Moldorm",
                     Address = 0xEB03,
-                    KeysNeeded = 1,
+                    KeyZone = 4,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        CanEnterGanonsTower(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1447,11 +1487,12 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-6F] Ganon's Tower - Moldorm room",
                     Address = 0xEB06,
-                    KeysNeeded = 2,
+                    KeyZone = 5,
                     BigKeyNeeded = true,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        CanEnterGanonsTower(have)
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1459,7 +1500,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B3] Hyrule Castle - next to Zelda",
                     Address = 0xEB09,
-                    KeysNeeded = 2,
+                    KeyZone = 2,
                     CanAccess =
                         have =>
                         true,
@@ -1768,7 +1809,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Escape - final basement room [left chest]",
                     Address = 0xEB5D,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
@@ -1780,7 +1821,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Escape - final basement room [middle chest]",
                     Address = 0xEB60,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
@@ -1792,7 +1833,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.HyruleCastleEscape,
                     Name = "[dungeon-C-B1] Escape - final basement room [right chest]",
                     Address = 0xEB63,
-                    KeysNeeded = 4,
+                    KeyZone = 4,
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
@@ -1802,7 +1843,7 @@ namespace AlttpRandomizer.Rom
                 //new Location
                 //{
                 //    LateGameItem = false,
-                //    UniqueItemOnly = true,
+                //    UniqueItemOnly = false,
                 //    Region = Region.LightWorld,
                 //    Name = "Uncle",
                 //    Address = 0x2DF45,
@@ -1823,70 +1864,29 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = true,
+                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "Sahasrahla",
                     Address = 0x2F1FC,
                     CanAccess =
                         have =>
                         CanDefeatEasternPalace(have),
-                    WriteItemCheck =
-                        (rom, item) =>
-                        {
-                            rom.Seek(0x2F178, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
-                        }
                 },
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = true,
+                    UniqueItemOnly = false,
                     Region = Region.DarkWorld,
                     Name = "Flute Boy",
                     Address = 0x330C7,
                     CanAccess =
                         have =>
                         CanAccessLowerDarkWorld(have),
-                    WriteItemCheck =
-                        (rom, item) =>
-                        {
-                            rom.Seek(0x31096, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
-                            //rom.Seek(0x32F9C, SeekOrigin.Begin);
-                            //rom.Write(Item.GetCheckLocation(item), 0, 1);
-                            rom.Seek(0x33063, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
-
-                            var compList = new List<ItemType>
-                            {
-                                ItemType.Bow,
-                                ItemType.BowAndArrows,
-                                ItemType.RedBoomerang,
-                                ItemType.Powder,
-                                ItemType.OcarinaInactive,
-                                ItemType.MagicMirror,
-                                ItemType.TitansMitt,
-                                ItemType.RedShield,
-                                ItemType.RedMail,
-                            };
-
-                            if (!compList.Contains(item))
-                            {
-                                rom.Seek(0x33067, SeekOrigin.Begin);
-                                rom.Write(new []{ (byte)0x01 }, 0, 1);
-                            }
-
-                            if (item == ItemType.MirrorShield || item == ItemType.OcarinaActive ||  item == ItemType.Shovel)
-                            {
-                                rom.Seek(0x33067, SeekOrigin.Begin);
-                                rom.Write(new []{ (byte)0x03 }, 0, 1);
-                            }
-                        }
                 },
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = true,
+                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "Sick Kid",
                     Address = 0x339CF,
@@ -1894,12 +1894,6 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEscapeCastle(have)
                         && have.Contains(ItemType.Bottle),
-                    WriteItemCheck =
-                        (rom, item) =>
-                        {
-                            rom.Seek(0x30D87, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
-                        }
                 },
                 new Location
                 {
@@ -1926,7 +1920,45 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = true,
+                    UniqueItemOnly = false,
+                    Region = Region.LightWorld,
+                    Name = "Ether",
+                    Address = 0x48B7C,
+                    CanAccess =
+                        have =>
+                        CanEnterTowerOfHera(have)
+                        && CanGetMasterSword(have)
+                        && have.Contains(ItemType.BookOfMudora),
+                    WriteItemCheck =
+                        (rom, item) =>
+                        {
+                            rom.Seek(0x44AA9, SeekOrigin.Begin);
+                            rom.Write(new [] { (byte)item }, 0, 1);
+                        }
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    UniqueItemOnly = false,
+                    Region = Region.LightWorld,
+                    Name = "Bombos",
+                    Address = 0x48B81,
+                    CanAccess =
+                        have =>
+                        CanAccessLowerDarkWorld(have)
+                        && CanGetMasterSword(have)
+                        && have.Contains(ItemType.BookOfMudora),
+                    WriteItemCheck =
+                        (rom, item) =>
+                        {
+                            rom.Seek(0x44AAE, SeekOrigin.Begin);
+                            rom.Write(new [] { (byte)item }, 0, 1);
+                        }
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    UniqueItemOnly = false,
                     Region = Region.DarkWorld,
                     Name = "Catfish",
                     Address = 0xEE185,
@@ -1939,89 +1971,274 @@ namespace AlttpRandomizer.Rom
                     WriteItemCheck =
                         (rom, item) =>
                         {
-                            rom.Seek(0xEE103, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
-                            rom.Seek(0xEE11D, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
+                            WriteSpecialItemCheck(rom, item, 0x180204);
                         }
                 },
-                //// Zora's appearance is based on if you have flippers or not
+                // Zora's appearance is based on if you have flippers or not
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = true,
+                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "King Zora",
                     Address = 0xEE1C3,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && ((have.Contains(ItemType.PowerGlove)
-                                && (have.Contains(ItemType.PegasusBoots)
-                                    || have.Contains(ItemType.TitansMitt)))
-                            || have.Contains(ItemType.Flippers)),
+                        CanAccessZorasRiver(have),
                     WriteItemCheck =
                         (rom, item) =>
                         {
-                            rom.Seek(0x30F17, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
+                            WriteSpecialItemCheck(rom, item, 0x180200);
                         }
                 },
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = true,
+                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "Old mountain man",
                     Address = 0xF69FA,
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have),
-                    WriteItemCheck =
-                        (rom, item) =>
-                        {
-                            // this is for the bit that lets you choose where to start in the light world
-                            rom.Seek(0x100F3, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
-                            // old man check
-                            rom.Seek(0xF690B, SeekOrigin.Begin);
-                            rom.Write(Item.GetCheckLocation(item), 0, 1);
-
-                            var compList = new List<ItemType>
-                            {
-                                ItemType.Bow,
-                                ItemType.BowAndArrows,
-                                ItemType.RedBoomerang,
-                                ItemType.Powder,
-                                ItemType.OcarinaInactive,
-                                ItemType.MagicMirror,
-                                ItemType.TitansMitt,
-                                ItemType.RedShield,
-                                ItemType.RedMail,
-                            };
-
-                            if (!compList.Contains(item))
-                            {
-                                // this is for the bit that lets you choose where to start in the light world
-                                rom.Seek(0x100F7, SeekOrigin.Begin);
-                                rom.Write(new []{ (byte)0x01 }, 0, 1);
-                                // old man check
-                                rom.Seek(0xF690F, SeekOrigin.Begin);
-                                rom.Write(new []{ (byte)0x01 }, 0, 1);
-                            }
-
-                            if (item == ItemType.MirrorShield || item == ItemType.OcarinaActive)
-                            {
-                                // this is for the bit that lets you choose where to start in the light world
-                                rom.Seek(0x100F7, SeekOrigin.Begin);
-                                rom.Write(new []{ (byte)0x03 }, 0, 1);
-                                // old man check
-                                rom.Seek(0xF690F, SeekOrigin.Begin);
-                                rom.Write(new []{ (byte)0x03 }, 0, 1);
-                            }
-                        }
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Thieves' Forest Hideout)",
+                    Address = 0x180000,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Lumberjack Tree)",
+                    Address = 0x180001,
+                    CanAccess =
+                        have =>
+                        CanDefeatAgahnim1(have)
+                        && have.Contains(ItemType.PegasusBoots),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Spectacle Rock Cave)",
+                    Address = 0x180002,
+                    CanAccess =
+                        have =>
+                        CanClimbDeathMountain(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (south of Haunted Grove)",
+                    Address = 0x180003,
+                    CanAccess =
+                        have =>
+                        CanAccessLowerDarkWorld(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Graveyard)",
+                    Address = 0x180004,
+                    CanAccess =
+                        have =>
+                        CanAccessLowerDarkWorld(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Desert - northeast corner)",
+                    Address = 0x180005,
+                    CanAccess =
+                        have =>
+                        have.Contains(ItemType.OcarinaActive)
+                        && CanBeInDarkWorld(have)
+                        && have.Contains(ItemType.TitansMitt),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.DarkWorld,
+                    Name = "Piece of Heart (Dark World blacksmith pegs)",
+                    Address = 0x180006,
+                    CanAccess =
+                        have =>
+                        CanAccessLowerDarkWorld(have)
+                        && have.Contains(ItemType.TitansMitt)
+                        && have.Contains(ItemType.Hammer),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "[cave-050] cave southwest of Lake Hylia - generous guy",
+                    Address = 0x180010,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.DarkWorld,
+                    Name = "[cave-073] cave northeast of swamp palace - generous guy",
+                    Address = 0x180011,
+                    CanAccess =
+                        have =>
+                        CanAccessLowerDarkWorld(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Library",
+                    Address = 0x180012,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have)
+                        && have.Contains(ItemType.PegasusBoots),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Spectacle Rock)",
+                    Address = 0x180140,
+                    CanAccess =
+                        have =>
+                        CanClimbDeathMountain(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Death Mountain - floating island)",
+                    Address = 0x180141,
+                    CanAccess =
+                        have =>
+                        CanAccessEastDarkWorldDeathMountain(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Maze Race)",
+                    Address = 0x180142,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Desert - west side)",
+                    Address = 0x180143,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have)
+                        && have.Contains(ItemType.BookOfMudora),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Lake Hylia)",
+                    Address = 0x180144,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have)
+                        && have.Contains(ItemType.Flippers)
+                        && CanAccessLowerDarkWorld(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Dam)",
+                    Address = 0x180145,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.DarkWorld,
+                    Name = "Piece of Heart (Dark World - bumper cave)",
+                    Address = 0x180146,
+                    CanAccess =
+                        have =>
+                        CanAccessLowerDarkWorld(have)
+                        && have.Contains(ItemType.Cape),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.DarkWorld,
+                    Name = "Piece of Heart (Pyramid)",
+                    Address = 0x180147,
+                    CanAccess =
+                        have =>
+                        CanAccessPyramid(have),
+                },
+                //new Location
+                //{
+                //    LateGameItem = false,
+                //    Region = Region.DarkWorld,
+                //    Name = "Piece of Heart (Digging Game)",
+                //    Address = 0x180148,
+                //    CanAccess =
+                //        have =>
+                //        CanAccessLowerDarkWorld(have),
+                //},
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Piece of Heart (Zora's River)",
+                    Address = 0x180149,
+                    CanAccess =
+                        have =>
+                        CanAccessZorasRiver(have),
                 },
             };
+        }
+
+        private static void WriteSpecialItemCheck(FileStream rom, ItemType item, int address)
+        {
+            var checkLocation = Item.GetCheckLocation(item);
+
+            if (checkLocation[0] == 0x00)
+            {
+                rom.Seek(address, SeekOrigin.Begin);
+                rom.Write(new byte[] {0x00, 0x00, 0x00, 0x00}, 0, 4);
+            }
+            else
+            {
+                var itemLevel = Item.GetItemLevel(item);
+                rom.Seek(address, SeekOrigin.Begin);
+                rom.Write(new byte[] {itemLevel[0], checkLocation[0], 0xF3, 0x7E}, 0, 4);
+            }
+        }
+
+        private bool CanAccessZorasRiver(List<ItemType> have)
+        {
+            return CanEscapeCastle(have)
+                && ((have.Contains(ItemType.PowerGlove)
+                    && (have.Contains(ItemType.PegasusBoots)
+                        || have.Contains(ItemType.TitansMitt)))
+                    || have.Contains(ItemType.Flippers));
         }
 
         private bool CanEnterHyruleCastleTower(List<ItemType> have)
@@ -2067,7 +2284,8 @@ namespace AlttpRandomizer.Rom
         {
             return CanEnterDarkPalace(have)
                 && have.Contains(ItemType.Bow)
-                && have.Contains(ItemType.Hammer);
+                && have.Contains(ItemType.Hammer)
+                && have.Contains(ItemType.Lamp);
         }
 
         private bool CanDefeatSwampPalace(List<ItemType> have)
@@ -2094,7 +2312,8 @@ namespace AlttpRandomizer.Rom
         private bool CanDefeatMiseryMire(List<ItemType> have)
         {
             return CanEnterMiseryMire(have)
-                && have.Contains(ItemType.CaneOfSomaria);
+                && have.Contains(ItemType.CaneOfSomaria)
+                && have.Contains(ItemType.Lamp);
         }
 
         private bool CanDefeatTurtleRock(List<ItemType> have)
@@ -2146,7 +2365,7 @@ namespace AlttpRandomizer.Rom
         private bool CanEnterSkullWoods2(List<ItemType> have)
         {
             return CanEnterSkullWoods(have)
-            && have.Contains(ItemType.FireRod);
+                && have.Contains(ItemType.FireRod);
         }
 
         private bool CanEnterSkullWoods(List<ItemType> have)
@@ -2195,7 +2414,14 @@ namespace AlttpRandomizer.Rom
         {
             return CanEnterDesertPalace(have)
                 && have.Contains(ItemType.PowerGlove)
-                && have.Contains(ItemType.Bow);
+                && have.Contains(ItemType.Bow)
+                && CanLightTorches(have);
+        }
+
+        private bool CanLightTorches(List<ItemType> have)
+        {
+            return have.Contains(ItemType.Lamp)
+                || have.Contains(ItemType.FireRod);
         }
 
         private bool CanDefeatEasternPalace(List<ItemType> have)
@@ -2213,6 +2439,7 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEnterDesertPalace(List<ItemType> have)
         {
+            // technically you don't need the boots to enter, but you need them to do anything due to bump key
             return CanEscapeCastle(have)
                 && have.Contains(ItemType.BookOfMudora)
                 && have.Contains(ItemType.PegasusBoots);
@@ -2225,7 +2452,7 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEscapeCastle(List<ItemType> have)
         {
-            return have.Contains(ItemType.Lamp);
+            return true;
         }
 
         public List<Location> GetAvailableLocations(List<ItemType> haveItems)
@@ -2297,9 +2524,9 @@ namespace AlttpRandomizer.Rom
             return retVal;
         }
 
-        private static bool IsLateGameItem(ItemType item)
+        private bool IsLateGameItem(ItemType item)
         {
-            return item == ItemType.TitansMitt || item == ItemType.RedMail || item == ItemType.MirrorShield;
+            return lateGameItems.Contains(item);
         }
 
         public ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random)
@@ -2326,18 +2553,18 @@ namespace AlttpRandomizer.Rom
         {
             var retVal = new List<ItemType>();
 
-            if (CanEscapeCastle(have) && have.Contains(ItemType.PegasusBoots) && !have.Contains(ItemType.BookOfMudora))
-            {
-                retVal.Add(ItemType.BookOfMudora);
-            }
-            if (CanGetMasterSword(have) && !have.Contains(ItemType.Bombos) && CanAccessLowerDarkWorld(have))
-            {
-                retVal.Add(ItemType.Bombos);
-            }
-            if (CanGetMasterSword(have) && !have.Contains(ItemType.Ether))
-            {
-                retVal.Add(ItemType.Ether);
-            }
+            //if (CanEscapeCastle(have) && have.Contains(ItemType.PegasusBoots) && !have.Contains(ItemType.BookOfMudora))
+            //{
+            //    retVal.Add(ItemType.BookOfMudora);
+            //}
+            //if (CanGetMasterSword(have) && !have.Contains(ItemType.Bombos) && CanAccessLowerDarkWorld(have))
+            //{
+            //    retVal.Add(ItemType.Bombos);
+            //}
+            //if (CanGetMasterSword(have) && !have.Contains(ItemType.Ether))
+            //{
+            //    retVal.Add(ItemType.Ether);
+            //}
             if (CanEscapeCastle(have) && have.Contains(ItemType.Shovel))
             {
                 retVal.Add(ItemType.OcarinaInactive);
@@ -2381,11 +2608,16 @@ namespace AlttpRandomizer.Rom
 
         public List<ItemType> GetItemPool(SeedRandom random)
         {
+            SetLateGameItems(random);
+            
             return new List<ItemType>
             {
                 // advancement items
+                ItemType.Bombos,
+                ItemType.BookOfMudora,
                 ItemType.Bow,
                 ItemType.CaneOfSomaria,
+                ItemType.Ether,
                 ItemType.FireRod,
                 ItemType.Flippers,
                 ItemType.Hammer,
@@ -2421,6 +2653,23 @@ namespace AlttpRandomizer.Rom
                 ItemType.PieceOfHeart,
                 ItemType.PieceOfHeart,
                 ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                //ItemType.PieceOfHeart,
                 ItemType.RedBoomerang,
                 ItemType.RedMail,
                 ItemType.RedShield,
@@ -2500,7 +2749,42 @@ namespace AlttpRandomizer.Rom
                 ItemType.OneHundredRupees,
                 ItemType.ThreeHundredRupees,
                 ItemType.ThreeHundredRupees,
+                ItemType.ThreeHundredRupees,
+                ItemType.ThreeHundredRupees,
             };
+        }
+
+        private void SetLateGameItems(SeedRandom random)
+        {
+            var coreLateGameItems = new List<ItemType>
+                {
+                    ItemType.RedMail,
+                    ItemType.MirrorShield,
+                };
+            var possibleLateGameItems = new List<List<ItemType>>
+                {
+                    new List<ItemType>
+                    {
+                        ItemType.Hammer,
+                    },
+                    new List<ItemType>
+                    {
+                        ItemType.TitansMitt,
+                    },
+                    new List<ItemType>
+                    {
+                        ItemType.TitansMitt,
+                    },
+                    new List<ItemType>
+                    {
+                        ItemType.Hammer,
+                        ItemType.TitansMitt,
+                    },
+                };
+            
+            lateGameItems = new List<ItemType>();
+            lateGameItems.AddRange(coreLateGameItems);
+            lateGameItems.AddRange(possibleLateGameItems[random.Next(possibleLateGameItems.Count)]);
         }
     }
 }

@@ -103,6 +103,41 @@ namespace AlttpRandomizer.Rom
             }
         }
 
+	    public static byte[] GetItemLevel(ItemType item)
+	    {
+            byte retVal;
+
+            switch (item)
+            {
+                case ItemType.RedBoomerang:
+                case ItemType.Powder:
+                case ItemType.MagicMirror:
+                case ItemType.TitansMitt:
+                case ItemType.RedShield:
+                case ItemType.OcarinaInactive:
+                case ItemType.L2Sword:
+                case ItemType.BowAndArrows:
+                case ItemType.RedMail:
+                    retVal = 0x02;
+                    break;
+                case ItemType.BowAndSilverArrows:
+                case ItemType.OcarinaActive:
+                case ItemType.MirrorShield:
+                case ItemType.L3Sword:
+                    retVal = 0x03;
+                    break;
+                case ItemType.L4Sword:
+                    retVal = 0x04;
+                    break;
+                default:
+                    // Anything not listed here is a 1
+                    retVal = 0x01;
+                    break;
+            }
+
+            return new[] { retVal };
+        }
+
         public static byte[] GetCheckLocation(ItemType item)
         {
             byte retVal;
@@ -199,7 +234,8 @@ namespace AlttpRandomizer.Rom
                     retVal = 0x5b;
                     break;
                 default:
-                    throw new ArgumentException("Item must be a unique item.", "item");
+                    retVal = 0x00;
+                    break;
             }
 
             return new[] { retVal };

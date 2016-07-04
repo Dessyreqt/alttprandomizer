@@ -15,6 +15,20 @@ namespace AlttpRandomizer.Random
 		Casual,
 	}
 
+    public class RandomizerOptions
+    {
+        public string Filename { get; set; }
+        public bool SpoilerOnly { get; set; }
+        public bool SramTrace { get; set; }
+
+        public RandomizerOptions()
+        {
+            Filename = "";
+            SpoilerOnly = false;
+            SramTrace = false;
+        }
+    }
+
 	public class Randomizer
 	{
 		private static SeedRandom random;
@@ -32,25 +46,25 @@ namespace AlttpRandomizer.Random
 			this.log = log;
 		}
 
-		public string CreateRom(string filename, bool spoilerOnly = false)
+		public string CreateRom(RandomizerOptions options)
 		{
 		    try
 		    {
-		        if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
+		        if (options.Filename.Contains("\\") && !Directory.Exists(options.Filename.Substring(0, options.Filename.LastIndexOf('\\'))))
 		        {
-		            Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
+		            Directory.CreateDirectory(options.Filename.Substring(0, options.Filename.LastIndexOf('\\')));
 		        }
 
                 GenerateItemList();
                 GenerateDungeonItems();
                 GenerateItemPositions();
 
-		        if (spoilerOnly)
+		        if (options.SpoilerOnly)
 		        {
 		            return log?.GetLogOutput();
 		        }
 
-                WriteRom(filename);
+                WriteRom(options.Filename, options.SramTrace);
 
 		        return "";
 		    }
@@ -79,16 +93,25 @@ namespace AlttpRandomizer.Random
 			GenerateGanonsTowerItems();
 		}
 
-		private void GenerateHyruleCastleEscapeItems()
+        private static bool IsInKeyZone(Location location, int zone)
+        {
+            return location.Item == null && !location.Name.Contains("big chest") && location.KeyZone == zone;
+        }
+
+        private static bool IsInOrBeforeKeyZone(Location location, int zone)
+        {
+            return location.Item == null && !location.Name.Contains("big chest") && location.KeyZone <= zone;
+        }
+
+        private void GenerateHyruleCastleEscapeItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.HyruleCastleEscape).ToList();
-			var keys = 2;
 
-			var currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+            // key zone 2: 1 key
+            var currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 2)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-			keys++;
 
-			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+			currentLocations = locations.Where(x => x.Item == null).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Map);
 		}
 
@@ -148,15 +171,28 @@ namespace AlttpRandomizer.Random
 		private void GenerateDarkPalaceItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.DarkPalace).ToList();
-			var keys = 0;
-			List<Location> currentLocations;
 
-            for (int addKeys = 6; addKeys > 0; addKeys--)
-            {
-                currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
-                currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-                keys++;
-            }
+		    // key zone 0: 2 keys
+            var currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            // key zone 1: 2 keys
+            currentLocations = locations.Where(x => IsInKeyZone(x, 1)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            currentLocations = locations.Where(x => IsInKeyZone(x, 1)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            // key zone 2: 1 key
+            currentLocations = locations.Where(x => IsInKeyZone(x, 2)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            // key zone 3: 1 key
+            currentLocations = locations.Where(x => IsInKeyZone(x, 3)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
             currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
@@ -168,12 +204,12 @@ namespace AlttpRandomizer.Random
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Compass);
 		}
 
-		private void GenerateSwampPalaceItems()
+	    private void GenerateSwampPalaceItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.SwampPalace).ToList();
-			const int keys = 0;
 
-			var currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+            // key zone 0: 1 key
+            var currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
 			currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
@@ -189,17 +225,20 @@ namespace AlttpRandomizer.Random
 		private void GenerateSkullWoodsItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.SkullWoods).ToList();
-			var keys = 2;
-			List<Location> currentLocations;
 
-			for (int addKeys = 3; addKeys > 0; addKeys--)
-			{
-				currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
-				currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-				keys++;
-			}
+            // key zone 0: 1 key
+		    var currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
+			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
-			currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
+            // key zone 1: 1 key
+            currentLocations = locations.Where(x => IsInKeyZone(x, 1)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            // key zone 2: 1 key
+            currentLocations = locations.Where(x => IsInKeyZone(x, 2)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -213,12 +252,11 @@ namespace AlttpRandomizer.Random
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.ThievesTown).ToList();
 
-		    var currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
+		    var currentLocations = locations.Where(x => IsInKeyZone(x, 0) && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
-			const int keys = 2;
-
-			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
+            // key zone 1: 1 key
+			currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 1)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -231,17 +269,16 @@ namespace AlttpRandomizer.Random
 		private void GenerateIcePalaceItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.IcePalace).ToList();
-			var keys = 3;
 			List<Location> currentLocations;
 
-			for (int addKeys = 2; addKeys > 0; addKeys--)
-			{
-				currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
-				currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-				keys++;
-			}
+            // key zone 2: 2 keys
+            currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 2)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
-			currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
+            currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 2)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -254,17 +291,19 @@ namespace AlttpRandomizer.Random
 		private void GenerateMiseryMireItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.MiseryMire).ToList();
-			var keys = 1;
-			List<Location> currentLocations;
 
-			for (int addKeys = 3; addKeys > 0; addKeys--)
-			{
-				currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
-				currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-				keys++;
-			}
+            // key zone 0: 2 keys
+            var currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
-			currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
+            currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            // key zone 1: 1 key
+            currentLocations = locations.Where(x => IsInKeyZone(x, 1)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -277,27 +316,27 @@ namespace AlttpRandomizer.Random
 		private void GenerateTurtleRockItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.TurtleRock).ToList();
-			var keys = 0;
 
-		    var currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
+            // key zone 0: 1 key
+		    var currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-			keys += 2;
 
-			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
+            // key zone 2: 1 key
+			currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 2)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-			keys += 2;
 
 			currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
-			for (int addKeys = 2; addKeys > 0; addKeys--)
-			{
-				currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= Math.Max(keys - 1, 0)).ToList();
-				currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-				keys++;
-			}
+            // key zone 5: 1 key
+            currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 5)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
-			currentLocations = locations.Where(x => x.Item == null).ToList();
+            // key zone 6: 1 key
+            currentLocations = locations.Where(x => IsInKeyZone(x, 6)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            currentLocations = locations.Where(x => x.Item == null).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Map);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -307,20 +346,20 @@ namespace AlttpRandomizer.Random
 		private void GenerateGanonsTowerItems()
 		{
 			var locations = romLocations.Locations.Where(x => x.Region == Region.GanonsTower).ToList();
-			var keys = 4;
-			List<Location> currentLocations;
 
-			for (int addKeys = 2; addKeys > 0; addKeys--)
-			{
-				currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys && !x.BigKeyNeeded).ToList();
-				currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
-				keys++;
-			}
+            // key zone 0: 1 key 
+		    var currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
+			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
-			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys && !x.BigKeyNeeded).ToList();
+            // key zone 1: 1 key
+            currentLocations = locations.Where(x => IsInKeyZone(x, 1)).ToList();
+            currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
+
+            currentLocations = locations.Where(x => IsInKeyZone(x, 2) && !x.BigKeyNeeded).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
-			currentLocations = locations.Where(x => x.Item == null && x.KeysNeeded <= keys).ToList();
+            // key zone 4: 1 key
+			currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 4)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -330,7 +369,7 @@ namespace AlttpRandomizer.Random
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Compass);
 		}
 
-		private void WriteRom(string filename)
+		private void WriteRom(string filename, bool sramTrace)
 		{
 			string usedFilename = FileName.Fix(filename, string.Format(romLocations.SeedFileString, seed));
 
@@ -350,6 +389,11 @@ namespace AlttpRandomizer.Random
 
 				WriteSeedInRom(rom);
 
+			    if (sramTrace)
+			    {
+			        WriteSramTraceToRom(rom);
+			    }
+
 			    if (RandomizerVersion.Debug)
 			    {
 			        WriteDebugModeToRom(rom);
@@ -360,6 +404,12 @@ namespace AlttpRandomizer.Random
 
 			log?.WriteLog(usedFilename);
 		}
+
+        private void WriteSramTraceToRom(FileStream rom)
+        {
+            rom.Seek(0x57, SeekOrigin.Begin);
+            rom.Write(new byte[] { 0x00, 0x80, 0x21 }, 0, 3);
+        }
 
         private void WriteDebugModeToRom(FileStream rom)
         {

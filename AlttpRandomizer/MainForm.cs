@@ -30,7 +30,8 @@ namespace AlttpRandomizer
 
 		private void InitializeSettings()
 		{
-			// this fixes an issue with running on mono
+			// this fixes an issue with running on wine
+		    Settings.Default.SramTrace = Settings.Default.SramTrace;
 			Settings.Default.OutputFile = Settings.Default.OutputFile;
 			Settings.Default.RandomizerDifficulty = Settings.Default.RandomizerDifficulty;
 			Settings.Default.CreateSpoilerLog = Settings.Default.CreateSpoilerLog;
@@ -54,6 +55,7 @@ namespace AlttpRandomizer
 
             CreateRom(difficulty);
 
+		    Settings.Default.SramTrace = sramTrace.Checked;
 		    Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
 			Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
 			Settings.Default.Save();
@@ -83,7 +85,7 @@ namespace AlttpRandomizer
                 try
                 {
                     var randomizer = new Randomizer(parsedSeed, romPlms, log);
-                    randomizer.CreateRom(filename.Text);
+                    randomizer.CreateRom(new RandomizerOptions { Filename = filename.Text, SramTrace = sramTrace.Checked });
 
                     var outputString = new StringBuilder();
 
@@ -119,7 +121,7 @@ namespace AlttpRandomizer
                 try
                 {
                     var randomizer = new Randomizer(parsedSeed, romPlms, log);
-                    WriteOutput(randomizer.CreateRom(filename.Text, true));
+                    WriteOutput(randomizer.CreateRom(new RandomizerOptions { SpoilerOnly = true }));
                 }
                 catch (RandomizationException ex)
                 {
@@ -221,6 +223,7 @@ namespace AlttpRandomizer
 		{
 			filename.Text = Settings.Default.OutputFile;
 			createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
+		    sramTrace.Checked = Settings.Default.SramTrace;
 			Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.CurrentDisplay);
 			randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
 			RunCheckUpdate();

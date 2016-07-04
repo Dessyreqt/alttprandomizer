@@ -174,7 +174,9 @@ namespace AlttpRandomizer.IO
 			{
 				case ItemType.L1SwordAndShield:
 					return "L1 Sword & Shield";
-				case ItemType.MirrorShield:
+                case ItemType.RedShield:
+                    return "Red Shield";
+                case ItemType.MirrorShield:
 					return "Mirror Shield";
 				case ItemType.FireRod:
 					return "Fire Rod";
@@ -188,7 +190,9 @@ namespace AlttpRandomizer.IO
 					return "Bow";
 				case ItemType.Boomerang:
 					return "Boomerang / 10 Arrows";
-				case ItemType.Ether:
+                case ItemType.Bombos:
+                    return "Bombos";
+                case ItemType.Ether:
 					return "Ether";
 				case ItemType.Quake:
 					return "Quake";
@@ -258,9 +262,7 @@ namespace AlttpRandomizer.IO
 					return "300 Rupees";
 				case ItemType.PegasusBoots:
 					return "Pegasus Boots";
-                case ItemType.RedShield:
-			        return "Red Shield";
-				default:
+                default:
 					throw new ArgumentException("Couldn't get item type!", "item");
 			}
 		}

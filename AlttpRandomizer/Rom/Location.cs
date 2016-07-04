@@ -35,7 +35,7 @@ namespace AlttpRandomizer.Rom
         public long Address { get; set; }
         public bool LateGameItem { get; set; }
         public bool UniqueItemOnly { get; set; }
-        public int KeysNeeded { get; set; }
+        public int KeyZone { get; set; }
         public bool BigKeyNeeded { get; set; }
         public Access CanAccess { get; set; }
         public Action<FileStream, ItemType> WriteItemCheck { get; set; }

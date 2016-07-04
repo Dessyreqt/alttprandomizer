@@ -31,7 +31,6 @@
             this.createSpoilerLog = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.randomizerDifficulty = new System.Windows.Forms.ComboBox();
-            this.browse = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.output = new System.Windows.Forms.TextBox();
             this.seed = new System.Windows.Forms.TextBox();
@@ -40,6 +39,8 @@
             this.filename = new System.Windows.Forms.TextBox();
             this.btnReport = new System.Windows.Forms.Button();
             this.randomSpoiler = new System.Windows.Forms.Button();
+            this.browse = new System.Windows.Forms.Button();
+            this.sramTrace = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // createSpoilerLog
@@ -72,17 +73,6 @@
             this.randomizerDifficulty.Size = new System.Drawing.Size(121, 21);
             this.randomizerDifficulty.TabIndex = 30;
             // 
-            // browse
-            // 
-            this.browse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browse.Image = global::AlttpRandomizer.Properties.Resources.MenuFileSaveIcon;
-            this.browse.Location = new System.Drawing.Point(454, 82);
-            this.browse.Name = "browse";
-            this.browse.Size = new System.Drawing.Size(25, 25);
-            this.browse.TabIndex = 26;
-            this.browse.UseVisualStyleBackColor = true;
-            this.browse.Click += new System.EventHandler(this.browse_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -114,7 +104,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.seed.Location = new System.Drawing.Point(10, 46);
             this.seed.Name = "seed";
-            this.seed.Size = new System.Drawing.Size(469, 20);
+            this.seed.Size = new System.Drawing.Size(375, 20);
             this.seed.TabIndex = 27;
             // 
             // create
@@ -172,11 +162,35 @@
             this.randomSpoiler.UseVisualStyleBackColor = true;
             this.randomSpoiler.Click += new System.EventHandler(this.randomSpoiler_Click);
             // 
+            // browse
+            // 
+            this.browse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.browse.Image = global::AlttpRandomizer.Properties.Resources.MenuFileSaveIcon;
+            this.browse.Location = new System.Drawing.Point(454, 82);
+            this.browse.Name = "browse";
+            this.browse.Size = new System.Drawing.Size(25, 25);
+            this.browse.TabIndex = 26;
+            this.browse.UseVisualStyleBackColor = true;
+            this.browse.Click += new System.EventHandler(this.browse_Click);
+            // 
+            // sramTrace
+            // 
+            this.sramTrace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.sramTrace.AutoSize = true;
+            this.sramTrace.Location = new System.Drawing.Point(391, 48);
+            this.sramTrace.Name = "sramTrace";
+            this.sramTrace.Size = new System.Drawing.Size(88, 17);
+            this.sramTrace.TabIndex = 35;
+            this.sramTrace.Text = "SRAM Trace";
+            this.sramTrace.UseVisualStyleBackColor = true;
+            this.sramTrace.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(491, 336);
+            this.Controls.Add(this.sramTrace);
             this.Controls.Add(this.randomSpoiler);
             this.Controls.Add(this.btnReport);
             this.Controls.Add(this.createSpoilerLog);
@@ -211,6 +225,7 @@
         private System.Windows.Forms.TextBox filename;
 		private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.Button randomSpoiler;
+        private System.Windows.Forms.CheckBox sramTrace;
     }
 }
 
