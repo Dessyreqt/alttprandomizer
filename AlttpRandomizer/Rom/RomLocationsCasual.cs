@@ -2116,7 +2116,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180140,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have),
+                        CanClimbDeathMountain(have)
+                        && have.Contains(ItemType.MagicMirror),
                 },
                 new Location
                 {
@@ -2624,8 +2625,6 @@ namespace AlttpRandomizer.Rom
                 ItemType.Hookshot,
                 ItemType.IceRod,
                 ItemType.Lamp,
-                ItemType.Lamp,
-                ItemType.Lamp,
                 //ItemType.L1SwordAndShield,
                 ItemType.MagicMirror,
                 ItemType.MoonPearl,
@@ -2736,9 +2735,6 @@ namespace AlttpRandomizer.Rom
                 ItemType.TwentyRupees,
                 ItemType.TwentyRupees,
                 ItemType.TwentyRupees,
-                ItemType.TwentyRupees,
-                ItemType.TwentyRupees,
-                ItemType.TwentyRupees,
                 ItemType.FiftyRupees,
                 ItemType.FiftyRupees,
                 ItemType.FiftyRupees,
@@ -2746,6 +2742,11 @@ namespace AlttpRandomizer.Rom
                 ItemType.FiftyRupees,
                 ItemType.FiftyRupees,
                 ItemType.FiftyRupees,
+                ItemType.OneHundredRupees,
+                ItemType.OneHundredRupees,
+                ItemType.OneHundredRupees,
+                ItemType.OneHundredRupees,
+                ItemType.OneHundredRupees,
                 ItemType.OneHundredRupees,
                 ItemType.ThreeHundredRupees,
                 ItemType.ThreeHundredRupees,
