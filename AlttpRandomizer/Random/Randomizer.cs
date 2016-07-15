@@ -59,7 +59,12 @@ namespace AlttpRandomizer.Random
                 GenerateDungeonItems();
                 GenerateItemPositions();
 
-		        if (options.SpoilerOnly)
+                if (RandomizerVersion.Debug)
+                {
+                    SetupTestItems(romLocations.Locations);
+                }
+
+                if (options.SpoilerOnly)
 		        {
 		            return log?.GetLogOutput();
 		        }
@@ -76,7 +81,38 @@ namespace AlttpRandomizer.Random
 		    }
 		}
 
-		private void GenerateDungeonItems()
+        /// <summary>
+        /// This is a setup method for placing items where they can be tested easily. It should only be run in debug mode.
+        /// </summary>
+        /// <param name="locations"></param>
+        private void SetupTestItems(List<Location> locations)
+        {
+            // add red boomerang 
+            var location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top chest]");
+            location.Item = new Item(ItemType.RedBoomerang);
+
+            // add blue boomerang 
+            location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top left chest]");
+            location.Item = new Item(ItemType.Boomerang);
+
+            // add powder
+            location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top right chest]");
+            location.Item = new Item(ItemType.Powder);
+
+            // add flute
+            location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [bottom left chest]");
+            location.Item = new Item(ItemType.OcarinaInactive);
+        
+            // add mushroom
+            location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [bottom right chest]");
+            location.Item = new Item(ItemType.Mushroom);
+            
+            // add shovel
+            location = locations.First(x => x.Name == "Bottle Vendor");
+            location.Item = new Item(ItemType.Shovel);
+        }
+
+        private void GenerateDungeonItems()
 		{
 			GenerateHyruleCastleEscapeItems();
 			GenerateEasternPalaceItems();

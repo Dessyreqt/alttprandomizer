@@ -37,7 +37,7 @@
             this.create = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.filename = new System.Windows.Forms.TextBox();
-            this.btnReport = new System.Windows.Forms.Button();
+            this.report = new System.Windows.Forms.Button();
             this.randomSpoiler = new System.Windows.Forms.Button();
             this.browse = new System.Windows.Forms.Button();
             this.sramTrace = new System.Windows.Forms.CheckBox();
@@ -140,16 +140,16 @@
             this.filename.TextChanged += new System.EventHandler(this.filename_TextChanged);
             this.filename.Leave += new System.EventHandler(this.filename_Leave);
             // 
-            // btnReport
+            // report
             // 
-            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReport.Location = new System.Drawing.Point(387, 301);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(92, 23);
-            this.btnReport.TabIndex = 33;
-            this.btnReport.Text = "Report an issue";
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            this.report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.report.Location = new System.Drawing.Point(387, 301);
+            this.report.Name = "report";
+            this.report.Size = new System.Drawing.Size(92, 23);
+            this.report.TabIndex = 33;
+            this.report.Text = "Report an issue";
+            this.report.UseVisualStyleBackColor = true;
+            this.report.Click += new System.EventHandler(this.report_Click);
             // 
             // randomSpoiler
             // 
@@ -192,7 +192,7 @@
             this.ClientSize = new System.Drawing.Size(491, 336);
             this.Controls.Add(this.sramTrace);
             this.Controls.Add(this.randomSpoiler);
-            this.Controls.Add(this.btnReport);
+            this.Controls.Add(this.report);
             this.Controls.Add(this.createSpoilerLog);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.randomizerDifficulty);
@@ -223,7 +223,7 @@
         private System.Windows.Forms.Button create;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox filename;
-		private System.Windows.Forms.Button btnReport;
+		private System.Windows.Forms.Button report;
         private System.Windows.Forms.Button randomSpoiler;
         private System.Windows.Forms.CheckBox sramTrace;
     }

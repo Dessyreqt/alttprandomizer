@@ -205,7 +205,7 @@ namespace AlttpRandomizer
 			}
 		}
 
-		private void btnReport_Click(object sender, EventArgs e)
+		private void report_Click(object sender, EventArgs e)
 		{
 		    if (output.Text.Contains("RandomizationException"))
 		    {

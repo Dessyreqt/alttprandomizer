@@ -190,6 +190,8 @@ namespace AlttpRandomizer.IO
 					return "Bow";
 				case ItemType.Boomerang:
 					return "Boomerang / 10 Arrows";
+                case ItemType.Powder:
+			        return "Magic Powder";
                 case ItemType.Bombos:
                     return "Bombos";
                 case ItemType.Ether:
@@ -236,6 +238,8 @@ namespace AlttpRandomizer.IO
 					return "Compass";
 				case ItemType.ThreeBombs:
 					return "3 Bombs";
+                case ItemType.Mushroom:
+			        return "Mushroom";
 				case ItemType.RedBoomerang:
 					return "Red Boomerang / 300 Rupees";
 				case ItemType.BigKey:

@@ -215,7 +215,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
-                        && have.Contains(ItemType.Hookshot),
+                        && have.Contains(ItemType.Hookshot)
+                        && have.Contains(ItemType.Hammer),
                 },
 
                 new Location
@@ -230,7 +231,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
-                        && have.Contains(ItemType.Hookshot),
+                        && have.Contains(ItemType.Hookshot)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
@@ -383,7 +385,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
-                        && have.Contains(ItemType.Hookshot),
+                        && have.Contains(ItemType.Hookshot)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
@@ -1152,7 +1155,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(ItemType.Hookshot),
+                        && have.Contains(ItemType.Hookshot)
+                        && have.Contains(ItemType.Hammer),
                 },
                 new Location
                 {
@@ -2211,7 +2215,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180149,
                     CanAccess =
                         have =>
-                        CanAccessZorasRiver(have),
+                        CanAccessZorasRiver(have)
+                        && have.Contains(ItemType.Flippers),
                 },
             };
         }
@@ -2637,7 +2642,6 @@ namespace AlttpRandomizer.Rom
                 // nice-to-have items
                 ItemType.BlueMail,
                 ItemType.Boomerang,
-                ItemType.Boomerang,
                 ItemType.Bottle,
                 ItemType.Bottle,
                 ItemType.Bottle,
@@ -2676,6 +2680,7 @@ namespace AlttpRandomizer.Rom
                 
                 // other treasure box contents
                 ItemType.Arrow,
+                ItemType.TenArrows,
                 ItemType.TenArrows,
                 ItemType.TenArrows,
                 ItemType.TenArrows,

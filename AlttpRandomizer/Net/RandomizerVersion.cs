@@ -10,7 +10,7 @@ namespace AlttpRandomizer.Net
 {
     public class RandomizerVersion
     {
-        public static string Current = "4";
+        public static string Current = "5P1";
         public static bool Debug = false;
 
         public static string CurrentDisplay
@@ -29,13 +29,14 @@ namespace AlttpRandomizer.Net
         }
 
         private const int checkVersion = 4;
-        private static readonly string updateAddress = "http://dessyreqt.github.io/alttprandomizer/?" + DateTime.Now.Ticks;
+        private static readonly string checkAddress = "http://dessyreqt.github.io/alttprandomizer/?" + DateTime.Now.Ticks;
+        private const string updateAddress = "http://dessyreqt.github.io/alttprandomizer/";
 
         public static void CheckUpdate()
         {
             try
             {
-                var response = GetResponse(updateAddress);
+                var response = GetResponse(checkAddress);
 
                 if (string.IsNullOrWhiteSpace(response))
                     return;
