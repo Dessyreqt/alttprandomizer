@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace AlttpRandomizer.Rom
 {
@@ -240,5 +241,162 @@ namespace AlttpRandomizer.Rom
 
             return new[] { retVal };
         }
+
+        public static byte[] GetCreditsName(ItemType item)
+        {
+            int maxLength = 20;
+            StringBuilder retVal = new StringBuilder(maxLength, maxLength);
+
+            switch (item)
+            {
+                case ItemType.Bow:
+                    retVal.Append("arrow sling");
+                    break;
+                case ItemType.BowAndArrows:
+                    retVal.Append("point stick");
+                    break;
+                case ItemType.BowAndSilverArrows:
+                    retVal.Append("sharp stick");
+                    break;
+                case ItemType.Boomerang:
+                case ItemType.RedBoomerang:
+                    retVal.Append("bent stick");
+                    break;
+                case ItemType.Hookshot:
+                    retVal.Append("boinger");
+                    break;
+                case ItemType.Mushroom:
+                case ItemType.Powder:
+                    retVal.Append("legal drugs");
+                    break;
+                case ItemType.FireRod:
+                    retVal.Append("flame staff");
+                    break;
+                case ItemType.IceRod:
+                    retVal.Append("ice cream");
+                    break;
+                case ItemType.Bombos:
+                    retVal.Append("swirly coin");
+                    break;
+                case ItemType.Ether:
+                    retVal.Append("bolt coin");
+                    break;
+                case ItemType.Quake:
+                    retVal.Append("wavy coin");
+                    break;
+                case ItemType.Lamp:
+                    retVal.Append("candle");
+                    break;
+                case ItemType.Hammer:
+                    retVal.Append("m c hammer");
+                    break;
+                case ItemType.Shovel:
+                    retVal.Append("dirt spade");
+                    break;
+                case ItemType.OcarinaActive:
+                case ItemType.OcarinaInactive:
+                    retVal.Append("bird call");
+                    break;
+                case ItemType.BugCatchingNet:
+                    retVal.Append("stick web");
+                    break;
+                case ItemType.BookOfMudora:
+                    retVal.Append("moon runes");
+                    break;
+                case ItemType.CaneOfSomaria:
+                    retVal.Append("block stick");
+                    break;
+                case ItemType.StaffOfByrna:
+                    retVal.Append("shiny stick");
+                    break;
+                case ItemType.Cape:
+                    retVal.Append("red hood");
+                    break;
+                case ItemType.MagicMirror:
+                    retVal.Append("your face");
+                    break;
+                case ItemType.PowerGlove:
+                    retVal.Append("lift glove");
+                    break;
+                case ItemType.TitansMitt:
+                    retVal.Append("carry glove");
+                    break;
+                case ItemType.PegasusBoots:
+                    retVal.Append("sprint shoe");
+                    break;
+                case ItemType.Flippers:
+                    retVal.Append("finger webs");
+                    break;
+                case ItemType.MoonPearl:
+                    retVal.Append("lunar orb");
+                    break;
+                case ItemType.L1Sword:
+                case ItemType.L1SwordAndShield:
+                case ItemType.L2Sword:
+                case ItemType.L3Sword:
+                case ItemType.L4Sword:
+                    retVal.Append("sword");
+                    break;
+                case ItemType.BlueShield:
+                    retVal.Append("shield");
+                    break;
+                case ItemType.RedShield:
+                    retVal.Append("red shield");
+                    break;
+                case ItemType.MirrorShield:
+                    retVal.Append("face shield");
+                    break;
+                case ItemType.BlueMail:
+                    retVal.Append("blue suit");
+                    break;
+                case ItemType.RedMail:
+                    retVal.Append("purple hat");
+                    break;
+                default:
+                    retVal.Append("life lesson");
+                    break;
+            }
+
+            retVal.Append(" for sale");
+
+            //space it some on the left to center it sliIIiightly better
+            if (retVal.Length < maxLength)
+            {
+                retVal.Insert(0, " ", maxLength - retVal.Length);
+            }
+
+            return ConvertToCreditEncoding(retVal.ToString());
+        }
+
+        private static byte[] ConvertToCreditEncoding(string input)
+        {
+            byte[] inputBytes = Encoding.ASCII.GetBytes(input.ToLower());
+
+            // 'a' in ASCII = 0x61
+            // 'a' in z3credits = 0x1A (among others, but this for the small font)
+            for (var i = 0; i < inputBytes.Length; ++i)
+            {
+                switch (inputBytes[i])
+                {
+                    case (byte)' ':
+                        inputBytes[i] = 0x9F;
+                        break;
+                    case (byte)'\'':
+                        inputBytes[i] = 0x35;
+                        break;
+                    case (byte)'-':
+                        inputBytes[i] = 0x36;
+                        break;
+                    case (byte)',':
+                        inputBytes[i] = 0x37;
+                        break;
+                    default:
+                        inputBytes[i] = (byte)(inputBytes[i] - 0x47);
+                        break;
+                }
+            }
+            return inputBytes;
+        }
+
     }
 }

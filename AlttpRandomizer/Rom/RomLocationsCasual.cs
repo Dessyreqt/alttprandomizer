@@ -1993,6 +1993,9 @@ namespace AlttpRandomizer.Rom
                         (rom, item) =>
                         {
                             WriteSpecialItemCheck(rom, item, 0x180200);
+
+                            rom.Seek(0x76A85, SeekOrigin.Begin);
+                            rom.Write(Item.GetCreditsName(item), 0, 20);
                         }
                 },
                 new Location
