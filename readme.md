@@ -1,4 +1,4 @@
-# Current Version: 4
+# Current Version: 5
 
 # About the Legend of Zelda: A Link to the Past Randomizer (or ALttPRandomizer)
 This is a simple program that moves around items in the Legend of Zelda: A Link to the Past (ALttP). It is used for racing the game.
@@ -40,6 +40,24 @@ This randomizer uses the 1.0 JP version of the base rom because it is what is pr
 - You can enter the Exploration Glitch in Tower of Hera by falling down the rightmost hole on the 3F, then jumping right from the wall.
 
 # What's new in Randomizer?
+
+v5
+- Added capability for Mushroom/Powder and Shovel/Ocarina to be carried simultaneously.
+- Mushroom, Powder, and Ocarina added to randomization pool.
+- Massive overhaul of a lot of the item locations, generally making things more permissive and removing softlocks.
+- Randomized Misery Mire and Turtle Rock medallion requirements.
+- Digging in random places will now give you pickups.
+- The Treasure Chest game will guaranteed give you its item on the second chest.
+- The Digging Game will guaranteed give you its item on the 15th dig.
+- Treasure Chest game and Digging Game added to randomization locations.
+- Bottles may now be found prefilled with items.
+- Bottle submenu now opens with X; use Y to change between bottles without opening submenu.
+- Credits updated to reflect what King Zora sold you.
+- Update checking logic updated.
+- Will no longer spawn in Dark World if you die in Dark World pre-Aga.
+- Fixed bottles not showing in inventory if gotten early.
+- Fixed HUD not updating for Silver Arrows.
+- Fixed Ganon warping more than once in teleport phase.
 
 v4
 - Heart Pieces are now randomized into the mix!
