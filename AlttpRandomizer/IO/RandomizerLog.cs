@@ -13,13 +13,15 @@ namespace AlttpRandomizer.IO
 	{
 		private readonly List<Location> generatedItems;
 		private readonly List<Location> orderedItems;
-		private readonly string seed;
+        private readonly List<Location> specialLocations;
+        private readonly string seed;
 
 		public RandomizerLog(string seed)
 		{
 			generatedItems = new List<Location>();
 			orderedItems = new List<Location>();
-			this.seed = seed;
+            specialLocations = new List<Location>();
+            this.seed = seed;
 		}
 
 		public void AddOrderedItem(Location Location)
@@ -32,7 +34,12 @@ namespace AlttpRandomizer.IO
 			generatedItems.AddRange(Locations);
 		}
 
-		public void WriteLog(string filename)
+        public void AddSpecialLocations(List<Location> Locations)
+        {
+            specialLocations.AddRange(Locations);
+        }
+
+        public void WriteLog(string filename)
 		{
 			using (var writer = new StreamWriter(string.Format("{0}.spoilers.txt", filename)))
 			{
@@ -164,6 +171,15 @@ namespace AlttpRandomizer.IO
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
+            writer.AppendLine();
+            writer.AppendLine();
+            writer.AppendLine("Special Locations");
+            writer.AppendLine("-----------------");
+            foreach (var Location in specialLocations.Where(x => x.Item.Type != ItemType.Nothing).OrderBy(x => x.Name))
+            {
+                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+            }
+            writer.AppendLine();
 
             return writer.ToString();
         }
@@ -189,7 +205,7 @@ namespace AlttpRandomizer.IO
 				case ItemType.Bow:
 					return "Bow";
 				case ItemType.Boomerang:
-					return "Boomerang / 10 Arrows";
+					return "Boomerang";
                 case ItemType.Powder:
 			        return "Magic Powder";
                 case ItemType.Bombos:
@@ -199,7 +215,7 @@ namespace AlttpRandomizer.IO
 				case ItemType.Quake:
 					return "Quake";
 				case ItemType.Lamp:
-					return "Lamp / 5 rupees";
+					return "Lamp";
 				case ItemType.Shovel:
 					return "Shovel";
 				case ItemType.OcarinaInactive:
@@ -240,9 +256,18 @@ namespace AlttpRandomizer.IO
 					return "3 Bombs";
                 case ItemType.Mushroom:
 			        return "Mushroom";
-				case ItemType.RedBoomerang:
-					return "Red Boomerang / 300 Rupees";
-				case ItemType.BigKey:
+                case ItemType.RedBoomerang:
+                    return "Red Boomerang";
+                case ItemType.BottleWithRedPotion:
+                case ItemType.RedPotion:
+                    return "Bottle (Red Potion)";
+                case ItemType.BottleWithGreenPotion:
+                case ItemType.GreenPotion:
+                    return "Bottle (Green Potion)";
+                case ItemType.BottleWithBluePotion:
+                case ItemType.BluePotion:
+                    return "Bottle (Blue Potion)";
+                case ItemType.BigKey:
 					return "Big Key";
 				case ItemType.Map:
 					return "Map";
@@ -252,7 +277,12 @@ namespace AlttpRandomizer.IO
 					return "5 Rupees";
 				case ItemType.TwentyRupees:
 					return "20 Rupees";
-				case ItemType.HeartContainer:
+                case ItemType.Bee:
+                case ItemType.BottleWithBee:
+                    return "Bottle (Bee)";
+                case ItemType.BottleWithFairy:
+                    return "Bottle (Fairy)";
+                case ItemType.HeartContainer:
 					return "Heart Container";
 				case ItemType.OneHundredRupees:
 					return "100 Rupees";
@@ -264,6 +294,8 @@ namespace AlttpRandomizer.IO
 					return "10 Arrows";
 				case ItemType.ThreeHundredRupees:
 					return "300 Rupees";
+                case ItemType.BottleWithGoldBee:
+			        return "Bottle (Gold Bee)";
 				case ItemType.PegasusBoots:
 					return "Pegasus Boots";
                 default:

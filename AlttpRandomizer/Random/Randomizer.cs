@@ -81,35 +81,53 @@ namespace AlttpRandomizer.Random
 		    }
 		}
 
+        private void WriteRngItems(FileStream rom)
+        {
+            for (int address = 0x178000; address <= 0x1783ff; address++)
+            {
+                var randomValue = (byte)random.Next(0x100);
+                rom.Seek(address, SeekOrigin.Begin);
+                rom.Write(new[] { randomValue }, 0, 1);
+            }
+        }
+
         /// <summary>
         /// This is a setup method for placing items where they can be tested easily. It should only be run in debug mode.
         /// </summary>
         /// <param name="locations"></param>
         private void SetupTestItems(List<Location> locations)
         {
-            // add red boomerang 
-            var location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top chest]");
-            location.Item = new Item(ItemType.RedBoomerang);
+            //// add red boomerang 
+            //var location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top chest]");
+            //location.Item = new Item(ItemType.RedBoomerang);
 
-            // add blue boomerang 
-            location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top left chest]");
-            location.Item = new Item(ItemType.Boomerang);
+            //// add blue boomerang 
+            //location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top left chest]");
+            //location.Item = new Item(ItemType.Boomerang);
 
-            // add powder
-            location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top right chest]");
-            location.Item = new Item(ItemType.Powder);
+            //// add powder
+            //location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [top right chest]");
+            //location.Item = new Item(ItemType.Powder);
 
-            // add flute
-            location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [bottom left chest]");
-            location.Item = new Item(ItemType.OcarinaInactive);
-        
-            // add mushroom
-            location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [bottom right chest]");
-            location.Item = new Item(ItemType.Mushroom);
-            
-            // add shovel
-            location = locations.First(x => x.Name == "Bottle Vendor");
-            location.Item = new Item(ItemType.Shovel);
+            //// add flute
+            //location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [bottom left chest]");
+            //location.Item = new Item(ItemType.OcarinaInactive);
+
+            //// add mushroom
+            //location = locations.First(x => x.Name == "[cave-022-B1] Thief's hut [bottom right chest]");
+            //location.Item = new Item(ItemType.Mushroom);
+
+            //// add shovel
+            //location = locations.First(x => x.Name == "Bottle Vendor");
+            //location.Item = new Item(ItemType.Shovel);
+
+            //// Link's House
+            //var location = locations.First(x => x.Name == "[cave-040] Link's House");
+            //location.Item = new Item(ItemType.Bottle);
+
+            //// After Sword
+            //location = locations.First(x => x.Name == "[cave-034] Hyrule Castle secret entrance");
+            //location.Item = new Item(ItemType.BottleWithRedPotion);
         }
 
         private void GenerateDungeonItems()
@@ -413,19 +431,31 @@ namespace AlttpRandomizer.Random
 			{
 				rom.Write(Resources.RomImage, 0, 2097152);
 
-				foreach (var location in romLocations.Locations)
-				{
-					rom.Seek(location.Address, SeekOrigin.Begin);
-				    var newItem = (byte)location.Item.HexValue;
+                foreach (var location in romLocations.Locations)
+                {
+                    rom.Seek(location.Address, SeekOrigin.Begin);
+                    var newItem = (byte)location.Item.HexValue;
 
-                    rom.Write(new [] { newItem }, 0, 1);
+                    rom.Write(new[] { newItem }, 0, 1);
 
                     location.WriteItemCheck?.Invoke(rom, location.Item.Type);
                 }
+                foreach (var location in romLocations.SpecialLocations)
+                {
+                    if (location.Address != default(int))
+                    {
+                        rom.Seek(location.Address, SeekOrigin.Begin);
+                        var newItem = (byte) location.Item.HexValue;
 
-				WriteSeedInRom(rom);
+                        rom.Write(new[] {newItem}, 0, 1);
+                    }
+                    location.WriteItemCheck?.Invoke(rom, location.Item.Type);
+                }
 
-			    if (sramTrace)
+                WriteSeedInRom(rom);
+                WriteRngItems(rom);
+
+                if (sramTrace)
 			    {
 			        WriteSramTraceToRom(rom);
 			    }
@@ -458,11 +488,13 @@ namespace AlttpRandomizer.Random
         private void WriteSeedInRom(FileStream rom)
 		{
 			string seedStr = string.Format(romLocations.SeedRomString, RandomizerVersion.Current, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
-			rom.Seek(0x7fc0, SeekOrigin.Begin);
-			rom.Write(StringToByteArray(seedStr), 0, 21);
-		}
+            rom.Seek(0x7fc0, SeekOrigin.Begin);
+            rom.Write(StringToByteArray(seedStr), 0, 21);
+            rom.Seek(0x180210, SeekOrigin.Begin);
+            rom.Write(StringToByteArray(romLocations.SeedFileString), 0, 1);
+        }
 
-		private static byte[] StringToByteArray(string input)
+        private static byte[] StringToByteArray(string input)
 		{
 			var retVal = new byte[input.Length];
 			var i = 0;
@@ -487,7 +519,6 @@ namespace AlttpRandomizer.Random
 				foreach (var candidateItem in itemPool)
 				{
 					haveItems.Add(candidateItem);
-                    var addedItems = AddProgressionItems(haveItems);
 					var newLocations = romLocations.GetAvailableLocations(haveItems);
 
 					if (newLocations.Count > currentLocations.Count)
@@ -496,10 +527,6 @@ namespace AlttpRandomizer.Random
 					}
 
 					haveItems.Remove(candidateItem);
-				    foreach (var item in addedItems)
-				    {
-				        haveItems.Remove(item);
-				    }
 				}
 
                 // Grab an item from the candidate list if there are any, otherwise, grab a random item
@@ -509,7 +536,6 @@ namespace AlttpRandomizer.Random
 
 					itemPool.Remove(insertedItem);
 					haveItems.Add(insertedItem);
-                    AddProgressionItems(haveItems);
 
                     int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
 					currentLocations[insertedLocation].Item = new Item(insertedItem);
@@ -524,7 +550,6 @@ namespace AlttpRandomizer.Random
 
                         itemPool.Remove(insertedItem);
                         haveItems.Add(insertedItem);
-                        AddProgressionItems(haveItems);
 
                         int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
                         currentLocations[insertedLocation].Item = new Item(insertedItem);
@@ -576,27 +601,11 @@ namespace AlttpRandomizer.Random
 				unavailableLocation.Item = new Item(ItemType.Nothing);
 			}
 
-			log?.AddGeneratedItems(romLocations.Locations);
-		}
-
-        private List<ItemType> AddProgressionItems(List<ItemType> have)
-        {
-            var implicitProgressionItems = romLocations.GetImplicitProgressionItems(have);
-            var retVal = new List<ItemType>();
-
-            foreach (var item in implicitProgressionItems)
-            {
-                if (!have.Contains(item))
-                {
-                    have.Add(item);
-                    retVal.Add(item);
-                }
-            }
-
-            return retVal;
+            log?.AddGeneratedItems(romLocations.Locations);
+            log?.AddSpecialLocations(romLocations.SpecialLocations);
         }
 
-		private void GenerateItemList()
+        private void GenerateItemList()
 		{
 			romLocations.ResetLocations();
 			haveItems = new List<ItemType>();

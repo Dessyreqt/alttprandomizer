@@ -10,6 +10,7 @@ namespace AlttpRandomizer.Rom
     public interface IRomLocations
     {
         List<Location> Locations { get; set; }
+        List<Location> SpecialLocations { get; set; }
         string DifficultyName { get; }
         string SeedFileString { get; }
         string SeedRomString { get; }
@@ -21,6 +22,5 @@ namespace AlttpRandomizer.Rom
         int GetInsertedLocation(List<Location> currentLocations, ItemType insertedItem, SeedRandom random);
         ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random);
         List<ItemType> GetItemPool(SeedRandom random);
-	    List<ItemType> GetImplicitProgressionItems(List<ItemType> haveItems);
     }
 }

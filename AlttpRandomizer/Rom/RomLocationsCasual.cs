@@ -14,6 +14,7 @@ namespace AlttpRandomizer.Rom
         private List<ItemType> lateGameItems;
 
         public List<Location> Locations { get; set; }
+        public List<Location> SpecialLocations { get; set; }
         public string DifficultyName => "Casual";
         public string SeedFileString => "C{0:0000000}";
         public string SeedRomString => "Z3Rv{0} C{1}";
@@ -75,7 +76,8 @@ namespace AlttpRandomizer.Rom
                         CanEscapeCastle(have)
                         && have.Contains(ItemType.PegasusBoots)
                         && (have.Contains(ItemType.TitansMitt)
-                            || CanAccessLowerDarkWorld(have)),
+                            || (CanAccessNorthWestDarkWorld(have)
+                                && have.Contains(ItemType.MoonPearl))),
                 },
                 new Location
                 {             
@@ -295,7 +297,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && ((CanBeInDarkWorld(have)
+                        && ((have.Contains(ItemType.MagicMirror)
                                 && have.Contains(ItemType.Hammer))
                             || have.Contains(ItemType.Hookshot)),
                 },
@@ -441,7 +443,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9EC,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessNorthWestDarkWorld(have),
                 },
                 new Location
                 {
@@ -451,7 +453,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9EF,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessNorthWestDarkWorld(have),
                 },
                 new Location
                 {
@@ -667,7 +669,9 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
-                        && have.Contains(ItemType.MirrorShield)
+                        && (have.Contains(ItemType.MirrorShield)
+                            || have.Contains(ItemType.Cape)
+                            || have.Contains(ItemType.StaffOfByrna))
                         && have.Contains(ItemType.FireRod)
                         && have.Contains(ItemType.Lamp),
                 },
@@ -682,7 +686,9 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
-                        && have.Contains(ItemType.MirrorShield)
+                        && (have.Contains(ItemType.MirrorShield)
+                            || have.Contains(ItemType.Cape)
+                            || have.Contains(ItemType.StaffOfByrna))
                         && have.Contains(ItemType.FireRod)
                         && have.Contains(ItemType.Lamp),
                 },
@@ -697,7 +703,9 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
-                        && have.Contains(ItemType.MirrorShield)
+                        && (have.Contains(ItemType.MirrorShield)
+                            || have.Contains(ItemType.Cape)
+                            || have.Contains(ItemType.StaffOfByrna))
                         && have.Contains(ItemType.FireRod)
                         && have.Contains(ItemType.Lamp),
                 },
@@ -712,7 +720,9 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
-                        && have.Contains(ItemType.MirrorShield)
+                        && (have.Contains(ItemType.MirrorShield)
+                            || have.Contains(ItemType.Cape)
+                            || have.Contains(ItemType.StaffOfByrna))
                         && have.Contains(ItemType.FireRod),
                 },
                 new Location
@@ -958,8 +968,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA73,
                     CanAccess =
                         have =>
-                        have.Contains(ItemType.OcarinaActive)
-                        && CanBeInDarkWorld(have)
+                        have.Contains(ItemType.OcarinaInactive)
+                        && have.Contains(ItemType.MoonPearl)
                         && have.Contains(ItemType.TitansMitt),
                },
                 new Location
@@ -970,8 +980,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA76,
                     CanAccess =
                         have =>
-                        have.Contains(ItemType.OcarinaActive)
-                        && CanBeInDarkWorld(have)
+                        have.Contains(ItemType.OcarinaInactive)
+                        && have.Contains(ItemType.MoonPearl)
                         && have.Contains(ItemType.TitansMitt),
                 },
                 new Location
@@ -1044,10 +1054,10 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && CanBeInDarkWorld(have)
+                        && have.Contains(ItemType.MoonPearl)
                         && have.Contains(ItemType.Hammer)
                         // not actually required here, but stops some deadlocks
-                        && have.Contains(ItemType.Quake),
+                        && have.Contains(SpecialLocations.First(x => x.Name == "Turtle Rock Required Medallion").Item.Type),
                 },
                 new Location
                 {
@@ -1577,7 +1587,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB1E,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessSouthDarkWorld(have),
                 },
                 new Location
                 {
@@ -1587,7 +1597,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB21,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessSouthDarkWorld(have),
                 },
                 new Location
                 {
@@ -1597,7 +1607,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB24,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessSouthDarkWorld(have),
                 },
                 new Location
                 {
@@ -1607,7 +1617,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB27,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessSouthDarkWorld(have),
                 },
                 new Location
                 {
@@ -1618,7 +1628,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && ((CanBeInDarkWorld(have)
+                        && ((have.Contains(ItemType.MagicMirror)
                                 && have.Contains(ItemType.Hammer))
                             || have.Contains(ItemType.Hookshot)),
                 },
@@ -1631,7 +1641,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && ((CanBeInDarkWorld(have)
+                        && ((have.Contains(ItemType.MagicMirror)
                                 && have.Contains(ItemType.Hammer))
                             || have.Contains(ItemType.Hookshot)),
                 },
@@ -1644,7 +1654,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && ((CanBeInDarkWorld(have)
+                        && ((have.Contains(ItemType.MagicMirror)
                                 && have.Contains(ItemType.Hammer))
                             || have.Contains(ItemType.Hookshot)),
                 },
@@ -1657,7 +1667,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && ((CanBeInDarkWorld(have)
+                        && ((have.Contains(ItemType.MagicMirror)
                                 && have.Contains(ItemType.Hammer))
                             || have.Contains(ItemType.Hookshot)),
                 },
@@ -1670,7 +1680,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && ((CanBeInDarkWorld(have)
+                        && ((have.Contains(ItemType.MagicMirror)
                                 && have.Contains(ItemType.Hammer))
                             || have.Contains(ItemType.Hookshot)),
                 },
@@ -1683,7 +1693,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && ((CanBeInDarkWorld(have)
+                        && ((have.Contains(ItemType.MagicMirror)
                                 && have.Contains(ItemType.Hammer))
                             || have.Contains(ItemType.Hookshot)),
                 },
@@ -1696,7 +1706,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanClimbDeathMountain(have)
-                        && ((CanBeInDarkWorld(have)
+                        && ((have.Contains(ItemType.MagicMirror)
                                 && have.Contains(ItemType.Hammer))
                             || have.Contains(ItemType.Hookshot)),
                 },
@@ -1770,6 +1780,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessEastDarkWorldDeathMountain(have)
+                        && have.Contains(ItemType.MoonPearl)
                         && have.Contains(ItemType.Hookshot),
                 },
                 new Location
@@ -1781,6 +1792,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessEastDarkWorldDeathMountain(have)
+                        && have.Contains(ItemType.MoonPearl)
                         && have.Contains(ItemType.Hookshot),
                 },
                 new Location
@@ -1792,6 +1804,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessEastDarkWorldDeathMountain(have)
+                        && have.Contains(ItemType.MoonPearl)
                         && have.Contains(ItemType.Hookshot),
                 },
                 new Location
@@ -1803,6 +1816,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessEastDarkWorldDeathMountain(have)
+                        && have.Contains(ItemType.MoonPearl)
                         && have.Contains(ItemType.Hookshot)
                         // not actually required here, but stops some deadlocks
                         && have.Contains(ItemType.FireRod),
@@ -1817,7 +1831,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
-                        && have.Contains(ItemType.PowerGlove),
+                        && CanLiftLightRocks(have),
                 },
                 new Location
                 {
@@ -1829,7 +1843,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
-                        && have.Contains(ItemType.PowerGlove),
+                        && CanLiftLightRocks(have),
                 },
                 new Location
                 {
@@ -1841,7 +1855,17 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
-                        && have.Contains(ItemType.PowerGlove),
+                        && CanLiftLightRocks(have),
+                },
+                new Location
+                {
+                    LateGameItem = true,
+                    Region = Region.DarkWorld,
+                    Name = "Piece of Heart (Treasure Chest Game)",
+                    Address = 0xEDA8,
+                    CanAccess =
+                        have =>
+                        CanAccessNorthWestDarkWorld(have),
                 },
                 //// Getting anything other than the sword here can be bad for progress... may as well keep the sword here since you can't use it if you get it before the uncle.
                 //new Location
@@ -1885,7 +1909,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x330C7,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessSouthDarkWorld(have),
                 },
                 new Location
                 {
@@ -1897,7 +1921,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEscapeCastle(have)
-                        && have.Contains(ItemType.Bottle),
+                        && HasBottle(have),
                 },
                 new Location
                 {
@@ -1907,8 +1931,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0x33D68,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have)
-                        && have.Contains(ItemType.TitansMitt),
+                        CanAccessNorthWestDarkWorld(have)
+                        && have.Contains(ItemType.TitansMitt)
+                        && have.Contains(ItemType.MagicMirror),
                 },
                 new Location
                 {
@@ -1949,9 +1974,10 @@ namespace AlttpRandomizer.Rom
                     Address = 0x48B81,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have)
+                        CanAccessSouthDarkWorld(have)
                         && CanGetMasterSword(have)
-                        && have.Contains(ItemType.BookOfMudora),
+                        && have.Contains(ItemType.BookOfMudora)
+                        && have.Contains(ItemType.MagicMirror),
                     WriteItemCheck =
                         (rom, item) =>
                         {
@@ -1969,7 +1995,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessPyramid(have)
-                        && have.Contains(ItemType.PowerGlove)
+                        && have.Contains(ItemType.MoonPearl)
+                        && CanLiftLightRocks(have)
                         && (have.Contains(ItemType.PegasusBoots)
                             || have.Contains(ItemType.TitansMitt)),
                     WriteItemCheck =
@@ -2048,7 +2075,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180003,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessSouthDarkWorld(have)
+                        && have.Contains(ItemType.MagicMirror),
                 },
                 new Location
                 {
@@ -2058,7 +2086,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180004,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessNorthWestDarkWorld(have)
+                        && have.Contains(ItemType.MagicMirror),
                 },
                 new Location
                 {
@@ -2068,8 +2097,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180005,
                     CanAccess =
                         have =>
-                        have.Contains(ItemType.OcarinaActive)
-                        && CanBeInDarkWorld(have)
+                        have.Contains(ItemType.OcarinaInactive)
+                        && have.Contains(ItemType.MagicMirror)
                         && have.Contains(ItemType.TitansMitt),
                 },
                 new Location
@@ -2080,7 +2109,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180006,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have)
+                        CanAccessNorthWestDarkWorld(have)
                         && have.Contains(ItemType.TitansMitt)
                         && have.Contains(ItemType.Hammer),
                 },
@@ -2102,7 +2131,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180011,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have),
+                        CanAccessSouthDarkWorld(have),
                 },
                 new Location
                 {
@@ -2114,6 +2143,27 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEscapeCastle(have)
                         && have.Contains(ItemType.PegasusBoots),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Mushroom",
+                    Address = 0x180013,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have),
+                },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Witch",
+                    Address = 0x180014,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have)
+                        && have.Contains(ItemType.Mushroom),
                 },
                 new Location
                 {
@@ -2134,7 +2184,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180141,
                     CanAccess =
                         have =>
-                        CanAccessEastDarkWorldDeathMountain(have),
+                        CanAccessEastDarkWorldDeathMountain(have)
+                        && have.Contains(ItemType.MoonPearl),
                 },
                 new Location
                 {
@@ -2167,7 +2218,8 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEscapeCastle(have)
                         && have.Contains(ItemType.Flippers)
-                        && CanAccessLowerDarkWorld(have),
+                        && CanAccessSouthDarkWorld(have)
+                        && have.Contains(ItemType.MagicMirror),
                 },
                 new Location
                 {
@@ -2187,7 +2239,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180146,
                     CanAccess =
                         have =>
-                        CanAccessLowerDarkWorld(have)
+                        CanAccessNorthWestDarkWorld(have)
                         && have.Contains(ItemType.Cape),
                 },
                 new Location
@@ -2200,16 +2252,16 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanAccessPyramid(have),
                 },
-                //new Location
-                //{
-                //    LateGameItem = false,
-                //    Region = Region.DarkWorld,
-                //    Name = "Piece of Heart (Digging Game)",
-                //    Address = 0x180148,
-                //    CanAccess =
-                //        have =>
-                //        CanAccessLowerDarkWorld(have),
-                //},
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.DarkWorld,
+                    Name = "Piece of Heart (Digging Game)",
+                    Address = 0x180148,
+                    CanAccess =
+                        have =>
+                        CanAccessSouthDarkWorld(have),
+                },
                 new Location
                 {
                     LateGameItem = false,
@@ -2221,7 +2273,120 @@ namespace AlttpRandomizer.Rom
                         CanAccessZorasRiver(have)
                         && have.Contains(ItemType.Flippers),
                 },
+                new Location
+                {
+                    LateGameItem = false,
+                    Region = Region.LightWorld,
+                    Name = "Haunted Grove item",
+                    Address = 0x18014A,
+                    CanAccess =
+                        have =>
+                        CanEscapeCastle(have)
+                        && have.Contains(ItemType.Shovel),
+                },
             };
+
+            SpecialLocations = new List<Location>
+            {
+                new Location
+                {
+                    Name = "Waterfall Bottle Item",
+                    Address = 0x348FF,
+                },
+                new Location
+                {
+                    Name = "Pyramid Bottle Item",
+                    Address = 0x3493B,
+                },
+                new Location
+                {
+                    Name = "Misery Mire Required Medallion",
+                    WriteItemCheck =
+                        (rom, item) =>
+                        {
+                            if (item == ItemType.Bombos)
+                            {
+                                rom.Seek(0x4FF2, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x31 }, 0, 1);
+                                rom.Seek(0x50D1, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x80 }, 0, 1);
+                                rom.Seek(0x51B0, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x00 }, 0, 1);
+                                rom.Seek(0x180022, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x00 }, 0, 1);
+                            }
+                            else if (item == ItemType.Ether)
+                            {
+                                rom.Seek(0x180022, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x01 }, 0, 1);
+                            }
+                            else if (item == ItemType.Quake)
+                            {
+                                rom.Seek(0x4FF2, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x31 }, 0, 1);
+                                rom.Seek(0x50D1, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x88 }, 0, 1);
+                                rom.Seek(0x51B0, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x00 }, 0, 1);
+                                rom.Seek(0x180022, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x02 }, 0, 1);
+                            }
+                        }
+                },
+                new Location
+                {
+                    Name = "Turtle Rock Required Medallion",
+                    WriteItemCheck =
+                        (rom, item) =>
+                        {
+                            if (item == ItemType.Bombos)
+                            {
+                                rom.Seek(0x5020, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x31 }, 0, 1);
+                                rom.Seek(0x50FF, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x90 }, 0, 1);
+                                rom.Seek(0x51DE, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x00 }, 0, 1);
+                                rom.Seek(0x180023, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x00 }, 0, 1);
+                            }
+                            else if (item == ItemType.Ether)
+                            {
+                                rom.Seek(0x5020, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x31 }, 0, 1);
+                                rom.Seek(0x50FF, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x98 }, 0, 1);
+                                rom.Seek(0x51DE, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x00 }, 0, 1);
+                                rom.Seek(0x180023, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x01 }, 0, 1);
+                            }
+                            else if (item == ItemType.Quake)
+                            {
+                                rom.Seek(0x180023, SeekOrigin.Begin);
+                                rom.Write(new byte[] { 0x02 }, 0, 1);
+                            }
+                        }
+                },
+            };
+        }
+
+        private bool HasBottle(List<ItemType> have)
+        {
+            return have.Contains(ItemType.Bottle)
+                || have.Contains(ItemType.BottleWithBee)
+                || have.Contains(ItemType.BottleWithBluePotion)
+                || have.Contains(ItemType.BottleWithFairy)
+                || have.Contains(ItemType.BottleWithGoldBee)
+                || have.Contains(ItemType.BottleWithGreenPotion)
+                || have.Contains(ItemType.BottleWithRedPotion);
+
+        }
+
+        private static bool CanLiftLightRocks(List<ItemType> have)
+        {
+            return have.Contains(ItemType.PowerGlove)
+                || have.Contains(ItemType.TitansMitt);
         }
 
         private static void WriteSpecialItemCheck(FileStream rom, ItemType item, int address)
@@ -2244,7 +2409,7 @@ namespace AlttpRandomizer.Rom
         private bool CanAccessZorasRiver(List<ItemType> have)
         {
             return CanEscapeCastle(have)
-                && ((have.Contains(ItemType.PowerGlove)
+                && ((CanLiftLightRocks(have)
                     && (have.Contains(ItemType.PegasusBoots)
                         || have.Contains(ItemType.TitansMitt)))
                     || have.Contains(ItemType.Flippers));
@@ -2266,20 +2431,21 @@ namespace AlttpRandomizer.Rom
         private bool CanAccessEastDarkWorldDeathMountain(List<ItemType> have)
         {
             return CanClimbDeathMountain(have)
-                && have.Contains(ItemType.Hammer)
-                && have.Contains(ItemType.TitansMitt)
-                && CanBeInDarkWorld(have);
+                && (have.Contains(ItemType.Hammer)
+                    || have.Contains(ItemType.Hookshot))
+                && have.Contains(ItemType.TitansMitt);
         }
 
         private bool CanClimbDeathMountain(List<ItemType> have)
         {
             return CanEscapeCastle(have)
-                && have.Contains(ItemType.PowerGlove);
+                && (CanLiftLightRocks(have)
+                    || have.Contains(ItemType.OcarinaInactive));
         }
 
         private bool CanEnterGanonsTower(List<ItemType> have)
         {
-            // items guaranteed here: Cane of Somaria, Ether, Fire Rod, Flippers, Hammer, Hookshot, Magic Mirror, Ocarina, Quake, Titan's Mitt
+            // items guaranteed here: Book, Bow, Cane of Somaria, Ether, Fire Rod, Flippers, Hammer, Hookshot, Ice Rod, Magic Mirror, Moon Pearl, Ocarina, Quake, Titan's Mitt
             return CanDefeatDarkPalace(have)
                 && CanDefeatSwampPalace(have)
                 && CanDefeatSkullWoods(have)
@@ -2315,14 +2481,17 @@ namespace AlttpRandomizer.Rom
 
         private bool CanDefeatIcePalace(List<ItemType> have)
         {
-            return CanEnterIcePalace(have);
+            return CanEnterIcePalace(have)
+                && have.Contains(ItemType.Hammer);
         }
 
         private bool CanDefeatMiseryMire(List<ItemType> have)
         {
             return CanEnterMiseryMire(have)
                 && have.Contains(ItemType.CaneOfSomaria)
-                && have.Contains(ItemType.Lamp);
+                && ((!LocationHasItem("[dungeon-D6-B1] Misery Mire - big key", ItemType.BigKey)
+                        && !LocationHasItem("[dungeon-D6-B1] Misery Mire - compass", ItemType.BigKey))
+                    || CanLightTorches(have));
         }
 
         private bool CanDefeatTurtleRock(List<ItemType> have)
@@ -2335,32 +2504,26 @@ namespace AlttpRandomizer.Rom
         private bool CanEnterTurtleRock(List<ItemType> have)
         {
             return CanAccessEastDarkWorldDeathMountain(have)
+                && have.Contains(ItemType.MoonPearl)
                 && have.Contains(ItemType.Hammer)
-                && have.Contains(ItemType.Quake)
+                && have.Contains(SpecialLocations.First(x => x.Name == "Turtle Rock Required Medallion").Item.Type)
                 && have.Contains(ItemType.CaneOfSomaria);
         }
 
         private bool CanEnterMiseryMire(List<ItemType> have)
         {
-            return have.Contains(ItemType.OcarinaActive)
-                && CanBeInDarkWorld(have)
+            return have.Contains(ItemType.OcarinaInactive)
+                && have.Contains(ItemType.MoonPearl)
                 && have.Contains(ItemType.TitansMitt)
-                && have.Contains(ItemType.Ether)
+                && have.Contains(SpecialLocations.First(x => x.Name == "Misery Mire Required Medallion").Item.Type)
                 && (have.Contains(ItemType.PegasusBoots)
                     || have.Contains(ItemType.Hookshot));
-        }
-
-        private bool CanBeInDarkWorld(List<ItemType> have)
-        {
-            return have.Contains(ItemType.MagicMirror)
-                && have.Contains(ItemType.MoonPearl)
-                && CanDefeatAgahnim1(have);
         }
 
         private bool CanEnterIcePalace(List<ItemType> have)
         {
             return have.Contains(ItemType.Flippers)
-                && CanBeInDarkWorld(have)
+                && have.Contains(ItemType.MoonPearl)
                 && have.Contains(ItemType.TitansMitt)
                 && (have.Contains(ItemType.FireRod)
                     || have.Contains(ItemType.Bombos));
@@ -2368,7 +2531,7 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEnterThievesTown(List<ItemType> have)
         {
-            return CanAccessLowerDarkWorld(have);
+            return CanAccessNorthWestDarkWorld(have);
         }
 
         private bool CanEnterSkullWoods2(List<ItemType> have)
@@ -2379,34 +2542,53 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEnterSkullWoods(List<ItemType> have)
         {
-            return CanAccessLowerDarkWorld(have);
+            return CanAccessNorthWestDarkWorld(have);
         }
 
         private bool CanEnterSwampPalace(List<ItemType> have)
         {
-            return CanAccessLowerDarkWorld(have)
-                && have.Contains(ItemType.Flippers);
+            return CanAccessSouthDarkWorld(have)
+                && have.Contains(ItemType.Flippers)
+                && have.Contains(ItemType.MagicMirror);
         }
 
-        private bool CanAccessLowerDarkWorld(List<ItemType> have)
+        private bool CanAccessSouthDarkWorld(List<ItemType> have)
         {
-            return CanAccessPyramid(have)
-                && (have.Contains(ItemType.Hammer)
-					|| have.Contains(ItemType.Hookshot))
-                && CanBeInDarkWorld(have);
+            return ((CanAccessPyramid(have)
+                        && (have.Contains(ItemType.Hammer)
+                            || have.Contains(ItemType.Hookshot)))
+                    || (have.Contains(ItemType.Hammer)
+                        && CanLiftLightRocks(have))
+                    || have.Contains(ItemType.TitansMitt))
+                && have.Contains(ItemType.MoonPearl);
+        }
+
+        private bool CanAccessNorthWestDarkWorld(List<ItemType> have)
+        {
+            return ((CanAccessPyramid(have)
+                        && have.Contains(ItemType.Hookshot)
+                        && (have.Contains(ItemType.Hammer)
+                            || CanLiftLightRocks(have)
+                            || have.Contains(ItemType.Flippers)))
+                    || (have.Contains(ItemType.Hammer)
+                        && CanLiftLightRocks(have))
+                    || have.Contains(ItemType.TitansMitt))
+                && have.Contains(ItemType.MoonPearl);
         }
 
         private bool CanEnterDarkPalace(List<ItemType> have)
         {
-            return CanAccessPyramid(have);
+            return CanAccessPyramid(have)
+                && have.Contains(ItemType.MoonPearl);
         }
 
         private bool CanAccessPyramid(List<ItemType> have)
         {
-            return (CanDefeatAgahnim1(have)
-                    || (have.Contains(ItemType.Hammer)
-                        && have.Contains(ItemType.TitansMitt)))
-                && CanBeInDarkWorld(have);
+            return CanDefeatAgahnim1(have)
+                || (have.Contains(ItemType.Hammer)
+                    && CanLiftLightRocks(have))
+                || (have.Contains(ItemType.TitansMitt)
+                    && have.Contains(ItemType.Flippers));
         }
 
         private bool CanDefeatAgahnim1(List<ItemType> have)
@@ -2416,14 +2598,14 @@ namespace AlttpRandomizer.Rom
 
         private bool CanDefeatTowerOfHera(List<ItemType> have)
         {
-            return CanEnterTowerOfHera(have);
+            return CanEnterTowerOfHera(have)
+                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", ItemType.BigKey) 
+                    || CanLightTorches(have));
         }
 
         private bool CanDefeatDesertPalace(List<ItemType> have)
         {
-            return CanEnterDesertPalace(have)
-                && have.Contains(ItemType.PowerGlove)
-                && have.Contains(ItemType.Bow)
+            return CanEnterDesertPalace2(have)
                 && CanLightTorches(have);
         }
 
@@ -2443,15 +2625,39 @@ namespace AlttpRandomizer.Rom
         {
             return CanEscapeCastle(have)
                 && CanClimbDeathMountain(have)
-                && have.Contains(ItemType.MagicMirror);
+                && (have.Contains(ItemType.MagicMirror)
+                    || (have.Contains(ItemType.Hookshot)
+                        && have.Contains(ItemType.Hammer)));
         }
 
         private bool CanEnterDesertPalace(List<ItemType> have)
         {
-            // technically you don't need the boots to enter, but you need them to do anything due to bump key
-            return CanEscapeCastle(have)
-                && have.Contains(ItemType.BookOfMudora)
-                && have.Contains(ItemType.PegasusBoots);
+            return (CanEscapeCastle(have)
+                    && have.Contains(ItemType.BookOfMudora)
+                    && have.Contains(ItemType.PegasusBoots))
+                || (have.Contains(ItemType.OcarinaInactive)
+                    && have.Contains(ItemType.TitansMitt)
+                    && have.Contains(ItemType.MagicMirror));
+        }
+
+        private bool CanEnterDesertPalace2(List<ItemType> have)
+        {
+            return (CanEscapeCastle(have)
+                    && have.Contains(ItemType.BookOfMudora)
+                    && have.Contains(ItemType.PegasusBoots) 
+                    && CanLiftLightRocks(have))
+                || (have.Contains(ItemType.OcarinaInactive)
+                    && have.Contains(ItemType.TitansMitt)
+                    && have.Contains(ItemType.MagicMirror)
+                    && (have.Contains(ItemType.PegasusBoots)
+                        || LocationHasItem("[dungeon-L2-B1] Desert Palace - Map room", ItemType.BigKey)));
+        }
+
+        private bool LocationHasItem(string locationName, ItemType item)
+        {
+            var location = Locations.FirstOrDefault(x => x.Name == locationName);
+
+            return location?.Item?.Type == item;
         }
 
         private bool CanEnterEasternPalace(List<ItemType> have)
@@ -2558,31 +2764,6 @@ namespace AlttpRandomizer.Rom
             return retVal;
         }
 
-        public List<ItemType> GetImplicitProgressionItems(List<ItemType> have)
-        {
-            var retVal = new List<ItemType>();
-
-            //if (CanEscapeCastle(have) && have.Contains(ItemType.PegasusBoots) && !have.Contains(ItemType.BookOfMudora))
-            //{
-            //    retVal.Add(ItemType.BookOfMudora);
-            //}
-            //if (CanGetMasterSword(have) && !have.Contains(ItemType.Bombos) && CanAccessLowerDarkWorld(have))
-            //{
-            //    retVal.Add(ItemType.Bombos);
-            //}
-            //if (CanGetMasterSword(have) && !have.Contains(ItemType.Ether))
-            //{
-            //    retVal.Add(ItemType.Ether);
-            //}
-            if (CanEscapeCastle(have) && have.Contains(ItemType.Shovel))
-            {
-                retVal.Add(ItemType.OcarinaInactive);
-                retVal.Add(ItemType.OcarinaActive);
-            }
-
-            return retVal;
-        }
-
         public List<ItemType> GetUniqueItems()
         {
             // Please exclude late game items from this list
@@ -2618,8 +2799,9 @@ namespace AlttpRandomizer.Rom
         public List<ItemType> GetItemPool(SeedRandom random)
         {
             SetLateGameItems(random);
+            SetSpecialLocations(random);
             
-            return new List<ItemType>
+            var retVal = new List<ItemType>
             {
                 // advancement items
                 ItemType.Bombos,
@@ -2636,23 +2818,20 @@ namespace AlttpRandomizer.Rom
                 //ItemType.L1SwordAndShield,
                 ItemType.MagicMirror,
                 ItemType.MoonPearl,
+                ItemType.OcarinaInactive,
                 ItemType.PegasusBoots,
                 ItemType.PowerGlove,
                 ItemType.Quake,
-                ItemType.Shovel,
                 ItemType.TitansMitt,
                 
                 // nice-to-have items
                 ItemType.BlueMail,
                 ItemType.Boomerang,
-                ItemType.Bottle,
-                ItemType.Bottle,
-                ItemType.Bottle,
-                ItemType.Bottle,
                 ItemType.BugCatchingNet,
                 ItemType.Cape,
                 ItemType.HeartContainer,
                 ItemType.MirrorShield,
+                ItemType.Mushroom,
                 ItemType.PieceOfHeart,
                 ItemType.PieceOfHeart,
                 ItemType.PieceOfHeart,
@@ -2675,10 +2854,13 @@ namespace AlttpRandomizer.Rom
                 ItemType.PieceOfHeart,
                 ItemType.PieceOfHeart,
                 ItemType.PieceOfHeart,
-                //ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.PieceOfHeart,
+                ItemType.Powder,
                 ItemType.RedBoomerang,
                 ItemType.RedMail,
                 ItemType.RedShield,
+                ItemType.Shovel,
                 ItemType.StaffOfByrna,
                 
                 // other treasure box contents
@@ -2761,6 +2943,54 @@ namespace AlttpRandomizer.Rom
                 ItemType.ThreeHundredRupees,
                 ItemType.ThreeHundredRupees,
             };
+
+            var bottleTypes = new List<ItemType>
+                {
+                    ItemType.Bottle,
+                    ItemType.BottleWithRedPotion,
+                    ItemType.BottleWithGreenPotion,
+                    ItemType.BottleWithBluePotion,
+                    ItemType.BottleWithBee,
+                    ItemType.BottleWithFairy,
+                    ItemType.BottleWithGoldBee,
+                };
+
+            //Bottles
+            for (int x = 0; x < 4; x++)
+            {
+                 retVal.Add(bottleTypes[random.Next(bottleTypes.Count)]);
+            }
+
+            return retVal;
+        }
+
+        private void SetSpecialLocations(SeedRandom random)
+        {
+            var bottleTypes = new List<ItemType>
+                {
+                    ItemType.BottleWithRedPotion,
+                    ItemType.BottleWithGreenPotion,
+                    ItemType.BottleWithBluePotion,
+                    ItemType.BottleWithBee,
+                    ItemType.BottleWithFairy,
+                    ItemType.BottleWithGoldBee,
+                };
+            var medallionTypes = new List<ItemType>
+                {
+                    ItemType.Bombos,
+                    ItemType.Ether,
+                    ItemType.Quake,
+                };
+
+            var waterfallItem = SpecialLocations.First(x => x.Name == "Waterfall Bottle Item");
+            waterfallItem.Item = new Item(bottleTypes[random.Next(bottleTypes.Count)]);
+            var pyramidItem = SpecialLocations.First(x => x.Name == "Pyramid Bottle Item");
+            pyramidItem.Item = new Item(bottleTypes[random.Next(bottleTypes.Count)]);
+
+            var mireMedallion = SpecialLocations.First(x => x.Name == "Misery Mire Required Medallion");
+            mireMedallion.Item = new Item(medallionTypes[random.Next(medallionTypes.Count)]);
+            var trockMedallion = SpecialLocations.First(x => x.Name == "Turtle Rock Required Medallion");
+            trockMedallion.Item = new Item(medallionTypes[random.Next(medallionTypes.Count)]);
         }
 
         private void SetLateGameItems(SeedRandom random)
@@ -2770,30 +3000,9 @@ namespace AlttpRandomizer.Rom
                     ItemType.RedMail,
                     ItemType.MirrorShield,
                 };
-            var possibleLateGameItems = new List<List<ItemType>>
-                {
-                    new List<ItemType>
-                    {
-                        ItemType.Hammer,
-                    },
-                    new List<ItemType>
-                    {
-                        ItemType.TitansMitt,
-                    },
-                    new List<ItemType>
-                    {
-                        ItemType.TitansMitt,
-                    },
-                    new List<ItemType>
-                    {
-                        ItemType.Hammer,
-                        ItemType.TitansMitt,
-                    },
-                };
             
             lateGameItems = new List<ItemType>();
             lateGameItems.AddRange(coreLateGameItems);
-            lateGameItems.AddRange(possibleLateGameItems[random.Next(possibleLateGameItems.Count)]);
         }
     }
 }
