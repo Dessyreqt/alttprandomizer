@@ -183,7 +183,6 @@
             this.sramTrace.TabIndex = 35;
             this.sramTrace.Text = "SRAM Trace";
             this.sramTrace.UseVisualStyleBackColor = true;
-            this.sramTrace.Visible = false;
             // 
             // MainForm
             // 

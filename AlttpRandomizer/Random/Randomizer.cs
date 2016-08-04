@@ -413,7 +413,7 @@ namespace AlttpRandomizer.Random
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
             // key zone 4: 1 key
-			currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 4)).ToList();
+			currentLocations = locations.Where(x => IsInKeyZone(x, 4)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();

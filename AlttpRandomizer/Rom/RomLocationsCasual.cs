@@ -32,7 +32,7 @@ namespace AlttpRandomizer.Rom
                     KeyZone = 2,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -73,8 +73,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE97A,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && have.Contains(ItemType.PegasusBoots)
+                        have.Contains(ItemType.PegasusBoots)
                         && (have.Contains(ItemType.TitansMitt)
                             || (CanAccessNorthWestDarkWorld(have)
                                 && have.Contains(ItemType.MoonPearl))),
@@ -125,7 +124,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE98C,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -137,7 +136,8 @@ namespace AlttpRandomizer.Rom
                     // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterDesertPalace(have),
+                        CanEnterDesertPalace(have)
+                        && CanGetDesertPalaceKey(have),
                 },
                 new Location
                 {
@@ -310,7 +310,8 @@ namespace AlttpRandomizer.Rom
                     KeyZone = 1,
                     CanAccess =
                         have =>
-                        CanEnterDesertPalace(have),
+                        CanEnterDesertPalace(have)
+                        && CanGetDesertPalaceKey(have),
                 },
                 new Location
                 {
@@ -342,7 +343,8 @@ namespace AlttpRandomizer.Rom
                     KeyZone = 1,
                     CanAccess =
                         have =>
-                        CanEnterDesertPalace(have),
+                        CanEnterDesertPalace(have)
+                        && CanGetDesertPalaceKey(have),
                 },
                 new Location
                 {
@@ -352,7 +354,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9CE,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
 
                 new Location
@@ -433,7 +435,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9E9,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -463,7 +465,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9F2,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -993,7 +995,7 @@ namespace AlttpRandomizer.Rom
                     KeyZone = 4,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1023,7 +1025,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA82,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1033,7 +1035,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA85,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1043,7 +1045,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA88,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1067,7 +1069,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA8E,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1077,7 +1079,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA91,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1087,7 +1089,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA94,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1097,7 +1099,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA97,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1107,7 +1109,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA9A,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1537,7 +1539,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB0F,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1547,7 +1549,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB12,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1557,7 +1559,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB15,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1567,7 +1569,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB18,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1577,7 +1579,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB1B,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1718,8 +1720,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB3F,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && have.Contains(ItemType.PegasusBoots),
+                        have.Contains(ItemType.PegasusBoots),
                 },
                 new Location
                 {
@@ -1729,7 +1730,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB42,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1739,7 +1740,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB45,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1749,7 +1750,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB48,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1759,7 +1760,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB4B,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1769,7 +1770,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB4E,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -1830,8 +1831,7 @@ namespace AlttpRandomizer.Rom
                     KeyZone = 4,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && CanLiftLightRocks(have),
+                        CanLiftLightRocks(have),
                 },
                 new Location
                 {
@@ -1842,8 +1842,7 @@ namespace AlttpRandomizer.Rom
                     KeyZone = 4,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && CanLiftLightRocks(have),
+                        CanLiftLightRocks(have),
                 },
                 new Location
                 {
@@ -1854,8 +1853,7 @@ namespace AlttpRandomizer.Rom
                     KeyZone = 4,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && CanLiftLightRocks(have),
+                        CanLiftLightRocks(have),
                 },
                 new Location
                 {
@@ -1867,18 +1865,6 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanAccessNorthWestDarkWorld(have),
                 },
-                //// Getting anything other than the sword here can be bad for progress... may as well keep the sword here since you can't use it if you get it before the uncle.
-                //new Location
-                //{
-                //    LateGameItem = false,
-                //    UniqueItemOnly = false,
-                //    Region = Region.LightWorld,
-                //    Name = "Uncle",
-                //    Address = 0x2DF45,
-                //    CanAccess =
-                //        have =>
-                //        true,
-                //},
                 new Location
                 {
                     LateGameItem = false,
@@ -1887,12 +1873,11 @@ namespace AlttpRandomizer.Rom
                     Address = 0x2EB18,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
+                        true
                 },
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "Sahasrahla",
                     Address = 0x2F1FC,
@@ -1903,7 +1888,6 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = false,
                     Region = Region.DarkWorld,
                     Name = "Flute Boy",
                     Address = 0x330C7,
@@ -1914,14 +1898,12 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "Sick Kid",
                     Address = 0x339CF,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && HasBottle(have),
+                        HasBottle(have),
                 },
                 new Location
                 {
@@ -1943,20 +1925,19 @@ namespace AlttpRandomizer.Rom
                     Address = 0x33E7D,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && have.Contains(ItemType.Flippers),
+                        have.Contains(ItemType.Flippers),
                 },
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "Ether",
                     Address = 0x48B7C,
                     CanAccess =
                         have =>
                         CanEnterTowerOfHera(have)
-                        && CanGetMasterSword(have)
+                        && (CanGetMasterSword(have)
+                            || CanGetTemperedSword(have))
                         && have.Contains(ItemType.BookOfMudora),
                     WriteItemCheck =
                         (rom, item) =>
@@ -1968,14 +1949,14 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "Bombos",
                     Address = 0x48B81,
                     CanAccess =
                         have =>
                         CanAccessSouthDarkWorld(have)
-                        && CanGetMasterSword(have)
+                        && (CanGetMasterSword(have)
+                            || CanGetTemperedSword(have))
                         && have.Contains(ItemType.BookOfMudora)
                         && have.Contains(ItemType.MagicMirror),
                     WriteItemCheck =
@@ -1988,7 +1969,6 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = false,
                     Region = Region.DarkWorld,
                     Name = "Catfish",
                     Address = 0xEE185,
@@ -2009,7 +1989,6 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "King Zora",
                     Address = 0xEE1C3,
@@ -2028,7 +2007,6 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     LateGameItem = false,
-                    UniqueItemOnly = false,
                     Region = Region.LightWorld,
                     Name = "Old mountain man",
                     Address = 0xF69FA,
@@ -2044,7 +2022,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180000,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -2121,7 +2099,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180010,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -2141,8 +2119,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180012,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && have.Contains(ItemType.PegasusBoots),
+                        have.Contains(ItemType.PegasusBoots),
                 },
                 new Location
                 {
@@ -2152,7 +2129,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180013,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -2162,8 +2139,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180014,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && have.Contains(ItemType.Mushroom),
+                        have.Contains(ItemType.Mushroom),
                 },
                 new Location
                 {
@@ -2185,7 +2161,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessEastDarkWorldDeathMountain(have)
-                        && have.Contains(ItemType.MoonPearl),
+                        && have.Contains(ItemType.MoonPearl)
+                        && have.Contains(ItemType.MagicMirror),
                 },
                 new Location
                 {
@@ -2195,7 +2172,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180142,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -2205,8 +2182,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180143,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && have.Contains(ItemType.BookOfMudora),
+                        have.Contains(ItemType.BookOfMudora),
                 },
                 new Location
                 {
@@ -2216,8 +2192,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180144,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && have.Contains(ItemType.Flippers)
+                        have.Contains(ItemType.Flippers)
                         && CanAccessSouthDarkWorld(have)
                         && have.Contains(ItemType.MagicMirror),
                 },
@@ -2229,7 +2204,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180145,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have),
+                        true,
                 },
                 new Location
                 {
@@ -2240,7 +2215,8 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessNorthWestDarkWorld(have)
-                        && have.Contains(ItemType.Cape),
+                        && have.Contains(ItemType.Cape)
+                        && have.Contains(ItemType.Hookshot),
                 },
                 new Location
                 {
@@ -2281,8 +2257,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x18014A,
                     CanAccess =
                         have =>
-                        CanEscapeCastle(have)
-                        && have.Contains(ItemType.Shovel),
+                        have.Contains(ItemType.Shovel),
                 },
             };
 
@@ -2371,6 +2346,16 @@ namespace AlttpRandomizer.Rom
             };
         }
 
+        private static bool CanGetDesertPalaceKey(List<ItemType> have)
+        {
+            return (have.Contains(ItemType.BookOfMudora)
+                    && (have.Contains(ItemType.PegasusBoots)
+                        || CanLiftLightRocks(have)))
+                || (have.Contains(ItemType.OcarinaInactive)
+                    && have.Contains(ItemType.TitansMitt)
+                    && have.Contains(ItemType.MagicMirror));
+        }
+
         private bool HasBottle(List<ItemType> have)
         {
             return have.Contains(ItemType.Bottle)
@@ -2408,17 +2393,15 @@ namespace AlttpRandomizer.Rom
 
         private bool CanAccessZorasRiver(List<ItemType> have)
         {
-            return CanEscapeCastle(have)
-                && ((CanLiftLightRocks(have)
-                    && (have.Contains(ItemType.PegasusBoots)
-                        || have.Contains(ItemType.TitansMitt)))
-                    || have.Contains(ItemType.Flippers));
+            return CanLiftLightRocks(have)
+                || have.Contains(ItemType.Flippers);
         }
 
         private bool CanEnterHyruleCastleTower(List<ItemType> have)
         {
-            return (CanGetMasterSword(have))
-                || (have.Contains(ItemType.Cape));
+            return CanGetMasterSword(have)
+                || have.Contains(ItemType.Cape);
+                //|| CanGetTemperedSword(have) --this is a StackOverflow if I do this, so even though it's true, it also doesn't really matter since you'll probably be able to access anywhere you can get to with the Pyramid if you can get the Tempered Sword.
         }
 
         private bool CanGetMasterSword(List<ItemType> have)
@@ -2426,6 +2409,12 @@ namespace AlttpRandomizer.Rom
             return CanDefeatEasternPalace(have)
                 && CanDefeatDesertPalace(have)
                 && CanDefeatTowerOfHera(have);
+        }
+
+        private bool CanGetTemperedSword(List<ItemType> have)
+        {
+            return CanAccessNorthWestDarkWorld(have)
+                && have.Contains(ItemType.TitansMitt);
         }
 
         private bool CanAccessEastDarkWorldDeathMountain(List<ItemType> have)
@@ -2438,14 +2427,12 @@ namespace AlttpRandomizer.Rom
 
         private bool CanClimbDeathMountain(List<ItemType> have)
         {
-            return CanEscapeCastle(have)
-                && (CanLiftLightRocks(have)
-                    || have.Contains(ItemType.OcarinaInactive));
+            return CanLiftLightRocks(have)
+                || have.Contains(ItemType.OcarinaInactive);
         }
 
         private bool CanEnterGanonsTower(List<ItemType> have)
         {
-            // items guaranteed here: Book, Bow, Cane of Somaria, Ether, Fire Rod, Flippers, Hammer, Hookshot, Ice Rod, Magic Mirror, Moon Pearl, Ocarina, Quake, Titan's Mitt
             return CanDefeatDarkPalace(have)
                 && CanDefeatSwampPalace(have)
                 && CanDefeatSkullWoods(have)
@@ -2556,7 +2543,9 @@ namespace AlttpRandomizer.Rom
         {
             return ((CanAccessPyramid(have)
                         && (have.Contains(ItemType.Hammer)
-                            || have.Contains(ItemType.Hookshot)))
+                            || (have.Contains(ItemType.Hookshot)
+                                && (have.Contains(ItemType.Flippers)
+                                    || CanLiftLightRocks(have)))))
                     || (have.Contains(ItemType.Hammer)
                         && CanLiftLightRocks(have))
                     || have.Contains(ItemType.TitansMitt))
@@ -2623,8 +2612,7 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEnterTowerOfHera(List<ItemType> have)
         {
-            return CanEscapeCastle(have)
-                && CanClimbDeathMountain(have)
+            return CanClimbDeathMountain(have)
                 && (have.Contains(ItemType.MagicMirror)
                     || (have.Contains(ItemType.Hookshot)
                         && have.Contains(ItemType.Hammer)));
@@ -2632,9 +2620,7 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEnterDesertPalace(List<ItemType> have)
         {
-            return (CanEscapeCastle(have)
-                    && have.Contains(ItemType.BookOfMudora)
-                    && have.Contains(ItemType.PegasusBoots))
+            return have.Contains(ItemType.BookOfMudora)
                 || (have.Contains(ItemType.OcarinaInactive)
                     && have.Contains(ItemType.TitansMitt)
                     && have.Contains(ItemType.MagicMirror));
@@ -2642,9 +2628,9 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEnterDesertPalace2(List<ItemType> have)
         {
-            return (CanEscapeCastle(have)
-                    && have.Contains(ItemType.BookOfMudora)
-                    && have.Contains(ItemType.PegasusBoots) 
+            return (have.Contains(ItemType.BookOfMudora)
+                    && (have.Contains(ItemType.PegasusBoots)
+                        || LocationHasItem("[dungeon-L2-B1] Desert Palace - Map room", ItemType.BigKey))
                     && CanLiftLightRocks(have))
                 || (have.Contains(ItemType.OcarinaInactive)
                     && have.Contains(ItemType.TitansMitt)
@@ -2661,11 +2647,6 @@ namespace AlttpRandomizer.Rom
         }
 
         private bool CanEnterEasternPalace(List<ItemType> have)
-        {
-            return CanEscapeCastle(have);
-        }
-
-        private bool CanEscapeCastle(List<ItemType> have)
         {
             return true;
         }
@@ -2701,12 +2682,10 @@ namespace AlttpRandomizer.Rom
 
         public void TryInsertCandidateItem(List<Location> currentLocations, List<ItemType> candidateItemList, ItemType candidateItem)
         {
-            var uniqueItems = GetUniqueItems();
             var badLateGameItem = IsLateGameItem(candidateItem) && !currentLocations.Any(x => x.LateGameItem);
-            var needUniqueItem = !uniqueItems.Contains(candidateItem) && currentLocations.All(x => x.UniqueItemOnly);
             var badFirstItem = IsBadFirstItem(candidateItem) && currentLocations.All(x => x.Name == "[cave-040] Link's House");
 
-            if (!badLateGameItem && !needUniqueItem && !badFirstItem)
+            if (!badLateGameItem && !badFirstItem)
             {
                 candidateItemList.Add(candidateItem);
             }
@@ -2720,21 +2699,16 @@ namespace AlttpRandomizer.Rom
         public int GetInsertedLocation(List<Location> currentLocations, ItemType insertedItem, SeedRandom random)
         {
             int retVal;
-            var uniqueItems = GetUniqueItems();
             bool badLateGameItemSpot;
-            bool badUniqueItemSpot;
             bool badFirstItemSpot;
-            bool unusedUniqueItemSpot;
 
             do
             {
                 retVal = random.Next(currentLocations.Count);
 
                 badLateGameItemSpot = IsLateGameItem(insertedItem) && !currentLocations[retVal].LateGameItem;
-                badUniqueItemSpot = !uniqueItems.Contains(insertedItem) && currentLocations[retVal].UniqueItemOnly;
                 badFirstItemSpot = IsBadFirstItem(insertedItem) && currentLocations[retVal].Name == "[cave-040] Link's House";
-                unusedUniqueItemSpot = uniqueItems.Contains(insertedItem) && !currentLocations[retVal].UniqueItemOnly && currentLocations.Any(x => x.UniqueItemOnly);
-            } while (badLateGameItemSpot || badUniqueItemSpot || badFirstItemSpot || unusedUniqueItemSpot);
+            } while (badLateGameItemSpot || badFirstItemSpot);
 
             return retVal;
         }
@@ -2747,9 +2721,7 @@ namespace AlttpRandomizer.Rom
         public ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random)
         {
             ItemType retVal;
-            var uniqueItems = GetUniqueItems();
             bool badLateGameItem;
-            bool needUniqueItem;
             bool preferLateGameItem;
 
             do
@@ -2757,43 +2729,10 @@ namespace AlttpRandomizer.Rom
                 retVal = itemPool[random.Next(itemPool.Count)];
 
                 badLateGameItem = IsLateGameItem(retVal) && !currentLocations.Any(x => x.LateGameItem);
-                needUniqueItem = !uniqueItems.Contains(retVal) && currentLocations.All(x => x.UniqueItemOnly);
                 preferLateGameItem = !IsLateGameItem(retVal) && currentLocations.Any(x => x.LateGameItem) && itemPool.Any(IsLateGameItem);
-            } while (badLateGameItem || needUniqueItem || preferLateGameItem);
+            } while (badLateGameItem || preferLateGameItem);
 
             return retVal;
-        }
-
-        public List<ItemType> GetUniqueItems()
-        {
-            // Please exclude late game items from this list
-            return new List<ItemType>
-            {
-                // advancement items
-                ItemType.Bow,
-                ItemType.CaneOfSomaria,
-                ItemType.FireRod,
-                ItemType.Flippers,
-                //ItemType.Hammer,
-                ItemType.Hookshot,
-                ItemType.IceRod,
-                //ItemType.Lamp,
-                ItemType.MagicMirror,
-                ItemType.MoonPearl,
-                ItemType.PegasusBoots,
-                ItemType.PowerGlove,
-                ItemType.Quake,
-                ItemType.Shovel,
-                //ItemType.TitansMitt,
-                ItemType.BlueMail,
-                //ItemType.Boomerang,
-                ItemType.BugCatchingNet,
-                ItemType.Cape,
-                //ItemType.MirrorShield,
-                //ItemType.RedBoomerang,
-                //ItemType.RedMail,
-                ItemType.StaffOfByrna,
-            };
         }
 
         public List<ItemType> GetItemPool(SeedRandom random)
@@ -2815,7 +2754,6 @@ namespace AlttpRandomizer.Rom
                 ItemType.Hookshot,
                 ItemType.IceRod,
                 ItemType.Lamp,
-                //ItemType.L1SwordAndShield,
                 ItemType.MagicMirror,
                 ItemType.MoonPearl,
                 ItemType.OcarinaInactive,
