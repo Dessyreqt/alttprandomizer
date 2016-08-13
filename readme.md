@@ -1,4 +1,4 @@
-# Current Version: 5
+# Current Version: 6
 
 # About the Legend of Zelda: A Link to the Past Randomizer (or ALttPRandomizer)
 This is a simple program that moves around items in the Legend of Zelda: A Link to the Past (ALttP). It is used for racing the game.
@@ -11,6 +11,20 @@ This was created by Dessyreqt & Karkat, with input from the SRL ALttP community.
 Select a location to save your randomized rom, then select `Create`.
 
 Right now there is only one difficulty, "Casual". There may be other difficulties in the future.
+
+# Think You're Stuck? #
+
+Randomizing the game definitely tests how well you know it.
+Here's a few places where people commonly get stuck.
+
+##### Unable get all three pendants and can't get the Master Sword to enter Hyrule Castle Tower?
+Try using the cape to enter the tower instead of the Master Sword.
+##### No Book of Mudora to enter Desert Palace?  
+If you have the Ocarina and Titan's Mitt, you can use that instead.  
+##### No Fire Rod for use in the Ice Palace?  
+Try the Bombos Medallion instead. It makes lots of fire.
+##### Need the Hookshot to enter Misery Mire?  
+Try using the Pegasus Boots to charge into the block, jumping the gap with the recoil.
 
 # Differences from the normal game
 There are a number of differences from a randomized game to the normal game. Here's a short list:
@@ -40,6 +54,27 @@ This randomizer uses the 1.0 JP version of the base rom because it is what is pr
 - You can enter the Exploration Glitch in Tower of Hera by falling down the rightmost hole on the 3F, then jumping right from the wall.
 
 # What's new in Randomizer?
+
+v6
+- SRAM Trace checkbox now available. Check out Zarby89's HUD at https://zarby89.github.io/ZeldaHud/ to learn how to use this.
+- The third phase of Ganon has no additional warps.
+- Removed a key door in Ganon’s Tower (1F) and Misery Mire (B2) for better key randomization.
+- Adjustments to Desert Palace, Misery Mire, and Ganon's Tower key logic.
+- Pegasus Boots will now only show up in places where Titan's Mitt is not needed.
+- The Magic Bat now has a 1/3 chance to give 1/4 Magic instead of 1/2 Magic.
+- The Chest Game is limited to 2 chests per session to prevent crashes.
+- The cursed dwarf is removed when you die or s+q with him following you.
+- The sanctuary priest is now immortal and also refills your magic.
+- The old man on Death Mountain also refills your magic.
+- The 3 pots in Link’s house have been changed from hearts to a full
+magic jar and 2 faeries.
+- Defeating Agahnim removes followers and keeps the doors to Hyrule
+Castle open.
+- Removed the opening psychic message and invisible follower.
+- Removed all Pyramid text after defeating Agahnim.
+- Graphical bug fixes (shadow pendant, big key icons, wide sprites,
+faerie fountains, toggle items, arrow HUD icon.)
+- Other minor logic changes
 
 v5
 - Added capability for Mushroom/Powder and Shovel/Ocarina to be carried simultaneously.
