@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AlttpRandomizer.Random;
 
 namespace AlttpRandomizer.Rom
 {
-	public class RomLocationsFactory
+    public class RomLocationsFactory
 	{
 		public static IRomLocations GetRomLocations(RandomizerDifficulty difficulty)
 		{

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace AlttpRandomizer.Rom
 {
@@ -82,6 +81,11 @@ namespace AlttpRandomizer.Rom
         L1Sword = 0x49, // can't be used until after uncle dies
         OcarinaActive = 0x4a,
         PegasusBoots = 0x4b,
+        
+        // Magic Bat
+        FullMagic = 0x00,
+        HalfMagic = 0x01,
+        QuarterMagic = 0x02,
 	}
 
 	public class Item

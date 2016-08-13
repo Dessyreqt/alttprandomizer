@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using AlttpRandomizer.Net;
 using AlttpRandomizer.Rom;
 
 namespace AlttpRandomizer.IO
 {
-	public class RandomizerLog
+    public class RandomizerLog
 	{
 		private readonly List<Location> generatedItems;
 		private readonly List<Location> orderedItems;
@@ -188,8 +187,6 @@ namespace AlttpRandomizer.IO
 		{
 			switch (item.Type)
 			{
-				case ItemType.L1SwordAndShield:
-					return "L1 Sword & Shield";
                 case ItemType.RedShield:
                     return "Red Shield";
                 case ItemType.MirrorShield:
@@ -296,8 +293,14 @@ namespace AlttpRandomizer.IO
 					return "300 Rupees";
                 case ItemType.BottleWithGoldBee:
 			        return "Bottle (Gold Bee)";
-				case ItemType.PegasusBoots:
-					return "Pegasus Boots";
+                case ItemType.PegasusBoots:
+                    return "Pegasus Boots";
+                case ItemType.FullMagic:
+                    return "Full Magic";
+                case ItemType.HalfMagic:
+                    return "1/2 Magic";
+                case ItemType.QuarterMagic:
+                    return "1/4 Magic";
                 default:
 					throw new ArgumentException("Couldn't get item type!", "item");
 			}

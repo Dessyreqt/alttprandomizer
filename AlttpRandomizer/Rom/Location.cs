@@ -34,7 +34,6 @@ namespace AlttpRandomizer.Rom
         public string Name { get; set; }
         public long Address { get; set; }
         public bool LateGameItem { get; set; }
-        public bool UniqueItemOnly { get; set; }
         public int KeyZone { get; set; }
         public bool BigKeyNeeded { get; set; }
         public Access CanAccess { get; set; }

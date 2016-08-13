@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AlttpRandomizer.Net
 {
     public class RandomizerVersion
     {
-        public static string Current = "5";
+        public static string Current = "6";
         public static bool Debug = false;
 
         public static string CurrentDisplay
@@ -28,7 +24,7 @@ namespace AlttpRandomizer.Net
             }
         }
 
-        private const int checkVersion = 5;
+        private const int checkVersion = 6;
         private static readonly string checkAddress = "http://dessyreqt.github.io/alttprandomizer/?" + DateTime.Now.Ticks;
         private const string updateAddress = "http://dessyreqt.github.io/alttprandomizer/";
 

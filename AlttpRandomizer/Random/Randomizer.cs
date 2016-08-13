@@ -354,7 +354,7 @@ namespace AlttpRandomizer.Random
             currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
             // key zone 1: 1 key
-            currentLocations = locations.Where(x => IsInKeyZone(x, 1)).ToList();
+            currentLocations = locations.Where(x => IsInKeyZone(x, 0)).ToList();
             currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
             currentLocations = locations.Where(x => x.Item == null && !x.BigKeyNeeded).ToList();
@@ -413,7 +413,7 @@ namespace AlttpRandomizer.Random
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.BigKey);
 
             // key zone 4: 1 key
-			currentLocations = locations.Where(x => IsInKeyZone(x, 4)).ToList();
+			currentLocations = locations.Where(x => IsInOrBeforeKeyZone(x, 4)).ToList();
 			currentLocations[random.Next(currentLocations.Count)].Item = new Item(ItemType.Key);
 
 			currentLocations = locations.Where(x => x.Item == null).ToList();
@@ -529,6 +529,8 @@ namespace AlttpRandomizer.Random
 					haveItems.Remove(candidateItem);
 				}
 
+			    AdjustCandidateItems(candidateItemList, haveItems, romLocations);
+
                 // Grab an item from the candidate list if there are any, otherwise, grab a random item
                 if (candidateItemList.Count > 0)
 				{
@@ -605,7 +607,32 @@ namespace AlttpRandomizer.Random
             log?.AddSpecialLocations(romLocations.SpecialLocations);
         }
 
-        private void GenerateItemList()
+        private void AdjustCandidateItems(List<ItemType> candidateItemList, List<ItemType> haveItems, IRomLocations romLocations)
+        {
+            // require Boots before Titan's Mitt
+            if (candidateItemList.Contains(ItemType.TitansMitt) && !haveItems.Contains(ItemType.PegasusBoots))
+            {
+                candidateItemList.Remove(ItemType.TitansMitt);
+            }
+
+            // stop double-item-needed deadlocks
+            if (candidateItemList.Count == 0)
+            {
+                var trockMedallion = romLocations.SpecialLocations.First(x => x.Name == "Turtle Rock Required Medallion").Item.Type;
+                AddUnownedItem(candidateItemList, haveItems, trockMedallion);
+                AddUnownedItem(candidateItemList, haveItems, ItemType.FireRod);
+            }
+        }
+
+	    private static void AddUnownedItem(List<ItemType> candidateItemList, List<ItemType> haveItems, ItemType item)
+	    {
+	        if (!haveItems.Contains(item))
+	        {
+	            candidateItemList.Add(item);
+	        }
+	    }
+
+	    private void GenerateItemList()
 		{
 			romLocations.ResetLocations();
 			haveItems = new List<ItemType>();
