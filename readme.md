@@ -12,7 +12,9 @@ Select a location to save your randomized rom, then select `Create`.
 
 Right now there is only one difficulty, "Casual". There may be other difficulties in the future.
 
-# Think You're Stuck? #
+You can enable the "SRAM Trace" to automatically populate Zarby89's HUD, which can be found at https://zarby89.github.io/ZeldaHud/
+
+# Think You're Stuck?
 
 Randomizing the game definitely tests how well you know it.
 Here's a few places where people commonly get stuck.
