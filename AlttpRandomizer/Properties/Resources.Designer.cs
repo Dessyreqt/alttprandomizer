@@ -93,6 +93,16 @@ namespace AlttpRandomizer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bulk_checkmark {
+            get {
+                object obj = ResourceManager.GetObject("bulk_checkmark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bulleted_list_options {
             get {
                 object obj = ResourceManager.GetObject("bulleted_list_options", resourceCulture);

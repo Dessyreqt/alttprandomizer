@@ -42,6 +42,8 @@
             this.heartBeepSpeed = new System.Windows.Forms.ComboBox();
             this.checkForUpdates = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bulkCreateCount = new System.Windows.Forms.NumericUpDown();
+            this.bulkCreate = new System.Windows.Forms.Button();
             this.listSpoiler = new System.Windows.Forms.Button();
             this.browse = new System.Windows.Forms.Button();
             this.create = new System.Windows.Forms.Button();
@@ -49,6 +51,7 @@
             this.report = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bulkCreateCount)).BeginInit();
             this.SuspendLayout();
             // 
             // createSpoilerLog
@@ -201,6 +204,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.bulkCreateCount);
+            this.groupBox2.Controls.Add(this.bulkCreate);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.filename);
             this.groupBox2.Controls.Add(this.listSpoiler);
@@ -215,6 +220,41 @@
             this.groupBox2.TabIndex = 38;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File Options";
+            // 
+            // bulkCreateCount
+            // 
+            this.bulkCreateCount.Location = new System.Drawing.Point(9, 137);
+            this.bulkCreateCount.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.bulkCreateCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.bulkCreateCount.Name = "bulkCreateCount";
+            this.bulkCreateCount.Size = new System.Drawing.Size(35, 20);
+            this.bulkCreateCount.TabIndex = 38;
+            this.bulkCreateCount.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // bulkCreate
+            // 
+            this.bulkCreate.Image = global::AlttpRandomizer.Properties.Resources.bulk_checkmark;
+            this.bulkCreate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bulkCreate.Location = new System.Drawing.Point(50, 135);
+            this.bulkCreate.Name = "bulkCreate";
+            this.bulkCreate.Size = new System.Drawing.Size(93, 24);
+            this.bulkCreate.TabIndex = 37;
+            this.bulkCreate.Text = "Bulk Create";
+            this.bulkCreate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bulkCreate.UseVisualStyleBackColor = true;
+            this.bulkCreate.Click += new System.EventHandler(this.bulkCreate_Click);
             // 
             // listSpoiler
             // 
@@ -302,6 +342,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bulkCreateCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,6 +369,8 @@
         private System.Windows.Forms.CheckBox checkForUpdates;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox heartBeepSpeed;
+        private System.Windows.Forms.Button bulkCreate;
+        private System.Windows.Forms.NumericUpDown bulkCreateCount;
     }
 }
 

@@ -50,7 +50,43 @@ namespace AlttpRandomizer
                 return;
             }
 
-            CreateRom(difficulty);
+            int parsedSeed;
+
+            if (!int.TryParse(seed.Text, out parsedSeed))
+            {
+                MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WriteOutput("Seed must be numeric or blank.");
+            }
+            else
+            {
+                try
+                {
+                    var romLocations = RomLocationsFactory.GetRomLocations(difficulty);
+                    RandomizerLog log = null;
+
+                    if (createSpoilerLog.Checked)
+                    {
+                        log = new RandomizerLog(string.Format(romLocations.SeedFileString, parsedSeed));
+                    }
+
+                    seed.Text = string.Format(romLocations.SeedFileString, parsedSeed);
+
+                    CreateRom(romLocations, log, difficulty, parsedSeed);
+
+                    var outputString = new StringBuilder();
+
+                    outputString.AppendFormat("Done!{0}{0}{0}Seed: ", Environment.NewLine);
+                    outputString.AppendFormat(romLocations.SeedFileString, parsedSeed);
+                    outputString.AppendFormat(" ({0} Difficulty){1}{1}", romLocations.DifficultyName, Environment.NewLine);
+
+                    WriteOutput(outputString.ToString());
+                }
+                catch (RandomizationException ex)
+                {
+                    WriteOutput(ex.ToString());
+                }
+
+            }
 
             SaveRandomizerSettings();
         }
@@ -66,52 +102,18 @@ namespace AlttpRandomizer
             Settings.Default.Save();
         }
 
-        private void CreateRom(RandomizerDifficulty difficulty)
+        private void CreateRom(IRomLocations romLocations, RandomizerLog log, RandomizerDifficulty difficulty, int parsedSeed)
         {
-            int parsedSeed;
+            var randomizer = new Randomizer(parsedSeed, romLocations, log);
+            var options = new RandomizerOptions
+                            {
+                                Filename = filename.Text,
+                                SramTrace = sramTrace.Checked,
+                                Difficulty = difficulty,
+                                HeartBeepSpeed = GetHeartBeepSpeed(),
+                            };
 
-            if (!int.TryParse(seed.Text, out parsedSeed))
-            {
-                MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                WriteOutput("Seed must be numeric or blank.");
-            }
-            else
-            {
-                var romPlms = RomLocationsFactory.GetRomLocations(difficulty);
-                RandomizerLog log = null;
-
-                if (createSpoilerLog.Checked)
-                {
-                    log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
-                }
-
-                seed.Text = string.Format(romPlms.SeedFileString, parsedSeed);
-
-                try
-                {
-                    var randomizer = new Randomizer(parsedSeed, romPlms, log);
-                    var options = new RandomizerOptions
-                                  {
-                                      Filename = filename.Text,
-                                      SramTrace = sramTrace.Checked,
-                                      Difficulty = difficulty,
-                                      HeartBeepSpeed = GetHeartBeepSpeed(),
-                                  };
-                    randomizer.CreateRom(options);
-
-                    var outputString = new StringBuilder();
-
-                    outputString.AppendFormat("Done!{0}{0}{0}Seed: ", Environment.NewLine);
-                    outputString.AppendFormat(romPlms.SeedFileString, parsedSeed);
-                    outputString.AppendFormat(" ({0} Difficulty){1}{1}", romPlms.DifficultyName, Environment.NewLine);
-
-                    WriteOutput(outputString.ToString());
-                }
-                catch (RandomizationException ex)
-                {
-                    WriteOutput(ex.ToString());
-                }
-            }
+            randomizer.CreateRom(options);
         }
 
         private HeartBeepSpeed GetHeartBeepSpeed()
@@ -215,6 +217,7 @@ namespace AlttpRandomizer
         private void WriteOutput(string text)
         {
             output.Text += text;
+            Application.DoEvents();
         }
 
         private void browse_Click(object sender, EventArgs e)
@@ -306,6 +309,82 @@ namespace AlttpRandomizer
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SaveRandomizerSettings();
+        }
+
+        private void bulkCreate_Click(object sender, EventArgs e)
+        {
+            if (!filename.Text.Contains("<seed>"))
+            {
+                MessageBox.Show("Bulk create requires \"<seed>\" be in the file name.", "Filename Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WriteOutput("Bulk create requires \"<seed>\" be in the file name.");
+            }
+            else
+            {
+                ClearOutput();
+
+                var difficulty = GetRandomizerDifficulty();
+
+                if (difficulty == RandomizerDifficulty.None)
+                {
+                    return;
+                }
+
+                int successCount = 0;
+                int failCount = 0;
+
+                for (int seedNum = 0; seedNum < bulkCreateCount.Value; seedNum++)
+                {
+                    int parsedSeed = new SeedRandom().Next(10000000);
+                    var romLocations = RomLocationsFactory.GetRomLocations(difficulty);
+                    RandomizerLog log = null;
+
+                    var outputString = new StringBuilder();
+                    outputString.Append("Creating Seed: ");
+                    outputString.AppendFormat(romLocations.SeedFileString, parsedSeed);
+                    outputString.AppendFormat(" ({0} Difficulty){1}", romLocations.DifficultyName, Environment.NewLine);
+                    WriteOutput(outputString.ToString());
+
+                    if (createSpoilerLog.Checked)
+                    {
+                        log = new RandomizerLog(string.Format(romLocations.SeedFileString, parsedSeed));
+                    }
+
+                    seed.Text = string.Format(romLocations.SeedFileString, parsedSeed);
+
+                    try
+                    {
+
+                        CreateRom(romLocations, log, difficulty, parsedSeed);
+
+                        outputString = new StringBuilder();
+                        outputString.AppendFormat("Completed Seed: ");
+                        outputString.AppendFormat(romLocations.SeedFileString, parsedSeed);
+                        outputString.AppendFormat(" ({0} Difficulty){1}{1}", romLocations.DifficultyName, Environment.NewLine);
+                        WriteOutput(outputString.ToString());
+
+                        successCount++;
+                    }
+                    catch (RandomizationException ex)
+                    {
+                        outputString = new StringBuilder();
+                        outputString.AppendFormat("FAILED Creating Seed: ");
+                        outputString.AppendFormat(romLocations.SeedFileString, parsedSeed);
+                        outputString.AppendFormat(" ({0} Difficulty) - {1}{2}{2}", romLocations.DifficultyName, ex.Message, Environment.NewLine);
+                        WriteOutput(outputString.ToString());
+
+                        failCount++;
+                        seedNum--;
+                    }
+                }
+
+                WriteOutput(string.Format("Completed! {0} successful", successCount));
+                if (failCount > 0)
+                {
+                    WriteOutput(string.Format(", {0} failed. ", failCount));
+                }
+            }
+
             SaveRandomizerSettings();
         }
     }

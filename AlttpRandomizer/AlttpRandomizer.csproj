@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chest_notes.txt" />
+    <None Include="Resources\bulk_checkmark.png" />
     <None Include="Resources\112_RefreshArrow_Blue.png" />
     <None Include="Resources\base_exclamationmark.png" />
     <None Include="Resources\bulleted_list_options.png" />
