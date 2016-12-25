@@ -1140,6 +1140,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-1F] Swamp Palace - first room",
                     Address = 0xEA9D,
+                    ForceItems = { InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have),
@@ -2624,7 +2625,7 @@ namespace AlttpRandomizer.Rom
 
         private bool CanEnterHyruleCastleTower(List<InventoryItemType> have)
         {
-            return CanUpgradeSword(have)
+            return CanGetMasterSword(have) // should be CanUpgradeSword but StackOverflows lie down this path
                 || have.Contains(InventoryItemType.Cape);
                 //|| CanGetTemperedSword(have) --this is a StackOverflow if I do this, so even though it's true, it also doesn't really matter since you'll probably be able to access anywhere you can get to with the Pyramid if you can get the Tempered Sword.
         }
@@ -2849,7 +2850,7 @@ namespace AlttpRandomizer.Rom
                     && CanLiftLightRocks(have))
                 || have.Contains(InventoryItemType.TitansMitt)
                 || ((CanGetMasterSword(have)
-                        || CanGetGoldSword(have)
+                        // || CanGetGoldSword(have) // this is true but probably irrelevant here
                         || have.Contains(InventoryItemType.Cape))
                     && ((have.Contains(InventoryItemType.Hookshot)
                             && (CanLiftLightRocks(have)
