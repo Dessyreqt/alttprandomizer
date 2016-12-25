@@ -6,7 +6,7 @@ namespace AlttpRandomizer.Net
 {
     public class RandomizerVersion
     {
-        public static string Current = "6";
+        public static string Current = "7P2";
         public static bool Debug = false;
 
         public static string CurrentDisplay

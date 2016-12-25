@@ -12,11 +12,17 @@ namespace AlttpRandomizer.Rom
         string SeedRomString { get; }
 
         void ResetLocations();
-        List<Location> GetAvailableLocations(List<ItemType> haveItems);
-        List<Location> GetUnavailableLocations(List<ItemType> haveItems);
-        void TryInsertCandidateItem(List<Location> currentLocations, List<ItemType> candidateItemList, ItemType candidateItem);
-        int GetInsertedLocation(List<Location> currentLocations, ItemType insertedItem, SeedRandom random);
-        ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random);
-        List<ItemType> GetItemPool(SeedRandom random);
+        bool CanDefeatDungeon(Region region, List<InventoryItemType> have);
+        void ResetRegion(Region region);
+        List<Location> GetAvailableLocations(List<InventoryItemType> haveItems);
+        List<Location> GetAvailableLocations(List<InventoryItemType> haveItems, Region region);
+        List<Location> GetUnavailableLocations(List<InventoryItemType> haveItems);
+        void TryInsertCandidateItem(List<Location> currentLocations, List<InventoryItemType> candidateItemList, InventoryItemType candidateItem);
+        int GetInsertedLocation(List<Location> currentLocations, InventoryItemType insertedItem, SeedRandom random);
+        InventoryItemType GetInsertedItem(List<Location> currentLocations, List<InventoryItemType> itemPool, SeedRandom random);
+        List<InventoryItemType> GetItemPool(SeedRandom random);
+        T GetItemAtLocation<T>(List<Location> locations, string locationName) where T : Item;
+        Location Location(string name);
+        Location SpecialLocation(string name);
     }
 }

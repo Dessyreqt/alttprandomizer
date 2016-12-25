@@ -27,19 +27,35 @@ namespace AlttpRandomizer.Rom
         GanonsTower,
     }
 
-    public delegate bool Access(List<ItemType> have);
+    public enum LocationType
+    {
+        Item,
+        Bat,
+        Health,
+        Magic,
+        Pendant,
+        Crystal,
+    }
+
+    public delegate bool Access(List<InventoryItemType> have);
 
     public class Location
     {
+        public Location()
+        {
+            ForceItems = new List<InventoryItemType>();
+            NeverItems = new List<InventoryItemType>();
+        }
+
         public string Name { get; set; }
-        public long Address { get; set; }
+        public int Address { get; set; }
         public bool LateGameItem { get; set; }
-        public int KeyZone { get; set; }
-        public bool BigKeyNeeded { get; set; }
         public Access CanAccess { get; set; }
-        public Action<FileStream, ItemType> WriteItemCheck { get; set; }
+        public Action<FileStream, Item> WriteItemCheck { get; set; }
         public Item Item { get; set; }
         public Region Region { get; set; }
         public int Weight { get; set; }
+        public List<InventoryItemType> ForceItems { get; set; }
+        public List<InventoryItemType> NeverItems { get; set; }
     }
 }

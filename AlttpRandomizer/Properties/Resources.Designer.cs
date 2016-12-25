@@ -63,6 +63,46 @@ namespace AlttpRandomizer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _112_RefreshArrow_Blue {
+            get {
+                object obj = ResourceManager.GetObject("112_RefreshArrow_Blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap base_checkmark {
+            get {
+                object obj = ResourceManager.GetObject("base_checkmark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap base_exclamationmark {
+            get {
+                object obj = ResourceManager.GetObject("base_exclamationmark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bulleted_list_options {
+            get {
+                object obj = ResourceManager.GetObject("bulleted_list_options", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MenuFileSaveIcon {
             get {
                 object obj = ResourceManager.GetObject("MenuFileSaveIcon", resourceCulture);

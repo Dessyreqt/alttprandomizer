@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\FileName.cs" />
+    <Compile Include="IO\FileStreamExtensions.cs" />
     <Compile Include="IO\RandomizerLog.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -60,11 +61,13 @@
     <Compile Include="Random\RandomizationException.cs" />
     <Compile Include="Random\Randomizer.cs" />
     <Compile Include="Random\SeedRandom.cs" />
+    <Compile Include="Rom\BaseRomLocations.cs" />
     <Compile Include="Rom\IRomLocations.cs" />
     <Compile Include="Rom\Item.cs" />
     <Compile Include="Rom\Location.cs" />
     <Compile Include="Rom\RomLocationsCasual.cs" />
     <Compile Include="Rom\RomLocationsFactory.cs" />
+    <Compile Include="Rom\RomLocationsGlitched.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chest_notes.txt" />
+    <None Include="Resources\112_RefreshArrow_Blue.png" />
+    <None Include="Resources\base_exclamationmark.png" />
+    <None Include="Resources\bulleted_list_options.png" />
+    <None Include="Resources\base_checkmark.png" />
     <None Include="Resources\MenuFileSaveIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

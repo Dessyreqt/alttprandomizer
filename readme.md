@@ -16,8 +16,7 @@ You can enable the "SRAM Trace" to automatically populate Zarby89's HUD, which c
 
 # Think You're Stuck?
 
-Randomizing the game definitely tests how well you know it.
-Here's a few places where people commonly get stuck.
+Randomizing the game definitely tests how well you know it. Here's a few places where people commonly get stuck.
 
 ##### Unable get all three pendants and can't get the Master Sword to enter Hyrule Castle Tower?
 Try using the cape to enter the tower instead of the Master Sword.

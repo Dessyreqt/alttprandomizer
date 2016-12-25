@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AlttpRandomizer.Random
 {
@@ -132,6 +133,22 @@ namespace AlttpRandomizer.Random
             {
                 buffer[i] = (byte)(InternalSample() % 256);
             }
+        }
+
+        public List<T> RandomizeList<T>(List<T> list)
+        {
+            var startList = new List<T>();
+            startList.AddRange(list);
+            var retVal = new List<T>();
+
+            while (startList.Count > 0)
+            {
+                var item = startList[Next(startList.Count)];
+                retVal.Add(item);
+                startList.Remove(item);
+            }
+
+            return retVal;
         }
     }
 }

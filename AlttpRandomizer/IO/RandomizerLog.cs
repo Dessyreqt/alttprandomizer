@@ -9,39 +9,65 @@ using AlttpRandomizer.Rom;
 namespace AlttpRandomizer.IO
 {
     public class RandomizerLog
-	{
-		private readonly List<Location> generatedItems;
-		private readonly List<Location> orderedItems;
+    {
+        private readonly List<Location> generatedItems;
+        private readonly List<Location> orderedItems;
         private readonly List<Location> specialLocations;
         private readonly string seed;
 
-		public RandomizerLog(string seed)
-		{
-			generatedItems = new List<Location>();
-			orderedItems = new List<Location>();
+        public RandomizerLog(string seed)
+        {
+            generatedItems = new List<Location>();
+            orderedItems = new List<Location>();
             specialLocations = new List<Location>();
             this.seed = seed;
-		}
+        }
 
-		public void AddOrderedItem(Location Location)
-		{
-			orderedItems.Add(Location);
-		}
-
-		public void AddGeneratedItems(List<Location> Locations)
-		{
-			generatedItems.AddRange(Locations);
-		}
-
-        public void AddSpecialLocations(List<Location> Locations)
+        public void AddOrderedItem(Location location)
         {
-            specialLocations.AddRange(Locations);
+            var minorItems = new List<InventoryItemType>
+                             {
+                                 InventoryItemType.BigKey,
+                                 InventoryItemType.Compass,
+                                 InventoryItemType.Key,
+                                 InventoryItemType.Map,
+                             };
+            var inventoryItem = location.Item as InventoryItem;
+
+            if (inventoryItem == null)
+            {
+                return;
+            }
+
+            if (minorItems.Contains(inventoryItem.Type))
+            {
+                return;
+            }
+
+            var extantLocation = orderedItems.FirstOrDefault(x => x.Name == location.Name);
+
+            if (extantLocation != null)
+            {
+                orderedItems.Remove(extantLocation);
+            }
+
+            orderedItems.Add(location);
+        }
+
+        public void AddGeneratedItems(List<Location> locations)
+        {
+            generatedItems.AddRange(locations);
+        }
+
+        public void AddSpecialLocations(List<Location> locations)
+        {
+            specialLocations.AddRange(locations);
         }
 
         public void WriteLog(string filename)
-		{
-			using (var writer = new StreamWriter(string.Format("{0}.spoilers.txt", filename)))
-			{
+        {
+            using (var writer = new StreamWriter(string.Format("{0}.spoilers.txt", filename)))
+            {
                 writer.Write(GetLogOutput());
             }
         }
@@ -67,105 +93,105 @@ namespace AlttpRandomizer.IO
             writer.AppendLine();
             writer.AppendLine("Light World");
             writer.AppendLine("-----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.LightWorld).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.LightWorld).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Dark World");
             writer.AppendLine("----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.DarkWorld).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.DarkWorld).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Hyrule Castle Escape");
             writer.AppendLine("--------------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.HyruleCastleEscape).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.HyruleCastleEscape).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Eastern Palace");
             writer.AppendLine("--------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.EasternPalace).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.EasternPalace).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Desert Palace");
             writer.AppendLine("-------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.DesertPalace).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.DesertPalace).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Tower of Hera");
             writer.AppendLine("-------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.TowerOfHera).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.TowerOfHera).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Hyrule Castle Tower");
             writer.AppendLine("-------------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.HyruleCastleTower).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.HyruleCastleTower).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Dark Palace");
             writer.AppendLine("-----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.DarkPalace).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.DarkPalace).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Swamp Palace");
             writer.AppendLine("------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.SwampPalace).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.SwampPalace).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Skull Woods");
             writer.AppendLine("-----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.SkullWoods).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.SkullWoods).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Thieves Town");
             writer.AppendLine("------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.ThievesTown).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.ThievesTown).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Ice Palace");
             writer.AppendLine("----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.IcePalace).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.IcePalace).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Misery Mire");
             writer.AppendLine("-----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.MiseryMire).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.MiseryMire).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Turtle Rock");
             writer.AppendLine("-----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.TurtleRock).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.TurtleRock).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
             writer.AppendLine("Ganon's Tower");
             writer.AppendLine("-------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.GanonsTower).OrderBy(x => x.Name))
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.GanonsTower).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
@@ -174,7 +200,7 @@ namespace AlttpRandomizer.IO
             writer.AppendLine();
             writer.AppendLine("Special Locations");
             writer.AppendLine("-----------------");
-            foreach (var Location in specialLocations.Where(x => x.Item.Type != ItemType.Nothing).OrderBy(x => x.Name))
+            foreach (var Location in specialLocations.Where(x => x.Item.HexValue != 0xFF).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
@@ -184,126 +210,208 @@ namespace AlttpRandomizer.IO
         }
 
         private string GetItemName(Item item)
-		{
-			switch (item.Type)
-			{
-                case ItemType.RedShield:
-                    return "Red Shield";
-                case ItemType.MirrorShield:
-					return "Mirror Shield";
-				case ItemType.FireRod:
-					return "Fire Rod";
-				case ItemType.IceRod:
-					return "Ice Rod";
-				case ItemType.Hammer:
-					return "Hammer";
-				case ItemType.Hookshot:
-					return "Hookshot";
-				case ItemType.Bow:
-					return "Bow";
-				case ItemType.Boomerang:
-					return "Boomerang";
-                case ItemType.Powder:
-			        return "Magic Powder";
-                case ItemType.Bombos:
-                    return "Bombos";
-                case ItemType.Ether:
-					return "Ether";
-				case ItemType.Quake:
-					return "Quake";
-				case ItemType.Lamp:
-					return "Lamp";
-				case ItemType.Shovel:
-					return "Shovel";
-				case ItemType.OcarinaInactive:
-					return "Ocarina";
-				case ItemType.CaneOfSomaria:
-					return "Cane of Somaria";
-				case ItemType.Bottle:
-					return "Bottle";
-				case ItemType.PieceOfHeart:
-					return "Piece of Heart";
-				case ItemType.StaffOfByrna:
-					return "Staff of Byrna";
-				case ItemType.Cape:
-					return "Cape";
-				case ItemType.MagicMirror:
-					return "Magic Mirror";
-				case ItemType.PowerGlove:
-					return "Power Glove";
-				case ItemType.TitansMitt:
-					return "Titan's Mitt";
-				case ItemType.BookOfMudora:
-					return "Book of Mudora";
-				case ItemType.Flippers:
-					return "Flippers";
-				case ItemType.MoonPearl:
-					return "Moon Pearl";
-				case ItemType.BugCatchingNet:
-					return "Bug-Catching Net";
-				case ItemType.BlueMail:
-					return "Blue Mail";
-				case ItemType.RedMail:
-					return "Red Mail";
-				case ItemType.Key:
-					return "Key";
-				case ItemType.Compass:
-					return "Compass";
-				case ItemType.ThreeBombs:
-					return "3 Bombs";
-                case ItemType.Mushroom:
-			        return "Mushroom";
-                case ItemType.RedBoomerang:
-                    return "Red Boomerang";
-                case ItemType.BottleWithRedPotion:
-                case ItemType.RedPotion:
-                    return "Bottle (Red Potion)";
-                case ItemType.BottleWithGreenPotion:
-                case ItemType.GreenPotion:
-                    return "Bottle (Green Potion)";
-                case ItemType.BottleWithBluePotion:
-                case ItemType.BluePotion:
-                    return "Bottle (Blue Potion)";
-                case ItemType.BigKey:
-					return "Big Key";
-				case ItemType.Map:
-					return "Map";
-				case ItemType.OneRupee:
-					return "1 Rupee";
-				case ItemType.FiveRupees:
-					return "5 Rupees";
-				case ItemType.TwentyRupees:
-					return "20 Rupees";
-                case ItemType.Bee:
-                case ItemType.BottleWithBee:
-                    return "Bottle (Bee)";
-                case ItemType.BottleWithFairy:
-                    return "Bottle (Fairy)";
-                case ItemType.HeartContainer:
-					return "Heart Container";
-				case ItemType.OneHundredRupees:
-					return "100 Rupees";
-				case ItemType.FiftyRupees:
-					return "50 Rupees";
-				case ItemType.Arrow:
-					return "1 Arrow";
-				case ItemType.TenArrows:
-					return "10 Arrows";
-				case ItemType.ThreeHundredRupees:
-					return "300 Rupees";
-                case ItemType.BottleWithGoldBee:
-			        return "Bottle (Gold Bee)";
-                case ItemType.PegasusBoots:
-                    return "Pegasus Boots";
-                case ItemType.FullMagic:
-                    return "Full Magic";
-                case ItemType.HalfMagic:
-                    return "1/2 Magic";
-                case ItemType.QuarterMagic:
-                    return "1/4 Magic";
-                default:
-					throw new ArgumentException("Couldn't get item type!", "item");
-			}
-		}
-	}
+        {
+            var inventoryItem = item as InventoryItem;
+            if (inventoryItem != null)
+            {
+                switch (inventoryItem.Type)
+                {
+                    case InventoryItemType.RedShield:
+                        return "Red Shield";
+                    case InventoryItemType.MirrorShield:
+                        return "Mirror Shield";
+                    case InventoryItemType.FireRod:
+                        return "Fire Rod";
+                    case InventoryItemType.IceRod:
+                        return "Ice Rod";
+                    case InventoryItemType.Hammer:
+                        return "Hammer";
+                    case InventoryItemType.Hookshot:
+                        return "Hookshot";
+                    case InventoryItemType.Bow:
+                        return "Bow";
+                    case InventoryItemType.Boomerang:
+                        return "Boomerang";
+                    case InventoryItemType.Powder:
+                        return "Magic Powder";
+                    case InventoryItemType.Bombos:
+                        return "Bombos";
+                    case InventoryItemType.Ether:
+                        return "Ether";
+                    case InventoryItemType.Quake:
+                        return "Quake";
+                    case InventoryItemType.Lamp:
+                        return "Lamp";
+                    case InventoryItemType.Shovel:
+                        return "Shovel";
+                    case InventoryItemType.OcarinaInactive:
+                        return "Ocarina";
+                    case InventoryItemType.CaneOfSomaria:
+                        return "Cane of Somaria";
+                    case InventoryItemType.Bottle:
+                        return "Bottle";
+                    case InventoryItemType.PieceOfHeart:
+                        return "Piece of Heart";
+                    case InventoryItemType.StaffOfByrna:
+                        return "Staff of Byrna";
+                    case InventoryItemType.Cape:
+                        return "Cape";
+                    case InventoryItemType.MagicMirror:
+                        return "Magic Mirror";
+                    case InventoryItemType.PowerGlove:
+                        return "Power Glove";
+                    case InventoryItemType.TitansMitt:
+                        return "Titan's Mitt";
+                    case InventoryItemType.BookOfMudora:
+                        return "Book of Mudora";
+                    case InventoryItemType.Flippers:
+                        return "Flippers";
+                    case InventoryItemType.MoonPearl:
+                        return "Moon Pearl";
+                    case InventoryItemType.BugCatchingNet:
+                        return "Bug-Catching Net";
+                    case InventoryItemType.BlueMail:
+                        return "Blue Mail";
+                    case InventoryItemType.RedMail:
+                        return "Red Mail";
+                    case InventoryItemType.Key:
+                        return "Key";
+                    case InventoryItemType.Compass:
+                        return "Compass";
+                    case InventoryItemType.ThreeBombs:
+                        return "3 Bombs";
+                    case InventoryItemType.Mushroom:
+                        return "Mushroom";
+                    case InventoryItemType.RedBoomerang:
+                        return "Red Boomerang";
+                    case InventoryItemType.BottleWithRedPotion:
+                    case InventoryItemType.RedPotion:
+                        return "Bottle (Red Potion)";
+                    case InventoryItemType.BottleWithGreenPotion:
+                    case InventoryItemType.GreenPotion:
+                        return "Bottle (Green Potion)";
+                    case InventoryItemType.BottleWithBluePotion:
+                    case InventoryItemType.BluePotion:
+                        return "Bottle (Blue Potion)";
+                    case InventoryItemType.BigKey:
+                        return "Big Key";
+                    case InventoryItemType.Map:
+                        return "Map";
+                    case InventoryItemType.OneRupee:
+                        return "1 Rupee";
+                    case InventoryItemType.FiveRupees:
+                        return "5 Rupees";
+                    case InventoryItemType.TwentyRupees:
+                        return "20 Rupees";
+                    case InventoryItemType.Bee:
+                    case InventoryItemType.BottleWithBee:
+                        return "Bottle (Bee)";
+                    case InventoryItemType.BottleWithFairy:
+                        return "Bottle (Fairy)";
+                    case InventoryItemType.HeartContainerNoRefill:
+                        return "Heart Container";
+                    case InventoryItemType.HeartContainer:
+                        return "Heart Container + Refill";
+                    case InventoryItemType.OneHundredRupees:
+                        return "100 Rupees";
+                    case InventoryItemType.FiftyRupees:
+                        return "50 Rupees";
+                    case InventoryItemType.Arrow:
+                        return "1 Arrow";
+                    case InventoryItemType.TenArrows:
+                        return "10 Arrows";
+                    case InventoryItemType.ThreeHundredRupees:
+                        return "300 Rupees";
+                    case InventoryItemType.BottleWithGoldBee:
+                        return "Bottle (Gold Bee)";
+                    case InventoryItemType.PegasusBoots:
+                        return "Pegasus Boots";
+                    case InventoryItemType.HalfMagic:
+                        return "1/2 Magic";
+                    case InventoryItemType.QuarterMagic:
+                        return "1/4 Magic";
+                    case InventoryItemType.FiftyBombCap:
+                        return "50 Bomb Cap";
+                    case InventoryItemType.SeventyArrowCap:
+                        return "70 Arrow Cap";
+                    default:
+                        throw new ArgumentException("Couldn't get item type!", "item");
+                }
+            }
+
+            var healthItem = item as HealthItem;
+            if (healthItem != null)
+            {
+                switch (healthItem.Type)
+                {
+                    case HealthItemType.NoRefill:
+                        return "No Refill";
+                    case HealthItemType.RefillHealth:
+                        return "Refill Health";
+                    default:
+                        throw new ArgumentException("Couldn't get item type!", "item");
+                }
+            }
+
+            var magicItem = item as MagicItem;
+            if (magicItem != null)
+            {
+                switch (magicItem.Type)
+                {
+                    case MagicItemType.NoRefill:
+                        return "No Refill";
+                    case MagicItemType.RefillMagic:
+                        return "Refill Magic";
+                    default:
+                        throw new ArgumentException("Couldn't get item type!", "item");
+                }
+            }
+
+            var pendantItem = item as PendantItem;
+            if (pendantItem != null)
+            {
+                switch (pendantItem.Type)
+                {
+                    case PendantItemType.None:
+                        return "No Pendant";
+                    case PendantItemType.RedPendant:
+                        return "Pendant of Wisdom (Red)";
+                    case PendantItemType.BluePendant:
+                        return "Pendant of Power (Blue)";
+                    case PendantItemType.GreenPendant:
+                        return "Pendant of Courage (Green)";
+                    default:
+                        throw new ArgumentException("Couldn't get item type!", "item");
+                }
+            }
+
+            var crystalItem = item as CrystalItem;
+            if (crystalItem != null)
+            {
+                switch (crystalItem.Type)
+                {
+                    case CrystalItemType.None:
+                        return "No Crystal";
+                    case CrystalItemType.Crystal6:
+                        return "Crystal 6 (Green)";
+                    case CrystalItemType.Crystal1:
+                        return "Crystal 1 (Orange/Red)";
+                    case CrystalItemType.Crystal5:
+                        return "Crystal 5 (Green/Red)";
+                    case CrystalItemType.Crystal7:
+                        return "Crystal 7 (Zelda)";
+                    case CrystalItemType.Crystal2:
+                        return "Crystal 2 (Pink/White)";
+                    case CrystalItemType.Crystal4:
+                        return "Crystal 4 (Pink/Red)";
+                    case CrystalItemType.Crystal3:
+                        return "Crystal 3 (Yellow/Brown)";
+                    default:
+                        throw new ArgumentException("Couldn't get item type!", "item");
+                }
+            }
+
+            throw new ArgumentException("Couldn't get item type!", "item");
+        }
+    }
 }

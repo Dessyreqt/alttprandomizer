@@ -2,10 +2,10 @@
 
 namespace AlttpRandomizer.Rom
 {
-    public enum ItemType
+    public enum InventoryItemType
     {
-		Nothing = 0xFF,
-		L1SwordAndShield = 0x00, // can't be used until after uncle dies
+        Nothing = 0xFF,
+        L1SwordAndShield = 0x00, // can't be used until after uncle dies
         L2Sword = 0x01, // crashes game
         L3Sword = 0x02, // can't be used until after uncle dies
         L4Sword = 0x03, // can't be used until after uncle dies
@@ -67,7 +67,7 @@ namespace AlttpRandomizer.Rom
         BowAndSilverArrows = 0x3b,
         BottleWithBee = 0x3c, 
         BottleWithFairy = 0x3d, 
-        HeartContainerNoDialog = 0x3e,
+        HeartContainerNoRefill = 0x3e,
         HeartContainer = 0x3f,
         OneHundredRupees = 0x40,
         FiftyRupees = 0x41,
@@ -81,24 +81,47 @@ namespace AlttpRandomizer.Rom
         L1Sword = 0x49, // can't be used until after uncle dies
         OcarinaActive = 0x4a,
         PegasusBoots = 0x4b,
-        
-        // Magic Bat
-        FullMagic = 0x00,
-        HalfMagic = 0x01,
-        QuarterMagic = 0x02,
-	}
+        FiftyBombCap = 0x4c,
+        SeventyArrowCap = 0x4d,
+        HalfMagic = 0x4e,
+        QuarterMagic = 0x4f,
+    }
 
-	public class Item
+    public enum HealthItemType
     {
-        private ItemType type;
-        public char HexValue { get; set; }
+        NoRefill = 0x00,
+        RefillHealth = 0xA0,
+    }
+    public enum MagicItemType
+    {
+        NoRefill = 0x00,
+        RefillMagic = 0x80,
+    }
 
-        public Item(ItemType insertedItem)
-        {
-            Type = insertedItem;
-        }
+    public enum PendantItemType
+    {
+        None = 0x00,
+        RedPendant = 0x01,
+        BluePendant = 0x02,
+        GreenPendant = 0x04,
+    }
 
-        public ItemType Type
+    public enum CrystalItemType
+    {
+        None = 0x00,
+        Crystal6 = 0x01,
+        Crystal1 = 0x02,
+        Crystal5 = 0x04,
+        Crystal7 = 0x08,
+        Crystal2 = 0x10,
+        Crystal4 = 0x20,
+        Crystal3 = 0x40,
+    }
+
+    public class InventoryItem : Item
+    {
+        private InventoryItemType type;
+        public new InventoryItemType Type
         {
             get { return type; }
             set
@@ -108,30 +131,122 @@ namespace AlttpRandomizer.Rom
             }
         }
 
-	    public static byte[] GetItemLevel(ItemType item)
-	    {
+        public InventoryItem(InventoryItemType insertedItem)
+        {
+            Type = insertedItem;
+        }
+    }
+
+    public class HealthItem : Item
+    {
+        private HealthItemType type;
+        public new HealthItemType Type
+        {
+            get { return type; }
+            set
+            {
+                type = value;
+                HexValue = (char)type;
+            }
+        }
+
+        public HealthItem(HealthItemType insertedItem)
+        {
+            Type = insertedItem;
+        }
+    }
+
+    public class MagicItem : Item
+    {
+        private MagicItemType type;
+        public new MagicItemType Type
+        {
+            get { return type; }
+            set
+            {
+                type = value;
+                HexValue = (char)type;
+            }
+        }
+
+        public MagicItem(MagicItemType insertedItem)
+        {
+            Type = insertedItem;
+        }
+    }
+
+    public class PendantItem : Item
+    {
+        private PendantItemType type;
+        public new PendantItemType Type
+        {
+            get { return type; }
+            set
+            {
+                type = value;
+                HexValue = (char)type;
+            }
+        }
+
+        public PendantItem(PendantItemType insertedItem)
+        {
+            Type = insertedItem;
+        }
+    }
+
+    public class CrystalItem : Item
+    {
+        private CrystalItemType type;
+        public new CrystalItemType Type
+        {
+            get { return type; }
+            set
+            {
+                type = value;
+                HexValue = (char)type;
+            }
+        }
+
+        public CrystalItem(CrystalItemType insertedItem)
+        {
+            Type = insertedItem;
+        }
+    }
+
+    public class Item
+    {
+        public char HexValue { get; set; }
+
+        internal Item()
+        {
+        }
+
+        public virtual object Type { get; set; }
+
+        public static byte[] GetItemLevel(InventoryItemType item)
+        {
             byte retVal;
 
             switch (item)
             {
-                case ItemType.RedBoomerang:
-                case ItemType.Powder:
-                case ItemType.MagicMirror:
-                case ItemType.TitansMitt:
-                case ItemType.RedShield:
-                case ItemType.OcarinaInactive:
-                case ItemType.L2Sword:
-                case ItemType.BowAndArrows:
-                case ItemType.RedMail:
+                case InventoryItemType.RedBoomerang:
+                case InventoryItemType.Powder:
+                case InventoryItemType.MagicMirror:
+                case InventoryItemType.TitansMitt:
+                case InventoryItemType.RedShield:
+                case InventoryItemType.OcarinaInactive:
+                case InventoryItemType.L2Sword:
+                case InventoryItemType.BowAndArrows:
+                case InventoryItemType.RedMail:
                     retVal = 0x02;
                     break;
-                case ItemType.BowAndSilverArrows:
-                case ItemType.OcarinaActive:
-                case ItemType.MirrorShield:
-                case ItemType.L3Sword:
+                case InventoryItemType.BowAndSilverArrows:
+                case InventoryItemType.OcarinaActive:
+                case InventoryItemType.MirrorShield:
+                case InventoryItemType.L3Sword:
                     retVal = 0x03;
                     break;
-                case ItemType.L4Sword:
+                case InventoryItemType.L4Sword:
                     retVal = 0x04;
                     break;
                 default:
@@ -143,99 +258,99 @@ namespace AlttpRandomizer.Rom
             return new[] { retVal };
         }
 
-        public static byte[] GetCheckLocation(ItemType item)
+        public static byte[] GetCheckLocation(InventoryItemType item)
         {
             byte retVal;
 
             switch (item)
             {
-                case ItemType.Bow:
-                case ItemType.BowAndArrows:
-                case ItemType.BowAndSilverArrows:
+                case InventoryItemType.Bow:
+                case InventoryItemType.BowAndArrows:
+                case InventoryItemType.BowAndSilverArrows:
                     retVal = 0x40;
                     break;
-                case ItemType.Boomerang:
-                case ItemType.RedBoomerang:
+                case InventoryItemType.Boomerang:
+                case InventoryItemType.RedBoomerang:
                     retVal = 0x41;
                     break;
-                case ItemType.Hookshot:
+                case InventoryItemType.Hookshot:
                     retVal = 0x42;
                     break;
-                case ItemType.Mushroom:
-                case ItemType.Powder:
+                case InventoryItemType.Mushroom:
+                case InventoryItemType.Powder:
                     retVal = 0x44;
                     break;
-                case ItemType.FireRod:
+                case InventoryItemType.FireRod:
                     retVal = 0x45;
                     break;
-                case ItemType.IceRod:
+                case InventoryItemType.IceRod:
                     retVal = 0x46;
                     break;
-                case ItemType.Bombos:
+                case InventoryItemType.Bombos:
                     retVal = 0x47;
                     break;
-                case ItemType.Ether:
+                case InventoryItemType.Ether:
                     retVal = 0x48;
                     break;
-                case ItemType.Quake:
+                case InventoryItemType.Quake:
                     retVal = 0x49;
                     break;
-                case ItemType.Lamp:
+                case InventoryItemType.Lamp:
                     retVal = 0x4a;
                     break;
-                case ItemType.Hammer:
+                case InventoryItemType.Hammer:
                     retVal = 0x4b;
                     break;
-                case ItemType.Shovel:
-                case ItemType.OcarinaActive:
-                case ItemType.OcarinaInactive:
+                case InventoryItemType.Shovel:
+                case InventoryItemType.OcarinaActive:
+                case InventoryItemType.OcarinaInactive:
                     retVal = 0x4c;
                     break;
-                case ItemType.BugCatchingNet:
+                case InventoryItemType.BugCatchingNet:
                     retVal = 0x4d;
                     break;
-                case ItemType.BookOfMudora:
+                case InventoryItemType.BookOfMudora:
                     retVal = 0x4e;
                     break;
-                case ItemType.CaneOfSomaria:
+                case InventoryItemType.CaneOfSomaria:
                     retVal = 0x50;
                     break;
-                case ItemType.StaffOfByrna:
+                case InventoryItemType.StaffOfByrna:
                     retVal = 0x51;
                     break;
-                case ItemType.Cape:
+                case InventoryItemType.Cape:
                     retVal = 0x52;
                     break;
-                case ItemType.MagicMirror:
+                case InventoryItemType.MagicMirror:
                     retVal = 0x53;
                     break;
-                case ItemType.PowerGlove:
-                case ItemType.TitansMitt:
+                case InventoryItemType.PowerGlove:
+                case InventoryItemType.TitansMitt:
                     retVal = 0x54;
                     break;
-                case ItemType.PegasusBoots:
+                case InventoryItemType.PegasusBoots:
                     retVal = 0x55;
                     break;
-                case ItemType.Flippers:
+                case InventoryItemType.Flippers:
                     retVal = 0x56;
                     break;
-                case ItemType.MoonPearl:
+                case InventoryItemType.MoonPearl:
                     retVal = 0x57;
                     break;
-                case ItemType.L1Sword:
-                case ItemType.L1SwordAndShield:
-                case ItemType.L2Sword:
-                case ItemType.L3Sword:
-                case ItemType.L4Sword:
+                case InventoryItemType.L1Sword:
+                case InventoryItemType.L1SwordAndShield:
+                case InventoryItemType.L2Sword:
+                case InventoryItemType.L3Sword:
+                case InventoryItemType.L4Sword:
                     retVal = 0x59;
                     break;
-                case ItemType.BlueShield:
-                case ItemType.RedShield:
-                case ItemType.MirrorShield:
+                case InventoryItemType.BlueShield:
+                case InventoryItemType.RedShield:
+                case InventoryItemType.MirrorShield:
                     retVal = 0x5a;
                     break;
-                case ItemType.BlueMail:
-                case ItemType.RedMail:
+                case InventoryItemType.BlueMail:
+                case InventoryItemType.RedMail:
                     retVal = 0x5b;
                     break;
                 default:
@@ -246,114 +361,114 @@ namespace AlttpRandomizer.Rom
             return new[] { retVal };
         }
 
-        public static byte[] GetCreditsName(ItemType item)
+        public static byte[] GetCreditsName(InventoryItemType item)
         {
-            int maxLength = 20;
+            const int maxLength = 20;
             StringBuilder retVal = new StringBuilder(maxLength, maxLength);
 
             switch (item)
             {
-                case ItemType.Bow:
+                case InventoryItemType.Bow:
                     retVal.Append("arrow sling");
                     break;
-                case ItemType.BowAndArrows:
+                case InventoryItemType.BowAndArrows:
                     retVal.Append("point stick");
                     break;
-                case ItemType.BowAndSilverArrows:
+                case InventoryItemType.BowAndSilverArrows:
                     retVal.Append("sharp stick");
                     break;
-                case ItemType.Boomerang:
-                case ItemType.RedBoomerang:
+                case InventoryItemType.Boomerang:
+                case InventoryItemType.RedBoomerang:
                     retVal.Append("bent stick");
                     break;
-                case ItemType.Hookshot:
+                case InventoryItemType.Hookshot:
                     retVal.Append("boinger");
                     break;
-                case ItemType.Mushroom:
-                case ItemType.Powder:
+                case InventoryItemType.Mushroom:
+                case InventoryItemType.Powder:
                     retVal.Append("legal drugs");
                     break;
-                case ItemType.FireRod:
+                case InventoryItemType.FireRod:
                     retVal.Append("flame staff");
                     break;
-                case ItemType.IceRod:
+                case InventoryItemType.IceRod:
                     retVal.Append("ice cream");
                     break;
-                case ItemType.Bombos:
+                case InventoryItemType.Bombos:
                     retVal.Append("swirly coin");
                     break;
-                case ItemType.Ether:
+                case InventoryItemType.Ether:
                     retVal.Append("bolt coin");
                     break;
-                case ItemType.Quake:
+                case InventoryItemType.Quake:
                     retVal.Append("wavy coin");
                     break;
-                case ItemType.Lamp:
+                case InventoryItemType.Lamp:
                     retVal.Append("candle");
                     break;
-                case ItemType.Hammer:
+                case InventoryItemType.Hammer:
                     retVal.Append("m c hammer");
                     break;
-                case ItemType.Shovel:
+                case InventoryItemType.Shovel:
                     retVal.Append("dirt spade");
                     break;
-                case ItemType.OcarinaActive:
-                case ItemType.OcarinaInactive:
+                case InventoryItemType.OcarinaActive:
+                case InventoryItemType.OcarinaInactive:
                     retVal.Append("bird call");
                     break;
-                case ItemType.BugCatchingNet:
+                case InventoryItemType.BugCatchingNet:
                     retVal.Append("stick web");
                     break;
-                case ItemType.BookOfMudora:
+                case InventoryItemType.BookOfMudora:
                     retVal.Append("moon runes");
                     break;
-                case ItemType.CaneOfSomaria:
+                case InventoryItemType.CaneOfSomaria:
                     retVal.Append("block stick");
                     break;
-                case ItemType.StaffOfByrna:
+                case InventoryItemType.StaffOfByrna:
                     retVal.Append("shiny stick");
                     break;
-                case ItemType.Cape:
+                case InventoryItemType.Cape:
                     retVal.Append("red hood");
                     break;
-                case ItemType.MagicMirror:
+                case InventoryItemType.MagicMirror:
                     retVal.Append("your face");
                     break;
-                case ItemType.PowerGlove:
+                case InventoryItemType.PowerGlove:
                     retVal.Append("lift glove");
                     break;
-                case ItemType.TitansMitt:
+                case InventoryItemType.TitansMitt:
                     retVal.Append("carry glove");
                     break;
-                case ItemType.PegasusBoots:
+                case InventoryItemType.PegasusBoots:
                     retVal.Append("sprint shoe");
                     break;
-                case ItemType.Flippers:
+                case InventoryItemType.Flippers:
                     retVal.Append("finger webs");
                     break;
-                case ItemType.MoonPearl:
+                case InventoryItemType.MoonPearl:
                     retVal.Append("lunar orb");
                     break;
-                case ItemType.L1Sword:
-                case ItemType.L1SwordAndShield:
-                case ItemType.L2Sword:
-                case ItemType.L3Sword:
-                case ItemType.L4Sword:
+                case InventoryItemType.L1Sword:
+                case InventoryItemType.L1SwordAndShield:
+                case InventoryItemType.L2Sword:
+                case InventoryItemType.L3Sword:
+                case InventoryItemType.L4Sword:
                     retVal.Append("sword");
                     break;
-                case ItemType.BlueShield:
+                case InventoryItemType.BlueShield:
                     retVal.Append("shield");
                     break;
-                case ItemType.RedShield:
+                case InventoryItemType.RedShield:
                     retVal.Append("red shield");
                     break;
-                case ItemType.MirrorShield:
+                case InventoryItemType.MirrorShield:
                     retVal.Append("face shield");
                     break;
-                case ItemType.BlueMail:
+                case InventoryItemType.BlueMail:
                     retVal.Append("blue suit");
                     break;
-                case ItemType.RedMail:
+                case InventoryItemType.RedMail:
                     retVal.Append("purple hat");
                     break;
                 default:

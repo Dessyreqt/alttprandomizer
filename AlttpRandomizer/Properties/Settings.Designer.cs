@@ -70,5 +70,29 @@ namespace AlttpRandomizer.Properties {
                 this["SramTrace"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CheckForUpdates {
+            get {
+                return ((bool)(this["CheckForUpdates"]));
+            }
+            set {
+                this["CheckForUpdates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public string HeartBeepSpeed {
+            get {
+                return ((string)(this["HeartBeepSpeed"]));
+            }
+            set {
+                this["HeartBeepSpeed"] = value;
+            }
+        }
     }
 }

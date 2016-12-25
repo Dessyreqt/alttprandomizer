@@ -7,7 +7,7 @@ using AlttpRandomizer.Random;
 
 namespace AlttpRandomizer.Rom
 {
-    public class RomLocationsCasual : BaseRomLocations, IRomLocations
+    public class RomLocationsGlitched : BaseRomLocations, IRomLocations
     {
         public override List<Location> Locations { get; set; }
         public override List<Location> SpecialLocations { get; set; }
@@ -74,7 +74,7 @@ namespace AlttpRandomizer.Rom
                                 && have.Contains(InventoryItemType.MagicMirror))),
                 },
                 new Location
-                {             
+                {
                     LateGameItem = false,
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - big chest",
@@ -104,11 +104,11 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have) 
-                        && have.Contains(InventoryItemType.Hammer) 
-                        && (have.Contains(InventoryItemType.Hookshot) 
-                            || (!LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",InventoryItemType.BigKey) 
-                                && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",InventoryItemType.BigKey)   
+                        CanEnterSwampPalace(have)
+                        && have.Contains(InventoryItemType.Hammer)
+                        && (have.Contains(InventoryItemType.Hookshot)
+                            || (!LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",InventoryItemType.BigKey)
+                                && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",InventoryItemType.BigKey)
                                 && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - hidden waterfall door room",InventoryItemType.BigKey))),
                 },
                 new Location
@@ -165,8 +165,8 @@ namespace AlttpRandomizer.Rom
                     // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods(have) 
-                        && (have.Contains(InventoryItemType.FireRod) 
+                        CanEnterSkullWoods(have)
+                        && (have.Contains(InventoryItemType.FireRod)
                             || !LocationHasItem("[dungeon-D3-B1] Skull Woods - Entrance to part 2", InventoryItemType.BigKey)),
                 },
                 new Location
@@ -234,7 +234,7 @@ namespace AlttpRandomizer.Rom
                             || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.BigKey)
                             || (LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
                                 && (have.Contains(InventoryItemType.Hookshot)
-                                    || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey) 
+                                    || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
                                             || LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
                                             || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
                                         && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
@@ -244,7 +244,7 @@ namespace AlttpRandomizer.Rom
                                     || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
                                 && have.Contains(InventoryItemType.Hammer)
                                 && (have.Contains(InventoryItemType.Hookshot)
-                                    || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey) 
+                                    || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
                                             || LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
                                             || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
                                         && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
@@ -554,7 +554,7 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D4-B1] Thieves' Town - Bottom left of huge room [bottom right chest]",
                     Address = 0xEA04,
                     CanAccess =
-                        have =>                                                                                                                                                                    
+                        have =>
                         CanEnterThievesTown(have),
                 },
                 new Location
@@ -769,18 +769,18 @@ namespace AlttpRandomizer.Rom
                     ForceItems = { InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have) 
+                        CanEnterDarkPalace(have)
                         && ((LocationHasItem("[dungeon-D1-B1] Dark Palace - shooter room", InventoryItemType.Key)
-                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key) 
-                                    || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key))) 
-                            || (have.Contains(InventoryItemType.Bow) 
-                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key) 
+                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
+                                    || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key)))
+                            || (have.Contains(InventoryItemType.Bow)
+                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
                                     || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)))
-                            || (have.Contains(InventoryItemType.Bow) 
+                            || (have.Contains(InventoryItemType.Bow)
                                 && have.Contains(InventoryItemType.Hammer)
-                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key) 
-                                    || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key) 
-                                    || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key) 
+                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
+                                    || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)
+                                    || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
                                     || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key)))),
                 },
                 new Location
@@ -804,9 +804,9 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterDarkPalace(have)
                         && (LocationHasItem("[dungeon-D1-B1] Dark Palace - shooter room", InventoryItemType.Key)
-                            || (have.Contains(InventoryItemType.Bow) 
+                            || (have.Contains(InventoryItemType.Bow)
                                 && have.Contains(InventoryItemType.Hammer))
-                            || (have.Contains(InventoryItemType.Bow) 
+                            || (have.Contains(InventoryItemType.Bow)
                                 && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
                                     || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)))),
                 },
@@ -2598,21 +2598,21 @@ namespace AlttpRandomizer.Rom
 
         private bool CanAccessLateDarkPalace(List<InventoryItemType> have)
         {
-            return CanEnterDarkPalace(have) 
-                && ((LocationHasItem("[dungeon-D1-B1] Dark Palace - shooter room", InventoryItemType.Key) 
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key) 
-                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key) 
+            return CanEnterDarkPalace(have)
+                && ((LocationHasItem("[dungeon-D1-B1] Dark Palace - shooter room", InventoryItemType.Key)
+                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key)
+                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
                             || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key)))
-                    || (have.Contains(InventoryItemType.Bow) 
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key) 
-                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key) 
+                    || (have.Contains(InventoryItemType.Bow)
+                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key)
+                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
                             || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)))
-                    || (have.Contains(InventoryItemType.Bow) 
-                        && have.Contains(InventoryItemType.Hammer) 
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key) 
-                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key) 
-                            || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key) 
-                            || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key) 
+                    || (have.Contains(InventoryItemType.Bow)
+                        && have.Contains(InventoryItemType.Hammer)
+                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key)
+                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
+                            || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)
+                            || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
                             || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key))));
         }
 
@@ -2626,7 +2626,7 @@ namespace AlttpRandomizer.Rom
         {
             return CanUpgradeSword(have)
                 || have.Contains(InventoryItemType.Cape);
-                //|| CanGetTemperedSword(have) --this is a StackOverflow if I do this, so even though it's true, it also doesn't really matter since you'll probably be able to access anywhere you can get to with the Pyramid if you can get the Tempered Sword.
+            //|| CanGetTemperedSword(have) --this is a StackOverflow if I do this, so even though it's true, it also doesn't really matter since you'll probably be able to access anywhere you can get to with the Pyramid if you can get the Tempered Sword.
         }
 
         private bool CanUpgradeSword(List<InventoryItemType> have)
@@ -2671,7 +2671,7 @@ namespace AlttpRandomizer.Rom
         {
             return CanClimbDeathMountain(have)
                 && have.Contains(InventoryItemType.MoonPearl)
-                && have.Contains(InventoryItemType.TitansMitt) 
+                && have.Contains(InventoryItemType.TitansMitt)
                 && (have.Contains(InventoryItemType.Hookshot)
                     || (have.Contains(InventoryItemType.Hammer)
                         && have.Contains(InventoryItemType.MagicMirror)));
@@ -2751,7 +2751,7 @@ namespace AlttpRandomizer.Rom
                     || (have.Contains(InventoryItemType.Hookshot)
                         && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.BigKey)
                             || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.BigKey)
-                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.BigKey))) 
+                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.BigKey)))
                     || ((LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
                             || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey)
                             || LocationHasItem("[dungeon-D5-B5] Ice Palace - big chest", InventoryItemType.BigKey))
@@ -2881,18 +2881,18 @@ namespace AlttpRandomizer.Rom
         internal override bool CanDefeatTowerOfHera(List<InventoryItemType> have)
         {
             return CanEnterTowerOfHera(have)
-                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey) 
+                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
                     || CanLightTorches(have));
         }
 
         internal override bool CanDefeatDesertPalace(List<InventoryItemType> have)
         {
-            return have.Contains(InventoryItemType.PegasusBoots) 
-                && CanLightTorches(have) 
-                && ((have.Contains(InventoryItemType.BookOfMudora) 
-                        && CanLiftLightRocks(have)) 
-                    || (have.Contains(InventoryItemType.OcarinaInactive) 
-                        && have.Contains(InventoryItemType.TitansMitt) 
+            return have.Contains(InventoryItemType.PegasusBoots)
+                && CanLightTorches(have)
+                && ((have.Contains(InventoryItemType.BookOfMudora)
+                        && CanLiftLightRocks(have))
+                    || (have.Contains(InventoryItemType.OcarinaInactive)
+                        && have.Contains(InventoryItemType.TitansMitt)
                         && have.Contains(InventoryItemType.MagicMirror)));
         }
 
@@ -2934,7 +2934,7 @@ namespace AlttpRandomizer.Rom
         {
             SetLateGameItems();
             SetSpecialLocations(random);
-            
+
             var retVal = new List<InventoryItemType>
             {
                 // advancement items
@@ -3102,7 +3102,7 @@ namespace AlttpRandomizer.Rom
             //Bottles
             for (int x = 0; x < 4; x++)
             {
-                 retVal.Add(bottleTypes[random.Next(bottleTypes.Count)]);
+                retVal.Add(bottleTypes[random.Next(bottleTypes.Count)]);
             }
 
             var magicBatItemTypes = new List<InventoryItemType>

@@ -15,46 +15,56 @@ namespace AlttpRandomizer
 {
     public partial class MainForm : Form
     {
-		private Thread checkUpdateThread;
+        private Thread checkUpdateThread;
 
-		public MainForm()
+        public MainForm()
         {
-			InitializeSettings();
-			InitializeComponent();
-		}
+            InitializeSettings();
+            InitializeComponent();
+        }
 
-		private void InitializeSettings()
-		{
-			// this fixes an issue with running on wine
-		    Settings.Default.SramTrace = Settings.Default.SramTrace;
-			Settings.Default.OutputFile = Settings.Default.OutputFile;
-			Settings.Default.RandomizerDifficulty = Settings.Default.RandomizerDifficulty;
-			Settings.Default.CreateSpoilerLog = Settings.Default.CreateSpoilerLog;
-		}
+        private void InitializeSettings()
+        {
+            // this fixes an issue with running on wine
+            Settings.Default.SramTrace = Settings.Default.SramTrace;
+            Settings.Default.OutputFile = Settings.Default.OutputFile;
+            Settings.Default.RandomizerDifficulty = Settings.Default.RandomizerDifficulty;
+            Settings.Default.CreateSpoilerLog = Settings.Default.CreateSpoilerLog;
+            Settings.Default.HeartBeepSpeed = Settings.Default.HeartBeepSpeed;
+            Settings.Default.CheckForUpdates = Settings.Default.CheckForUpdates;
+        }
 
-		private void create_Click(object sender, EventArgs e)
-		{
-			if (string.IsNullOrWhiteSpace(seed.Text))
-			{
-				SetSeedBasedOnDifficulty();
-			}
+        private void create_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(seed.Text))
+            {
+                SetSeedBasedOnDifficulty();
+            }
 
-			ClearOutput();
+            ClearOutput();
 
-		    var difficulty = GetRandomizerDifficulty();
+            var difficulty = GetRandomizerDifficulty();
 
-		    if (difficulty == RandomizerDifficulty.None)
-		    {
-		        return;
-		    }
+            if (difficulty == RandomizerDifficulty.None)
+            {
+                return;
+            }
 
             CreateRom(difficulty);
 
-		    Settings.Default.SramTrace = sramTrace.Checked;
-		    Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
-			Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
-			Settings.Default.Save();
-		}
+            SaveRandomizerSettings();
+        }
+
+        private void SaveRandomizerSettings()
+        {
+            Settings.Default.SramTrace = sramTrace.Checked;
+            Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
+            Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
+            Settings.Default.HeartBeepSpeed = heartBeepSpeed.SelectedItem.ToString();
+            Settings.Default.CheckForUpdates = checkForUpdates.Checked;
+
+            Settings.Default.Save();
+        }
 
         private void CreateRom(RandomizerDifficulty difficulty)
         {
@@ -80,7 +90,14 @@ namespace AlttpRandomizer
                 try
                 {
                     var randomizer = new Randomizer(parsedSeed, romPlms, log);
-                    randomizer.CreateRom(new RandomizerOptions { Filename = filename.Text, SramTrace = sramTrace.Checked });
+                    var options = new RandomizerOptions
+                                  {
+                                      Filename = filename.Text,
+                                      SramTrace = sramTrace.Checked,
+                                      Difficulty = difficulty,
+                                      HeartBeepSpeed = GetHeartBeepSpeed(),
+                                  };
+                    randomizer.CreateRom(options);
 
                     var outputString = new StringBuilder();
 
@@ -95,6 +112,18 @@ namespace AlttpRandomizer
                     WriteOutput(ex.ToString());
                 }
             }
+        }
+
+        private HeartBeepSpeed GetHeartBeepSpeed()
+        {
+            HeartBeepSpeed retVal;
+
+            if (Enum.TryParse(heartBeepSpeed.SelectedItem.ToString(), true, out retVal))
+            {
+                return retVal;
+            }
+
+            return HeartBeepSpeed.Normal;
         }
 
         private void CreateSpoilerLog(RandomizerDifficulty difficulty)
@@ -116,7 +145,7 @@ namespace AlttpRandomizer
                 try
                 {
                     var randomizer = new Randomizer(parsedSeed, romPlms, log);
-                    WriteOutput(randomizer.CreateRom(new RandomizerOptions { SpoilerOnly = true }));
+                    WriteOutput(randomizer.CreateRom(new RandomizerOptions { SpoilerOnly = true, Difficulty = difficulty}));
                 }
                 catch (RandomizationException ex)
                 {
@@ -135,12 +164,21 @@ namespace AlttpRandomizer
                 seed.Text = seed.Text.ToUpper().Replace("C", "");
                 difficulty = RandomizerDifficulty.Casual;
             }
+            if (seed.Text.ToUpper().Contains("G"))
+            {
+                randomizerDifficulty.SelectedItem = "Glitched";
+                seed.Text = seed.Text.ToUpper().Replace("G", "");
+                difficulty = RandomizerDifficulty.Glitched;
+            }
             else
             {
                 switch (randomizerDifficulty.SelectedItem.ToString())
                 {
                     case "Casual":
                         difficulty = RandomizerDifficulty.Casual;
+                        break;
+                    case "Glitched":
+                        difficulty = RandomizerDifficulty.Glitched;
                         break;
                     default:
                         MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -156,72 +194,85 @@ namespace AlttpRandomizer
         {
             switch (randomizerDifficulty.SelectedItem.ToString())
             {
-                default:
+                case "Casual":
                     seed.Text = string.Format("C{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
+                case "Glitched":
+                    seed.Text = string.Format("G{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
+                default:
+                    MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    WriteOutput("Please select a difficulty.");
                     break;
             }
         }
 
         private void ClearOutput()
-		{
-			output.Text = "";
-		}
+        {
+            output.Text = "";
+        }
 
-		private void WriteOutput(string text)
-		{
-			output.Text += text;
-		}
+        private void WriteOutput(string text)
+        {
+            output.Text += text;
+        }
 
-		private void browse_Click(object sender, EventArgs e)
-		{
-			var info = new FileInfo(Regex.Replace(filename.Text, "<.*>", ""));
-			var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name };
+        private void browse_Click(object sender, EventArgs e)
+        {
+            var info = new FileInfo(Regex.Replace(filename.Text, "<.*>", ""));
+            var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name };
 
-			if (saveFileDialog.ShowDialog() == DialogResult.OK)
-			{
-				filename.Text = saveFileDialog.FileName;
-				MessageBox.Show("Remember to hit \"create\" to create the rom.", "Remember to create the rom!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-			}
-		}
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filename.Text = saveFileDialog.FileName;
+                MessageBox.Show("Remember to hit \"create\" to create the rom.", "Remember to create the rom!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            }
+        }
 
-		private void filename_TextChanged(object sender, EventArgs e)
-		{
-			Settings.Default.OutputFile = filename.Text;
-			Settings.Default.Save();
-		}
+        private void filename_TextChanged(object sender, EventArgs e)
+        {
+            Settings.Default.OutputFile = filename.Text;
+            Settings.Default.Save();
+        }
 
-		private void filename_Leave(object sender, EventArgs e)
-		{
-			var senderText = (TextBox)sender;
+        private void filename_Leave(object sender, EventArgs e)
+        {
+            var senderText = (TextBox)sender;
 
-			if (!senderText.Text.Contains("."))
-			{
-				senderText.Text += ".sfc";
-			}
-		}
+            if (!senderText.Text.Contains("."))
+            {
+                senderText.Text += ".sfc";
+            }
+        }
 
-		private void report_Click(object sender, EventArgs e)
-		{
-		    if (output.Text.Contains("RandomizationException"))
-		    {
+        private void report_Click(object sender, EventArgs e)
+        {
+            if (output.Text.Contains("RandomizationException"))
+            {
                 var title = Uri.EscapeUriString(output.Text.Substring(47, output.Text.IndexOf(" --->", StringComparison.Ordinal) - 47));
                 var message = Uri.EscapeUriString(output.Text.Substring(0, output.Text.IndexOf("   at", StringComparison.Ordinal)));
                 Help.ShowHelp(null, string.Format("https://gitreports.com/issue/Dessyreqt/alttprandomizer?issue_title=[v{0}]%20{1}&details=[v{0}]%0A%0A{2}", RandomizerVersion.CurrentDisplay, title, message));
             }
             else
-		    {
+            {
                 Help.ShowHelp(null, string.Format("https://gitreports.com/issue/Dessyreqt/alttprandomizer?issue_title=[v{0}]%20Anonymous%20Issue&details=[v{0}]%0A%0A", RandomizerVersion.CurrentDisplay));
             }
         }
 
-		private void MainForm_Load(object sender, EventArgs e)
-		{
-			filename.Text = Settings.Default.OutputFile;
-			createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
-		    sramTrace.Checked = Settings.Default.SramTrace;
-			Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.CurrentDisplay);
-			randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
-			RunCheckUpdate();
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            filename.Text = Settings.Default.OutputFile;
+            createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
+            sramTrace.Checked = Settings.Default.SramTrace;
+            Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.CurrentDisplay);
+            randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
+            heartBeepSpeed.SelectedItem = Settings.Default.HeartBeepSpeed;
+            checkForUpdates.Checked = Settings.Default.CheckForUpdates;
+
+            if (checkForUpdates.Checked)
+            {
+                RunCheckUpdate();
+            }
 
             if (RandomizerVersion.Debug)
             {
@@ -231,11 +282,11 @@ namespace AlttpRandomizer
         }
 
         private void RunCheckUpdate()
-		{
-			checkUpdateThread = new Thread(RandomizerVersion.CheckUpdate);
-			checkUpdateThread.SetApartmentState(ApartmentState.STA);
-			checkUpdateThread.Start();
-		}
+        {
+            checkUpdateThread = new Thread(RandomizerVersion.CheckUpdate);
+            checkUpdateThread.SetApartmentState(ApartmentState.STA);
+            checkUpdateThread.Start();
+        }
 
         private void randomSpoiler_Click(object sender, EventArgs e)
         {
@@ -245,6 +296,17 @@ namespace AlttpRandomizer
 
             var difficulty = GetRandomizerDifficulty();
             CreateSpoilerLog(difficulty);
+        }
+
+        private void listSpoiler_Click(object sender, EventArgs e)
+        {
+            var difficulty = GetRandomizerDifficulty();
+            CreateSpoilerLog(difficulty);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveRandomizerSettings();
         }
     }
 }
