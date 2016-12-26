@@ -474,6 +474,24 @@ namespace AlttpRandomizer.Rom
                 case InventoryItemType.RedMail:
                     retVal.Append("purple hat");
                     break;
+                case InventoryItemType.ThreeBombs:
+                case InventoryItemType.TenBombs:
+                case InventoryItemType.Bomb:
+                case InventoryItemType.FiftyBombCap:
+                    retVal.Append("fireworks");
+                    break;
+                case InventoryItemType.Arrow:
+                case InventoryItemType.TenArrows:
+                case InventoryItemType.SeventyArrowCap:
+                    retVal.Append("sewing kit");
+                    break;
+               case InventoryItemType.PieceOfHeart:
+               case InventoryItemType.HeartContainerNoAnimation:
+               case InventoryItemType.HeartContainerNoRefill:
+               case InventoryItemType.HeartContainer:
+               case InventoryItemType.Heart:
+                    retVal.Append("love");
+                    break;
                 default:
                     retVal.Append("life lesson");
                     break;
@@ -520,5 +538,26 @@ namespace AlttpRandomizer.Rom
             return inputBytes;
         }
 
+        public static bool IsBottle(InventoryItemType item)
+        {
+            switch (item)
+            {
+                case InventoryItemType.Bottle:
+                case InventoryItemType.BottleWithRedPotion:
+                case InventoryItemType.BottleWithGreenPotion:
+                case InventoryItemType.BottleWithBluePotion:
+                case InventoryItemType.BottleWithBee:
+                case InventoryItemType.BottleWithFairy:
+                case InventoryItemType.BottleWithGoldBee:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsKeyItem(InventoryItemType item)
+        {
+            return GetCheckLocation(item)[0] != GetCheckLocation(InventoryItemType.Nothing)[0] || IsBottle(item);
+        }
     }
 }

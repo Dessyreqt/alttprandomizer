@@ -49,6 +49,7 @@
             this.create = new System.Windows.Forms.Button();
             this.randomSpoiler = new System.Windows.Forms.Button();
             this.report = new System.Windows.Forms.Button();
+            this.showComplexity = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bulkCreateCount)).BeginInit();
@@ -154,6 +155,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.showComplexity);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.heartBeepSpeed);
             this.groupBox1.Controls.Add(this.checkForUpdates);
@@ -323,6 +325,18 @@
             this.report.UseVisualStyleBackColor = true;
             this.report.Click += new System.EventHandler(this.report_Click);
             // 
+            // showComplexity
+            // 
+            this.showComplexity.AutoSize = true;
+            this.showComplexity.Checked = true;
+            this.showComplexity.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showComplexity.Location = new System.Drawing.Point(6, 96);
+            this.showComplexity.Name = "showComplexity";
+            this.showComplexity.Size = new System.Drawing.Size(106, 17);
+            this.showComplexity.TabIndex = 39;
+            this.showComplexity.Text = "Show Complexity";
+            this.showComplexity.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,6 +385,7 @@
         private System.Windows.Forms.ComboBox heartBeepSpeed;
         private System.Windows.Forms.Button bulkCreate;
         private System.Windows.Forms.NumericUpDown bulkCreateCount;
+        private System.Windows.Forms.CheckBox showComplexity;
     }
 }
 

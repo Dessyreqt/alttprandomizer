@@ -27,6 +27,7 @@ namespace AlttpRandomizer
         {
             // this fixes an issue with running on wine
             Settings.Default.SramTrace = Settings.Default.SramTrace;
+            Settings.Default.ShowComplexity = Settings.Default.ShowComplexity;
             Settings.Default.OutputFile = Settings.Default.OutputFile;
             Settings.Default.RandomizerDifficulty = Settings.Default.RandomizerDifficulty;
             Settings.Default.CreateSpoilerLog = Settings.Default.CreateSpoilerLog;
@@ -71,13 +72,20 @@ namespace AlttpRandomizer
 
                     seed.Text = string.Format(romLocations.SeedFileString, parsedSeed);
 
-                    CreateRom(romLocations, log, difficulty, parsedSeed);
+                    int complexity = CreateRom(romLocations, log, difficulty, parsedSeed);
 
                     var outputString = new StringBuilder();
 
                     outputString.AppendFormat("Done!{0}{0}{0}Seed: ", Environment.NewLine);
                     outputString.AppendFormat(romLocations.SeedFileString, parsedSeed);
-                    outputString.AppendFormat(" ({0} Difficulty){1}{1}", romLocations.DifficultyName, Environment.NewLine);
+                    if (showComplexity.Checked)
+                    {
+                        outputString.AppendFormat(" ({0} Difficulty - Complexity {2}){1}{1}", romLocations.DifficultyName, Environment.NewLine, complexity);
+                    }
+                    else
+                    {
+                        outputString.AppendFormat(" ({0} Difficulty){1}{1}", romLocations.DifficultyName, Environment.NewLine);
+                    }
 
                     WriteOutput(outputString.ToString());
                 }
@@ -94,6 +102,7 @@ namespace AlttpRandomizer
         private void SaveRandomizerSettings()
         {
             Settings.Default.SramTrace = sramTrace.Checked;
+            Settings.Default.ShowComplexity = showComplexity.Checked;
             Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
             Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
             Settings.Default.HeartBeepSpeed = heartBeepSpeed.SelectedItem.ToString();
@@ -102,18 +111,21 @@ namespace AlttpRandomizer
             Settings.Default.Save();
         }
 
-        private void CreateRom(IRomLocations romLocations, RandomizerLog log, RandomizerDifficulty difficulty, int parsedSeed)
+        private int CreateRom(IRomLocations romLocations, RandomizerLog log, RandomizerDifficulty difficulty, int parsedSeed)
         {
             var randomizer = new Randomizer(parsedSeed, romLocations, log);
             var options = new RandomizerOptions
                             {
                                 Filename = filename.Text,
                                 SramTrace = sramTrace.Checked,
+                                ShowComplexity = showComplexity.Checked,
                                 Difficulty = difficulty,
                                 HeartBeepSpeed = GetHeartBeepSpeed(),
                             };
 
             randomizer.CreateRom(options);
+
+            return randomizer.GetComplexity();
         }
 
         private HeartBeepSpeed GetHeartBeepSpeed()
@@ -267,6 +279,7 @@ namespace AlttpRandomizer
             filename.Text = Settings.Default.OutputFile;
             createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
             sramTrace.Checked = Settings.Default.SramTrace;
+            showComplexity.Checked = Settings.Default.ShowComplexity;
             Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.CurrentDisplay);
             randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
             heartBeepSpeed.SelectedItem = Settings.Default.HeartBeepSpeed;
