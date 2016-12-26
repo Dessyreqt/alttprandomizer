@@ -610,6 +610,7 @@ namespace AlttpRandomizer.Random
                     };
                 case Region.SkullWoods:
                 case Region.MiseryMire:
+                case Region.GanonsTower:
                     return new List<InventoryItemType>
                     {
                         InventoryItemType.BigKey,
@@ -620,7 +621,6 @@ namespace AlttpRandomizer.Random
                         InventoryItemType.Map,
                     };
                 case Region.IcePalace:
-                case Region.GanonsTower:
                     return new List<InventoryItemType>
                     {
                         InventoryItemType.BigKey,

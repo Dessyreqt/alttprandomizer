@@ -2261,7 +2261,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.EasternPalace,
                     Name = "Heart Container (Armos Knights)",
                     Address = 0x180150,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatEasternPalace(have),
@@ -2272,7 +2272,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DesertPalace,
                     Name = "Heart Container (Lanmolas)",
                     Address = 0x180151,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatDesertPalace(have),
@@ -2283,7 +2283,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TowerOfHera,
                     Name = "Heart Container (Moldorm)",
                     Address = 0x180152,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatTowerOfHera(have),
@@ -2294,7 +2294,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "Heart Container (Helmasaur King)",
                     Address = 0x180153,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatDarkPalace(have),
@@ -2305,7 +2305,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "Heart Container (Arrghus)",
                     Address = 0x180154,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatSwampPalace(have),
@@ -2316,7 +2316,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SkullWoods,
                     Name = "Heart Container (Mothula)",
                     Address = 0x180155,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatSkullWoods(have),
@@ -2327,7 +2327,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.ThievesTown,
                     Name = "Heart Container (Blind)",
                     Address = 0x180156,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatThievesTown(have),
@@ -2338,7 +2338,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "Heart Container (Kholdstare)",
                     Address = 0x180157,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatIcePalace(have),
@@ -2349,7 +2349,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.MiseryMire,
                     Name = "Heart Container (Vitreous)",
                     Address = 0x180158,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatMiseryMire(have),
@@ -2360,7 +2360,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "Heart Container (Trinexx)",
                     Address = 0x180159,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatTurtleRock(have),
@@ -3044,7 +3044,6 @@ namespace AlttpRandomizer.Rom
                 InventoryItemType.OneRupee,
                 InventoryItemType.FiveRupees,
                 InventoryItemType.FiveRupees,
-                InventoryItemType.TwentyRupees,
                 InventoryItemType.TwentyRupees,
                 InventoryItemType.TwentyRupees,
                 InventoryItemType.TwentyRupees,
