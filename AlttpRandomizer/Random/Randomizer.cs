@@ -220,7 +220,7 @@ namespace AlttpRandomizer.Random
 
         private void WriteRom(RandomizerOptions options)
         {
-            string usedFilename = FileName.Fix(options.Filename, string.Format(romLocations.SeedFileString, seed));
+            string usedFilename = FileName.Fix(options.Filename, string.Format(romLocations.SeedFileString, seed), complexity);
 
             using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
             {

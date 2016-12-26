@@ -369,12 +369,19 @@ namespace AlttpRandomizer
                     try
                     {
 
-                        CreateRom(romLocations, log, difficulty, parsedSeed);
+                        int complexity = CreateRom(romLocations, log, difficulty, parsedSeed);
 
                         outputString = new StringBuilder();
                         outputString.AppendFormat("Completed Seed: ");
                         outputString.AppendFormat(romLocations.SeedFileString, parsedSeed);
-                        outputString.AppendFormat(" ({0} Difficulty){1}{1}", romLocations.DifficultyName, Environment.NewLine);
+                        if (showComplexity.Checked)
+                        {
+                            outputString.AppendFormat(" ({0} Difficulty - Complexity {2}){1}{1}", romLocations.DifficultyName, Environment.NewLine, complexity);
+                        }
+                        else
+                        {
+                            outputString.AppendFormat(" ({0} Difficulty){1}{1}", romLocations.DifficultyName, Environment.NewLine);
+                        }
                         WriteOutput(outputString.ToString());
 
                         successCount++;

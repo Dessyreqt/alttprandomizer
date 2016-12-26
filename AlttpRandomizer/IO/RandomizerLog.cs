@@ -98,13 +98,24 @@ namespace AlttpRandomizer.IO
             {
                 writer.AppendLine();
                 if (i == 0)
-                    writer.AppendLine("Step 1 - Items reachable from start:");
-                else
-                    writer.AppendLine(string.Format("Step {0} - Items reachable after collecting all items from Step {1}:", i + 1, i));
-                
-                foreach (var Location in reachableKeyItems[i].OrderBy(x => x.Name))
                 {
-                    writer.AppendLine(string.Format("  {0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+                    writer.AppendLine("Step 1 - Items reachable from start:");
+                }
+                else
+                {
+                    writer.AppendLine(string.Format("Step {0} - Items reachable after collecting all items from Step {1}:", i + 1, i));
+                }
+
+                if (reachableKeyItems[i].Count == 0)
+                {
+                    writer.AppendLine("  (minor items only)");
+                }
+                else
+                {
+                    foreach (var Location in reachableKeyItems[i].OrderBy(x => x.Name))
+                    {
+                        writer.AppendLine(string.Format("  {0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+                    }
                 }
             }
             writer.AppendLine();
