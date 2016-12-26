@@ -216,6 +216,7 @@ namespace AlttpRandomizer.IO
             {
                 switch (inventoryItem.Type)
                 {
+                    case InventoryItemType.L2SwordPedestal:
                     case InventoryItemType.L2Sword:
                         return "Master Sword";
                     case InventoryItemType.L3Sword:

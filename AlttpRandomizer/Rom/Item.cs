@@ -6,7 +6,7 @@ namespace AlttpRandomizer.Rom
     {
         Nothing = 0xFF,
         L1SwordAndShield = 0x00, // can't be used until after uncle dies
-        L2Sword = 0x01, // crashes game
+        L2SwordPedestal = 0x01, // only use this at pedestal
         L3Sword = 0x02, // can't be used until after uncle dies
         L4Sword = 0x03, // can't be used until after uncle dies
         BlueShield = 0x04, // can't be used until after uncle dies
@@ -85,6 +85,7 @@ namespace AlttpRandomizer.Rom
         SeventyArrowCap = 0x4d,
         HalfMagic = 0x4e,
         QuarterMagic = 0x4f,
+        L2Sword = 0x50,
     }
 
     public enum HealthItemType
@@ -340,6 +341,7 @@ namespace AlttpRandomizer.Rom
                 case InventoryItemType.L1Sword:
                 case InventoryItemType.L1SwordAndShield:
                 case InventoryItemType.L2Sword:
+                case InventoryItemType.L2SwordPedestal:
                 case InventoryItemType.L3Sword:
                 case InventoryItemType.L4Sword:
                     retVal = 0x59;
@@ -452,6 +454,7 @@ namespace AlttpRandomizer.Rom
                 case InventoryItemType.L1Sword:
                 case InventoryItemType.L1SwordAndShield:
                 case InventoryItemType.L2Sword:
+                case InventoryItemType.L2SwordPedestal:
                 case InventoryItemType.L3Sword:
                 case InventoryItemType.L4Sword:
                     retVal.Append("sword");

@@ -2577,8 +2577,8 @@ namespace AlttpRandomizer.Rom
                     WriteItemCheck =
                         (rom, item) =>
                         {
-                            var itemType = ((InventoryItem)item).Type + 1;
-                            rom.WriteBytes(0x3348E, (byte)itemType);
+                            int itemType = (int)((InventoryItem)item).Type + 1;
+                            rom.WriteBytes(0x3348E, (byte)(itemType % 0x4F));
                         }
                 },
                 new Location

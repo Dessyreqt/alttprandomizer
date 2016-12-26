@@ -112,7 +112,7 @@ namespace AlttpRandomizer.Random
 
             swords = random.RandomizeList(swords);
 
-            romLocations.SpecialLocation("Pedestal Sword").Item = new InventoryItem(swords[0]);
+            romLocations.SpecialLocation("Pedestal Sword").Item = new InventoryItem(swords[0] == InventoryItemType.L2Sword ? InventoryItemType.L2SwordPedestal : swords[0]);
             romLocations.SpecialLocation("Smithy Sword").Item = new InventoryItem(swords[1]);
             romLocations.SpecialLocation("Fairy Sword").Item = new InventoryItem(swords[2]);
         }
@@ -264,7 +264,20 @@ namespace AlttpRandomizer.Random
         {
             string seedStr = string.Format(romLocations.SeedRomString, RandomizerVersion.Current, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
             rom.WriteBytes(0x7fc0, StringToByteArray(seedStr));
-            rom.WriteBytes(0x180210, (byte)options.Difficulty , 0x00);
+            rom.WriteBytes(0x180210, (byte)options.Difficulty , 0x00, GetWarningFlags(options.Difficulty));
+        }
+
+        private byte GetWarningFlags(RandomizerDifficulty difficulty)
+        {
+            switch (difficulty)
+            {
+                case RandomizerDifficulty.Casual:
+                    return 0x00;
+                case RandomizerDifficulty.Glitched:
+                    return 0x40;
+            }
+
+            return 0x00;
         }
 
         private static byte[] StringToByteArray(string input)
