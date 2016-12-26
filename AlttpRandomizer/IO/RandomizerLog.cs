@@ -13,6 +13,7 @@ namespace AlttpRandomizer.IO
         private readonly List<Location> generatedItems;
         private readonly List<Location> orderedItems;
         private readonly List<Location> specialLocations;
+        private readonly List<List<Location>> reachableKeyItems;
         private readonly string seed;
 
         public RandomizerLog(string seed)
@@ -20,6 +21,7 @@ namespace AlttpRandomizer.IO
             generatedItems = new List<Location>();
             orderedItems = new List<Location>();
             specialLocations = new List<Location>();
+            reachableKeyItems = new List<List<Location>>();
             this.seed = seed;
         }
 
@@ -63,6 +65,11 @@ namespace AlttpRandomizer.IO
         {
             specialLocations.AddRange(locations);
         }
+ 
+        public void AddReachableKeyItems(List<Location> Location)
+        {
+            reachableKeyItems.Add(Location);
+        }
 
         public void WriteLog(string filename)
         {
@@ -80,7 +87,23 @@ namespace AlttpRandomizer.IO
             writer.AppendLine("---------------------------------");
             writer.AppendLine(string.Format("Version: {0}", RandomizerVersion.CurrentDisplay));
             writer.AppendLine(string.Format("Creation Date: {0}", DateTime.Now));
+            writer.AppendLine(string.Format("Complexity: {0}", reachableKeyItems.Count));
             writer.AppendLine(string.Format("Seed: {0}", seed));
+            for (int i = 0; i < reachableKeyItems.Count; i++)
+            {
+                writer.AppendLine();
+                if (i == 0)
+                    writer.AppendLine("Step 1 - Items reachable from start:");
+                else
+                    writer.AppendLine(string.Format("Step {0} - Items reachable after collecting all items from Step {1}:", i + 1, i));
+                
+                foreach (var Location in reachableKeyItems[i].OrderBy(x => x.Name))
+                {
+                    writer.AppendLine(string.Format("  {0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+                }
+            }
+            writer.AppendLine();
+            writer.AppendLine();
             writer.AppendLine();
             writer.AppendLine("Generated Item Order");
             writer.AppendLine("--------------------");

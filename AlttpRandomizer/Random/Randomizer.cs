@@ -29,6 +29,7 @@ namespace AlttpRandomizer.Random
         public string Filename { get; set; }
         public bool SpoilerOnly { get; set; }
         public bool SramTrace { get; set; }
+        public bool ShowComplexity { get; set; }
         public RandomizerDifficulty Difficulty { get; set; }
         public HeartBeepSpeed HeartBeepSpeed { get; set; } 
 
@@ -37,6 +38,7 @@ namespace AlttpRandomizer.Random
             Filename = "";
             SpoilerOnly = false;
             SramTrace = false;
+            ShowComplexity = true;
             Difficulty = RandomizerDifficulty.None;
             HeartBeepSpeed = HeartBeepSpeed.Normal;
         }
@@ -50,6 +52,12 @@ namespace AlttpRandomizer.Random
         private readonly int seed;
         private readonly IRomLocations romLocations;
         private readonly RandomizerLog log;
+        private int complexity;
+        
+        public int GetComplexity()
+        {
+            return complexity;
+        }
 
         public Randomizer(int seed, IRomLocations romLocations, RandomizerLog log)
         {
@@ -71,6 +79,11 @@ namespace AlttpRandomizer.Random
                 GenerateItemList();
                 RandomizeQuestItems();
                 GenerateItemPositions();
+
+                if (log != null || options.ShowComplexity)
+                {
+                    CalculateComplexity();
+                }
 
                 if (RandomizerVersion.Debug)
                 {
@@ -680,6 +693,23 @@ namespace AlttpRandomizer.Random
             for (int i = itemPool.Count; i < 100 - unavailableLocations.Count; i++)
             {
                 itemPool.Add(InventoryItemType.Nothing);
+            }
+        }
+
+        private void CalculateComplexity()
+        {
+           List<InventoryItemType> haveItems = new List<InventoryItemType>();
+           IEnumerable<Location> remainingLocations = romLocations.Locations.Where(x => x.Item != null && x.Item is InventoryItem);
+           List<Location> newReachableLocations = remainingLocations.Where(x => x.CanAccess(haveItems)).ToList();
+           complexity = 0;
+
+           while (newReachableLocations.Count() > 0)
+           {
+                log?.AddReachableKeyItems(newReachableLocations.Where(x => Item.IsKeyItem(((InventoryItem)x.Item).Type)).ToList());
+                haveItems.AddRange(newReachableLocations.ConvertAll(x => ((InventoryItem)x.Item).Type));
+                remainingLocations = remainingLocations.Except(newReachableLocations);
+                complexity++;
+                newReachableLocations = remainingLocations.Where(x => x.CanAccess(haveItems)).ToList();
             }
         }
     }
