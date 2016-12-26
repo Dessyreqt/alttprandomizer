@@ -537,7 +537,7 @@ namespace AlttpRandomizer.Random
 
             if (!handledDungeons.Contains(insertedLocation.Region))
             {
-                itemPlaced = GenerateDungeonItems(insertedLocation.Region, insertedItem);
+                itemPlaced = GenerateDungeonItems(insertedLocation.Region, insertedItem, logOrderedItem);
 
                 if (itemPlaced)
                 {
@@ -563,7 +563,7 @@ namespace AlttpRandomizer.Random
             return itemPlaced;
         }
 
-        private bool GenerateDungeonItems(Region region, InventoryItemType insertedItem)
+        private bool GenerateDungeonItems(Region region, InventoryItemType insertedItem, bool logInsertedItem = false)
         {
             var retVal = false;
             var tempItemPool = GetDungeonItemPool(region);
@@ -583,6 +583,11 @@ namespace AlttpRandomizer.Random
             }
             else
             {
+                if (logInsertedItem)
+                {
+                    var insertedLocation = romLocations.Locations.First(x => x.Region == region && x.Item != null && ((InventoryItem)x.Item).Type == insertedItem);
+                    log?.AddOrderedItem(insertedLocation);
+                }
                 retVal = true;
             }
 
