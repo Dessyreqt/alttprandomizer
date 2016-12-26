@@ -404,6 +404,11 @@ namespace AlttpRandomizer.Random
                             }
                         }
 
+                        if (currentLocations.Count == 0)
+                        {
+                            return;
+                        }
+
                         var insertedItemList = random.RandomizeList(placeItems);
 
                         foreach (var insertedItem in insertedItemList)
