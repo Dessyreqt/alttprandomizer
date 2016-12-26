@@ -316,6 +316,7 @@ namespace AlttpRandomizer
 
         private void listSpoiler_Click(object sender, EventArgs e)
         {
+            ClearOutput();
             var difficulty = GetRandomizerDifficulty();
             CreateSpoilerLog(difficulty);
         }

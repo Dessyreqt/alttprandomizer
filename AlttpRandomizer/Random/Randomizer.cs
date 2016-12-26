@@ -342,6 +342,11 @@ namespace AlttpRandomizer.Random
                     {
                         throw new RandomizationException("Ran out of places to put items! (WTF?)");
                     }
+
+                    if (currentLocations.Count == 0)
+                    {
+                        throw new RandomizationException("Hit a roadblock in item generation...");
+                    }
                 }
                 else
                 {
@@ -360,7 +365,11 @@ namespace AlttpRandomizer.Random
 
                 if (handledDungeons.Count == 1)
                 {
-                    HandleForcedItems(currentLocations, insertedItemPool);
+                    var itemsHandled = HandleForcedItems(currentLocations, insertedItemPool);
+                    if (itemsHandled)
+                    {
+                        continue;
+                    }
                 }
 
                 var candidateItemList = new List<InventoryItemType>();
@@ -380,7 +389,10 @@ namespace AlttpRandomizer.Random
                     haveItems.Remove(candidateItem);
                 }
 
-                AdjustCandidateItems(candidateItemList, haveItems, romLocations);
+                if (region == Region.Progression)
+                {
+                    AdjustCandidateItems(candidateItemList, haveItems, romLocations);
+                }
 
                 // Grab an item from the candidate list if there are any, otherwise, grab a random item
                 if (candidateItemList.Count > 0)
@@ -488,8 +500,9 @@ namespace AlttpRandomizer.Random
             } while (insertedItemPool.Count > 0);
         }
 
-        private void HandleForcedItems(List<Location> currentLocations, List<InventoryItemType> insertedItemPool)
+        private bool HandleForcedItems(List<Location> currentLocations, List<InventoryItemType> insertedItemPool)
         {
+            var retVal = false;
             var forcedLocations = currentLocations.Where(x => x.ForceItems.Count > 0).ToList();
 
             foreach (var forcedLocation in forcedLocations)
@@ -501,10 +514,14 @@ namespace AlttpRandomizer.Random
                     var insertedItem = availableForcedItems[random.Next(availableForcedItems.Count)];
                     forcedLocation.Item = new InventoryItem(insertedItem);
                     insertedItemPool.Remove(insertedItem);
+                    haveItems.Add(insertedItem);
+                    retVal = true;
                 }
 
                 currentLocations.Remove(forcedLocation);
             }
+
+            return retVal;
         }
 
         private bool PlaceItem(List<Region> handledDungeons, List<InventoryItemType> insertedItemPool, List<Location> currentLocations, InventoryItemType insertedItem, bool logOrderedItem = false)
@@ -562,6 +579,7 @@ namespace AlttpRandomizer.Random
             if (!romLocations.CanDefeatDungeon(region, haveItems))
             {
                 romLocations.ResetRegion(region);
+                log.RemoveOrderedItems(region);
             }
             else
             {
@@ -698,18 +716,18 @@ namespace AlttpRandomizer.Random
 
         private void CalculateComplexity()
         {
-           List<InventoryItemType> haveItems = new List<InventoryItemType>();
+           List<InventoryItemType> have = new List<InventoryItemType>();
            IEnumerable<Location> remainingLocations = romLocations.Locations.Where(x => x.Item != null && x.Item is InventoryItem);
-           List<Location> newReachableLocations = remainingLocations.Where(x => x.CanAccess(haveItems)).ToList();
+           List<Location> newReachableLocations = remainingLocations.Where(x => x.CanAccess(have)).ToList();
            complexity = 0;
 
            while (newReachableLocations.Count() > 0)
            {
                 log?.AddReachableKeyItems(newReachableLocations.Where(x => Item.IsKeyItem(((InventoryItem)x.Item).Type)).ToList());
-                haveItems.AddRange(newReachableLocations.ConvertAll(x => ((InventoryItem)x.Item).Type));
+                have.AddRange(newReachableLocations.ConvertAll(x => ((InventoryItem)x.Item).Type));
                 remainingLocations = remainingLocations.Except(newReachableLocations);
                 complexity++;
-                newReachableLocations = remainingLocations.Where(x => x.CanAccess(haveItems)).ToList();
+                newReachableLocations = remainingLocations.Where(x => x.CanAccess(have)).ToList();
             }
         }
     }

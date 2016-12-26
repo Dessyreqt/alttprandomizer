@@ -56,6 +56,11 @@ namespace AlttpRandomizer.IO
             orderedItems.Add(location);
         }
 
+        public void RemoveOrderedItems(Region region)
+        {
+            orderedItems.RemoveAll(x => x.Region == region);
+        }
+
         public void AddGeneratedItems(List<Location> locations)
         {
             generatedItems.AddRange(locations);
