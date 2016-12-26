@@ -2421,7 +2421,7 @@ namespace AlttpRandomizer.Rom
                         (rom, item) =>
                         {
                             var itemType = ((CrystalItem)item).Type;
-                            WriteCrystal(rom, Region.SwampPalace, itemType);
+                            WriteCrystal(rom, Region.DarkPalace, itemType);
                         }
                 },
                 new Location
@@ -2432,7 +2432,7 @@ namespace AlttpRandomizer.Rom
                         (rom, item) =>
                         {
                             var itemType = ((CrystalItem)item).Type;
-                            WriteCrystal(rom, Region.SwampPalace, itemType);
+                            WriteCrystal(rom, Region.MiseryMire, itemType);
                         }
                 },
                 new Location
