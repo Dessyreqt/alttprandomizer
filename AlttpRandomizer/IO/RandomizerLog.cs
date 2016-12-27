@@ -94,9 +94,13 @@ namespace AlttpRandomizer.IO
             writer.AppendLine(string.Format("Creation Date: {0}", DateTime.Now));
             writer.AppendLine(string.Format("Complexity: {0}", reachableKeyItems.Count));
             writer.AppendLine(string.Format("Seed: {0}", seed));
+            writer.AppendLine();
+            writer.AppendLine();
+            writer.AppendLine();
+            writer.AppendLine("Complexity Analysis");
+            writer.AppendLine("-------------------");
             for (int i = 0; i < reachableKeyItems.Count; i++)
             {
-                writer.AppendLine();
                 if (i == 0)
                 {
                     writer.AppendLine("Step 1 - Items reachable from start:");
@@ -117,8 +121,8 @@ namespace AlttpRandomizer.IO
                         writer.AppendLine(string.Format("  {0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
                     }
                 }
+                writer.AppendLine();
             }
-            writer.AppendLine();
             writer.AppendLine();
             writer.AppendLine();
             writer.AppendLine("Generated Item Order");

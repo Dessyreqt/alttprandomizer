@@ -33,6 +33,7 @@ namespace AlttpRandomizer
             Settings.Default.CreateSpoilerLog = Settings.Default.CreateSpoilerLog;
             Settings.Default.HeartBeepSpeed = Settings.Default.HeartBeepSpeed;
             Settings.Default.CheckForUpdates = Settings.Default.CheckForUpdates;
+            Settings.Default.BulkCreateCount = Settings.Default.BulkCreateCount;
         }
 
         private void create_Click(object sender, EventArgs e)
@@ -107,6 +108,7 @@ namespace AlttpRandomizer
             Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
             Settings.Default.HeartBeepSpeed = heartBeepSpeed.SelectedItem.ToString();
             Settings.Default.CheckForUpdates = checkForUpdates.Checked;
+            Settings.Default.BulkCreateCount = (int)bulkCreateCount.Value;
 
             Settings.Default.Save();
         }
@@ -276,14 +278,8 @@ namespace AlttpRandomizer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            filename.Text = Settings.Default.OutputFile;
-            createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
-            sramTrace.Checked = Settings.Default.SramTrace;
-            showComplexity.Checked = Settings.Default.ShowComplexity;
             Text = string.Format("A Link to the Past Randomizer v{0}", RandomizerVersion.CurrentDisplay);
-            randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
-            heartBeepSpeed.SelectedItem = Settings.Default.HeartBeepSpeed;
-            checkForUpdates.Checked = Settings.Default.CheckForUpdates;
+            LoadSettings();
 
             if (checkForUpdates.Checked)
             {
@@ -295,6 +291,18 @@ namespace AlttpRandomizer
                 create.BackColor = Color.DarkRed;
                 Text += " *** DEBUG ***";
             }
+        }
+
+        private void LoadSettings()
+        {
+            filename.Text = Settings.Default.OutputFile;
+            createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
+            sramTrace.Checked = Settings.Default.SramTrace;
+            showComplexity.Checked = Settings.Default.ShowComplexity;
+            randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
+            heartBeepSpeed.SelectedItem = Settings.Default.HeartBeepSpeed;
+            checkForUpdates.Checked = Settings.Default.CheckForUpdates;
+            bulkCreateCount.Value = Settings.Default.BulkCreateCount;
         }
 
         private void RunCheckUpdate()

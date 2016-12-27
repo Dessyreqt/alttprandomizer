@@ -576,7 +576,7 @@ namespace AlttpRandomizer.Random
             haveItems.RemoveAll(x => x == InventoryItemType.Key);
             haveItems.RemoveAll(x => x == InventoryItemType.Map);
 
-            if (!romLocations.CanDefeatDungeon(region, haveItems))
+            if (tempItemPool.Count > 0 || !romLocations.CanDefeatDungeon(region, haveItems))
             {
                 romLocations.ResetRegion(region);
                 log.RemoveOrderedItems(region);
