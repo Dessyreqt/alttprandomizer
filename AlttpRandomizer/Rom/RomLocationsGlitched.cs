@@ -2688,9 +2688,20 @@ namespace AlttpRandomizer.Rom
 
         protected override bool CanDefeatTurtleRock(List<InventoryItemType> have)
         {
-            return  have.Contains(InventoryItemType.FireRod)
+            return have.Contains(InventoryItemType.FireRod)
                 && have.Contains(InventoryItemType.IceRod)
                 && have.Contains(InventoryItemType.CaneOfSomaria);
+        }
+
+        protected override bool CanDefeatGanonsTower(List<InventoryItemType> have)
+        {
+            return have.Contains(InventoryItemType.Bow)
+                && CanLightTorches(have)
+                && have.Contains(InventoryItemType.Hookshot)
+                && ((BigKeyGanonsTowerLeft()
+                        && have.Contains(InventoryItemType.Hammer))
+                    || (BigKeyGanonsTowerRight()
+                        && have.Contains(InventoryItemType.CaneOfSomaria)));
         }
 
         private bool CanEnterMiseryMire(List<InventoryItemType> have)

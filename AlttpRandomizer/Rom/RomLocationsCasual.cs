@@ -78,7 +78,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.EasternPalace,
                     Name = "[dungeon-L1-1F] Eastern Palace - big chest",
                     Address = 0xE97D,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         true,
@@ -99,7 +99,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-B1] Swamp Palace - big chest",
                     Address = 0xE989,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have) 
@@ -125,7 +125,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DesertPalace,
                     Name = "[dungeon-L2-B1] Desert Palace - big chest",
                     Address = 0xE98F,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanEnterDesertPalace(have)
@@ -158,7 +158,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SkullWoods,
                     Name = "[dungeon-D3-B1] Skull Woods - big chest",
                     Address = 0xE998,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanEnterSkullWoods(have) 
@@ -220,7 +220,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "[dungeon-D5-B5] Ice Palace - big chest",
                     Address = 0xE9AA,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
@@ -501,7 +501,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TowerOfHera,
                     Name = "[dungeon-L3-4F] Tower of Hera - big chest",
                     Address = 0xE9F8,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanEnterTowerOfHera(have)
@@ -588,7 +588,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.ThievesTown,
                     Name = "[dungeon-D4-B2] Thieves' Town - big chest",
                     Address = 0xEA10,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanEnterThievesTown(have)
@@ -1341,7 +1341,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - big chest",
                     Address = 0xEAD6,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -2761,15 +2761,53 @@ namespace AlttpRandomizer.Rom
         {
             return CanEnterMiseryMire(have)
                 && have.Contains(InventoryItemType.CaneOfSomaria)
-                && have.Contains(InventoryItemType.Lamp);
+                && have.Contains(InventoryItemType.Lamp)
+                && MiseryMireKeysOkay();
+        }
+
+        private bool MiseryMireKeysOkay()
+        {
+            return LocationHasItem("[dungeon-D6-B1] Misery Mire - spike room", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-D6-B1] Misery Mire - spike room", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-D6-B1] Misery Mire - end of bridge", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-D6-B1] Misery Mire - end of bridge", InventoryItemType.Key);
         }
 
         protected override bool CanDefeatTurtleRock(List<InventoryItemType> have)
         {
             return CanEnterTurtleRock(have)
                 && CanAccessTurtleRock2(have)
+                && TurtleRockKeysOkay()
                 && have.Contains(InventoryItemType.FireRod)
                 && have.Contains(InventoryItemType.IceRod);
+        }
+
+        private bool TurtleRockKeysOkay()
+        {
+            var keyCount = 0;
+
+            if (LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom left chest]", InventoryItemType.Key)) { keyCount++; }
+            if (LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom right chest]", InventoryItemType.Key)) { keyCount++; }
+            if (LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [top left chest]", InventoryItemType.Key)) { keyCount++; }
+            if (LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [top right chest]", InventoryItemType.Key)) { keyCount++; }
+
+            return keyCount < 2;
+        }
+
+        protected override bool CanDefeatGanonsTower(List<InventoryItemType> have)
+        {
+            return LocationHasItem("[dungeon-A2-1F] Ganon's Tower - above Armos", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [left chest]", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - down right staircase from entrance [right chest]", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - east of down right staircase from entrace", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - map room", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom left chest]", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom right chest]", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of gap room [top left chest]", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of gap room [top right chest]", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-B1] Ganon's Tower - north of Armos room [bottom chest]", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-B1] Ganon's Tower - north of Armos room [left chest]", InventoryItemType.Key)
+                || LocationHasItem("[dungeon-A2-B1] Ganon's Tower - north of Armos room [right chest]", InventoryItemType.Key);
         }
 
         private bool CanEnterTurtleRock(List<InventoryItemType> have)
@@ -2887,7 +2925,7 @@ namespace AlttpRandomizer.Rom
         protected override bool CanDefeatTowerOfHera(List<InventoryItemType> have)
         {
             return CanEnterTowerOfHera(have)
-                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey) 
+                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
                     || CanLightTorches(have));
         }
 

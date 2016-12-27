@@ -405,6 +405,8 @@ namespace AlttpRandomizer.Rom
                     return CanDefeatMiseryMire(have);
                 case Region.TurtleRock:
                     return CanDefeatTurtleRock(have);
+                case Region.GanonsTower:
+                    return CanDefeatGanonsTower(have);
                 default:
                     return true;
             }
@@ -421,5 +423,6 @@ namespace AlttpRandomizer.Rom
         protected abstract bool CanDefeatIcePalace(List<InventoryItemType> have);
         protected abstract bool CanDefeatMiseryMire(List<InventoryItemType> have);
         protected abstract bool CanDefeatTurtleRock(List<InventoryItemType> have);
+        protected abstract bool CanDefeatGanonsTower(List<InventoryItemType> have);
     }
 }
