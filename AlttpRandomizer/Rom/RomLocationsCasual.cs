@@ -614,6 +614,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
+                        && CanAccessTurtleRock2(have)
                         && (have.Contains(InventoryItemType.FireRod)
                             || LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)),
                 },
@@ -627,6 +628,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
+                        && CanAccessTurtleRock2(have)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -673,6 +675,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
+                        && CanAccessTurtleRock2(have)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key))),
@@ -687,6 +690,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
+                        && CanAccessTurtleRock2(have)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -702,6 +706,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
+                        && CanAccessTurtleRock2(have)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -717,6 +722,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
+                        && CanAccessTurtleRock2(have)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -732,6 +738,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
+                        && CanAccessTurtleRock2(have)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -747,6 +754,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
+                        && CanAccessTurtleRock2(have)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -2759,6 +2767,7 @@ namespace AlttpRandomizer.Rom
         protected override bool CanDefeatTurtleRock(List<InventoryItemType> have)
         {
             return CanEnterTurtleRock(have)
+                && CanAccessTurtleRock2(have)
                 && have.Contains(InventoryItemType.FireRod)
                 && have.Contains(InventoryItemType.IceRod);
         }
@@ -2770,6 +2779,18 @@ namespace AlttpRandomizer.Rom
                 && have.Contains(InventoryItemType.Hammer)
                 && have.Contains(GetItemAtLocation<InventoryItem>(SpecialLocations, "Turtle Rock Required Medallion").Type)
                 && have.Contains(InventoryItemType.CaneOfSomaria);
+        }
+
+        private bool CanAccessTurtleRock2(List<InventoryItemType> have)
+        {
+            var keyCount = 0;
+
+            if (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)) { keyCount ++; }
+            if (LocationHasItem("[dungeon-D7-1F] Turtle Rock - Map room [left chest]", InventoryItemType.Key)) { keyCount++; }
+            if (LocationHasItem("[dungeon-D7-1F] Turtle Rock - Map room [right chest]", InventoryItemType.Key)) { keyCount++; }
+            if (LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)) { keyCount++; }
+
+            return keyCount > 1;
         }
 
         private bool CanEnterMiseryMire(List<InventoryItemType> have)
