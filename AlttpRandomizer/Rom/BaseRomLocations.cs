@@ -52,6 +52,12 @@ namespace AlttpRandomizer.Rom
                 || have.Contains(InventoryItemType.TitansMitt);
         }
 
+        internal bool CanLightTorches(List<InventoryItemType> have)
+        {
+            return have.Contains(InventoryItemType.Lamp)
+                || have.Contains(InventoryItemType.FireRod);
+        }
+
         internal static void WriteSpecialItemCheck(FileStream rom, InventoryItemType item, int address)
         {
             var checkLocation = Item.GetCheckLocation(item);

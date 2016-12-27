@@ -363,7 +363,7 @@ namespace AlttpRandomizer.Random
                     }
                 }
 
-                if (handledDungeons.Count == 1)
+                if (handledDungeons.Count == 1 || haveItems.Count == 0)
                 {
                     var itemsHandled = HandleForcedItems(currentLocations, insertedItemPool);
                     if (itemsHandled)

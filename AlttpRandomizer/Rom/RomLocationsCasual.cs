@@ -57,7 +57,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE977,
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -80,10 +80,9 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-L1-1F] Eastern Palace - big chest",
                     Address = 0xE97D,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -128,7 +127,6 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-L2-B1] Desert Palace - big chest",
                     Address = 0xE98F,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterDesertPalace(have)
@@ -162,7 +160,6 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D3-B1] Skull Woods - big chest",
                     Address = 0xE998,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterSkullWoods(have) 
@@ -225,7 +222,6 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D5-B5] Ice Palace - big chest",
                     Address = 0xE9AA,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
@@ -270,7 +266,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9B3,
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -290,7 +286,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9B9,
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -498,7 +494,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9F5,
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -507,7 +503,6 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-L3-4F] Tower of Hera - big chest",
                     Address = 0xE9F8,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterTowerOfHera(have)
@@ -595,7 +590,6 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D4-B2] Thieves' Town - big chest",
                     Address = 0xEA10,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterThievesTown(have)
@@ -631,7 +625,6 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D7-B1] Turtle Rock - big chest",
                     Address = 0xEA19,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterTurtleRock(have)
@@ -957,7 +950,6 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D6-B1] Misery Mire - big chest",
                     Address = 0xEA67,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
@@ -1343,7 +1335,6 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-A2-1F] Ganon's Tower - big chest",
                     Address = 0xEAD6,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterGanonsTower(have),
@@ -2720,20 +2711,17 @@ namespace AlttpRandomizer.Rom
         {
             return CanEnterSwampPalace(have)
                 && have.Contains(InventoryItemType.Hookshot)
-                && have.Contains(InventoryItemType.Hammer)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.SwampPalace) == 1;
+                && have.Contains(InventoryItemType.Hammer);
         }
 
         internal override bool CanDefeatSkullWoods(List<InventoryItemType> have)
         {
-            return CanEnterSkullWoods2(have)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.SkullWoods) == 3;
+            return CanEnterSkullWoods2(have);
         }
 
         internal override bool CanDefeatThievesTown(List<InventoryItemType> have)
         {
-            return CanEnterThievesTown(have)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.ThievesTown) == 1;
+            return CanEnterThievesTown(have);
         }
 
         internal override bool CanDefeatIcePalace(List<InventoryItemType> have)
@@ -2759,24 +2747,21 @@ namespace AlttpRandomizer.Rom
                         && (have.Contains(InventoryItemType.Hookshot)
                             || LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
                             || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key))))
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.IcePalace) == 2;
+                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key))));
         }
 
         internal override bool CanDefeatMiseryMire(List<InventoryItemType> have)
         {
             return CanEnterMiseryMire(have)
                 && have.Contains(InventoryItemType.CaneOfSomaria)
-                && have.Contains(InventoryItemType.Lamp)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.MiseryMire) == 3;
+                && have.Contains(InventoryItemType.Lamp);
         }
 
         internal override bool CanDefeatTurtleRock(List<InventoryItemType> have)
         {
             return CanEnterTurtleRock(have)
                 && have.Contains(InventoryItemType.FireRod)
-                && have.Contains(InventoryItemType.IceRod)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.TurtleRock) == 4;
+                && have.Contains(InventoryItemType.IceRod);
         }
 
         private bool CanEnterTurtleRock(List<InventoryItemType> have)
@@ -2897,16 +2882,9 @@ namespace AlttpRandomizer.Rom
                         && have.Contains(InventoryItemType.MagicMirror)));
         }
 
-        private bool CanLightTorches(List<InventoryItemType> have)
-        {
-            return have.Contains(InventoryItemType.Lamp)
-                || have.Contains(InventoryItemType.FireRod);
-        }
-
         internal override bool CanDefeatEasternPalace(List<InventoryItemType> have)
         {
-            return CanEnterEasternPalace(have)
-                && have.Contains(InventoryItemType.Bow);
+            return have.Contains(InventoryItemType.Bow);
         }
 
         private bool CanEnterTowerOfHera(List<InventoryItemType> have)
@@ -2924,12 +2902,6 @@ namespace AlttpRandomizer.Rom
                     && have.Contains(InventoryItemType.TitansMitt)
                     && have.Contains(InventoryItemType.MagicMirror));
         }
-
-        private bool CanEnterEasternPalace(List<InventoryItemType> have)
-        {
-            return true;
-        }
-
 
         public List<InventoryItemType> GetItemPool(SeedRandom random)
         {

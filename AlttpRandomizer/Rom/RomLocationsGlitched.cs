@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using AlttpRandomizer.IO;
 using AlttpRandomizer.Random;
@@ -11,9 +10,9 @@ namespace AlttpRandomizer.Rom
     {
         public override List<Location> Locations { get; set; }
         public override List<Location> SpecialLocations { get; set; }
-        public string DifficultyName => "Casual";
-        public string SeedFileString => "C{0:0000000}";
-        public string SeedRomString => "Z3Rv{0} C{1}";
+        public string DifficultyName => "Glitched";
+        public string SeedFileString => "G{0:0000000}";
+        public string SeedRomString => "Z3Rv{0} G{1}";
 
         public void ResetLocations()
         {
@@ -27,7 +26,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE96E,
                     CanAccess =
                         have =>
-                        CanLiftLightRocks(have),
+                        true,
                 },
                 new Location
                 {
@@ -57,7 +56,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE977,
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -69,8 +68,7 @@ namespace AlttpRandomizer.Rom
                         have =>
                         have.Contains(InventoryItemType.PegasusBoots)
                         && (have.Contains(InventoryItemType.TitansMitt)
-                            || (CanAccessNorthWestDarkWorld(have)
-                                && have.Contains(InventoryItemType.MoonPearl)
+                            || (CanAccessDarkWorld(have)
                                 && have.Contains(InventoryItemType.MagicMirror))),
                 },
                 new Location
@@ -80,10 +78,9 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-L1-1F] Eastern Palace - big chest",
                     Address = 0xE97D,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -93,7 +90,15 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE986,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have),
+                        (have.Contains(InventoryItemType.Flippers)
+                            && have.Contains(InventoryItemType.MagicMirror)
+                            && have.Contains(InventoryItemType.MoonPearl)
+                            && LocationHasItem("[dungeon-D2-1F] Swamp Palace - first room", InventoryItemType.Key))
+                        || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                            && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                || CanLightTorches(have)))
+                        || (CanEnterMiseryMire(have)
+                            && CanAccessDarkWorld(have)),
                 },
                 new Location
                 {
@@ -104,12 +109,16 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hammer)
-                        && (have.Contains(InventoryItemType.Hookshot)
-                            || (!LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",InventoryItemType.BigKey)
-                                && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",InventoryItemType.BigKey)
-                                && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - hidden waterfall door room",InventoryItemType.BigKey))),
+                        have.Contains(InventoryItemType.Flippers)
+                        && ((have.Contains(InventoryItemType.Hammer)
+                                && have.Contains(InventoryItemType.MagicMirror)
+                                && have.Contains(InventoryItemType.MoonPearl)
+                                && LocationHasItem("[dungeon-D2-1F] Swamp Palace - first room", InventoryItemType.Key))
+                            || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                    || CanLightTorches(have)))
+                            || (CanEnterMiseryMire(have)
+                                && CanAccessDarkWorld(have))),
                 },
                 new Location
                 {
@@ -128,12 +137,9 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-L2-B1] Desert Palace - big chest",
                     Address = 0xE98F,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterDesertPalace(have)
-                        && (have.Contains(InventoryItemType.PegasusBoots)
-                            || LocationHasItem("[dungeon-L2-B1] Desert Palace - Map room", InventoryItemType.BigKey)),
+                        true,
                 },
                 new Location
                 {
@@ -143,7 +149,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE992,
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods(have),
+                        true,
                 },
                 new Location
                 {
@@ -153,7 +159,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE995,
                     CanAccess =
                         have =>
-                        CanEnterIcePalace(have),
+                        CanEnterIcePalace(have)
+                        && (have.Contains(InventoryItemType.FireRod)
+                            || have.Contains(InventoryItemType.Bombos)),
                 },
                 new Location
                 {
@@ -162,12 +170,9 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D3-B1] Skull Woods - big chest",
                     Address = 0xE998,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || !LocationHasItem("[dungeon-D3-B1] Skull Woods - Entrance to part 2", InventoryItemType.BigKey)),
+                        true,
                 },
                 new Location
                 {
@@ -177,7 +182,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE99B,
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods(have),
+                        true,
                 },
                 new Location
                 {
@@ -187,7 +192,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE99E,
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods(have),
+                        true,
                 },
                 new Location
                 {
@@ -197,7 +202,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9A1,
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods(have),
+                        true,
                 },
                 new Location
                 {
@@ -209,13 +214,7 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterIcePalace(have)
                         && have.Contains(InventoryItemType.Hammer)
-                        && (have.Contains(InventoryItemType.Hookshot)
-                            || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
-                                    || LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
-                                    || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
-                                && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key)))),
+                        && CanLiftLightRocks(have),
                 },
 
                 new Location
@@ -225,31 +224,11 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D5-B5] Ice Palace - big chest",
                     Address = 0xE9AA,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterIcePalace(have)
-                        && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.BigKey)
-                            || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.BigKey)
-                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.BigKey)
-                            || (LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
-                                && (have.Contains(InventoryItemType.Hookshot)
-                                    || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
-                                            || LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
-                                            || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
-                                        && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
-                                            || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key)
-                                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key)))))
-                            || ((LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
-                                    || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
-                                && have.Contains(InventoryItemType.Hammer)
-                                && (have.Contains(InventoryItemType.Hookshot)
-                                    || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
-                                            || LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
-                                            || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
-                                        && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
-                                            || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key)
-                                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key)))))),
+                        && have.Contains(InventoryItemType.Hammer)
+                        && CanLiftLightRocks(have),
                 },
                 new Location
                 {
@@ -259,7 +238,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9AD,
                     CanAccess =
                         have =>
-                        CanEnterTowerOfHera(have),
+                        true,
                 },
 
                 new Location
@@ -270,7 +249,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9B3,
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -280,7 +259,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9B6,
                     CanAccess =
                         have =>
-                        CanEnterDesertPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -290,7 +269,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9B9,
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -298,6 +277,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.LightWorld,
                     Name = "[cave-040] Link's House",
                     Address = 0xE9BC,
+                    ForceItems = { InventoryItemType.PegasusBoots },
                     CanAccess =
                         have =>
                         true,
@@ -310,10 +290,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9BF,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && ((have.Contains(InventoryItemType.MagicMirror)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || have.Contains(InventoryItemType.Hookshot)),
+                        true,
                 },
                 new Location
                 {
@@ -323,8 +300,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9C2,
                     CanAccess =
                         have =>
-                        CanEnterDesertPalace(have)
-                        && have.Contains(InventoryItemType.PegasusBoots),
+                        true,
                 },
                 new Location
                 {
@@ -334,11 +310,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9C5,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && have.Contains(InventoryItemType.MagicMirror)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key))),
+                        have.Contains(InventoryItemType.MagicMirror)
+                        && have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -349,7 +322,7 @@ namespace AlttpRandomizer.Rom
                     ForceItems = { InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods(have),
+                        true,
                 },
                 new Location
                 {
@@ -359,8 +332,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9CB,
                     CanAccess =
                         have =>
-                        CanEnterDesertPalace(have)
-                        && have.Contains(InventoryItemType.PegasusBoots),
+                        true,
                 },
                 new Location
                 {
@@ -392,7 +364,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9DA,
                     CanAccess =
                         have =>
-                        CanEnterMiseryMire(have),
+                        CanEnterMiseryMire(have)
+                        && CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -404,13 +377,7 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterIcePalace(have)
                         && have.Contains(InventoryItemType.Hammer)
-                        && (have.Contains(InventoryItemType.Hookshot)
-                            || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
-                                    || LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
-                                    || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
-                                && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key)))),
+                        && CanLiftLightRocks(have),
                 },
                 new Location
                 {
@@ -420,14 +387,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9E0,
                     CanAccess =
                         have =>
-                        CanEnterIcePalace(have)
-                        && (have.Contains(InventoryItemType.Hookshot)
-                            || ((LocationHasItem("[dungeon-D5-B3] Ice Palace - spike room", InventoryItemType.BigKey)
-                                    || LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
-                                    || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey))
-                                && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key)))),
+                        CanEnterIcePalace(have),
                 },
                 new Location
                 {
@@ -447,8 +407,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9E6,
                     CanAccess =
                         have =>
-                        CanEnterTowerOfHera(have)
-                        && CanLightTorches(have),
+                        CanLightTorches(have),
                 },
                 new Location
                 {
@@ -468,7 +427,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9EC,
                     CanAccess =
                         have =>
-                        CanAccessNorthWestDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -478,7 +437,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9EF,
                     CanAccess =
                         have =>
-                        CanAccessNorthWestDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -498,7 +457,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9F5,
                     CanAccess =
                         have =>
-                        CanEnterEasternPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -507,12 +466,9 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-L3-4F] Tower of Hera - big chest",
                     Address = 0xE9F8,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterTowerOfHera(have)
-                        && (CanLightTorches(have)
-                            || LocationHasItem("[dungeon-L3-2F] Tower of Hera - Entrance", InventoryItemType.BigKey)),
+                        CanDefeatTowerOfHera(have),
                 },
                 new Location
                 {
@@ -523,9 +479,7 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterTowerOfHera(have)
-                        && (CanLightTorches(have)
-                            || LocationHasItem("[dungeon-L3-2F] Tower of Hera - Entrance", InventoryItemType.BigKey)),
+                        CanDefeatTowerOfHera(have),
                 },
                 new Location
                 {
@@ -535,7 +489,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE9FE,
                     CanAccess =
                         have =>
-                        CanEnterSkullWoods2(have),
+                        have.Contains(InventoryItemType.FireRod),
                 },
                 new Location
                 {
@@ -545,7 +499,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA01,
                     CanAccess =
                         have =>
-                        CanEnterThievesTown(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -555,7 +509,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA04,
                     CanAccess =
                         have =>
-                        CanEnterThievesTown(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -565,7 +519,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA07,
                     CanAccess =
                         have =>
-                        CanEnterThievesTown(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -575,7 +529,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA0A,
                     CanAccess =
                         have =>
-                        CanEnterThievesTown(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -586,7 +540,7 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanEnterThievesTown(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -595,10 +549,9 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D4-B2] Thieves' Town - big chest",
                     Address = 0xEA10,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterThievesTown(have)
+                        CanAccessDarkWorld(have)
                         && have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
@@ -610,7 +563,7 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterThievesTown(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -620,9 +573,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA16,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)),
+                        true,
                 },
                 new Location
                 {
@@ -631,14 +582,9 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D7-B1] Turtle Rock - big chest",
                     Address = 0xEA19,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-B1] Turtle Rock - big key room", InventoryItemType.BigKey))),
+                        true,
                 },
                 new Location
                 {
@@ -648,7 +594,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA1C,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
+                        have.Contains(InventoryItemType.CaneOfSomaria)
                         && have.Contains(InventoryItemType.FireRod),
                 },
                 new Location
@@ -659,7 +605,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA1F,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
+                        have.Contains(InventoryItemType.CaneOfSomaria)
                         && have.Contains(InventoryItemType.FireRod),
                 },
                 new Location
@@ -670,7 +616,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA22,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have),
+                        have.Contains(InventoryItemType.CaneOfSomaria),
                 },
                 new Location
                 {
@@ -680,10 +626,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA25,
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key))),
+                        true,
                 },
                 new Location
                 {
@@ -694,11 +637,10 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-B1] Turtle Rock - big key room", InventoryItemType.BigKey))),
+                        (!TurtleRockBigKeyOnLaserBridge()
+                            && have.Contains(InventoryItemType.CaneOfSomaria))
+                        || (have.Contains(InventoryItemType.MagicMirror)
+                            && CanAccessDarkWorld(have)),
                 },
                 new Location
                 {
@@ -709,11 +651,10 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-B1] Turtle Rock - big key room", InventoryItemType.BigKey))),
+                        (!TurtleRockBigKeyOnLaserBridge()
+                            && have.Contains(InventoryItemType.CaneOfSomaria))
+                        || (have.Contains(InventoryItemType.MagicMirror)
+                            && CanAccessDarkWorld(have)),
                 },
                 new Location
                 {
@@ -724,11 +665,10 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-B1] Turtle Rock - big key room", InventoryItemType.BigKey))),
+                        (!TurtleRockBigKeyOnLaserBridge()
+                            && have.Contains(InventoryItemType.CaneOfSomaria))
+                        || (have.Contains(InventoryItemType.MagicMirror)
+                            && CanAccessDarkWorld(have)),
                 },
                 new Location
                 {
@@ -739,11 +679,10 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-B1] Turtle Rock - big key room", InventoryItemType.BigKey))),
+                        (!TurtleRockBigKeyOnLaserBridge()
+                            && have.Contains(InventoryItemType.CaneOfSomaria))
+                        || (have.Contains(InventoryItemType.MagicMirror)
+                            && CanAccessDarkWorld(have)),
                 },
                 new Location
                 {
@@ -754,11 +693,9 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterTurtleRock(have)
-                        && (have.Contains(InventoryItemType.FireRod)
-                            || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
-                                && LocationHasItem("[dungeon-D7-B1] Turtle Rock - big key room", InventoryItemType.BigKey))),
+                        !TurtleRockBigKeyOnLaserBridge()
+                        || (have.Contains(InventoryItemType.MagicMirror)
+                            && CanAccessDarkWorld(have)),
                 },
                 new Location
                 {
@@ -769,19 +706,7 @@ namespace AlttpRandomizer.Rom
                     ForceItems = { InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have)
-                        && ((LocationHasItem("[dungeon-D1-B1] Dark Palace - shooter room", InventoryItemType.Key)
-                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key)))
-                            || (have.Contains(InventoryItemType.Bow)
-                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)))
-                            || (have.Contains(InventoryItemType.Bow)
-                                && have.Contains(InventoryItemType.Hammer)
-                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key)))),
+                        true,
                 },
                 new Location
                 {
@@ -791,8 +716,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA3A,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have)
-                        && have.Contains(InventoryItemType.Bow),
+                        true,
                 },
                 new Location
                 {
@@ -802,13 +726,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA3D,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have)
-                        && (LocationHasItem("[dungeon-D1-B1] Dark Palace - shooter room", InventoryItemType.Key)
-                            || (have.Contains(InventoryItemType.Bow)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || (have.Contains(InventoryItemType.Bow)
-                                && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
-                                    || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)))),
+                        true,
                 },
                 new Location
                 {
@@ -819,8 +737,7 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanAccessLateDarkPalace(have)
-                        && have.Contains(InventoryItemType.Lamp),
+                        true,
                 },
                 new Location
                 {
@@ -830,7 +747,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA43,
                     CanAccess =
                         have =>
-                        CanAccessLateDarkPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -840,7 +757,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA46,
                     CanAccess =
                         have =>
-                        CanAccessLateDarkPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -850,7 +767,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA49,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -860,8 +777,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA4C,
                     CanAccess =
                         have =>
-                        CanAccessLateDarkPalace(have)
-                        && have.Contains(InventoryItemType.Lamp),
+                        true,
                 },
                 new Location
                 {
@@ -871,8 +787,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA4F,
                     CanAccess =
                         have =>
-                        CanAccessLateDarkPalace(have)
-                        && have.Contains(InventoryItemType.Lamp),
+                        true,
                 },
                 new Location
                 {
@@ -882,8 +797,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA52,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have)
-                        && have.Contains(InventoryItemType.Bow),
+                        true,
                 },
                 new Location
                 {
@@ -894,8 +808,7 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanAccessLateDarkPalace(have)
-                        && have.Contains(InventoryItemType.Lamp),
+                        true,
                 },
                 new Location
                 {
@@ -906,8 +819,7 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanAccessLateDarkPalace(have)
-                        && have.Contains(InventoryItemType.Lamp),
+                        true,
                 },
                 new Location
                 {
@@ -917,7 +829,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA5B,
                     CanAccess =
                         have =>
-                        CanEnterDarkPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -927,7 +839,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA5E,
                     CanAccess =
                         have =>
-                        CanEnterMiseryMire(have),
+                        CanEnterMiseryMire(have)
+                        && CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -937,7 +850,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA61,
                     CanAccess =
                         have =>
-                        CanEnterMiseryMire(have),
+                        CanEnterMiseryMire(have)
+                        && CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -948,6 +862,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
+                        && CanAccessDarkWorld(have)
                         && CanLightTorches(have),
                 },
                 new Location
@@ -957,13 +872,10 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-D6-B1] Misery Mire - big chest",
                     Address = 0xEA67,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
-                        && (CanLightTorches(have)
-                            || (!LocationHasItem("[dungeon-D6-B1] Misery Mire - compass", InventoryItemType.BigKey)
-                                && !LocationHasItem("[dungeon-D6-B1] Misery Mire - big key", InventoryItemType.BigKey))),
+                        && CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -973,7 +885,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA6A,
                     CanAccess =
                         have =>
-                        CanEnterMiseryMire(have),
+                        CanEnterMiseryMire(have)
+                        && CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -984,6 +897,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
+                        && CanAccessDarkWorld(have)
                         && CanLightTorches(have),
                 },
 
@@ -995,9 +909,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA73,
                     CanAccess =
                         have =>
-                        have.Contains(InventoryItemType.OcarinaInactive)
-                        && have.Contains(InventoryItemType.MoonPearl)
-                        && have.Contains(InventoryItemType.TitansMitt),
+                        CanAccessDarkWorld(have),
                },
                 new Location
                 {
@@ -1007,9 +919,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA76,
                     CanAccess =
                         have =>
-                        have.Contains(InventoryItemType.OcarinaInactive)
-                        && have.Contains(InventoryItemType.MoonPearl)
-                        && have.Contains(InventoryItemType.TitansMitt),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -1019,7 +929,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA79,
                     CanAccess =
                         have =>
-                        CanDefeatHyruleCastleEscape(have),
+                        true,
                 },
                 new Location
                 {
@@ -1029,7 +939,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA7C,
                     CanAccess =
                         have =>
-                        CanAccessEastDarkWorldDeathMountain(have),
+                        true,
                 },
                 new Location
                 {
@@ -1039,7 +949,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA7F,
                     CanAccess =
                         have =>
-                        CanAccessEastDarkWorldDeathMountain(have),
+                        true,
                 },
                 new Location
                 {
@@ -1079,9 +989,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEA8B,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
+                        CanAccessDarkWorld(have)
                         && CanLiftLightRocks(have)
-                        && have.Contains(InventoryItemType.MoonPearl)
                         && have.Contains(InventoryItemType.Hammer)
                 },
                 new Location
@@ -1140,9 +1049,17 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "[dungeon-D2-1F] Swamp Palace - first room",
                     Address = 0xEA9D,
+                    ForceItems = { InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have),
+                        (have.Contains(InventoryItemType.Flippers)
+                            && have.Contains(InventoryItemType.MagicMirror)
+                            && have.Contains(InventoryItemType.MoonPearl))
+                        || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                            && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                || CanLightTorches(have)))
+                        || (CanEnterMiseryMire(have)
+                            && CanAccessDarkWorld(have)),
                 },
                 new Location
                 {
@@ -1152,8 +1069,16 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAA0,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hammer),
+                        have.Contains(InventoryItemType.Flippers)
+                        && ((have.Contains(InventoryItemType.Hammer)
+                                && have.Contains(InventoryItemType.MagicMirror)
+                                && have.Contains(InventoryItemType.MoonPearl)
+                                && LocationHasItem("[dungeon-D2-1F] Swamp Palace - first room", InventoryItemType.Key))
+                            || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                    || CanLightTorches(have)))
+                            || (CanEnterMiseryMire(have)
+                                && CanAccessDarkWorld(have))),
                 },
                 new Location
                 {
@@ -1163,8 +1088,16 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAA3,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hammer),
+                        have.Contains(InventoryItemType.Flippers)
+                        && ((have.Contains(InventoryItemType.Hammer)
+                                && have.Contains(InventoryItemType.MagicMirror)
+                                && have.Contains(InventoryItemType.MoonPearl)
+                                && LocationHasItem("[dungeon-D2-1F] Swamp Palace - first room", InventoryItemType.Key))
+                            || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                    || CanLightTorches(have)))
+                            || (CanEnterMiseryMire(have)
+                                && CanAccessDarkWorld(have))),
                 },
                 new Location
                 {
@@ -1174,8 +1107,16 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAA6,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hammer),
+                        have.Contains(InventoryItemType.Flippers)
+                        && ((have.Contains(InventoryItemType.Hammer)
+                                && have.Contains(InventoryItemType.MagicMirror)
+                                && have.Contains(InventoryItemType.MoonPearl)
+                                && LocationHasItem("[dungeon-D2-1F] Swamp Palace - first room", InventoryItemType.Key))
+                            || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                    || CanLightTorches(have)))
+                            || (CanEnterMiseryMire(have)
+                                && CanAccessDarkWorld(have))),
                 },
                 new Location
                 {
@@ -1185,9 +1126,17 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAA9,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have)
+                        have.Contains(InventoryItemType.Flippers)
                         && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && ((have.Contains(InventoryItemType.Hammer)
+                                && have.Contains(InventoryItemType.MagicMirror)
+                                && have.Contains(InventoryItemType.MoonPearl)
+                                && LocationHasItem("[dungeon-D2-1F] Swamp Palace - first room", InventoryItemType.Key))
+                            || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                    || CanLightTorches(have)))
+                            || (CanOpenMiseryMire(have)
+                                && CanAccessDarkWorld(have))),
                 },
                 new Location
                 {
@@ -1197,9 +1146,17 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAAC,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have)
+                        have.Contains(InventoryItemType.Flippers)
                         && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && ((have.Contains(InventoryItemType.Hammer)
+                                && have.Contains(InventoryItemType.MagicMirror)
+                                && have.Contains(InventoryItemType.MoonPearl)
+                                && LocationHasItem("[dungeon-D2-1F] Swamp Palace - first room", InventoryItemType.Key))
+                            || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                    || CanLightTorches(have)))
+                            || (CanOpenMiseryMire(have)
+                                && CanAccessDarkWorld(have))),
                 },
                 new Location
                 {
@@ -1209,9 +1166,17 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAAF,
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have)
+                        have.Contains(InventoryItemType.Flippers)
                         && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && ((have.Contains(InventoryItemType.Hammer)
+                                && have.Contains(InventoryItemType.MagicMirror)
+                                && have.Contains(InventoryItemType.MoonPearl)
+                                && LocationHasItem("[dungeon-D2-1F] Swamp Palace - first room", InventoryItemType.Key))
+                            || (!LocationHasItem("[dungeon-L3-4F] Tower of Hera - 4F [small chest]", InventoryItemType.BigKey)
+                                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                                    || CanLightTorches(have)))
+                            || (CanOpenMiseryMire(have)
+                                && CanAccessDarkWorld(have))),
                 },
                 new Location
                 {
@@ -1222,7 +1187,7 @@ namespace AlttpRandomizer.Rom
                     Item = new InventoryItem(InventoryItemType.Key),
                     CanAccess =
                         have =>
-                        CanEnterHyruleCastleTower(have),
+                        true,
                 },
                 new Location
                 {
@@ -1233,7 +1198,7 @@ namespace AlttpRandomizer.Rom
                     Item = new InventoryItem(InventoryItemType.Key),
                     CanAccess =
                         have =>
-                        CanEnterHyruleCastleTower(have),
+                        true,
                 },
                 new Location
                 {
@@ -1243,7 +1208,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAB8,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1253,7 +1218,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEABB,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1263,7 +1228,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEABE,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1273,7 +1238,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAC1,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1283,7 +1248,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAC4,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1293,7 +1258,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAC7,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1303,7 +1268,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEACA,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1313,7 +1278,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEACD,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1321,9 +1286,10 @@ namespace AlttpRandomizer.Rom
                     Region = Region.GanonsTower,
                     Name = "[dungeon-A2-1F] Ganon's Tower - north of teleport room",
                     Address = 0xEAD0,
+                    NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1333,7 +1299,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAD3,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
                 {
@@ -1342,10 +1308,11 @@ namespace AlttpRandomizer.Rom
                     Name = "[dungeon-A2-1F] Ganon's Tower - big chest",
                     Address = 0xEAD6,
                     NeverItems = { InventoryItemType.BigKey },
-                    // big chests require all the items that other chests in the dungeon require (that also don't require big key)
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer)
+                        || (have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have)),
                 },
                 new Location
                 {
@@ -1355,7 +1322,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAD9,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        true,
                 },
                 new Location
                 {
@@ -1365,7 +1332,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEADC,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        true,
                 },
                 new Location
                 {
@@ -1375,7 +1342,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEADF,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer)
+                        || (have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have)),
                 },
                 new Location
                 {
@@ -1385,7 +1354,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAE2,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.CaneOfSomaria),
                 },
                 new Location
                 {
@@ -1395,7 +1364,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAE5,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1405,7 +1375,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAE8,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1415,7 +1386,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAEB,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1425,7 +1397,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAEE,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -1435,7 +1408,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAF1,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer)
+                        || (have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have)),
                 },
                 new Location
                 {
@@ -1445,7 +1420,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAF4,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer)
+                        || (have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have)),
                 },
                 new Location
                 {
@@ -1455,7 +1432,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEAF7,
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Hammer)
+                        || (have.Contains(InventoryItemType.CaneOfSomaria)
+                            && CanLightTorches(have)),
                 },
 
                 new Location
@@ -1467,7 +1446,12 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Bow)
+                        && CanLightTorches(have)
+                        && ((BigKeyGanonsTowerLeft()
+                                && have.Contains(InventoryItemType.Hammer))
+                            || (BigKeyGanonsTowerRight()
+                                && have.Contains(InventoryItemType.CaneOfSomaria))),
                 },
                 new Location
                 {
@@ -1478,7 +1462,12 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Bow)
+                        && CanLightTorches(have)
+                        && ((BigKeyGanonsTowerLeft()
+                                && have.Contains(InventoryItemType.Hammer))
+                            || (BigKeyGanonsTowerRight()
+                                && have.Contains(InventoryItemType.CaneOfSomaria))),
                 },
                 new Location
                 {
@@ -1489,7 +1478,12 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Bow)
+                        && CanLightTorches(have)
+                        && ((BigKeyGanonsTowerLeft()
+                                && have.Contains(InventoryItemType.Hammer))
+                            || (BigKeyGanonsTowerRight()
+                                && have.Contains(InventoryItemType.CaneOfSomaria))),
                 },
                 new Location
                 {
@@ -1500,7 +1494,13 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey },
                     CanAccess =
                         have =>
-                        CanEnterGanonsTower(have),
+                        have.Contains(InventoryItemType.Bow)
+                        && CanLightTorches(have)
+                        && have.Contains(InventoryItemType.Hookshot)
+                        && ((BigKeyGanonsTowerLeft()
+                                && have.Contains(InventoryItemType.Hammer))
+                            || (BigKeyGanonsTowerRight()
+                                && have.Contains(InventoryItemType.CaneOfSomaria))),
                 },
                 new Location
                 {
@@ -1580,7 +1580,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB1E,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -1590,7 +1590,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB21,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -1600,7 +1600,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB24,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -1610,7 +1610,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB27,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -1620,10 +1620,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB2A,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && ((have.Contains(InventoryItemType.MagicMirror)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || have.Contains(InventoryItemType.Hookshot)),
+                        true,
                 },
                 new Location
                 {
@@ -1633,10 +1630,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB2D,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && ((have.Contains(InventoryItemType.MagicMirror)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || have.Contains(InventoryItemType.Hookshot)),
+                        true,
                 },
                 new Location
                 {
@@ -1646,10 +1640,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB30,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && ((have.Contains(InventoryItemType.MagicMirror)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || have.Contains(InventoryItemType.Hookshot)),
+                        true,
                 },
                 new Location
                 {
@@ -1659,10 +1650,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB33,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && ((have.Contains(InventoryItemType.MagicMirror)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || have.Contains(InventoryItemType.Hookshot)),
+                        true,
                 },
                 new Location
                 {
@@ -1672,10 +1660,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB36,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && ((have.Contains(InventoryItemType.MagicMirror)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || have.Contains(InventoryItemType.Hookshot)),
+                        true,
                 },
                 new Location
                 {
@@ -1685,10 +1670,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB39,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && ((have.Contains(InventoryItemType.MagicMirror)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || have.Contains(InventoryItemType.Hookshot)),
+                        true,
                 },
                 new Location
                 {
@@ -1698,10 +1680,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB3C,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && ((have.Contains(InventoryItemType.MagicMirror)
-                                && have.Contains(InventoryItemType.Hammer))
-                            || have.Contains(InventoryItemType.Hookshot)),
+                        true,
                 },
                 new Location
                 {
@@ -1771,7 +1750,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB51,
                     CanAccess =
                         have =>
-                        CanAccessEastDarkWorldDeathMountain(have)
+                        CanAccessDarkWorld(have)
+                        && (CanLiftLightRocks(have)
+                            || have.Contains(InventoryItemType.MagicMirror))
                         && have.Contains(InventoryItemType.Hookshot),
                 },
                 new Location
@@ -1782,7 +1763,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB54,
                     CanAccess =
                         have =>
-                        CanAccessEastDarkWorldDeathMountain(have)
+                        CanAccessDarkWorld(have)
+                        && (CanLiftLightRocks(have)
+                            || have.Contains(InventoryItemType.MagicMirror))
                         && have.Contains(InventoryItemType.Hookshot),
                 },
                 new Location
@@ -1793,7 +1776,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB57,
                     CanAccess =
                         have =>
-                        CanAccessEastDarkWorldDeathMountain(have)
+                        CanAccessDarkWorld(have)
+                        && (CanLiftLightRocks(have)
+                            || have.Contains(InventoryItemType.MagicMirror))
                         && have.Contains(InventoryItemType.Hookshot),
                 },
                 new Location
@@ -1804,7 +1789,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB5A,
                     CanAccess =
                         have =>
-                        CanAccessEastDarkWorldDeathMountain(have)
+                        CanAccessDarkWorld(have)
+                        && (CanLiftLightRocks(have)
+                            || have.Contains(InventoryItemType.MagicMirror))
                         && (have.Contains(InventoryItemType.Hookshot)
                             || have.Contains(InventoryItemType.PegasusBoots))
                 },
@@ -1816,7 +1803,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB5D,
                     CanAccess =
                         have =>
-                        CanLiftLightRocks(have),
+                        true,
                 },
                 new Location
                 {
@@ -1826,7 +1813,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB60,
                     CanAccess =
                         have =>
-                        CanLiftLightRocks(have),
+                        true,
                 },
                 new Location
                 {
@@ -1836,7 +1823,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEB63,
                     CanAccess =
                         have =>
-                        CanLiftLightRocks(have),
+                        true,
                 },
                 new Location
                 {
@@ -1846,7 +1833,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEDA8,
                     CanAccess =
                         have =>
-                        CanAccessNorthWestDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -1878,7 +1865,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x330C7,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -1898,9 +1885,10 @@ namespace AlttpRandomizer.Rom
                     Address = 0x33D68,
                     CanAccess =
                         have =>
-                        CanAccessNorthWestDarkWorld(have)
-                        && have.Contains(InventoryItemType.TitansMitt)
-                        && have.Contains(InventoryItemType.MagicMirror),
+                        have.Contains(InventoryItemType.MagicMirror)
+                        && (have.Contains(InventoryItemType.Bottle)
+                            || (have.Contains(InventoryItemType.MoonPearl)
+                                && have.Contains(InventoryItemType.TitansMitt))),
                 },
                 new Location
                 {
@@ -1910,7 +1898,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x33E7D,
                     CanAccess =
                         have =>
-                        have.Contains(InventoryItemType.Flippers),
+                        true,
                 },
                 new Location
                 {
@@ -1920,9 +1908,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEE185,
                     CanAccess =
                         have =>
-                        CanAccessPyramid(have)
-                        && have.Contains(InventoryItemType.MoonPearl)
-                        && CanLiftLightRocks(have),
+                        CanAccessDarkWorld(have),
                     WriteItemCheck =
                         (rom, item) =>
                         {
@@ -1939,7 +1925,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xEE1C3,
                     CanAccess =
                         have =>
-                        CanAccessZorasRiver(have),
+                        true,
                     WriteItemCheck =
                         (rom, item) =>
                         {
@@ -1956,7 +1942,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xF69FA,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have),
+                        true,
                 },
                 new Location
                 {
@@ -1976,8 +1962,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180001,
                     CanAccess =
                         have =>
-                        CanDefeatAgahnim1(have)
-                        && have.Contains(InventoryItemType.PegasusBoots),
+                        have.Contains(InventoryItemType.PegasusBoots),
                 },
                 new Location
                 {
@@ -1987,7 +1972,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180002,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have),
+                        true,
                 },
                 new Location
                 {
@@ -1997,8 +1982,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180003,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have)
-                        && have.Contains(InventoryItemType.MagicMirror),
+                        true,
                 },
                 new Location
                 {
@@ -2008,8 +1992,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180004,
                     CanAccess =
                         have =>
-                        CanAccessNorthWestDarkWorld(have)
-                        && have.Contains(InventoryItemType.MagicMirror),
+                        true,
                 },
                 new Location
                 {
@@ -2019,9 +2002,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180005,
                     CanAccess =
                         have =>
-                        have.Contains(InventoryItemType.OcarinaInactive)
-                        && have.Contains(InventoryItemType.MagicMirror)
-                        && have.Contains(InventoryItemType.TitansMitt),
+                        CanLiftLightRocks(have),
                 },
                 new Location
                 {
@@ -2031,8 +2012,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180006,
                     CanAccess =
                         have =>
-                        CanAccessNorthWestDarkWorld(have)
-                        && have.Contains(InventoryItemType.TitansMitt)
+                        CanAccessDarkWorld(have)
                         && have.Contains(InventoryItemType.Hammer),
                 },
                 new Location
@@ -2053,7 +2033,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180011,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have),
+                        CanAccessDarkWorld(have)
+                        || have.Contains(InventoryItemType.MagicMirror),
                 },
                 new Location
                 {
@@ -2105,8 +2086,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180016,
                     CanAccess =
                         have =>
-                        CanEnterTowerOfHera(have)
-                        && CanUpgradeSword(have)
+                        CanUpgradeSword(have)
                         && have.Contains(InventoryItemType.BookOfMudora),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2123,10 +2103,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180017,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have)
-                        && CanUpgradeSword(have)
-                        && have.Contains(InventoryItemType.BookOfMudora)
-                        && have.Contains(InventoryItemType.MagicMirror),
+                        CanUpgradeSword(have)
+                        && have.Contains(InventoryItemType.BookOfMudora),
                     WriteItemCheck =
                         (rom, item) =>
                         {
@@ -2142,8 +2120,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180140,
                     CanAccess =
                         have =>
-                        CanClimbDeathMountain(have)
-                        && have.Contains(InventoryItemType.MagicMirror),
+                        true,
                 },
                 new Location
                 {
@@ -2153,8 +2130,8 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180141,
                     CanAccess =
                         have =>
-                        CanAccessEastDarkWorldDeathMountain(have)
-                        && have.Contains(InventoryItemType.MagicMirror),
+                        have.Contains(InventoryItemType.Flippers)
+                        || have.Contains(InventoryItemType.MagicMirror),
                 },
                 new Location
                 {
@@ -2174,7 +2151,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180143,
                     CanAccess =
                         have =>
-                        CanEnterDesertPalace(have),
+                        true,
                 },
                 new Location
                 {
@@ -2184,13 +2161,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180144,
                     CanAccess =
                         have =>
-                        have.Contains(InventoryItemType.Flippers)
-                        && have.Contains(InventoryItemType.MagicMirror)
-                        && have.Contains(InventoryItemType.MoonPearl)
-                        && (have.Contains(InventoryItemType.TitansMitt)
-                            || CanDefeatAgahnim1(have)
-                            || (have.Contains(InventoryItemType.Hammer)
-                                && have.Contains(InventoryItemType.PowerGlove))),
+                        true,
                 },
                 new Location
                 {
@@ -2210,8 +2181,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180146,
                     CanAccess =
                         have =>
-                        CanAccessNorthWestDarkWorld(have)
-                        && have.Contains(InventoryItemType.Cape),
+                        true,
                 },
                 new Location
                 {
@@ -2221,7 +2191,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180147,
                     CanAccess =
                         have =>
-                        CanAccessPyramid(have),
+                        true,
                 },
                 new Location
                 {
@@ -2231,7 +2201,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180148,
                     CanAccess =
                         have =>
-                        CanAccessSouthDarkWorld(have),
+                        CanAccessDarkWorld(have),
                 },
                 new Location
                 {
@@ -2241,8 +2211,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0x180149,
                     CanAccess =
                         have =>
-                        CanAccessZorasRiver(have)
-                        && have.Contains(InventoryItemType.Flippers),
+                        have.Contains(InventoryItemType.Flippers)
+                        || (have.Contains(InventoryItemType.PegasusBoots)
+                            && have.Contains(InventoryItemType.MoonPearl)),
                 },
                 new Location
                 {
@@ -2260,7 +2231,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.EasternPalace,
                     Name = "Heart Container (Armos Knights)",
                     Address = 0x180150,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatEasternPalace(have),
@@ -2271,7 +2242,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DesertPalace,
                     Name = "Heart Container (Lanmolas)",
                     Address = 0x180151,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatDesertPalace(have),
@@ -2282,7 +2253,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TowerOfHera,
                     Name = "Heart Container (Moldorm)",
                     Address = 0x180152,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatTowerOfHera(have),
@@ -2293,7 +2264,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.DarkPalace,
                     Name = "Heart Container (Helmasaur King)",
                     Address = 0x180153,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatDarkPalace(have),
@@ -2304,7 +2275,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SwampPalace,
                     Name = "Heart Container (Arrghus)",
                     Address = 0x180154,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatSwampPalace(have),
@@ -2315,7 +2286,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.SkullWoods,
                     Name = "Heart Container (Mothula)",
                     Address = 0x180155,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatSkullWoods(have),
@@ -2326,7 +2297,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.ThievesTown,
                     Name = "Heart Container (Blind)",
                     Address = 0x180156,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatThievesTown(have),
@@ -2337,7 +2308,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.IcePalace,
                     Name = "Heart Container (Kholdstare)",
                     Address = 0x180157,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatIcePalace(have),
@@ -2348,7 +2319,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.MiseryMire,
                     Name = "Heart Container (Vitreous)",
                     Address = 0x180158,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatMiseryMire(have),
@@ -2359,7 +2330,7 @@ namespace AlttpRandomizer.Rom
                     Region = Region.TurtleRock,
                     Name = "Heart Container (Trinexx)",
                     Address = 0x180159,
-                    NeverItems = { InventoryItemType.BigKey },
+                    NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
                         CanDefeatTurtleRock(have),
@@ -2420,7 +2391,7 @@ namespace AlttpRandomizer.Rom
                         (rom, item) =>
                         {
                             var itemType = ((CrystalItem)item).Type;
-                            WriteCrystal(rom, Region.SwampPalace, itemType);
+                            WriteCrystal(rom, Region.DarkPalace, itemType);
                         }
                 },
                 new Location
@@ -2431,7 +2402,7 @@ namespace AlttpRandomizer.Rom
                         (rom, item) =>
                         {
                             var itemType = ((CrystalItem)item).Type;
-                            WriteCrystal(rom, Region.SwampPalace, itemType);
+                            WriteCrystal(rom, Region.MiseryMire, itemType);
                         }
                 },
                 new Location
@@ -2576,8 +2547,8 @@ namespace AlttpRandomizer.Rom
                     WriteItemCheck =
                         (rom, item) =>
                         {
-                            var itemType = ((InventoryItem)item).Type + 1;
-                            rom.WriteBytes(0x3348E, (byte)itemType);
+                            int itemType = (int)((InventoryItem)item).Type + 1;
+                            rom.WriteBytes(0x3348E, (byte)(itemType % 0x4F));
                         }
                 },
                 new Location
@@ -2588,45 +2559,43 @@ namespace AlttpRandomizer.Rom
             };
         }
 
+        private bool BigKeyGanonsTowerRight()
+        {
+            return LocationHasItem("[dungeon-A2-1F] Ganon's Tower - compass room [bottom left chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - compass room [bottom right chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - compass room [top left chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - compass room [top right chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - east of down right staircase from entrace", InventoryItemType.BigKey);
+        }
+
+        private bool BigKeyGanonsTowerLeft()
+        {
+            return LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom left chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of gap room [bottom right chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of gap room [top left chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of gap room [top right chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - map room", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - north of teleport room", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom left chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - west of teleport room [bottom right chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - west of teleport room [top left chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-A2-1F] Ganon's Tower - west of teleport room [top right chest]", InventoryItemType.BigKey);
+        }
+
+        private bool TurtleRockBigKeyOnLaserBridge()
+        {
+            return LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom left chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [bottom right chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [top left chest]", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [top right chest]", InventoryItemType.BigKey);
+        }
+
         internal override bool CanDefeatHyruleCastleEscape(List<InventoryItemType> have)
         {
             return LocationHasItem("[dungeon-C-B1] Escape - first B1 room", InventoryItemType.Key)
                 || LocationHasItem("[dungeon-C-B1] Hyrule Castle - boomerang room", InventoryItemType.Key)
                 || LocationHasItem("[dungeon-C-B1] Hyrule Castle - map room", InventoryItemType.Key)
                 || LocationHasItem("[dungeon-C-B3] Hyrule Castle - next to Zelda", InventoryItemType.Key);
-        }
-
-        private bool CanAccessLateDarkPalace(List<InventoryItemType> have)
-        {
-            return CanEnterDarkPalace(have)
-                && ((LocationHasItem("[dungeon-D1-B1] Dark Palace - shooter room", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key)
-                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key)))
-                    || (have.Contains(InventoryItemType.Bow)
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key)
-                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)))
-                    || (have.Contains(InventoryItemType.Bow)
-                        && have.Contains(InventoryItemType.Hammer)
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key)
-                        && (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key))));
-        }
-
-        private bool CanAccessZorasRiver(List<InventoryItemType> have)
-        {
-            return CanLiftLightRocks(have)
-                || have.Contains(InventoryItemType.Flippers);
-        }
-
-        private bool CanEnterHyruleCastleTower(List<InventoryItemType> have)
-        {
-            return CanUpgradeSword(have)
-                || have.Contains(InventoryItemType.Cape);
-            //|| CanGetTemperedSword(have) --this is a StackOverflow if I do this, so even though it's true, it also doesn't really matter since you'll probably be able to access anywhere you can get to with the Pyramid if you can get the Tempered Sword.
         }
 
         private bool CanUpgradeSword(List<InventoryItemType> have)
@@ -2649,8 +2618,11 @@ namespace AlttpRandomizer.Rom
                 { "Turtle Rock Crystal", CanDefeatTurtleRock },
             };
 
-            // return true if crystals 5 and 6 are accessible
-            return dungeons.Keys.Where(key => CrystalAtLocation(key, CrystalItemType.Crystal5) || CrystalAtLocation(key, CrystalItemType.Crystal6)).All(key => dungeons[key](have));
+            var canGetCrystals5_6 = dungeons.Keys.Where(key => CrystalAtLocation(key, CrystalItemType.Crystal5) || CrystalAtLocation(key, CrystalItemType.Crystal6)).All(key => dungeons[key](have));
+
+            return canGetCrystals5_6
+                || have.Contains(InventoryItemType.MagicMirror)
+                || have.Contains(InventoryItemType.Bottle);
         }
 
         private bool CanGetMasterSword(List<InventoryItemType> have)
@@ -2662,273 +2634,139 @@ namespace AlttpRandomizer.Rom
 
         private bool CanGetTemperedSword(List<InventoryItemType> have)
         {
-            return CanAccessNorthWestDarkWorld(have)
-                && have.Contains(InventoryItemType.TitansMitt)
-                && have.Contains(InventoryItemType.MagicMirror);
+            return have.Contains(InventoryItemType.MagicMirror)
+                || HasBottle(have)
+                || (have.Contains(InventoryItemType.TitansMitt)
+                    && have.Contains(InventoryItemType.MoonPearl));
         }
 
-        private bool CanAccessEastDarkWorldDeathMountain(List<InventoryItemType> have)
+        private bool CanAccessDarkWorld(List<InventoryItemType> have)
         {
-            return CanClimbDeathMountain(have)
-                && have.Contains(InventoryItemType.MoonPearl)
-                && have.Contains(InventoryItemType.TitansMitt)
-                && (have.Contains(InventoryItemType.Hookshot)
-                    || (have.Contains(InventoryItemType.Hammer)
-                        && have.Contains(InventoryItemType.MagicMirror)));
-        }
-
-        private bool CanClimbDeathMountain(List<InventoryItemType> have)
-        {
-            return CanLiftLightRocks(have)
-                || have.Contains(InventoryItemType.OcarinaInactive);
-        }
-
-        private bool CanEnterGanonsTower(List<InventoryItemType> have)
-        {
-            return CanDefeatDarkPalace(have)
-                && CanDefeatSwampPalace(have)
-                && CanDefeatSkullWoods(have)
-                && CanDefeatThievesTown(have)
-                && CanDefeatIcePalace(have)
-                && CanDefeatMiseryMire(have)
-                && CanDefeatTurtleRock(have);
+            return have.Contains(InventoryItemType.MoonPearl)
+                || HasBottle(have);
         }
 
         internal override bool CanDefeatDarkPalace(List<InventoryItemType> have)
         {
-            return CanEnterDarkPalace(have)
-                && have.Contains(InventoryItemType.Bow)
-                && have.Contains(InventoryItemType.Hammer)
-                && have.Contains(InventoryItemType.Lamp)
-                && LocationHasItem("[dungeon-D1-1F] Dark Palace - big key room", InventoryItemType.Key)
-                && ((LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key))
-                    || (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key))
-                    || (LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key))
-                    || (LocationHasItem("[dungeon-D1-1F] Dark Palace - statue push room", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key)));
+            return have.Contains(InventoryItemType.Bow)
+                && have.Contains(InventoryItemType.Hammer);
         }
 
         internal override bool CanDefeatSwampPalace(List<InventoryItemType> have)
         {
-            return CanEnterSwampPalace(have)
-                && have.Contains(InventoryItemType.Hookshot)
-                && have.Contains(InventoryItemType.Hammer)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.SwampPalace) == 1;
+            return have.Contains(InventoryItemType.MoonPearl)
+                && have.Contains(InventoryItemType.MagicMirror)
+                && have.Contains(InventoryItemType.Flippers)
+                && have.Contains(InventoryItemType.Hookshot);
         }
 
         internal override bool CanDefeatSkullWoods(List<InventoryItemType> have)
         {
-            return CanEnterSkullWoods2(have)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.SkullWoods) == 3;
+            return have.Contains(InventoryItemType.FireRod);
         }
 
         internal override bool CanDefeatThievesTown(List<InventoryItemType> have)
         {
-            return CanEnterThievesTown(have)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.ThievesTown) == 1;
+            return CanAccessDarkWorld(have);
         }
 
         internal override bool CanDefeatIcePalace(List<InventoryItemType> have)
         {
             return CanEnterIcePalace(have)
+                && CanLiftLightRocks(have)
                 && have.Contains(InventoryItemType.Hammer)
-                && ((LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.BigKey)
-                        && LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key))
-                    || (LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.BigKey)
-                        && LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key))
-                    || (LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.BigKey)
-                        && LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
-                        && LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key))
-                    || (have.Contains(InventoryItemType.Hookshot)
-                        && (LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.BigKey)
-                            || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.BigKey)
-                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.BigKey)))
-                    || ((LocationHasItem("[dungeon-D5-B2] Ice Palace - map room", InventoryItemType.BigKey)
-                            || LocationHasItem("[dungeon-D5-B1] Ice Palace - Big Key room", InventoryItemType.BigKey)
-                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - big chest", InventoryItemType.BigKey))
-                        && (have.Contains(InventoryItemType.Hookshot)
-                            || LocationHasItem("[dungeon-D5-B1] Ice Palace - compass room", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D5-B4] Ice Palace - above Blue Mail room", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D5-B5] Ice Palace - b5 up staircase", InventoryItemType.Key))))
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.IcePalace) == 2;
+                && (have.Contains(InventoryItemType.FireRod)
+                    || have.Contains(InventoryItemType.Bombos));
         }
 
         internal override bool CanDefeatMiseryMire(List<InventoryItemType> have)
         {
             return CanEnterMiseryMire(have)
                 && have.Contains(InventoryItemType.CaneOfSomaria)
-                && have.Contains(InventoryItemType.Lamp)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.MiseryMire) == 3;
+                && CanAccessDarkWorld(have);
         }
 
         internal override bool CanDefeatTurtleRock(List<InventoryItemType> have)
         {
-            return CanEnterTurtleRock(have)
-                && have.Contains(InventoryItemType.FireRod)
+            return  have.Contains(InventoryItemType.FireRod)
                 && have.Contains(InventoryItemType.IceRod)
-                && Locations.Count(x => x.Item is InventoryItem && ((InventoryItem)x.Item).Type == InventoryItemType.Key && x.Region == Region.TurtleRock) == 4;
-        }
-
-        private bool CanEnterTurtleRock(List<InventoryItemType> have)
-        {
-            return CanAccessEastDarkWorldDeathMountain(have)
-                && have.Contains(InventoryItemType.MoonPearl)
-                && have.Contains(InventoryItemType.Hammer)
-                && have.Contains(GetItemAtLocation<InventoryItem>(SpecialLocations, "Turtle Rock Required Medallion").Type)
                 && have.Contains(InventoryItemType.CaneOfSomaria);
         }
 
         private bool CanEnterMiseryMire(List<InventoryItemType> have)
         {
-            return have.Contains(InventoryItemType.OcarinaInactive)
-                && have.Contains(InventoryItemType.MoonPearl)
-                && have.Contains(InventoryItemType.TitansMitt)
-                && have.Contains(GetItemAtLocation<InventoryItem>(SpecialLocations, "Misery Mire Required Medallion").Type)
+            return CanOpenMiseryMire(have)
                 && (have.Contains(InventoryItemType.PegasusBoots)
                     || have.Contains(InventoryItemType.Hookshot));
         }
 
+        private bool CanOpenMiseryMire(List<InventoryItemType> have)
+        {
+            return have.Contains(GetItemAtLocation<InventoryItem>(SpecialLocations, "Misery Mire Required Medallion").Type);
+        }
+
         private bool CanEnterIcePalace(List<InventoryItemType> have)
         {
-            return have.Contains(InventoryItemType.Flippers)
-                && have.Contains(InventoryItemType.MoonPearl)
-                && have.Contains(InventoryItemType.TitansMitt)
-                && (have.Contains(InventoryItemType.FireRod)
-                    || have.Contains(InventoryItemType.Bombos));
-        }
-
-        private bool CanEnterThievesTown(List<InventoryItemType> have)
-        {
-            return CanAccessNorthWestDarkWorld(have);
-        }
-
-        private bool CanEnterSkullWoods2(List<InventoryItemType> have)
-        {
-            return CanEnterSkullWoods(have)
-                && have.Contains(InventoryItemType.FireRod);
-        }
-
-        private bool CanEnterSkullWoods(List<InventoryItemType> have)
-        {
-            return CanAccessNorthWestDarkWorld(have);
-        }
-
-        private bool CanEnterSwampPalace(List<InventoryItemType> have)
-        {
-            return CanAccessSouthDarkWorld(have)
-                && have.Contains(InventoryItemType.Flippers)
-                && have.Contains(InventoryItemType.MagicMirror);
-        }
-
-        private bool CanAccessSouthDarkWorld(List<InventoryItemType> have)
-        {
-            return ((CanAccessPyramid(have)
-                        && (have.Contains(InventoryItemType.Hammer)
-                            || (have.Contains(InventoryItemType.Hookshot)
-                                && (have.Contains(InventoryItemType.Flippers)
-                                    || CanLiftLightRocks(have)))))
-                    || (have.Contains(InventoryItemType.Hammer)
-                        && CanLiftLightRocks(have))
-                    || have.Contains(InventoryItemType.TitansMitt))
-                && have.Contains(InventoryItemType.MoonPearl);
-        }
-
-        private bool CanAccessNorthWestDarkWorld(List<InventoryItemType> have)
-        {
-            return have.Contains(InventoryItemType.MoonPearl)
-            && ((have.Contains(InventoryItemType.Hammer)
-                    && CanLiftLightRocks(have))
-                || have.Contains(InventoryItemType.TitansMitt)
-                || ((CanGetMasterSword(have)
-                        || CanGetGoldSword(have)
-                        || have.Contains(InventoryItemType.Cape))
-                    && ((have.Contains(InventoryItemType.Hookshot)
-                            && (CanLiftLightRocks(have)
-                                || have.Contains(InventoryItemType.Hammer)
-                                || have.Contains(InventoryItemType.Flippers))))));
-        }
-
-        private bool CanEnterDarkPalace(List<InventoryItemType> have)
-        {
-            return CanAccessPyramid(have)
-                && have.Contains(InventoryItemType.MoonPearl);
-        }
-
-        private bool CanAccessPyramid(List<InventoryItemType> have)
-        {
-            return CanDefeatAgahnim1(have)
-                || (((have.Contains(InventoryItemType.Hammer)
-                            && CanLiftLightRocks(have))
-                        || (have.Contains(InventoryItemType.TitansMitt)
-                            && have.Contains(InventoryItemType.Flippers)))
-                    && have.Contains(InventoryItemType.MoonPearl));
-        }
-
-        private bool CanDefeatAgahnim1(List<InventoryItemType> have)
-        {
-            return CanEnterHyruleCastleTower(have);
+            return have.Contains(InventoryItemType.MagicMirror)
+                || have.Contains(InventoryItemType.TitansMitt);
         }
 
         internal override bool CanDefeatTowerOfHera(List<InventoryItemType> have)
         {
-            return CanEnterTowerOfHera(have)
-                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
-                    || CanLightTorches(have));
+            return ((LocationHasItem("[dungeon-L3-2F] Tower of Hera - Entrance", InventoryItemType.BigKey)
+                        || (LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                            && CanLightTorches(have))))
+                || (CanAccessDarkWorld(have)
+                    && CanEnterMiseryMire(have)
+                    && (!MireBigKeyOnWestSide()
+                        || CanLightTorches(have)));
+        }
+
+        private bool MireBigKeyOnWestSide()
+        {
+            return LocationHasItem("[dungeon-D6-B1] Misery Mire - compass", InventoryItemType.BigKey)
+                || LocationHasItem("[dungeon-D6-B1] Misery Mire - big key", InventoryItemType.BigKey);
         }
 
         internal override bool CanDefeatDesertPalace(List<InventoryItemType> have)
         {
-            return have.Contains(InventoryItemType.PegasusBoots)
-                && CanLightTorches(have)
-                && ((have.Contains(InventoryItemType.BookOfMudora)
-                        && CanLiftLightRocks(have))
-                    || (have.Contains(InventoryItemType.OcarinaInactive)
-                        && have.Contains(InventoryItemType.TitansMitt)
-                        && have.Contains(InventoryItemType.MagicMirror)));
-        }
-
-        private bool CanLightTorches(List<InventoryItemType> have)
-        {
-            return have.Contains(InventoryItemType.Lamp)
-                || have.Contains(InventoryItemType.FireRod);
+            return CanLightTorches(have)
+                && (LocationHasItem("[dungeon-L2-B1] Desert Palace - Map room", InventoryItemType.BigKey)
+                    || have.Contains(InventoryItemType.PegasusBoots)
+                    || !LocationHasRequiredItem("[dungeon-D4-B2] Thieves' Town - big chest"));
         }
 
         internal override bool CanDefeatEasternPalace(List<InventoryItemType> have)
         {
-            return CanEnterEasternPalace(have)
-                && have.Contains(InventoryItemType.Bow);
+            return have.Contains(InventoryItemType.Bow);
         }
 
-        private bool CanEnterTowerOfHera(List<InventoryItemType> have)
+        private bool LocationHasRequiredItem(string locationName)
         {
-            return CanClimbDeathMountain(have)
-                && (have.Contains(InventoryItemType.MagicMirror)
-                    || (have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer)));
+            var item = GetItemAtLocation<InventoryItem>(Locations, locationName);
+
+            return item != null && IsRequiredItem(item.Type);
         }
 
-        private bool CanEnterDesertPalace(List<InventoryItemType> have)
+        private bool IsRequiredItem(InventoryItemType item)
         {
-            return have.Contains(InventoryItemType.BookOfMudora)
-                || (have.Contains(InventoryItemType.OcarinaInactive)
-                    && have.Contains(InventoryItemType.TitansMitt)
-                    && have.Contains(InventoryItemType.MagicMirror));
-        }
+            var requiredItems = new List<InventoryItemType>
+                                {
+                                    InventoryItemType.Bombos,
+                                    InventoryItemType.Bottle,
+                                    InventoryItemType.Bow,
+                                    InventoryItemType.CaneOfSomaria,
+                                    InventoryItemType.FireRod,
+                                    InventoryItemType.Flippers,
+                                    InventoryItemType.Hammer,
+                                    InventoryItemType.Hookshot,
+                                    InventoryItemType.IceRod,
+                                    InventoryItemType.MagicMirror,
+                                    InventoryItemType.MoonPearl,
+                                };
 
-        private bool CanEnterEasternPalace(List<InventoryItemType> have)
-        {
-            return true;
+            return requiredItems.Contains(item);
         }
-
 
         public List<InventoryItemType> GetItemPool(SeedRandom random)
         {
@@ -3043,7 +2881,6 @@ namespace AlttpRandomizer.Rom
                 InventoryItemType.OneRupee,
                 InventoryItemType.FiveRupees,
                 InventoryItemType.FiveRupees,
-                InventoryItemType.TwentyRupees,
                 InventoryItemType.TwentyRupees,
                 InventoryItemType.TwentyRupees,
                 InventoryItemType.TwentyRupees,
