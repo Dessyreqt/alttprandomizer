@@ -88,101 +88,38 @@ namespace AlttpRandomizer.IO
         {
             var writer = new StringBuilder();
 
-            writer.AppendLine("A Link to the Past Randomizer Log");
-            writer.AppendLine("---------------------------------");
-            writer.AppendLine(string.Format("Version: {0}", RandomizerVersion.CurrentDisplay));
-            writer.AppendLine(string.Format("Creation Date: {0}", DateTime.Now));
-            writer.AppendLine(string.Format("Complexity: {0}", reachableKeyItems.Count));
-            writer.AppendLine(string.Format("Seed: {0}", seed));
-            writer.AppendLine();
-            writer.AppendLine();
-            writer.AppendLine();
-            writer.AppendLine("Complexity Analysis");
-            writer.AppendLine("-------------------");
-            for (int i = 0; i < reachableKeyItems.Count; i++)
-            {
-                if (i == 0)
-                {
-                    writer.AppendLine("Step 1 - Items reachable from start:");
-                }
-                else
-                {
-                    writer.AppendLine(string.Format("Step {0} - Items reachable after collecting all items from Step {1}:", i + 1, i));
-                }
+            AppendHeader(writer);
+            AppendComplexityAnalysis(writer);
+            AppendGeneratedItemOrder(writer);
+            AppendInventoryItems(writer);
+            AppendSpecialItems(writer);
 
-                if (reachableKeyItems[i].Count == 0)
-                {
-                    writer.AppendLine("  (minor items only)");
-                }
-                else
-                {
-                    foreach (var Location in reachableKeyItems[i].OrderBy(x => x.Name))
-                    {
-                        writer.AppendLine(string.Format("  {0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
-                    }
-                }
-                writer.AppendLine();
-            }
+            return writer.ToString();
+        }
+
+        private void AppendInventoryItems(StringBuilder writer)
+        {
+            AppendLightWorldItems(writer);
+            AppendDarkWorldItems(writer);
+            AppendLightWorldDungeonItems(writer);
+            AppendDarkWorldDungeonItems(writer);
             writer.AppendLine();
             writer.AppendLine();
-            writer.AppendLine("Generated Item Order");
-            writer.AppendLine("--------------------");
-            foreach (var Location in orderedItems)
+        }
+
+        private void AppendSpecialItems(StringBuilder writer)
+        {
+            writer.AppendLine("Special Locations");
+            writer.AppendLine("-----------------");
+            foreach (var Location in specialLocations.Where(x => x.Item.HexValue != 0xFF).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
-            writer.AppendLine();
-            writer.AppendLine();
-            writer.AppendLine("Light World");
-            writer.AppendLine("-----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.LightWorld).OrderBy(x => x.Name))
-            {
-                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
-            }
-            writer.AppendLine();
-            writer.AppendLine("Dark World");
-            writer.AppendLine("----------");
-            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.DarkWorld).OrderBy(x => x.Name))
-            {
-                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
-            }
-            writer.AppendLine();
-            writer.AppendLine("Hyrule Castle Escape");
-            writer.AppendLine("--------------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.HyruleCastleEscape).OrderBy(x => x.Name))
-            {
-                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
-            }
-            writer.AppendLine();
-            writer.AppendLine("Eastern Palace");
-            writer.AppendLine("--------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.EasternPalace).OrderBy(x => x.Name))
-            {
-                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
-            }
-            writer.AppendLine();
-            writer.AppendLine("Desert Palace");
-            writer.AppendLine("-------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.DesertPalace).OrderBy(x => x.Name))
-            {
-                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
-            }
-            writer.AppendLine();
-            writer.AppendLine("Tower of Hera");
-            writer.AppendLine("-------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.TowerOfHera).OrderBy(x => x.Name))
-            {
-                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
-            }
-            writer.AppendLine();
-            writer.AppendLine("Hyrule Castle Tower");
-            writer.AppendLine("-------------------");
-            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.HyruleCastleTower).OrderBy(x => x.Name))
-            {
-                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
-            }
-            writer.AppendLine();
+        }
+
+        private void AppendDarkWorldDungeonItems(StringBuilder writer)
+        {
             writer.AppendLine("Dark Palace");
             writer.AppendLine("-----------");
             foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.DarkPalace).OrderBy(x => x.Name))
@@ -239,17 +176,125 @@ namespace AlttpRandomizer.IO
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
-            writer.AppendLine();
-            writer.AppendLine();
-            writer.AppendLine("Special Locations");
-            writer.AppendLine("-----------------");
-            foreach (var Location in specialLocations.Where(x => x.Item.HexValue != 0xFF).OrderBy(x => x.Name))
+        }
+
+        private void AppendLightWorldDungeonItems(StringBuilder writer)
+        {
+            writer.AppendLine("Hyrule Castle Escape");
+            writer.AppendLine("--------------------");
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.HyruleCastleEscape).OrderBy(x => x.Name))
             {
                 writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
             }
             writer.AppendLine();
+            writer.AppendLine("Eastern Palace");
+            writer.AppendLine("--------------");
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.EasternPalace).OrderBy(x => x.Name))
+            {
+                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine("Desert Palace");
+            writer.AppendLine("-------------");
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.DesertPalace).OrderBy(x => x.Name))
+            {
+                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine("Tower of Hera");
+            writer.AppendLine("-------------");
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.TowerOfHera).OrderBy(x => x.Name))
+            {
+                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine("Hyrule Castle Tower");
+            writer.AppendLine("-------------------");
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.HyruleCastleTower).OrderBy(x => x.Name))
+            {
+                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+            }
+            writer.AppendLine();
+        }
 
-            return writer.ToString();
+        private void AppendDarkWorldItems(StringBuilder writer)
+        {
+            writer.AppendLine("Dark World");
+            writer.AppendLine("----------");
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.DarkWorld).OrderBy(x => x.Name))
+            {
+                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+            }
+            writer.AppendLine();
+        }
+
+        private void AppendLightWorldItems(StringBuilder writer)
+        {
+            writer.AppendLine("Light World");
+            writer.AppendLine("-----------");
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && x.Region == Region.LightWorld).OrderBy(x => x.Name))
+            {
+                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+            }
+            writer.AppendLine();
+        }
+
+        private void AppendHeader(StringBuilder writer)
+        {
+            writer.AppendLine("A Link to the Past Randomizer Log");
+            writer.AppendLine("---------------------------------");
+            writer.AppendLine(string.Format("Version: {0}", RandomizerVersion.CurrentDisplay));
+            writer.AppendLine(string.Format("Creation Date: {0}", DateTime.Now));
+            writer.AppendLine(string.Format("Complexity: {0}", reachableKeyItems.Count));
+            writer.AppendLine(string.Format("Seed: {0}", seed));
+            writer.AppendLine();
+            writer.AppendLine();
+            writer.AppendLine();
+        }
+
+        private void AppendGeneratedItemOrder(StringBuilder writer)
+        {
+            writer.AppendLine("Generated Item Order");
+            writer.AppendLine("--------------------");
+            foreach (var Location in orderedItems)
+            {
+                writer.AppendLine(string.Format("{0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine();
+            writer.AppendLine();
+        }
+
+        private void AppendComplexityAnalysis(StringBuilder writer)
+        {
+            writer.AppendLine("Complexity Analysis");
+            writer.AppendLine("-------------------");
+            for (int i = 0; i < reachableKeyItems.Count; i++)
+            {
+                if (i == 0)
+                {
+                    writer.AppendLine("Step 1 - Items reachable from start:");
+                }
+                else
+                {
+                    writer.AppendLine(string.Format("Step {0} - Items reachable after collecting all items from Step {1}:", i + 1, i));
+                }
+
+                if (reachableKeyItems[i].Count == 0)
+                {
+                    writer.AppendLine("  (minor items only)");
+                }
+                else
+                {
+                    foreach (var Location in reachableKeyItems[i].OrderBy(x => x.Name))
+                    {
+                        writer.AppendLine(string.Format("  {0}{1}", Location.Name.PadRight(90, '.'), GetItemName(Location.Item)));
+                    }
+                }
+                writer.AppendLine();
+            }
+            writer.AppendLine();
+            writer.AppendLine();
         }
 
         private string GetItemName(Item item)

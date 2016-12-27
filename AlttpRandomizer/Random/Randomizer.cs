@@ -721,16 +721,16 @@ namespace AlttpRandomizer.Random
 
         private void CalculateComplexity()
         {
-           List<InventoryItemType> have = new List<InventoryItemType>();
-           IEnumerable<Location> remainingLocations = romLocations.Locations.Where(x => x.Item != null && x.Item is InventoryItem);
-           List<Location> newReachableLocations = remainingLocations.Where(x => x.CanAccess(have)).ToList();
+           var have = new List<InventoryItemType>();
+           var remainingLocations = romLocations.Locations.Where(x => x.Item is InventoryItem).ToList();
+           var newReachableLocations = remainingLocations.Where(x => x.CanAccess(have)).ToList();
            complexity = 0;
 
-           while (newReachableLocations.Count() > 0)
+           while (newReachableLocations.Any())
            {
                 log?.AddReachableKeyItems(newReachableLocations.Where(x => Item.IsKeyItem(((InventoryItem)x.Item).Type)).ToList());
                 have.AddRange(newReachableLocations.ConvertAll(x => ((InventoryItem)x.Item).Type));
-                remainingLocations = remainingLocations.Except(newReachableLocations);
+                remainingLocations = remainingLocations.Except(newReachableLocations).ToList();
                 complexity++;
                 newReachableLocations = remainingLocations.Where(x => x.CanAccess(have)).ToList();
             }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AlttpRandomizer.IO;
@@ -14,7 +13,7 @@ namespace AlttpRandomizer.Rom
         public virtual List<Location> Locations { get; set; }
         public virtual List<Location> SpecialLocations { get; set; }
 
-        internal static void WeightLocations(List<Location> retVal)
+        private static void WeightLocations(List<Location> retVal)
         {
             var currentWeight = (from item in retVal orderby item.Weight descending select item.Weight).First() + 1;
 
@@ -80,7 +79,7 @@ namespace AlttpRandomizer.Rom
             return ((T)locations.First(x => x.Name == locationName).Item);
         }
 
-        internal bool IsLateGameItem(InventoryItemType item)
+        private bool IsLateGameItem(InventoryItemType item)
         {
             return lateGameItems.Contains(item);
         }
@@ -150,7 +149,7 @@ namespace AlttpRandomizer.Rom
             }
         }
 
-        internal static bool IsBadFirstItem(InventoryItemType item)
+        private static bool IsBadFirstItem(InventoryItemType item)
         {
             return (item == InventoryItemType.PowerGlove || item == InventoryItemType.TitansMitt || item == InventoryItemType.RedShield || item == InventoryItemType.MirrorShield);
         }
@@ -200,7 +199,7 @@ namespace AlttpRandomizer.Rom
             SetMagic(random);
         }
 
-        internal void SetMagic(SeedRandom random)
+        private void SetMagic(SeedRandom random)
         {
             var magicTypes = new List<MagicItemType>
                              {
@@ -214,7 +213,7 @@ namespace AlttpRandomizer.Rom
             spawnNpcMagic.Item = new MagicItem(magicTypes[random.Next(magicTypes.Count)]);
         }
 
-        internal void SetHealth(SeedRandom random)
+        private void SetHealth(SeedRandom random)
         {
             var healthTypes = new List<HealthItemType>
                               {
@@ -228,7 +227,7 @@ namespace AlttpRandomizer.Rom
             spawnNpcHealth.Item = new HealthItem(healthTypes[random.Next(healthTypes.Count)]);
         }
 
-        internal void SetMedallions(SeedRandom random)
+        private void SetMedallions(SeedRandom random)
         {
             var medallionTypes = new List<InventoryItemType>
                                  {
@@ -243,7 +242,7 @@ namespace AlttpRandomizer.Rom
             trockMedallion.Item = new InventoryItem(medallionTypes[random.Next(medallionTypes.Count)]);
         }
 
-        internal void SetBottles(SeedRandom random)
+        private void SetBottles(SeedRandom random)
         {
             var bottleTypes = new List<InventoryItemType>
                               {
@@ -259,29 +258,6 @@ namespace AlttpRandomizer.Rom
             waterfallItem.Item = new InventoryItem(bottleTypes[random.Next(bottleTypes.Count)]);
             var pyramidItem = SpecialLocation("Pyramid Bottle Item");
             pyramidItem.Item = new InventoryItem(bottleTypes[random.Next(bottleTypes.Count)]);
-        }
-
-        internal byte GetIndicatorByte(CrystalItemType itemType)
-        {
-            switch (itemType)
-            {
-                case CrystalItemType.Crystal1:
-                    return 0x7F;
-                case CrystalItemType.Crystal2:
-                    return 0x79;
-                case CrystalItemType.Crystal3:
-                    return 0x6C;
-                case CrystalItemType.Crystal4:
-                    return 0x6D;
-                case CrystalItemType.Crystal5:
-                    return 0x6E;
-                case CrystalItemType.Crystal6:
-                    return 0x6F;
-                case CrystalItemType.Crystal7:
-                    return 0x7C;
-                default:
-                    throw new ArgumentException("Couldn't get indicator byte from CrystalType");
-            }
         }
 
         internal void WriteCrystal(FileStream rom, Region region, CrystalItemType itemType)
@@ -434,16 +410,16 @@ namespace AlttpRandomizer.Rom
             }
         }
 
-        internal abstract bool CanDefeatHyruleCastleEscape(List<InventoryItemType> have);
-        internal abstract bool CanDefeatEasternPalace(List<InventoryItemType> have);
-        internal abstract bool CanDefeatDesertPalace(List<InventoryItemType> have);
-        internal abstract bool CanDefeatTowerOfHera(List<InventoryItemType> have);
-        internal abstract bool CanDefeatDarkPalace(List<InventoryItemType> have);
-        internal abstract bool CanDefeatSwampPalace(List<InventoryItemType> have);
-        internal abstract bool CanDefeatSkullWoods(List<InventoryItemType> have);
-        internal abstract bool CanDefeatThievesTown(List<InventoryItemType> have);
-        internal abstract bool CanDefeatIcePalace(List<InventoryItemType> have);
-        internal abstract bool CanDefeatMiseryMire(List<InventoryItemType> have);
-        internal abstract bool CanDefeatTurtleRock(List<InventoryItemType> have);
+        protected abstract bool CanDefeatHyruleCastleEscape(List<InventoryItemType> have);
+        protected abstract bool CanDefeatEasternPalace(List<InventoryItemType> have);
+        protected abstract bool CanDefeatDesertPalace(List<InventoryItemType> have);
+        protected abstract bool CanDefeatTowerOfHera(List<InventoryItemType> have);
+        protected abstract bool CanDefeatDarkPalace(List<InventoryItemType> have);
+        protected abstract bool CanDefeatSwampPalace(List<InventoryItemType> have);
+        protected abstract bool CanDefeatSkullWoods(List<InventoryItemType> have);
+        protected abstract bool CanDefeatThievesTown(List<InventoryItemType> have);
+        protected abstract bool CanDefeatIcePalace(List<InventoryItemType> have);
+        protected abstract bool CanDefeatMiseryMire(List<InventoryItemType> have);
+        protected abstract bool CanDefeatTurtleRock(List<InventoryItemType> have);
     }
 }

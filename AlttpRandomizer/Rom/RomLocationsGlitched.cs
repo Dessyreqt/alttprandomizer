@@ -2590,7 +2590,7 @@ namespace AlttpRandomizer.Rom
                 || LocationHasItem("[dungeon-D7-B2] Turtle Rock - Eye bridge room [top right chest]", InventoryItemType.BigKey);
         }
 
-        internal override bool CanDefeatHyruleCastleEscape(List<InventoryItemType> have)
+        protected override bool CanDefeatHyruleCastleEscape(List<InventoryItemType> have)
         {
             return LocationHasItem("[dungeon-C-B1] Escape - first B1 room", InventoryItemType.Key)
                 || LocationHasItem("[dungeon-C-B1] Hyrule Castle - boomerang room", InventoryItemType.Key)
@@ -2646,13 +2646,13 @@ namespace AlttpRandomizer.Rom
                 || HasBottle(have);
         }
 
-        internal override bool CanDefeatDarkPalace(List<InventoryItemType> have)
+        protected override bool CanDefeatDarkPalace(List<InventoryItemType> have)
         {
             return have.Contains(InventoryItemType.Bow)
                 && have.Contains(InventoryItemType.Hammer);
         }
 
-        internal override bool CanDefeatSwampPalace(List<InventoryItemType> have)
+        protected override bool CanDefeatSwampPalace(List<InventoryItemType> have)
         {
             return have.Contains(InventoryItemType.MoonPearl)
                 && have.Contains(InventoryItemType.MagicMirror)
@@ -2660,17 +2660,17 @@ namespace AlttpRandomizer.Rom
                 && have.Contains(InventoryItemType.Hookshot);
         }
 
-        internal override bool CanDefeatSkullWoods(List<InventoryItemType> have)
+        protected override bool CanDefeatSkullWoods(List<InventoryItemType> have)
         {
             return have.Contains(InventoryItemType.FireRod);
         }
 
-        internal override bool CanDefeatThievesTown(List<InventoryItemType> have)
+        protected override bool CanDefeatThievesTown(List<InventoryItemType> have)
         {
             return CanAccessDarkWorld(have);
         }
 
-        internal override bool CanDefeatIcePalace(List<InventoryItemType> have)
+        protected override bool CanDefeatIcePalace(List<InventoryItemType> have)
         {
             return CanEnterIcePalace(have)
                 && CanLiftLightRocks(have)
@@ -2679,14 +2679,14 @@ namespace AlttpRandomizer.Rom
                     || have.Contains(InventoryItemType.Bombos));
         }
 
-        internal override bool CanDefeatMiseryMire(List<InventoryItemType> have)
+        protected override bool CanDefeatMiseryMire(List<InventoryItemType> have)
         {
             return CanEnterMiseryMire(have)
                 && have.Contains(InventoryItemType.CaneOfSomaria)
                 && CanAccessDarkWorld(have);
         }
 
-        internal override bool CanDefeatTurtleRock(List<InventoryItemType> have)
+        protected override bool CanDefeatTurtleRock(List<InventoryItemType> have)
         {
             return  have.Contains(InventoryItemType.FireRod)
                 && have.Contains(InventoryItemType.IceRod)
@@ -2711,7 +2711,7 @@ namespace AlttpRandomizer.Rom
                 || have.Contains(InventoryItemType.TitansMitt);
         }
 
-        internal override bool CanDefeatTowerOfHera(List<InventoryItemType> have)
+        protected override bool CanDefeatTowerOfHera(List<InventoryItemType> have)
         {
             return ((LocationHasItem("[dungeon-L3-2F] Tower of Hera - Entrance", InventoryItemType.BigKey)
                         || (LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
@@ -2728,7 +2728,7 @@ namespace AlttpRandomizer.Rom
                 || LocationHasItem("[dungeon-D6-B1] Misery Mire - big key", InventoryItemType.BigKey);
         }
 
-        internal override bool CanDefeatDesertPalace(List<InventoryItemType> have)
+        protected override bool CanDefeatDesertPalace(List<InventoryItemType> have)
         {
             return CanLightTorches(have)
                 && (LocationHasItem("[dungeon-L2-B1] Desert Palace - Map room", InventoryItemType.BigKey)
@@ -2736,7 +2736,7 @@ namespace AlttpRandomizer.Rom
                     || !LocationHasRequiredItem("[dungeon-D4-B2] Thieves' Town - big chest"));
         }
 
-        internal override bool CanDefeatEasternPalace(List<InventoryItemType> have)
+        protected override bool CanDefeatEasternPalace(List<InventoryItemType> have)
         {
             return have.Contains(InventoryItemType.Bow);
         }

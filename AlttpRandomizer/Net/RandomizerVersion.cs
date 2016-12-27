@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace AlttpRandomizer.Net
 {
-    public class RandomizerVersion
+    public static class RandomizerVersion
     {
-        public static string Current = "7P3";
-        public static bool Debug = false;
+        public const string Current = "7P3";
+        public const bool Debug = false;
 
         public static string CurrentDisplay
         {
@@ -77,7 +77,7 @@ namespace AlttpRandomizer.Net
             webBrowser.Navigate(address);
             while (webBrowser.ReadyState != WebBrowserReadyState.Complete) { Application.DoEvents(); }
 
-            return webBrowser.Document.Body.InnerHtml;
+            return webBrowser.Document?.Body?.InnerHtml;
         }
     }
 }
