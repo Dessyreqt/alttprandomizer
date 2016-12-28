@@ -579,7 +579,7 @@ namespace AlttpRandomizer.Random
             if (tempItemPool.Count > 0 || !romLocations.CanDefeatDungeon(region, haveItems))
             {
                 romLocations.ResetRegion(region);
-                log.RemoveOrderedItems(region);
+                log?.RemoveOrderedItems(region);
             }
             else
             {
