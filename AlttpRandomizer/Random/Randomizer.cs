@@ -721,15 +721,16 @@ namespace AlttpRandomizer.Random
 
         private void CalculateComplexity()
         {
-           var have = new List<InventoryItemType>();
-           var remainingLocations = romLocations.Locations.Where(x => x.Item is InventoryItem).ToList();
-           var newReachableLocations = remainingLocations.Where(x => x.CanAccess(have)).ToList();
-           complexity = 0;
+            var have = new List<InventoryItemType>();
+            var remainingLocations = romLocations.Locations.Where(x => x.Item is InventoryItem).ToList();
+            remainingLocations.AddRange(romLocations.SpecialLocations.Where(x => x.Item is CrystalItem || x.Item is PendantItem).ToList());
+            var newReachableLocations = remainingLocations.Where(x => x.CanAccess(have)).ToList();
+            complexity = 0;
 
-           while (newReachableLocations.Any())
-           {
-                log?.AddReachableKeyItems(newReachableLocations.Where(x => Item.IsKeyItem(((InventoryItem)x.Item).Type)).ToList());
-                have.AddRange(newReachableLocations.ConvertAll(x => ((InventoryItem)x.Item).Type));
+            while (newReachableLocations.Any())
+            {
+                log?.AddReachableKeyItems(newReachableLocations.Where(x => x.Item is CrystalItem || x.Item is PendantItem || Item.IsKeyItem(((InventoryItem)x.Item).Type)).ToList());
+                have.AddRange(newReachableLocations.Where(x => x.Item is InventoryItem).ToList().ConvertAll(x => ((InventoryItem)x.Item).Type));
                 remainingLocations = remainingLocations.Except(newReachableLocations).ToList();
                 complexity++;
                 newReachableLocations = remainingLocations.Where(x => x.CanAccess(have)).ToList();

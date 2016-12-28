@@ -63,14 +63,12 @@ namespace AlttpRandomizer.Rom
 
             if (checkLocation[0] == 0x00)
             {
-                rom.Seek(address, SeekOrigin.Begin);
-                rom.Write(new byte[] { 0x00, 0x00, 0x00, 0x00 }, 0, 4);
+                rom.WriteBytes(address, 0x00, 0x00, 0x00, 0x00);
             }
             else
             {
                 var itemLevel = Item.GetItemLevel(item);
-                rom.Seek(address, SeekOrigin.Begin);
-                rom.Write(new byte[] { itemLevel[0], checkLocation[0], 0xF3, 0x7E }, 0, 4);
+                rom.WriteBytes(address, itemLevel[0], checkLocation[0], 0xF3, 0x7E);
             }
         }
 

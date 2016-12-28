@@ -26,7 +26,7 @@ namespace AlttpRandomizer.Rom
                     Address = 0xE96E,
                     CanAccess =
                         have =>
-                        CanLiftLightRocks(have),
+                        true,
                 },
                 new Location
                 {
@@ -2376,7 +2376,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((PendantItem)item).Type;
                             WritePendant(rom, Region.EasternPalace, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatEasternPalace(have),
                 },
                 new Location
                 {
@@ -2387,7 +2390,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((PendantItem)item).Type;
                             WritePendant(rom, Region.DesertPalace, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatDesertPalace(have),
                 },
                 new Location
                 {
@@ -2398,7 +2404,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((PendantItem)item).Type;
                             WritePendant(rom, Region.TowerOfHera, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatTowerOfHera(have),
                 },
                 new Location
                 {
@@ -2409,7 +2418,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((CrystalItem)item).Type;
                             WriteCrystal(rom, Region.SwampPalace, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatSwampPalace(have),
                 },
                 new Location
                 {
@@ -2420,7 +2432,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((CrystalItem)item).Type;
                             WriteCrystal(rom, Region.DarkPalace, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatDarkPalace(have),
                 },
                 new Location
                 {
@@ -2431,7 +2446,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((CrystalItem)item).Type;
                             WriteCrystal(rom, Region.MiseryMire, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatMiseryMire(have),
                 },
                 new Location
                 {
@@ -2442,7 +2460,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((CrystalItem)item).Type;
                             WriteCrystal(rom, Region.SkullWoods, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatSkullWoods(have),
                 },
                 new Location
                 {
@@ -2453,7 +2474,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((CrystalItem)item).Type;
                             WriteCrystal(rom, Region.IcePalace, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatIcePalace(have),
                 },
                 new Location
                 {
@@ -2464,7 +2488,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((CrystalItem)item).Type;
                             WriteCrystal(rom, Region.ThievesTown, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatThievesTown(have),
                 },
                 new Location
                 {
@@ -2475,7 +2502,10 @@ namespace AlttpRandomizer.Rom
                         {
                             var itemType = ((CrystalItem)item).Type;
                             WriteCrystal(rom, Region.TurtleRock, itemType);
-                        }
+                        },
+                    CanAccess =
+                        have =>
+                        CanDefeatTurtleRock(have),
                 },
                 new Location
                 {
@@ -2567,6 +2597,12 @@ namespace AlttpRandomizer.Rom
                 {
                     Name = "Pedestal Sword",
                     Address = 0x289B0,
+                    WriteItemCheck =
+                        (rom, item) =>
+                        {
+                            byte itemType = (byte)((InventoryItem)item).Type;
+                            rom.WriteBytes(0x44435, itemType);
+                        },
                 },
                 new Location
                 {
