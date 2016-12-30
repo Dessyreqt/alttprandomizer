@@ -88,17 +88,6 @@ namespace AlttpRandomizer.Rom
         L2Sword = 0x50,
     }
 
-    public enum HealthItemType
-    {
-        NoRefill = 0x00,
-        RefillHealth = 0xA0,
-    }
-    public enum MagicItemType
-    {
-        NoRefill = 0x00,
-        RefillMagic = 0x80,
-    }
-
     public enum PendantItemType
     {
         None = 0x00,
@@ -133,44 +122,6 @@ namespace AlttpRandomizer.Rom
         }
 
         public InventoryItem(InventoryItemType insertedItem)
-        {
-            Type = insertedItem;
-        }
-    }
-
-    public class HealthItem : Item
-    {
-        private HealthItemType type;
-        public new HealthItemType Type
-        {
-            get { return type; }
-            set
-            {
-                type = value;
-                HexValue = (char)type;
-            }
-        }
-
-        public HealthItem(HealthItemType insertedItem)
-        {
-            Type = insertedItem;
-        }
-    }
-
-    public class MagicItem : Item
-    {
-        private MagicItemType type;
-        public new MagicItemType Type
-        {
-            get { return type; }
-            set
-            {
-                type = value;
-                HexValue = (char)type;
-            }
-        }
-
-        public MagicItem(MagicItemType insertedItem)
         {
             Type = insertedItem;
         }

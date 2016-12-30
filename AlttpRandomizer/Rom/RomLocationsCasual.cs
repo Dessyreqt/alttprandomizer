@@ -1865,9 +1865,9 @@ namespace AlttpRandomizer.Rom
                     Address = 0x2F1FC,
                     CanAccess =
                         have =>
-                        (PendantAtLocation("Eastern Palace Pendant", PendantItemType.GreenPendant) && CanDefeatEasternPalace(have))
-                        || (PendantAtLocation("Desert Palace Pendant", PendantItemType.GreenPendant) && CanDefeatDesertPalace(have))
-                        || (PendantAtLocation("Tower of Hera Pendant", PendantItemType.GreenPendant) && CanDefeatTowerOfHera(have)),
+                        (PendantAtLocation("Pendant - Eastern Palace", PendantItemType.GreenPendant) && CanDefeatEasternPalace(have))
+                        || (PendantAtLocation("Pendant - Desert Palace", PendantItemType.GreenPendant) && CanDefeatDesertPalace(have))
+                        || (PendantAtLocation("Pendant - Tower of Hera", PendantItemType.GreenPendant) && CanDefeatTowerOfHera(have)),
                 },
                 new Location
                 {
@@ -2369,7 +2369,7 @@ namespace AlttpRandomizer.Rom
             {
                 new Location
                 {
-                    Name = "Eastern Palace Pendant",
+                    Name = "Pendant - Eastern Palace",
                     Item = new PendantItem(PendantItemType.GreenPendant),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2383,7 +2383,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Desert Palace Pendant",
+                    Name = "Pendant - Desert Palace",
                     Item = new PendantItem(PendantItemType.BluePendant),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2397,7 +2397,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Tower of Hera Pendant",
+                    Name = "Pendant - Tower of Hera",
                     Item = new PendantItem(PendantItemType.RedPendant),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2411,7 +2411,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Swamp Palace Crystal",
+                    Name = "Crystal - Swamp Palace",
                     Item = new CrystalItem(CrystalItemType.Crystal2),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2425,7 +2425,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Dark Palace Crystal",
+                    Name = "Crystal - Dark Palace",
                     Item = new CrystalItem(CrystalItemType.Crystal1),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2439,7 +2439,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Misery Mire Crystal",
+                    Name = "Crystal - Misery Mire",
                     Item = new CrystalItem(CrystalItemType.Crystal6),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2453,7 +2453,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Skull Woods Crystal",
+                    Name = "Crystal - Skull Woods",
                     Item = new CrystalItem(CrystalItemType.Crystal3),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2467,7 +2467,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Ice Palace Crystal",
+                    Name = "Crystal - Ice Palace",
                     Item = new CrystalItem(CrystalItemType.Crystal5),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2481,7 +2481,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Thieves' Town Crystal",
+                    Name = "Crystal - Thieves' Town",
                     Item = new CrystalItem(CrystalItemType.Crystal4),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2495,7 +2495,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Turtle Rock Crystal",
+                    Name = "Crystal - Turtle Rock",
                     Item = new CrystalItem(CrystalItemType.Crystal7),
                     WriteItemCheck =
                         (rom, item) =>
@@ -2509,17 +2509,17 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Waterfall Bottle Item",
+                    Name = "Bottle Item - Waterfall",
                     Address = 0x348FF,
                 },
                 new Location
                 {
-                    Name = "Pyramid Bottle Item",
+                    Name = "Bottle Item - Pyramid",
                     Address = 0x3493B,
                 },
                 new Location
                 {
-                    Name = "Misery Mire Required Medallion",
+                    Name = "Required Medallion - Misery Mire",
                     WriteItemCheck =
                         (rom, item) =>
                         {
@@ -2547,7 +2547,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Turtle Rock Required Medallion",
+                    Name = "Required Medallion - Turtle Rock",
                     WriteItemCheck =
                         (rom, item) =>
                         {
@@ -2575,27 +2575,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Big Fairy Health",
-                    Address = 0x180024,
-                },
-                new Location
-                {
-                    Name = "Big Fairy Magic",
-                    Address = 0x180025,
-                },
-                new Location
-                {
-                    Name = "Spawn NPC Health",
-                    Address = 0x180026,
-                },
-                new Location
-                {
-                    Name = "Spawn NPC Magic",
-                    Address = 0x180027,
-                },
-                new Location
-                {
-                    Name = "Pedestal Sword",
+                    Name = "Sword - Pedestal",
                     Address = 0x289B0,
                     WriteItemCheck =
                         (rom, item) =>
@@ -2606,7 +2586,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Smithy Sword",
+                    Name = "Sword - Smithy",
                     Address = 0x3355C,
                     WriteItemCheck =
                         (rom, item) =>
@@ -2617,7 +2597,7 @@ namespace AlttpRandomizer.Rom
                 },
                 new Location
                 {
-                    Name = "Fairy Sword",
+                    Name = "Sword - Fairy",
                     Address = 0x180028,
                 },
             };
@@ -2675,13 +2655,13 @@ namespace AlttpRandomizer.Rom
         {
             Dictionary<string, Func<List<InventoryItemType>, bool>> dungeons = new Dictionary<string, Func<List<InventoryItemType>, bool>>
             {
-                { "Dark Palace Crystal", CanDefeatDarkPalace },
-                { "Swamp Palace Crystal", CanDefeatSwampPalace },
-                { "Skull Woods Crystal", CanDefeatSkullWoods },
-                { "Thieves' Town Crystal", CanDefeatThievesTown },
-                { "Ice Palace Crystal", CanDefeatIcePalace },
-                { "Misery Mire Crystal", CanDefeatMiseryMire },
-                { "Turtle Rock Crystal", CanDefeatTurtleRock },
+                { "Crystal - Dark Palace", CanDefeatDarkPalace },
+                { "Crystal - Swamp Palace", CanDefeatSwampPalace },
+                { "Crystal - Skull Woods", CanDefeatSkullWoods },
+                { "Crystal - Thieves' Town", CanDefeatThievesTown },
+                { "Crystal - Ice Palace", CanDefeatIcePalace },
+                { "Crystal - Misery Mire", CanDefeatMiseryMire },
+                { "Crystal - Turtle Rock", CanDefeatTurtleRock },
             };
 
             // return true if crystals 5 and 6 are accessible
@@ -2851,7 +2831,7 @@ namespace AlttpRandomizer.Rom
             return CanAccessEastDarkWorldDeathMountain(have)
                 && have.Contains(InventoryItemType.MoonPearl)
                 && have.Contains(InventoryItemType.Hammer)
-                && have.Contains(GetItemAtLocation<InventoryItem>(SpecialLocations, "Turtle Rock Required Medallion").Type)
+                && have.Contains(GetItemAtLocation<InventoryItem>(SpecialLocations, "Required Medallion - Turtle Rock").Type)
                 && have.Contains(InventoryItemType.CaneOfSomaria);
         }
 
@@ -2872,7 +2852,7 @@ namespace AlttpRandomizer.Rom
             return have.Contains(InventoryItemType.OcarinaInactive)
                 && have.Contains(InventoryItemType.MoonPearl)
                 && have.Contains(InventoryItemType.TitansMitt)
-                && have.Contains(GetItemAtLocation<InventoryItem>(SpecialLocations, "Misery Mire Required Medallion").Type)
+                && have.Contains(GetItemAtLocation<InventoryItem>(SpecialLocations, "Required Medallion - Misery Mire").Type)
                 && (have.Contains(InventoryItemType.PegasusBoots)
                     || have.Contains(InventoryItemType.Hookshot));
         }

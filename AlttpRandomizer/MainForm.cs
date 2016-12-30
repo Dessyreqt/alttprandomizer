@@ -63,6 +63,11 @@ namespace AlttpRandomizer
             {
                 try
                 {
+                    if (difficulty == RandomizerDifficulty.Casual)
+                    {
+                        WriteCasualMessage();
+                    }
+
                     var romLocations = RomLocationsFactory.GetRomLocations(difficulty);
                     RandomizerLog log = null;
 
@@ -98,6 +103,18 @@ namespace AlttpRandomizer
             }
 
             SaveRandomizerSettings();
+        }
+
+        private void WriteCasualMessage()
+        {
+            var outputText = new StringBuilder();
+
+            outputText.AppendLine("Some quick hints:");
+            outputText.AppendLine("- You can toggle between Shovel & Flute in the inventory screen with the Y button.");
+            outputText.AppendLine("- You can use the Cape to get into Hyrule Castle Tower without the Master Sword.");
+            outputText.AppendLine();
+
+            WriteOutput(outputText.ToString());
         }
 
         private void SaveRandomizerSettings()
@@ -324,6 +341,11 @@ namespace AlttpRandomizer
 
         private void listSpoiler_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(seed.Text))
+            {
+                SetSeedBasedOnDifficulty();
+            }
+
             ClearOutput();
             var difficulty = GetRandomizerDifficulty();
             CreateSpoilerLog(difficulty);
@@ -345,11 +367,18 @@ namespace AlttpRandomizer
             {
                 ClearOutput();
 
+                SetSeedBasedOnDifficulty();
+
                 var difficulty = GetRandomizerDifficulty();
 
                 if (difficulty == RandomizerDifficulty.None)
                 {
                     return;
+                }
+
+                if (difficulty == RandomizerDifficulty.Casual)
+                {
+                    WriteCasualMessage();
                 }
 
                 int successCount = 0;

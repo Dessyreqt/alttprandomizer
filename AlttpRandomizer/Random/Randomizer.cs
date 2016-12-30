@@ -125,9 +125,9 @@ namespace AlttpRandomizer.Random
 
             swords = random.RandomizeList(swords);
 
-            romLocations.SpecialLocation("Pedestal Sword").Item = new InventoryItem(swords[0] == InventoryItemType.L2Sword ? InventoryItemType.L2SwordPedestal : swords[0]);
-            romLocations.SpecialLocation("Smithy Sword").Item = new InventoryItem(swords[1]);
-            romLocations.SpecialLocation("Fairy Sword").Item = new InventoryItem(swords[2]);
+            romLocations.SpecialLocation("Sword - Pedestal").Item = new InventoryItem(swords[0] == InventoryItemType.L2Sword ? InventoryItemType.L2SwordPedestal : swords[0]);
+            romLocations.SpecialLocation("Sword - Smithy").Item = new InventoryItem(swords[1]);
+            romLocations.SpecialLocation("Sword - Fairy").Item = new InventoryItem(swords[2]);
         }
 
         private void RandomizeCrystals()
@@ -145,13 +145,13 @@ namespace AlttpRandomizer.Random
 
             crystals = random.RandomizeList(crystals);
 
-            romLocations.SpecialLocation("Dark Palace Crystal").Item = new CrystalItem(crystals[0]);
-            romLocations.SpecialLocation("Swamp Palace Crystal").Item = new CrystalItem(crystals[1]);
-            romLocations.SpecialLocation("Skull Woods Crystal").Item = new CrystalItem(crystals[2]);
-            romLocations.SpecialLocation("Thieves' Town Crystal").Item = new CrystalItem(crystals[3]);
-            romLocations.SpecialLocation("Ice Palace Crystal").Item = new CrystalItem(crystals[4]);
-            romLocations.SpecialLocation("Misery Mire Crystal").Item = new CrystalItem(crystals[5]);
-            romLocations.SpecialLocation("Turtle Rock Crystal").Item = new CrystalItem(crystals[6]);
+            romLocations.SpecialLocation("Crystal - Dark Palace").Item = new CrystalItem(crystals[0]);
+            romLocations.SpecialLocation("Crystal - Swamp Palace").Item = new CrystalItem(crystals[1]);
+            romLocations.SpecialLocation("Crystal - Skull Woods").Item = new CrystalItem(crystals[2]);
+            romLocations.SpecialLocation("Crystal - Thieves' Town").Item = new CrystalItem(crystals[3]);
+            romLocations.SpecialLocation("Crystal - Ice Palace").Item = new CrystalItem(crystals[4]);
+            romLocations.SpecialLocation("Crystal - Misery Mire").Item = new CrystalItem(crystals[5]);
+            romLocations.SpecialLocation("Crystal - Turtle Rock").Item = new CrystalItem(crystals[6]);
         }
 
         private void RandomizePendants()
@@ -165,9 +165,9 @@ namespace AlttpRandomizer.Random
 
             pendants = random.RandomizeList(pendants);
 
-            romLocations.SpecialLocation("Eastern Palace Pendant").Item = new PendantItem(pendants[0]);
-            romLocations.SpecialLocation("Desert Palace Pendant").Item = new PendantItem(pendants[1]);
-            romLocations.SpecialLocation("Tower of Hera Pendant").Item = new PendantItem(pendants[2]);
+            romLocations.SpecialLocation("Pendant - Eastern Palace").Item = new PendantItem(pendants[0]);
+            romLocations.SpecialLocation("Pendant - Desert Palace").Item = new PendantItem(pendants[1]);
+            romLocations.SpecialLocation("Pendant - Tower of Hera").Item = new PendantItem(pendants[2]);
         }
 
         private void WriteRngItems(FileStream rom)
@@ -245,6 +245,7 @@ namespace AlttpRandomizer.Random
                 WriteSeedInRom(rom, options);
                 WriteRngItems(rom);
                 rom.WriteBytes(0x180033, (byte)options.HeartBeepSpeed);
+                rom.WriteBytes(0x180040, (byte)random.Next(0x20));
 
                 if (options.SramTrace)
                 {
@@ -579,7 +580,7 @@ namespace AlttpRandomizer.Random
             if (tempItemPool.Count > 0 || !romLocations.CanDefeatDungeon(region, haveItems))
             {
                 romLocations.ResetRegion(region);
-                log?.RemoveOrderedItems(region);
+                log.RemoveOrderedItems(region);
             }
             else
             {
@@ -692,7 +693,7 @@ namespace AlttpRandomizer.Random
             // stop double-item-needed deadlocks
             if (candidateItemList.Count == 0)
             {
-                var trockMedallion = romLocations.GetItemAtLocation<InventoryItem>(romLocations.SpecialLocations, "Turtle Rock Required Medallion").Type;
+                var trockMedallion = romLocations.GetItemAtLocation<InventoryItem>(romLocations.SpecialLocations, "Required Medallion - Turtle Rock").Type;
                 AddUnownedItem(candidateItemList, haveItems, trockMedallion);
                 AddUnownedItem(candidateItemList, haveItems, InventoryItemType.FireRod);
             }

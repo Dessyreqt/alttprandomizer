@@ -434,34 +434,6 @@ namespace AlttpRandomizer.IO
                 }
             }
 
-            var healthItem = item as HealthItem;
-            if (healthItem != null)
-            {
-                switch (healthItem.Type)
-                {
-                    case HealthItemType.NoRefill:
-                        return "No Refill";
-                    case HealthItemType.RefillHealth:
-                        return "Refill Health";
-                    default:
-                        throw new ArgumentException("Couldn't get item type!", "item");
-                }
-            }
-
-            var magicItem = item as MagicItem;
-            if (magicItem != null)
-            {
-                switch (magicItem.Type)
-                {
-                    case MagicItemType.NoRefill:
-                        return "No Refill";
-                    case MagicItemType.RefillMagic:
-                        return "Refill Magic";
-                    default:
-                        throw new ArgumentException("Couldn't get item type!", "item");
-                }
-            }
-
             var pendantItem = item as PendantItem;
             if (pendantItem != null)
             {

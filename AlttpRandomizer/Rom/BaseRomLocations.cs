@@ -193,36 +193,6 @@ namespace AlttpRandomizer.Rom
         {
             SetBottles(random);
             SetMedallions(random);
-            SetHealth(random);
-            SetMagic(random);
-        }
-
-        private void SetMagic(SeedRandom random)
-        {
-            var magicTypes = new List<MagicItemType>
-                             {
-                                 MagicItemType.NoRefill,
-                                 MagicItemType.RefillMagic,
-                             };
-
-            var bigFairyMagic = SpecialLocation("Big Fairy Magic");
-            bigFairyMagic.Item = new MagicItem(magicTypes[random.Next(magicTypes.Count)]);
-            var spawnNpcMagic = SpecialLocation("Spawn NPC Magic");
-            spawnNpcMagic.Item = new MagicItem(magicTypes[random.Next(magicTypes.Count)]);
-        }
-
-        private void SetHealth(SeedRandom random)
-        {
-            var healthTypes = new List<HealthItemType>
-                              {
-                                  HealthItemType.NoRefill,
-                                  HealthItemType.RefillHealth,
-                              };
-
-            var bigFairyHealth = SpecialLocation("Big Fairy Health");
-            bigFairyHealth.Item = new HealthItem(healthTypes[random.Next(healthTypes.Count)]);
-            var spawnNpcHealth = SpecialLocation("Spawn NPC Health");
-            spawnNpcHealth.Item = new HealthItem(healthTypes[random.Next(healthTypes.Count)]);
         }
 
         private void SetMedallions(SeedRandom random)
@@ -234,9 +204,9 @@ namespace AlttpRandomizer.Rom
                                      InventoryItemType.Quake,
                                  };
 
-            var mireMedallion = SpecialLocation("Misery Mire Required Medallion");
+            var mireMedallion = SpecialLocation("Required Medallion - Misery Mire");
             mireMedallion.Item = new InventoryItem(medallionTypes[random.Next(medallionTypes.Count)]);
-            var trockMedallion = SpecialLocation("Turtle Rock Required Medallion");
+            var trockMedallion = SpecialLocation("Required Medallion - Turtle Rock");
             trockMedallion.Item = new InventoryItem(medallionTypes[random.Next(medallionTypes.Count)]);
         }
 
@@ -252,9 +222,9 @@ namespace AlttpRandomizer.Rom
                                   InventoryItemType.BottleWithGoldBee,
                               };
 
-            var waterfallItem = SpecialLocation("Waterfall Bottle Item");
+            var waterfallItem = SpecialLocation("Bottle Item - Waterfall");
             waterfallItem.Item = new InventoryItem(bottleTypes[random.Next(bottleTypes.Count)]);
-            var pyramidItem = SpecialLocation("Pyramid Bottle Item");
+            var pyramidItem = SpecialLocation("Bottle Item - Pyramid");
             pyramidItem.Item = new InventoryItem(bottleTypes[random.Next(bottleTypes.Count)]);
         }
 
