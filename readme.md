@@ -1,20 +1,26 @@
-# Current Version: 6
+# Current Version: 7
 
 # About the Legend of Zelda: A Link to the Past Randomizer (or ALttPRandomizer)
 This is a simple program that moves around items in the Legend of Zelda: A Link to the Past (ALttP). It is used for racing the game.
 
 When racing the game, it is suggested that each player play the same seed to ensure a level playing field.
 
-This was created by Dessyreqt & Karkat, with input from the SRL ALttP community.
+This was created by Dessyreqt, Karkat, ChristosOwen, and Smallhacker, with input from the SRL ALttP community.
 
 # Using the Randomizer
 Select a location to save your randomized rom, then select `Create`.
 
-Right now there is only one difficulty, "Casual". There may be other difficulties in the future.
+There are two difficulties, "Casual" and "Glitched". If you don't know which one to pick, select "Casual". You can also create a non-randomized ROM, to play the classic game with the changes to the rom file we've added.
 
-You can enable the "SRAM Trace" to automatically populate Zarby89's HUD, which can be found at https://zarby89.github.io/ZeldaHud/
+You can slow down the low-health warning or turn it off using the "Heart Beep Speed" dropdown box.
 
-# Think You're Stuck?
+Enabling the "SRAM Trace" option will allow the rom's SRM file to automatically populate Zarby89's HUD, which can be found at https://zarby89.github.io/ZeldaHud/
+
+"Show complexity" will display the number of steps to collect all of the items in the generated rom (explained more clearly in the spoiler log.)
+
+"Check for Updates on Startup" will disable update checking. I'd recommend you leave this on, but if it's problematic to check due to your network situation, I understand.
+
+# Think You're Stuck? (A FAQ of sorts)
 
 Randomizing the game definitely tests how well you know it. Here's a few places where people commonly get stuck.
 
@@ -26,16 +32,27 @@ If you have the Ocarina and Titan's Mitt, you can use that instead.
 Try the Bombos Medallion instead. It makes lots of fire.
 ##### Need the Hookshot to enter Misery Mire?  
 Try using the Pegasus Boots to charge into the block, jumping the gap with the recoil.
+##### I just got the shovel and my flute is now gone!
+Go over to the shovel and press "Y". You can also toggle the Mushroom/Powder, Normal/Silver Arrows, and all the bottles in this way.
+##### I beat the Eastern Palace, but Sahasrahla is holding out on me!
+Sahasrahla is expecting the Pendant of Courage (the green one). It may be located in a different dungeon (check your map.)
+##### How do I get the Super Bomb for the Great Faerie in the Pyramid?
+You need to collect crystals 5 and 6, which may not be in the Ice Palace and Misery Mire anymore (check your map to see where.)
+##### How do I see which crystals I have?
+Press select on the inventory screen.
+##### This boss just gave me a map/compass!
+Yep, their hearts can be found elsewhere now. Good luck!
 
 # Differences from the normal game
 There are a number of differences from a randomized game to the normal game. Here's a short list:
 - The game text is in Japanese _(this obviously isn't different if you are used to playing in Japanese. See below for why.)_
-- Chest items, heart pieces, medallions, the Book of Mudora, and items given to you by NPCs are randomized. Note that this doesn't include chests in the various chest games throughout Hyrule.
+- Chest items, heart pieces, boss hearts, medallions, pendants, crystals, capacity upgrades, the Book of Mudora, and items given to you by NPCs are randomized. Note that this doesn't include chests in the various chest games throughout Hyrule.
 - The rupee maximum is now 9999.
 - You can't turn the tree kid to wood. This is to prevent being unable to get his item.
 - Escaping the castle at the beginning of the game no longer requires the lamp.
 - In the light world, you don't need the Lamp to see in the dark.
 - In the dark world, the crystals will display on your inventory screen even if you haven't defeated Agahnim.
+- The 70 Arrow and 50 bomb upgrades are now items you can find, along with the 1/2 and (previously unused) 1/4 Magic upgrades.
 
 Some bugs that wouldn't crop up in normal play have been fixed:
 - If you die in a Dark World dungeon and haven't defeated Agahnim, you will end up in what's known as "fake Dark World." This will sometimes cause the Crystal at the end of the dungeon to not spawn, causing a softlock. You cannot spawn in "fake Dark World" in randomizer.
@@ -47,6 +64,8 @@ Some bugs that wouldn't crop up in normal play have been fixed:
 - If you flute from the Master Sword grove or save & quit, it may be possible to have an invisible follower following you. This would prevent you from entering the Dark Palace as Kiki won't follow you if you already have a follower. In randomizer, this has been fixed.
 
 # Why is the game in Japanese?
+There isn't much text left in the game, but some of what you will find is in Japanese.
+
 This randomizer uses the 1.0 JP version of the base rom because it is what is primarily used in speedrunning ALttP. Here are some of the features of this version compared to the English version:
 - Faster text speed. This is very noticeable during the introduction.
 - After getting the Pegasus Boots, pressing `Y` + `A` will allow you to use an item and dash at the same time. For a clear example of this working, try hammer dashing at the bridge leading from Dark Palace to Swamp Palace.
@@ -55,6 +74,22 @@ This randomizer uses the 1.0 JP version of the base rom because it is what is pr
 - You can enter the Exploration Glitch in Tower of Hera by falling down the rightmost hole on the 3F, then jumping right from the wall.
 
 # What's new in Randomizer?
+
+v7
+- Added Glitched difficulty. This is a mode for experienced runners of the game to test their skills using glitches to bypass obstacles they wouldn't normally be able to pass!
+- Reworked casual logic (again). Softlocks should be much more rare.
+- Added the ability to create a non-randomized rom.
+- Creating roms will no longer freeze the UI.
+- Changed special locations' names for spoiler log sorting.
+- Some hints will appear in the UI if you create a Casual difficulty seed.
+- Pendants, Crystals, Swords, and Capacity upgrades are now included in the randomization.
+- Added Bulk Seed creation, which allows you to create up to 100 seeds in one click!
+- Added complexity analysis to the spoiler log. You can also have the complexity of a seed appear when you create it. You can also put this in the file name by using the `"<complexity>"` token.
+- Increased compatibility with some external tools.
+- Added option to set Heart Beep speed: Normal, Half, Quarter, and Off
+- Added option to not check for updates
+- GUI Update! Buttons now have icons and the layout has been changed to accomodate the extra options in a neat manner.
+- Lots of text in-game has been removed.
 
 v6
 - SRAM Trace checkbox now available. Check out Zarby89's HUD at https://zarby89.github.io/ZeldaHud/ to learn how to use this.

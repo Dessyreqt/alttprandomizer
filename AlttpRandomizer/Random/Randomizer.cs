@@ -271,7 +271,7 @@ namespace AlttpRandomizer.Random
 
         private void WriteSramTraceToRom(FileStream rom)
         {
-            rom.WriteBytes(0x180030, 0x00, 0x80, 0x21);
+            rom.WriteBytes(0x180030, 0x01);
         }
 
         private void WriteDebugModeToRom(FileStream rom)
