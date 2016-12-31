@@ -84,7 +84,7 @@ v7
 - Some hints will appear in the UI if you create a Casual difficulty seed.
 - Pendants, Crystals, Swords, and Capacity upgrades are now included in the randomization.
 - Added Bulk Seed creation, which allows you to create up to 100 seeds in one click!
-- Added complexity analysis to the spoiler log. You can also have the complexity of a seed appear when you create it. You can also put this in the file name by using the `"<complexity>"` token.
+- Added complexity analysis to the spoiler log. You can also have the complexity of a seed appear when you create it. You can also put this in the file name by using the `<complexity>` token.
 - Increased compatibility with some external tools.
 - Added option to set Heart Beep speed: Normal, Half, Quarter, and Off
 - Added option to not check for updates
