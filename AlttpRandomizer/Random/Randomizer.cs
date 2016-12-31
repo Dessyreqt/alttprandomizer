@@ -32,6 +32,7 @@ namespace AlttpRandomizer.Random
         public bool ShowComplexity { get; set; }
         public RandomizerDifficulty Difficulty { get; set; }
         public HeartBeepSpeed HeartBeepSpeed { get; set; } 
+        public bool NoRandomization { get; set; }
 
         public RandomizerOptions()
         {
@@ -41,6 +42,7 @@ namespace AlttpRandomizer.Random
             ShowComplexity = true;
             Difficulty = RandomizerDifficulty.None;
             HeartBeepSpeed = HeartBeepSpeed.Normal;
+            NoRandomization = false;
         }
     }
 
@@ -76,25 +78,27 @@ namespace AlttpRandomizer.Random
                     Directory.CreateDirectory(options.Filename.Substring(0, options.Filename.LastIndexOf('\\')));
                 }
 
-                GenerateItemList();
-                RandomizeQuestItems();
-                GenerateItemPositions();
-
-                if (log != null || options.ShowComplexity)
+                if (!options.NoRandomization)
                 {
-                    CalculateComplexity();
-                }
+                    GenerateItemList();
+                    RandomizeQuestItems();
+                    GenerateItemPositions();
 
-                if (RandomizerVersion.Debug)
-                {
-                    SetupTestItems(romLocations.Locations);
-                }
+                    if (log != null || options.ShowComplexity)
+                    {
+                        CalculateComplexity();
+                    }
 
-                if (options.SpoilerOnly)
-                {
-                    return log?.GetLogOutput();
-                }
+                    if (RandomizerVersion.Debug)
+                    {
+                        SetupTestItems(romLocations.Locations);
+                    }
 
+                    if (options.SpoilerOnly)
+                    {
+                        return log?.GetLogOutput();
+                    }
+                }
                 WriteRom(options);
 
                 return "";
@@ -225,6 +229,8 @@ namespace AlttpRandomizer.Random
             using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
             {
                 rom.Write(Resources.RomImage, 0, 2097152);
+
+                if (options.NoRandomization) { return; }
 
                 foreach (var location in romLocations.Locations)
                 {
@@ -580,7 +586,7 @@ namespace AlttpRandomizer.Random
             if (tempItemPool.Count > 0 || !romLocations.CanDefeatDungeon(region, haveItems))
             {
                 romLocations.ResetRegion(region);
-                log.RemoveOrderedItems(region);
+                log?.RemoveOrderedItems(region);
             }
             else
             {

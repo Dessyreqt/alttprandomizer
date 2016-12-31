@@ -16,6 +16,7 @@ namespace AlttpRandomizer
     public partial class MainForm : Form
     {
         private Thread checkUpdateThread;
+        private Thread createRomThread;
 
         public MainForm()
         {
@@ -45,10 +46,15 @@ namespace AlttpRandomizer
 
             ClearOutput();
 
-            var difficulty = GetRandomizerDifficulty();
+            var options = GetOptions();
 
-            if (difficulty == RandomizerDifficulty.None)
+            if (options.Difficulty == RandomizerDifficulty.None)
             {
+                options.NoRandomization = true;
+                var randomizer = new Randomizer(0, new RomLocationsNoRandomization(), null);
+                randomizer.CreateRom(options);
+                WriteOutput("Non-randomized rom created.");
+
                 return;
             }
 
@@ -63,12 +69,7 @@ namespace AlttpRandomizer
             {
                 try
                 {
-                    if (difficulty == RandomizerDifficulty.Casual)
-                    {
-                        WriteCasualMessage();
-                    }
-
-                    var romLocations = RomLocationsFactory.GetRomLocations(difficulty);
+                    var romLocations = RomLocationsFactory.GetRomLocations(options.Difficulty);
                     RandomizerLog log = null;
 
                     if (createSpoilerLog.Checked)
@@ -78,7 +79,12 @@ namespace AlttpRandomizer
 
                     seed.Text = string.Format(romLocations.SeedFileString, parsedSeed);
 
-                    int complexity = CreateRom(romLocations, log, difficulty, parsedSeed);
+                    if (options.Difficulty == RandomizerDifficulty.Casual)
+                    {
+                        WriteCasualMessage();
+                    }
+
+                    int complexity = CreateRom(romLocations, log, options, parsedSeed);
 
                     var outputString = new StringBuilder();
 
@@ -103,6 +109,18 @@ namespace AlttpRandomizer
             }
 
             SaveRandomizerSettings();
+        }
+
+        private RandomizerOptions GetOptions()
+        {
+            return new RandomizerOptions
+                   {
+                       Filename = filename.Text,
+                       SramTrace = sramTrace.Checked,
+                       ShowComplexity = showComplexity.Checked,
+                       Difficulty = GetRandomizerDifficulty(),
+                       HeartBeepSpeed = GetHeartBeepSpeed(),
+                   };
         }
 
         private void WriteCasualMessage()
@@ -130,21 +148,40 @@ namespace AlttpRandomizer
             Settings.Default.Save();
         }
 
-        private int CreateRom(IRomLocations romLocations, RandomizerLog log, RandomizerDifficulty difficulty, int parsedSeed)
+        private int CreateRom(IRomLocations romLocations, RandomizerLog log, RandomizerOptions options, int parsedSeed)
         {
             var randomizer = new Randomizer(parsedSeed, romLocations, log);
-            var options = new RandomizerOptions
-                            {
-                                Filename = filename.Text,
-                                SramTrace = sramTrace.Checked,
-                                ShowComplexity = showComplexity.Checked,
-                                Difficulty = difficulty,
-                                HeartBeepSpeed = GetHeartBeepSpeed(),
-                            };
 
-            randomizer.CreateRom(options);
+            CreateRomThread(randomizer, options);
 
             return randomizer.GetComplexity();
+        }
+
+        private string CreateRomThread(Randomizer randomizer, RandomizerOptions options)
+        {
+            var retVal = "";
+
+            SetButtonsEnabled(false);
+
+            createRomThread = new Thread(() => retVal = randomizer.CreateRom(options));
+            createRomThread.Start();
+
+            while (createRomThread.IsAlive)
+            {
+                Application.DoEvents();
+            }
+
+            SetButtonsEnabled(true);
+
+            return retVal;
+        }
+
+        private void SetButtonsEnabled(bool enabled)
+        {
+            create.Enabled = enabled;
+            bulkCreate.Enabled = enabled;
+            randomSpoiler.Enabled = enabled;
+            listSpoiler.Enabled = enabled;
         }
 
         private HeartBeepSpeed GetHeartBeepSpeed()
@@ -178,7 +215,8 @@ namespace AlttpRandomizer
                 try
                 {
                     var randomizer = new Randomizer(parsedSeed, romPlms, log);
-                    WriteOutput(randomizer.CreateRom(new RandomizerOptions { SpoilerOnly = true, Difficulty = difficulty}));
+
+                    WriteOutput(CreateRomThread(randomizer, new RandomizerOptions { SpoilerOnly = true, Difficulty = difficulty}));
                 }
                 catch (RandomizationException ex)
                 {
@@ -197,11 +235,16 @@ namespace AlttpRandomizer
                 seed.Text = seed.Text.ToUpper().Replace("C", "");
                 difficulty = RandomizerDifficulty.Casual;
             }
-            if (seed.Text.ToUpper().Contains("G"))
+            else if (seed.Text.ToUpper().Contains("G"))
             {
                 randomizerDifficulty.SelectedItem = "Glitched";
                 seed.Text = seed.Text.ToUpper().Replace("G", "");
                 difficulty = RandomizerDifficulty.Glitched;
+            }
+            else if (seed.Text.ToUpper().Contains("NORAND"))
+            {
+                randomizerDifficulty.SelectedItem = "No Randomization";
+                difficulty = RandomizerDifficulty.None;
             }
             else
             {
@@ -214,8 +257,6 @@ namespace AlttpRandomizer
                         difficulty = RandomizerDifficulty.Glitched;
                         break;
                     default:
-                        MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        WriteOutput("Please select a difficulty.");
                         return RandomizerDifficulty.None;
                 }
             }
@@ -232,6 +273,9 @@ namespace AlttpRandomizer
                     break;
                 case "Glitched":
                     seed.Text = string.Format("G{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
+                case "No Randomization":
+                    seed.Text = string.Format("NORAND");
                     break;
                 default:
                     MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -354,6 +398,7 @@ namespace AlttpRandomizer
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveRandomizerSettings();
+            createRomThread?.Abort();
         }
 
         private void bulkCreate_Click(object sender, EventArgs e)
@@ -406,7 +451,7 @@ namespace AlttpRandomizer
                     try
                     {
 
-                        int complexity = CreateRom(romLocations, log, difficulty, parsedSeed);
+                        int complexity = CreateRom(romLocations, log, GetOptions(), parsedSeed);
 
                         outputString = new StringBuilder();
                         outputString.AppendFormat("Completed Seed: ");
@@ -433,6 +478,12 @@ namespace AlttpRandomizer
 
                         failCount++;
                         seedNum--;
+
+                        if (failCount >= 3)
+                        {
+                            WriteOutput(string.Format("Stopping bulk creation after {0} failures.{1}", failCount, Environment.NewLine));
+                        }
+
                     }
                 }
 
@@ -444,6 +495,20 @@ namespace AlttpRandomizer
             }
 
             SaveRandomizerSettings();
+        }
+
+        private void randomizerDifficulty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (randomizerDifficulty.SelectedItem.ToString() == "No Randomization")
+            {
+                seed.Text = "NORAND";
+                bulkCreate.Enabled = false;
+            }
+            else if (seed.Text == "NORAND")
+            {
+                seed.Text = "";
+                bulkCreate.Enabled = true;
+            }
         }
     }
 }

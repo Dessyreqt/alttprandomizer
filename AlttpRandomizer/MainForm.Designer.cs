@@ -81,11 +81,13 @@
             this.randomizerDifficulty.FormattingEnabled = true;
             this.randomizerDifficulty.Items.AddRange(new object[] {
             "Casual",
-            "Glitched"});
+            "Glitched",
+            "No Randomization"});
             this.randomizerDifficulty.Location = new System.Drawing.Point(62, 19);
             this.randomizerDifficulty.Name = "randomizerDifficulty";
             this.randomizerDifficulty.Size = new System.Drawing.Size(128, 21);
             this.randomizerDifficulty.TabIndex = 30;
+            this.randomizerDifficulty.SelectedIndexChanged += new System.EventHandler(this.randomizerDifficulty_SelectedIndexChanged);
             // 
             // label3
             // 
