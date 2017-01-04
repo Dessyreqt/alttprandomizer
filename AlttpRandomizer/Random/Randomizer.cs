@@ -73,9 +73,9 @@ namespace AlttpRandomizer.Random
         {
             try
             {
-                if (options.Filename.Contains("\\") && !Directory.Exists(options.Filename.Substring(0, options.Filename.LastIndexOf('\\'))))
+                String filePath = FileName.Fix(options.Filename, string.Format(romLocations.SeedFileString, seed), complexity);
+                if (filePath.Contains("\\") && !Directory.Exists(filePath.Substring(0, filePath.LastIndexOf('\\'))))
                 {
-                    String filePath = FileName.Fix(options.Filename, string.Format(romLocations.SeedFileString, seed), complexity);
                     Directory.CreateDirectory(filePath.Substring(0, filePath.LastIndexOf('\\')));
                 }
 
