@@ -104,11 +104,12 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterSwampPalace(have) 
                         && have.Contains(InventoryItemType.Hammer)
-                        && ((LocationHasItem("[dungeon-D2-B1] Swamp Palace - big key room", InventoryItemType.BigKey)
+                        && (LocationHasItem("[dungeon-D2-B1] Swamp Palace - big key room", InventoryItemType.BigKey)
                                 || LocationHasItem("[dungeon-D2-B1] Swamp Palace - map room", InventoryItemType.BigKey)
                                 || LocationHasItem("[dungeon-D2-B1] Swamp Palace - push 4 blocks room", InventoryItemType.BigKey)
-                                || LocationHasItem("[dungeon-D2-B1] Swamp Palace - south of hookshot room", InventoryItemType.BigKey))
-                            || (have.Contains(InventoryItemType.Hookshot) && !LocationHasItem("[dungeon-D2-B1] Swamp Palace - big chest",InventoryItemType.Hookshot)))
+                                || LocationHasItem("[dungeon-D2-B1] Swamp Palace - south of hookshot room", InventoryItemType.BigKey)
+                            || (have.Contains(InventoryItemType.Hookshot) 
+                                && !LocationHasItem("[dungeon-D2-B1] Swamp Palace - big chest",InventoryItemType.Hookshot)))
                 },
                 new Location
                 {
