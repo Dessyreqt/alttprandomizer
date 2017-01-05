@@ -2802,6 +2802,7 @@ namespace AlttpRandomizer.Rom
             return CanEnterTurtleRock(have)
                 && CanAccessTurtleRock2(have)
                 && TurtleRockKeysOkay()
+                && have.Contains(InventoryItemType.Lamp)
                 && have.Contains(InventoryItemType.FireRod)
                 && have.Contains(InventoryItemType.IceRod);
         }
