@@ -93,6 +93,7 @@ namespace AlttpRandomizer.IO
             AppendGeneratedItemOrder(writer);
             AppendInventoryItems(writer);
             AppendSpecialItems(writer);
+            AppendMagicUpgrade(writer);
 
             return writer.ToString();
         }
@@ -104,6 +105,15 @@ namespace AlttpRandomizer.IO
             AppendLightWorldDungeonItems(writer);
             AppendDarkWorldDungeonItems(writer);
             writer.AppendLine();
+            writer.AppendLine();
+        }
+
+        private void AppendMagicUpgrade(StringBuilder writer)
+        {
+            foreach (var Location in generatedItems.Where(x => x.Item.HexValue != 0xFF && GetItemName(x.Item).StartsWith("1/")))
+            {
+                writer.AppendLine(string.Format("{0}{1}", "Magic Upgrade".PadRight(90, '.'), GetItemName(Location.Item)));
+            }
             writer.AppendLine();
         }
 
