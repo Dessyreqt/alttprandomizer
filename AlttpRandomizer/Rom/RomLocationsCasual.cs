@@ -2680,7 +2680,11 @@ namespace AlttpRandomizer.Rom
             };
 
             // return true if crystals 5 and 6 are accessible
-            return dungeons.Keys.Where(key => CrystalAtLocation(key, CrystalItemType.Crystal5) || CrystalAtLocation(key, CrystalItemType.Crystal6)).All(key => dungeons[key](have));
+            return dungeons.Keys.Where(key => CrystalAtLocation(key, CrystalItemType.Crystal5) || CrystalAtLocation(key, CrystalItemType.Crystal6)).All(key => dungeons[key](have))
+                && have.Contains(InventoryItemType.MoonPearl)
+                && (have.Contains(InventoryItemType.Hammer)
+                    || (CanDefeatAgahnim1(have) 
+                        && have.Contains(InventoryItemType.MagicMirror)));
         }
 
         private bool CanGetMasterSword(List<InventoryItemType> have)
