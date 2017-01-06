@@ -102,14 +102,12 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have) 
+                        CanEnterSwampPalace(have)
                         && have.Contains(InventoryItemType.Hammer)
-                        && (LocationHasItem("[dungeon-D2-B1] Swamp Palace - big key room", InventoryItemType.BigKey)
-                                || LocationHasItem("[dungeon-D2-B1] Swamp Palace - map room", InventoryItemType.BigKey)
-                                || LocationHasItem("[dungeon-D2-B1] Swamp Palace - push 4 blocks room", InventoryItemType.BigKey)
-                                || LocationHasItem("[dungeon-D2-B1] Swamp Palace - south of hookshot room", InventoryItemType.BigKey)
-                            || (have.Contains(InventoryItemType.Hookshot) 
-                                && !LocationHasItem("[dungeon-D2-B1] Swamp Palace - big chest",InventoryItemType.Hookshot)))
+                        && (have.Contains(InventoryItemType.Hookshot)
+                            || (!LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",InventoryItemType.BigKey)
+                                && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",InventoryItemType.BigKey)
+                                && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - hidden waterfall door room",InventoryItemType.BigKey))),
                 },
                 new Location
                 {
@@ -1193,8 +1191,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && CanAccessLateSwampPalace(have),
                 },
                 new Location
                 {
@@ -1205,8 +1202,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && CanAccessLateSwampPalace(have),
                 },
                 new Location
                 {
@@ -1217,8 +1213,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && CanAccessLateSwampPalace(have),
                 },
                 new Location
                 {
@@ -2094,6 +2089,7 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     Name = "Magic Bat",
+                    Region = Region.LightWorld,
                     Address = 0x180015,
                     CanAccess =
                         have =>
@@ -2637,6 +2633,17 @@ namespace AlttpRandomizer.Rom
                             || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [right chest]", InventoryItemType.Key) 
                             || LocationHasItem("[dungeon-D1-1F] Dark Palace - jump room [left chest]", InventoryItemType.Key) 
                             || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key))));
+        }
+
+        private bool CanAccessLateSwampPalace(List<InventoryItemType> have)
+        {
+            return (have.Contains(InventoryItemType.Hammer)
+                    && (LocationHasItem("[dungeon-D2-B1] Swamp Palace - big key room", InventoryItemType.BigKey)
+                        || LocationHasItem("[dungeon-D2-B1] Swamp Palace - map room", InventoryItemType.BigKey)
+                        || LocationHasItem("[dungeon-D2-B1] Swamp Palace - push 4 blocks room", InventoryItemType.BigKey)
+                        || LocationHasItem("[dungeon-D2-B1] Swamp Palace - south of hookshot room", InventoryItemType.BigKey)
+                        || (have.Contains(InventoryItemType.Hookshot)
+                            && !LocationHasItem("[dungeon-D2-B1] Swamp Palace - big chest", InventoryItemType.Hookshot))));
         }
 
         private bool CanAccessZorasRiver(List<InventoryItemType> have)
