@@ -102,11 +102,11 @@ namespace AlttpRandomizer.Rom
                     NeverItems = { InventoryItemType.BigKey, InventoryItemType.Key },
                     CanAccess =
                         have =>
-                        CanEnterSwampPalace(have) 
-                        && have.Contains(InventoryItemType.Hammer) 
-                        && (have.Contains(InventoryItemType.Hookshot) 
-                            || (!LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",InventoryItemType.BigKey) 
-                                && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",InventoryItemType.BigKey)   
+                        CanEnterSwampPalace(have)
+                        && have.Contains(InventoryItemType.Hammer)
+                        && (have.Contains(InventoryItemType.Hookshot)
+                            || (!LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [left chest]",InventoryItemType.BigKey)
+                                && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - flooded room [right chest]",InventoryItemType.BigKey)
                                 && !LocationHasItem("[dungeon-D2-B2] Swamp Palace - hidden waterfall door room",InventoryItemType.BigKey))),
                 },
                 new Location
@@ -691,6 +691,7 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterTurtleRock(have)
                         && CanAccessTurtleRock2(have)
+                        && have.Contains(InventoryItemType.Lamp)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -707,6 +708,7 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterTurtleRock(have)
                         && CanAccessTurtleRock2(have)
+                        && have.Contains(InventoryItemType.Lamp)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -723,6 +725,7 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterTurtleRock(have)
                         && CanAccessTurtleRock2(have)
+                        && have.Contains(InventoryItemType.Lamp)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -739,6 +742,7 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterTurtleRock(have)
                         && CanAccessTurtleRock2(have)
+                        && have.Contains(InventoryItemType.Lamp)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -755,6 +759,7 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterTurtleRock(have)
                         && CanAccessTurtleRock2(have)
+                        && have.Contains(InventoryItemType.Lamp)
                         && (have.Contains(InventoryItemType.FireRod)
                             || (LocationHasItem("[dungeon-D7-1F] Turtle Rock - compass room", InventoryItemType.Key)
                                 && LocationHasItem("[dungeon-D7-1F] Turtle Rock - Chain chomp room", InventoryItemType.Key)
@@ -1186,8 +1191,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && CanAccessLateSwampPalace(have),
                 },
                 new Location
                 {
@@ -1198,8 +1202,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && CanAccessLateSwampPalace(have),
                 },
                 new Location
                 {
@@ -1210,8 +1213,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterSwampPalace(have)
-                        && have.Contains(InventoryItemType.Hookshot)
-                        && have.Contains(InventoryItemType.Hammer),
+                        && CanAccessLateSwampPalace(have),
                 },
                 new Location
                 {
@@ -2087,6 +2089,7 @@ namespace AlttpRandomizer.Rom
                 new Location
                 {
                     Name = "Magic Bat",
+                    Region = Region.LightWorld,
                     Address = 0x180015,
                     CanAccess =
                         have =>
@@ -2210,6 +2213,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanAccessNorthWestDarkWorld(have)
+                        && CanLiftLightRocks(have)
                         && have.Contains(InventoryItemType.Cape),
                 },
                 new Location
@@ -2631,6 +2635,17 @@ namespace AlttpRandomizer.Rom
                             || LocationHasItem("[dungeon-D1-B1] Dark Palace - turtle stalfos room", InventoryItemType.Key))));
         }
 
+        private bool CanAccessLateSwampPalace(List<InventoryItemType> have)
+        {
+            return (have.Contains(InventoryItemType.Hammer)
+                    && (LocationHasItem("[dungeon-D2-B1] Swamp Palace - big key room", InventoryItemType.BigKey)
+                        || LocationHasItem("[dungeon-D2-B1] Swamp Palace - map room", InventoryItemType.BigKey)
+                        || LocationHasItem("[dungeon-D2-B1] Swamp Palace - push 4 blocks room", InventoryItemType.BigKey)
+                        || LocationHasItem("[dungeon-D2-B1] Swamp Palace - south of hookshot room", InventoryItemType.BigKey)
+                        || (have.Contains(InventoryItemType.Hookshot)
+                            && !LocationHasItem("[dungeon-D2-B1] Swamp Palace - big chest", InventoryItemType.Hookshot))));
+        }
+
         private bool CanAccessZorasRiver(List<InventoryItemType> have)
         {
             return CanLiftLightRocks(have)
@@ -2665,7 +2680,11 @@ namespace AlttpRandomizer.Rom
             };
 
             // return true if crystals 5 and 6 are accessible
-            return dungeons.Keys.Where(key => CrystalAtLocation(key, CrystalItemType.Crystal5) || CrystalAtLocation(key, CrystalItemType.Crystal6)).All(key => dungeons[key](have));
+            return dungeons.Keys.Where(key => CrystalAtLocation(key, CrystalItemType.Crystal5) || CrystalAtLocation(key, CrystalItemType.Crystal6)).All(key => dungeons[key](have))
+                && have.Contains(InventoryItemType.MoonPearl)
+                && (have.Contains(InventoryItemType.Hammer)
+                    || (CanDefeatAgahnim1(have) 
+                        && have.Contains(InventoryItemType.MagicMirror)));
         }
 
         private bool CanGetMasterSword(List<InventoryItemType> have)
@@ -2794,6 +2813,7 @@ namespace AlttpRandomizer.Rom
             return CanEnterTurtleRock(have)
                 && CanAccessTurtleRock2(have)
                 && TurtleRockKeysOkay()
+                && have.Contains(InventoryItemType.Lamp)
                 && have.Contains(InventoryItemType.FireRod)
                 && have.Contains(InventoryItemType.IceRod);
         }
@@ -2941,8 +2961,9 @@ namespace AlttpRandomizer.Rom
         protected override bool CanDefeatTowerOfHera(List<InventoryItemType> have)
         {
             return CanEnterTowerOfHera(have)
-                && (!LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
-                    || CanLightTorches(have));
+                && ((LocationHasItem("[dungeon-L3-1F] Tower of Hera - first floor", InventoryItemType.BigKey)
+                        && CanLightTorches(have))
+                   || LocationHasItem("[dungeon-L3-2F] Tower of Hera - Entrance", InventoryItemType.BigKey));
         }
 
         protected override bool CanDefeatDesertPalace(List<InventoryItemType> have)
