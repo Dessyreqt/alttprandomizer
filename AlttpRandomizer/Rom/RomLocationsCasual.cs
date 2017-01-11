@@ -2762,7 +2762,7 @@ namespace AlttpRandomizer.Rom
 
         protected override bool CanDefeatSkullWoods(List<InventoryItemType> have)
         {
-            return CanEnterSkullWoods2(have);
+            return CanEnterSkullWoods2(have)
                 && !(LocationHasItem("[dungeon-D3-B1] Skull Woods - big chest", InventoryItemType.FireRod)
                     && LocationHasItem("[dungeon-D3-B1] Skull Woods - Entrance to part 2", InventoryItemType.BigKey));
         }
