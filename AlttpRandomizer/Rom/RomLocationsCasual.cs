@@ -953,7 +953,9 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
-                        && CanLightTorches(have),
+                        && CanLightTorches(have)
+                        && (!LocationHasItem("[dungeon-D6-B1] Misery Mire - big chest", InventoryItemType.Key)
+                            || LocationHasItem("[dungeon-D6-B1] Misery Mire - big key", InventoryItemType.Key)),
                 },
                 new Location
                 {
@@ -988,7 +990,9 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
-                        && CanLightTorches(have),
+                        && CanLightTorches(have)
+                        && (!LocationHasItem("[dungeon-D6-B1] Misery Mire - big chest", InventoryItemType.Key)
+                            || LocationHasItem("[dungeon-D6-B1] Misery Mire - compass", InventoryItemType.Key)),
                 },
 
                 new Location
@@ -2759,6 +2763,8 @@ namespace AlttpRandomizer.Rom
         protected override bool CanDefeatSkullWoods(List<InventoryItemType> have)
         {
             return CanEnterSkullWoods2(have);
+                && !(LocationHasItem("[dungeon-D3-B1] Skull Woods - big chest", InventoryItemType.FireRod)
+                    && LocationHasItem("[dungeon-D3-B1] Skull Woods - Entrance to part 2", InventoryItemType.BigKey));
         }
 
         protected override bool CanDefeatThievesTown(List<InventoryItemType> have)
