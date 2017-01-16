@@ -501,15 +501,59 @@ namespace AlttpRandomizer
 
         private void randomizerDifficulty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (randomizerDifficulty.SelectedItem.ToString() == "No Randomization")
+            switch(randomizerDifficulty.SelectedItem.ToString())
             {
-                seed.Text = "NORAND";
-                bulkCreate.Enabled = false;
+                case "Casual":
+                    bulkCreate.Enabled = true;
+                    if (seed.Text.ToUpper().StartsWith("G"))
+                    {
+                        seed.Text = seed.Text.ToUpper().Replace('G', 'C');
+                    }
+                    else if (seed.Text.ToUpper() == "NORAND")
+                    {
+                        seed.Text = "";
+                    }
+                    break;
+                case "Glitched":
+                    bulkCreate.Enabled = true;
+                    if (seed.Text.ToUpper().StartsWith("C"))
+                    {
+                        seed.Text = seed.Text.ToUpper().Replace('C', 'G');
+                    }
+                    else if (seed.Text.ToUpper() == "NORAND")
+                    {
+                        seed.Text = "";
+                    }
+                    break;
+                case "No Randomization":
+                    seed.Text = "NORAND";
+                    bulkCreate.Enabled = false;
+                    break;
             }
-            else if (seed.Text == "NORAND")
+        }
+
+        private void seed_TextChanged(object sender, EventArgs e)
+        {
+            if(seed.Text.ToUpper().StartsWith("C"))
             {
-                seed.Text = "";
-                bulkCreate.Enabled = true;
+                if (randomizerDifficulty.SelectedItem.ToString() != "Casual")
+                {
+                    randomizerDifficulty.SelectedItem = "Casual";
+                }
+            }
+            else if (seed.Text.ToUpper().StartsWith("G"))
+            {
+                if (randomizerDifficulty.SelectedItem.ToString() != "Glitched")
+                {
+                    randomizerDifficulty.SelectedItem = "Glitched";
+                }
+            }
+            else if (seed.Text.ToUpper() == "NORAND")
+            {
+                if (randomizerDifficulty.SelectedItem.ToString() != "No Randomization")
+                {
+                    randomizerDifficulty.SelectedItem = "No Randomization";
+                }
             }
         }
     }
