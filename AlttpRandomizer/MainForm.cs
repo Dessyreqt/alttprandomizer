@@ -492,6 +492,8 @@ namespace AlttpRandomizer
                 {
                     WriteOutput(string.Format(", {0} failed. ", failCount));
                 }
+                MessageBox.Show(string.Format("Completed! {0} successful", successCount) + " and " +
+                    string.Format(", {0} failed. ", failCount), "Bulk Creation Complete", MessageBoxButtons.OK);
             }
 
             SaveRandomizerSettings();

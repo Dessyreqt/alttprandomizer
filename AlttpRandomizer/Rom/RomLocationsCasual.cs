@@ -961,11 +961,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
-                        && DungeonHasBigKey[(int)Region.MiseryMire]
-                        && ((!LocationHasItem("[dungeon-D6-B1] Misery Mire - compass", InventoryItemType.BigKey)
-                                && !LocationHasItem("[dungeon-D6-B1] Misery Mire - big key", InventoryItemType.BigKey))
-                            || (CanLightTorches(have)
-                                && MiseryMireAccessibleKeyCount())),
+                        && CanLightTorches(have),
                 },
                 new Location
                 {
@@ -978,9 +974,10 @@ namespace AlttpRandomizer.Rom
                         have =>
                         CanEnterMiseryMire(have)
                         && DungeonHasBigKey[(int)Region.MiseryMire]
-                        && (CanLightTorches(have)
-                            || (!LocationHasItem("[dungeon-D6-B1] Misery Mire - compass", InventoryItemType.BigKey)
-                                && !LocationHasItem("[dungeon-D6-B1] Misery Mire - big key", InventoryItemType.BigKey))),
+                        && ((!LocationHasItem("[dungeon-D6-B1] Misery Mire - compass", InventoryItemType.BigKey)
+                                && !LocationHasItem("[dungeon-D6-B1] Misery Mire - big key", InventoryItemType.BigKey))
+                            || (CanLightTorches(have)
+                                && MiseryMireAccessibleKeyCount())),
                 },
                 new Location
                 {
@@ -1001,9 +998,7 @@ namespace AlttpRandomizer.Rom
                     CanAccess =
                         have =>
                         CanEnterMiseryMire(have)
-                        && CanLightTorches(have)
-                        && (!LocationHasItem("[dungeon-D6-B1] Misery Mire - big chest", InventoryItemType.Key)
-                            || LocationHasItem("[dungeon-D6-B1] Misery Mire - compass", InventoryItemType.Key)),
+                        && CanLightTorches(have),
                 },
 
                 new Location
