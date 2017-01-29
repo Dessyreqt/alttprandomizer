@@ -259,6 +259,57 @@ namespace AlttpRandomizer.Rom
             return new[] { retVal };
         }
 
+        public static bool ommitAccessibleCheck(InventoryItemType item)
+        {
+            bool retval;
+
+            switch (item)
+            {
+                case InventoryItemType.Nothing:
+                case InventoryItemType.BlueShield:
+                case InventoryItemType.RedShield:
+                case InventoryItemType.MirrorShield:
+                case InventoryItemType.Boomerang:
+                case InventoryItemType.PieceOfHeart:
+                case InventoryItemType.StaffOfByrna:
+                case InventoryItemType.BugCatchingNet:
+                case InventoryItemType.BlueMail:
+                case InventoryItemType.RedMail:
+                case InventoryItemType.Compass:
+                case InventoryItemType.HeartContainerNoAnimation:
+                case InventoryItemType.Bomb:
+                case InventoryItemType.ThreeBombs:
+                case InventoryItemType.RedBoomerang:
+                case InventoryItemType.TenBombs:
+                case InventoryItemType.Map:
+                case InventoryItemType.OneRupee:
+                case InventoryItemType.FiveRupees:
+                case InventoryItemType.TwentyRupees:
+                case InventoryItemType.HeartContainerNoRefill:
+                case InventoryItemType.HeartContainer:
+                case InventoryItemType.OneHundredRupees:
+                case InventoryItemType.FiftyRupees:
+                case InventoryItemType.Heart:
+                case InventoryItemType.Arrow:
+                case InventoryItemType.TenArrows:
+                case InventoryItemType.SmallMagic:
+                case InventoryItemType.ThreeHundredRupees:
+                case InventoryItemType.TwentyRupees2:
+                case InventoryItemType.FiftyBombCap:
+                case InventoryItemType.SeventyArrowCap:
+                case InventoryItemType.HalfMagic:
+                case InventoryItemType.QuarterMagic:
+                    retval = true;
+                    break;
+                default:
+                    // Anything not listed here is a 1
+                    retval = false;
+                    break;
+            }
+
+            return retval;
+        }
+
         public static byte[] GetCheckLocation(InventoryItemType item)
         {
             byte retVal;

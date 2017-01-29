@@ -368,16 +368,19 @@ namespace AlttpRandomizer.Random
                 // Generate candidate item list
                 foreach (var candidateItem in insertedItemPool)
                 {
-                    haveItems.Add(candidateItem);
-
-                    var newLocations = region == Region.Progression ? romLocations.GetAvailableLocations(haveItems) : romLocations.GetAvailableLocations(haveItems, region);
-
-                    if (newLocations.Count > currentLocations.Count)
+                    if (!Item.ommitAccessibleCheck(candidateItem)) // Can ommit the following logic for most items, as it doesn't do any thing
                     {
-                        romLocations.TryInsertCandidateItem(currentLocations, candidateItemList, candidateItem);
-                    }
+                        haveItems.Add(candidateItem);
 
-                    haveItems.Remove(candidateItem);
+                        var newLocations = region == Region.Progression ? romLocations.GetAvailableLocations(haveItems) : romLocations.GetAvailableLocations(haveItems, region);
+
+                        if (newLocations.Count > currentLocations.Count)
+                        {
+                            romLocations.TryInsertCandidateItem(currentLocations, candidateItemList, candidateItem);
+                        }
+
+                        haveItems.Remove(candidateItem);
+                    }
                 }
 
                 AdjustCandidateItems(candidateItemList, haveItems, romLocations);
