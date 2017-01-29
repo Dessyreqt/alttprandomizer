@@ -13,6 +13,10 @@ namespace AlttpRandomizer.Rom
         public virtual List<Location> Locations { get; set; }
         public virtual List<Location> SpecialLocations { get; set; }
 
+        private static int RegionCount = System.Enum.GetValues(typeof(Region)).Length;
+
+        public bool[] DungeonHasBigKey = new bool[RegionCount];
+
         private static void WeightLocations(List<Location> retVal)
         {
             var currentWeight = (from item in retVal orderby item.Weight descending select item.Weight).First() + 1;
@@ -85,6 +89,8 @@ namespace AlttpRandomizer.Rom
         public void ResetRegion(Region region)
         {
             var locations = (from Location location in Locations where (location.Region == region) select location).ToList();
+
+            DungeonHasBigKey[(int)region] = false;
 
             foreach (var location in locations)
             {
@@ -164,6 +170,11 @@ namespace AlttpRandomizer.Rom
 
                 if (!(badLateGameItemSpot || badFirstItemSpot || badNeverItemSpot))
                 {
+                    if (insertedItem == InventoryItemType.BigKey)
+                    {
+                        DungeonHasBigKey[(int)currentLocations[0].Region] = true;
+                    }
+
                     return currentLocations.IndexOf(location);
                 }
             }
