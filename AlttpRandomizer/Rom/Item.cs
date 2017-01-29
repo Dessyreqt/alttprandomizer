@@ -210,7 +210,7 @@ namespace AlttpRandomizer.Rom
             return new[] { retVal };
         }
 
-        public static bool ommitAccessibleCheck(InventoryItemType item)
+        public static bool OmitAccessibleCheck(InventoryItemType item)
         {
             bool retval;
 

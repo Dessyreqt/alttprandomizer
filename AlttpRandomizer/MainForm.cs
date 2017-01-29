@@ -487,13 +487,19 @@ namespace AlttpRandomizer
                     }
                 }
 
-                WriteOutput(string.Format("Completed! {0} successful", successCount));
+                var finishedString = string.Format("Completed! {0} successful", successCount);
+
                 if (failCount > 0)
                 {
-                    WriteOutput(string.Format(", {0} failed. ", failCount));
+                    finishedString += string.Format(", {0} failed. ", failCount);
                 }
-                MessageBox.Show(string.Format("Completed! {0} successful", successCount) + " and " +
-                    string.Format(", {0} failed. ", failCount), "Bulk Creation Complete", MessageBoxButtons.OK);
+                else
+                {
+                    finishedString += ".";
+                }
+
+                WriteOutput(finishedString);
+                MessageBox.Show(finishedString, "Bulk Creation Complete", MessageBoxButtons.OK);
             }
 
             SaveRandomizerSettings();

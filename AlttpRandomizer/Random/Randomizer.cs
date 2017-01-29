@@ -385,7 +385,7 @@ namespace AlttpRandomizer.Random
                 // Generate candidate item list
                 foreach (var candidateItem in insertedItemPool)
                 {
-                    if (!Item.ommitAccessibleCheck(candidateItem)) // Can ommit the following logic for most items, as it doesn't do any thing
+                    if (!Item.OmitAccessibleCheck(candidateItem)) // Can ommit the following logic for most items, as it doesn't do any thing
                     {
                         haveItems.Add(candidateItem);
 
